@@ -1,7 +1,5 @@
 library ieee;
 use ieee.std_logic_1164.all;
--- use ieee.std_logic_arith.all;
--- use ieee.std_logic_unsigned.all;
 use work.system_constants_pkg.all;
 
 entity list_ctrl is

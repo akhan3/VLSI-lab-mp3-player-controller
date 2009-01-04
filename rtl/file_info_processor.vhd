@@ -1,7 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
--- use ieee.std_logic_arith.all;
 use ieee.std_logic_unsigned.all;
+-- use ieee.std_logic_arith.all;
 use work.system_constants_pkg.all;
 
 entity file_info_processor is
@@ -126,7 +126,7 @@ begin
 
   lcdc_chrm_waddr <= x"0" & fname_lcd_counter;
 
-  with (fname_lcd_counter) select
+  with fname_lcd_counter select
     lcdc_chrm_wdata <= fname(0) when x"0",
                        fname(1) when x"1",
                        fname(2) when x"2",

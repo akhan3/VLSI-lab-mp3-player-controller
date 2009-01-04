@@ -1,0 +1,66 @@
+#!/bin/bash
+
+TESTNAME="playcontrol_tb"
+DESIGN_FILES="  ../rtl/system_constants_pkg.vhd  \
+                ../sim/playcontrol_tb.vhd        \
+                ../rtl/playcontrol.vhd           \
+                ../rtl/file_info_processor.vhd   \
+                ../rtl/arbiter_mux.vhd           \
+                ../rtl/list_ctrl.vhd             \
+                ../rtl/kbc_intf.vhd"
+
+# echo
+# echo "Creating soft link of test file for simulation..."
+# echo "================================================================================"
+# if [ -f sim.inc ]
+# then
+#   rm sim.inc
+# fi
+# ln -sv $1 sim.inc
+
+echo
+echo "Creating work library..."
+echo "================================================================================"
+echo vlib work
+if [ -e work ]
+then
+  rm -r work
+fi
+vlib work
+
+echo
+echo "Running VHDL Compilation..."
+echo "================================================================================"
+VCOM_SWITCH_LIST=" -lint -novopt"
+vcom  $VCOM_SWITCH_LIST $DESIGN_FILES -quiet
+
+if [ $? != 0 ]
+then
+  echo "§§§§§§§§§§§§§§§§ Compilation error §§§§§§§§§§§§§§§§";
+  echo
+  exit 0;
+else
+  echo "§§§§§§§§§§§§§§§§ Compilation successful §§§§§§§§§§§§§§§§";
+  echo
+fi
+
+
+echo
+echo 'Running Simulation...'
+echo "================================================================================"
+VSIM_SWITCH_LIST=" -L unisims_ver -L simprims_ver -L xilinxcorelib_ver -t ps -novopt"
+vsim $SWITCH_LIST_SIM -l $TESTNAME.log -wlf $TESTNAME.wlf work.$TESTNAME -do vsim.do -c
+
+echo
+echo "Checking for ERROR(s) in $TESTNAME.log..."
+echo "================================================================================"
+SIM_ERR=`grep -i error $TESTNAME.log | wc -l`
+if [ $SIM_ERR == 0 ]
+then
+  echo "§§§§§§§§§§§§§§§§ Simulation passed §§§§§§§§§§§§§§§§";
+  echo
+else
+  echo "§§§§§§§§§§§§§§§§ Simulation failed with $SIM_ERR errors §§§§§§§§§§§§§§§§";
+  echo "See $TESTNAME.log for details"
+  echo
+fi

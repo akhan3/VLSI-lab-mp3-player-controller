@@ -1,7 +1,5 @@
 library ieee;
 use ieee.std_logic_1164.all;
--- use ieee.std_logic_arith.all;
--- use ieee.std_logic_unsigned.all;
 use work.system_constants_pkg.all;
 
 entity arbiter_mux is
@@ -45,7 +43,7 @@ begin
   end process;
 
 -- Multiplexer
-  with (gnt_reg) select
+  with gnt_reg select
     fio_bus <=  bus_in(9 downto 0)    when "001",
                 bus_in(19 downto 10)  when "010",
                 bus_in(29 downto 20)  when "100",

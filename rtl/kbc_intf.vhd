@@ -1,8 +1,5 @@
 library ieee;
 use ieee.std_logic_1164.all;
--- use ieee.std_logic_arith.all;
--- use ieee.std_logic_unsigned.all;
-library work;
 use work.system_constants_pkg.all;
 
 entity kbc_intf is
@@ -14,7 +11,7 @@ entity kbc_intf is
     listnext  : out std_logic;
     listprev  : out std_logic
   );
-end kbc_intf;
+end entity;
 
 architecture arch of kbc_intf is
   constant KEY_2 : std_logic_vector(7 downto 0) := x"72";

@@ -1,0 +1,5 @@
+#!/bin/bash
+cd ise_prj
+xst -intstyle xflow -ifn playcontrol.xst -ofn playcontrol.syr
+cp playcontrol.syr ../playcontrol.syr
+cd ..
