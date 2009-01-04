@@ -1,0 +1,5 @@
+#!/bin/bash
+cd ../test_synth_ise
+xst -intstyle xflow -ifn file_info_processor.xst -ofn file_info_processor.syr
+cp  file_info_processor.syr ../modules/syr
+cd ../modules

@@ -62,4 +62,15 @@ package system_constants_pkg is
   constant CHRM_BASE_ADDR_OFFSET : std_logic_vector(31 downto 0) := x"000a0000";
   constant LCD_CFG_ADDR_OFFSET : std_logic_vector(31 downto 0) := x"000b0000";
 
+
+----------------------------------------------------------------------------------
+-- My constants
+----------------------------------------------------------------------------------
+-- For LCD
+  constant  LCD_NOP       : std_logic_vector(1 downto 0) := "00";
+  constant  LCD_CLEAR     : std_logic_vector(1 downto 0) := "01";
+  constant  LCD_REFRESH   : std_logic_vector(1 downto 0) := "10";
+
+
+
 end system_constants_pkg;
