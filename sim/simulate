@@ -19,7 +19,7 @@ DESIGN_FILES="  ../rtl/system_constants_pkg.vhd  \
 # ln -sv $1 sim.inc
 
 echo
-echo "Creating work library..."
+echo "Creating work library ..."
 echo "================================================================================"
 echo vlib work
 if [ -e work ]
@@ -29,10 +29,10 @@ fi
 vlib work
 
 echo
-echo "Running VHDL Compilation..."
+echo "Running VHDL Compilation ..."
 echo "================================================================================"
 VCOM_SWITCH_LIST=" -lint -novopt"
-vcom  $VCOM_SWITCH_LIST $DESIGN_FILES -quiet
+vcom  $VCOM_SWITCH_LIST $DESIGN_FILES
 
 if [ $? != 0 ]
 then
@@ -46,13 +46,13 @@ fi
 
 
 echo
-echo 'Running Simulation...'
+echo 'Running Simulation ...'
 echo "================================================================================"
 VSIM_SWITCH_LIST=" -L unisims_ver -L simprims_ver -L xilinxcorelib_ver -t ps -novopt"
-vsim $SWITCH_LIST_SIM -l $TESTNAME.log -wlf $TESTNAME.wlf work.$TESTNAME -do vsim.do -c
+vsim $SWITCH_LIST_SIM -l $TESTNAME.log -wlf $TESTNAME.wlf work.$TESTNAME -do 'vsim.do'
 
 echo
-echo "Checking for ERROR(s) in $TESTNAME.log..."
+echo "Checking for errors in $TESTNAME.log ..."
 echo "================================================================================"
 SIM_ERR=`grep -i error $TESTNAME.log | wc -l`
 if [ $SIM_ERR == 0 ]
@@ -64,3 +64,6 @@ else
   echo "See $TESTNAME.log for details"
   echo
 fi
+
+# clean up temp files
+rm -r ./work

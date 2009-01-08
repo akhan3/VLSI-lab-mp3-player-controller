@@ -1,7 +1,0 @@
-#!/bin/bash
-vcom  system_constants_pkg.vhd  \
-      playcontrol.vhd \
-      arbiter_mux.vhd \
-      file_info_processor.vhd \
-      kbc_intf.vhd \
-      list_ctrl.vhd

@@ -1,0 +1,567 @@
+Release 8.2i - xst I.31
+Copyright (c) 1995-2006 Xilinx, Inc.  All rights reserved.
+--> 
+Parameter TMPDIR set to ./xst/projnav.tmp
+CPU : 0.00 / 0.05 s | Elapsed : 0.00 / 0.00 s
+ 
+--> 
+Parameter xsthdpdir set to ./xst
+CPU : 0.00 / 0.05 s | Elapsed : 0.00 / 0.00 s
+ 
+--> 
+Reading design: playcontrol.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Compilation
+  3) Design Hierarchy Analysis
+  4) HDL Analysis
+  5) HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Advanced HDL Synthesis
+     6.1) Advanced HDL Synthesis Report
+  7) Low Level Synthesis
+  8) Partition Report
+  9) Final Report
+     9.1) Device utilization summary
+     9.2) TIMING REPORT
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "playcontrol.prj"
+Input Format                       : mixed
+Ignore Synthesis Constraint File   : NO
+
+---- Target Parameters
+Output File Name                   : "playcontrol"
+Output Format                      : NGC
+Target Device                      : xc2vp7-7-ff896
+
+---- Source Options
+Top Module Name                    : playcontrol
+Automatic FSM Extraction           : YES
+FSM Encoding Algorithm             : Auto
+FSM Style                          : lut
+RAM Extraction                     : Yes
+RAM Style                          : Auto
+ROM Extraction                     : Yes
+Mux Style                          : Auto
+Decoder Extraction                 : YES
+Priority Encoder Extraction        : YES
+Shift Register Extraction          : YES
+Logical Shifter Extraction         : YES
+XOR Collapsing                     : YES
+ROM Style                          : Auto
+Mux Extraction                     : YES
+Resource Sharing                   : YES
+Multiplier Style                   : auto
+Automatic Register Balancing       : No
+
+---- Target Options
+Add IO Buffers                     : NO
+Global Maximum Fanout              : 500
+Add Generic Clock Buffer(BUFG)     : 16
+Register Duplication               : YES
+Slice Packing                      : YES
+Pack IO Registers into IOBs        : auto
+Equivalent register Removal        : YES
+
+---- General Options
+Optimization Goal                  : Speed
+Optimization Effort                : 1
+Keep Hierarchy                     : NO
+RTL Output                         : Yes
+Global Optimization                : AllClockNets
+Write Timing Constraints           : NO
+Hierarchy Separator                : /
+Bus Delimiter                      : <>
+Case Specifier                     : maintain
+Slice Utilization Ratio            : 100
+Slice Utilization Ratio Delta      : 5
+
+---- Other Options
+Read Cores                         : YES
+cross_clock_analysis               : NO
+verilog2001                        : YES
+safe_implementation                : No
+Optimize Instantiated Primitives   : NO
+tristate2logic                     : Yes
+use_clock_enable                   : Yes
+use_sync_set                       : Yes
+use_sync_reset                     : Yes
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling vhdl file "/home/aak/vlsi_home/prj/playcontrol/rtl/system_constants_pkg.vhd" in Library work.
+Package <system_constants_pkg> compiled.
+Compiling vhdl file "/home/aak/vlsi_home/prj/playcontrol/rtl/kbc_intf.vhd" in Library work.
+Entity <kbc_intf> compiled.
+Entity <kbc_intf> (Architecture <arch>) compiled.
+Compiling vhdl file "/home/aak/vlsi_home/prj/playcontrol/rtl/arbiter_mux.vhd" in Library work.
+Entity <arbiter_mux> compiled.
+Entity <arbiter_mux> (Architecture <arch>) compiled.
+Compiling vhdl file "/home/aak/vlsi_home/prj/playcontrol/rtl/list_ctrl.vhd" in Library work.
+Entity <list_ctrl> compiled.
+Entity <list_ctrl> (Architecture <arch>) compiled.
+Compiling vhdl file "/home/aak/vlsi_home/prj/playcontrol/rtl/file_info_processor.vhd" in Library work.
+Entity <file_info_processor> compiled.
+Entity <file_info_processor> (Architecture <arch>) compiled.
+Compiling vhdl file "/home/aak/vlsi_home/prj/playcontrol/rtl/playcontrol.vhd" in Library work.
+Entity <playcontrol> compiled.
+Entity <playcontrol> (Architecture <playcontrol_arch>) compiled.
+
+=========================================================================
+*                     Design Hierarchy Analysis                         *
+=========================================================================
+Analyzing hierarchy for entity <playcontrol> in library <work> (architecture <playcontrol_arch>).
+
+Analyzing hierarchy for entity <kbc_intf> in library <work> (architecture <arch>).
+
+Analyzing hierarchy for entity <arbiter_mux> in library <work> (architecture <arch>).
+
+Analyzing hierarchy for entity <list_ctrl> in library <work> (architecture <arch>).
+
+Analyzing hierarchy for entity <file_info_processor> in library <work> (architecture <arch>).
+
+Building hierarchy successfully finished.
+
+=========================================================================
+*                            HDL Analysis                               *
+=========================================================================
+Analyzing Entity <playcontrol> in library <work> (Architecture <playcontrol_arch>).
+WARNING:Xst:753 - "/home/aak/vlsi_home/prj/playcontrol/rtl/playcontrol.vhd" line 176: Unconnected output port 'filesize' of component 'file_info_processor'.
+Entity <playcontrol> analyzed. Unit <playcontrol> generated.
+
+Analyzing Entity <kbc_intf> in library <work> (Architecture <arch>).
+Entity <kbc_intf> analyzed. Unit <kbc_intf> generated.
+
+Analyzing Entity <arbiter_mux> in library <work> (Architecture <arch>).
+Entity <arbiter_mux> analyzed. Unit <arbiter_mux> generated.
+
+Analyzing Entity <list_ctrl> in library <work> (Architecture <arch>).
+Entity <list_ctrl> analyzed. Unit <list_ctrl> generated.
+
+Analyzing Entity <file_info_processor> in library <work> (Architecture <arch>).
+Entity <file_info_processor> analyzed. Unit <file_info_processor> generated.
+
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Performing bidirectional port resolution...
+
+Synthesizing Unit <kbc_intf>.
+    Related source file is "/home/aak/vlsi_home/prj/playcontrol/rtl/kbc_intf.vhd".
+Unit <kbc_intf> synthesized.
+
+
+Synthesizing Unit <arbiter_mux>.
+    Related source file is "/home/aak/vlsi_home/prj/playcontrol/rtl/arbiter_mux.vhd".
+    Found 3-bit register for signal <gnt_reg>.
+    Summary:
+	inferred   3 D-type flip-flop(s).
+Unit <arbiter_mux> synthesized.
+
+
+Synthesizing Unit <list_ctrl>.
+    Related source file is "/home/aak/vlsi_home/prj/playcontrol/rtl/list_ctrl.vhd".
+    Found finite state machine <FSM_0> for signal <state>.
+    -----------------------------------------------------------------------
+    | States             | 3                                              |
+    | Transitions        | 8                                              |
+    | Inputs             | 5                                              |
+    | Outputs            | 3                                              |
+    | Clock              | clk (rising_edge)                              |
+    | Reset              | reset (positive)                               |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | idle                                           |
+    | Power Up State     | idle                                           |
+    | Encoding           | automatic                                      |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 8-bit register for signal <busi>.
+    Summary:
+	inferred   1 Finite State Machine(s).
+	inferred   8 D-type flip-flop(s).
+Unit <list_ctrl> synthesized.
+
+
+Synthesizing Unit <file_info_processor>.
+    Related source file is "/home/aak/vlsi_home/prj/playcontrol/rtl/file_info_processor.vhd".
+    Found 32-bit register for signal <filesize>.
+    Found 8-bit 16-to-1 multiplexer for signal <lcdc_chrm_wdata>.
+    Found 4-bit comparator less for signal <$cmp_lt0000> created at line 127.
+    Found 4-bit up counter for signal <fio_data_counter>.
+    Found 1-bit register for signal <fio_data_counter3_reg>.
+    Found 96-bit register for signal <fname>.
+    Found 4-bit up counter for signal <fname_lcd_counter>.
+    Found 4-bit register for signal <fname_lcd_counter_reg>.
+    Found 1-bit register for signal <fname_wr_done>.
+    Found 1-bit register for signal <info_ready_bit>.
+    Found 2-bit register for signal <lcdc_command>.
+    Summary:
+	inferred   2 Counter(s).
+	inferred 133 D-type flip-flop(s).
+	inferred   1 Comparator(s).
+	inferred   8 Multiplexer(s).
+Unit <file_info_processor> synthesized.
+
+
+Synthesizing Unit <playcontrol>.
+    Related source file is "/home/aak/vlsi_home/prj/playcontrol/rtl/playcontrol.vhd".
+WARNING:Xst:647 - Input <hw_full> is never used.
+WARNING:Xst:647 - Input <dbuf_almost_full> is never used.
+WARNING:Xst:647 - Input <sbuf_full> is never used.
+WARNING:Xst:647 - Input <sbuf_empty> is never used.
+WARNING:Xst:647 - Input <dec_status> is never used.
+WARNING:Xst:646 - Signal <arbiter_fio_gnt<1:0>> is assigned but never used.
+Unit <playcontrol> synthesized.
+
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# Counters                                             : 2
+ 4-bit up counter                                      : 2
+# Registers                                            : 20
+ 1-bit register                                        : 3
+ 2-bit register                                        : 1
+ 3-bit register                                        : 1
+ 32-bit register                                       : 1
+ 4-bit register                                        : 1
+ 8-bit register                                        : 13
+# Comparators                                          : 1
+ 4-bit comparator less                                 : 1
+# Multiplexers                                         : 1
+ 8-bit 16-to-1 multiplexer                             : 1
+
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+Analyzing FSM <FSM_0> for best encoding.
+Optimizing FSM <list_ctrl_inst/state> on signal <state[1:2]> with sequential encoding.
+-------------------
+ State | Encoding
+-------------------
+ idle  | 00
+ wrdy  | 01
+ winfo | 10
+-------------------
+Loading device for application Rf_Device from file '2vp7.nph' in environment /tools/Xilinx.
+WARNING:Xst:2404 -  FFs/Latches <busi<7:1>> (without init value) have a constant value of 0 in block <list_ctrl>.
+WARNING:Xst:2404 -  FFs/Latches <fname_8<7:6>> (without init value) have a constant value of 0 in block <file_info_processor>.
+WARNING:Xst:1710 - FF/Latch  <lcdc_command_0> (without init value) has a constant value of 0 in block <file_info_processor>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <fname_8_5> (without init value) has a constant value of 0 in block <file_info_processor>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <fname_8_1> (without init value) has a constant value of 0 in block <file_info_processor>.
+INFO:Xst:2261 - The FF/Latch <fname_8_4> in Unit <file_info_processor> is equivalent to the following 3 FFs/Latches, which will be removed : <fname_8_3> <fname_8_2> <fname_8_0> 
+WARNING:Xst:1291 - FF/Latch <filesize_0> is unconnected in block <file_info_processor_inst>.
+WARNING:Xst:1291 - FF/Latch <filesize_1> is unconnected in block <file_info_processor_inst>.
+WARNING:Xst:1291 - FF/Latch <filesize_2> is unconnected in block <file_info_processor_inst>.
+WARNING:Xst:1291 - FF/Latch <filesize_3> is unconnected in block <file_info_processor_inst>.
+WARNING:Xst:1291 - FF/Latch <filesize_4> is unconnected in block <file_info_processor_inst>.
+WARNING:Xst:1291 - FF/Latch <filesize_5> is unconnected in block <file_info_processor_inst>.
+WARNING:Xst:1291 - FF/Latch <filesize_6> is unconnected in block <file_info_processor_inst>.
+WARNING:Xst:1291 - FF/Latch <filesize_7> is unconnected in block <file_info_processor_inst>.
+WARNING:Xst:1291 - FF/Latch <filesize_8> is unconnected in block <file_info_processor_inst>.
+WARNING:Xst:1291 - FF/Latch <filesize_9> is unconnected in block <file_info_processor_inst>.
+WARNING:Xst:1291 - FF/Latch <filesize_10> is unconnected in block <file_info_processor_inst>.
+WARNING:Xst:1291 - FF/Latch <filesize_11> is unconnected in block <file_info_processor_inst>.
+WARNING:Xst:1291 - FF/Latch <filesize_12> is unconnected in block <file_info_processor_inst>.
+WARNING:Xst:1291 - FF/Latch <filesize_13> is unconnected in block <file_info_processor_inst>.
+WARNING:Xst:1291 - FF/Latch <filesize_14> is unconnected in block <file_info_processor_inst>.
+WARNING:Xst:1291 - FF/Latch <filesize_15> is unconnected in block <file_info_processor_inst>.
+WARNING:Xst:1291 - FF/Latch <filesize_16> is unconnected in block <file_info_processor_inst>.
+WARNING:Xst:1291 - FF/Latch <filesize_17> is unconnected in block <file_info_processor_inst>.
+WARNING:Xst:1291 - FF/Latch <filesize_18> is unconnected in block <file_info_processor_inst>.
+WARNING:Xst:1291 - FF/Latch <filesize_19> is unconnected in block <file_info_processor_inst>.
+WARNING:Xst:1291 - FF/Latch <filesize_20> is unconnected in block <file_info_processor_inst>.
+WARNING:Xst:1291 - FF/Latch <filesize_21> is unconnected in block <file_info_processor_inst>.
+WARNING:Xst:1291 - FF/Latch <filesize_22> is unconnected in block <file_info_processor_inst>.
+WARNING:Xst:1291 - FF/Latch <filesize_23> is unconnected in block <file_info_processor_inst>.
+WARNING:Xst:1291 - FF/Latch <filesize_24> is unconnected in block <file_info_processor_inst>.
+WARNING:Xst:1291 - FF/Latch <filesize_25> is unconnected in block <file_info_processor_inst>.
+WARNING:Xst:1291 - FF/Latch <filesize_26> is unconnected in block <file_info_processor_inst>.
+WARNING:Xst:1291 - FF/Latch <filesize_27> is unconnected in block <file_info_processor_inst>.
+WARNING:Xst:1291 - FF/Latch <filesize_28> is unconnected in block <file_info_processor_inst>.
+WARNING:Xst:1291 - FF/Latch <filesize_29> is unconnected in block <file_info_processor_inst>.
+WARNING:Xst:1291 - FF/Latch <filesize_30> is unconnected in block <file_info_processor_inst>.
+WARNING:Xst:1291 - FF/Latch <filesize_31> is unconnected in block <file_info_processor_inst>.
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# FSMs                                                 : 1
+# Counters                                             : 2
+ 4-bit up counter                                      : 2
+# Registers                                            : 143
+ Flip-Flops                                            : 143
+# Comparators                                          : 1
+ 4-bit comparator less                                 : 1
+# Multiplexers                                         : 1
+ 8-bit 16-to-1 multiplexer                             : 1
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+WARNING:Xst:1710 - FF/Latch  <gnt_reg_0> (without init value) has a constant value of 0 in block <arbiter_mux>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <gnt_reg_1> (without init value) has a constant value of 0 in block <arbiter_mux>.
+
+Optimizing unit <playcontrol> ...
+
+Optimizing unit <file_info_processor> ...
+
+Mapping all equations...
+WARNING:Xst:1291 - FF/Latch <file_info_processor_inst/filesize_0> is unconnected in block <playcontrol>.
+WARNING:Xst:1291 - FF/Latch <file_info_processor_inst/filesize_1> is unconnected in block <playcontrol>.
+WARNING:Xst:1291 - FF/Latch <file_info_processor_inst/filesize_2> is unconnected in block <playcontrol>.
+WARNING:Xst:1291 - FF/Latch <file_info_processor_inst/filesize_3> is unconnected in block <playcontrol>.
+WARNING:Xst:1291 - FF/Latch <file_info_processor_inst/filesize_4> is unconnected in block <playcontrol>.
+WARNING:Xst:1291 - FF/Latch <file_info_processor_inst/filesize_5> is unconnected in block <playcontrol>.
+WARNING:Xst:1291 - FF/Latch <file_info_processor_inst/filesize_6> is unconnected in block <playcontrol>.
+WARNING:Xst:1291 - FF/Latch <file_info_processor_inst/filesize_7> is unconnected in block <playcontrol>.
+WARNING:Xst:1291 - FF/Latch <file_info_processor_inst/filesize_8> is unconnected in block <playcontrol>.
+WARNING:Xst:1291 - FF/Latch <file_info_processor_inst/filesize_9> is unconnected in block <playcontrol>.
+WARNING:Xst:1291 - FF/Latch <file_info_processor_inst/filesize_10> is unconnected in block <playcontrol>.
+WARNING:Xst:1291 - FF/Latch <file_info_processor_inst/filesize_11> is unconnected in block <playcontrol>.
+WARNING:Xst:1291 - FF/Latch <file_info_processor_inst/filesize_12> is unconnected in block <playcontrol>.
+WARNING:Xst:1291 - FF/Latch <file_info_processor_inst/filesize_13> is unconnected in block <playcontrol>.
+WARNING:Xst:1291 - FF/Latch <file_info_processor_inst/filesize_14> is unconnected in block <playcontrol>.
+WARNING:Xst:1291 - FF/Latch <file_info_processor_inst/filesize_15> is unconnected in block <playcontrol>.
+WARNING:Xst:1291 - FF/Latch <file_info_processor_inst/filesize_16> is unconnected in block <playcontrol>.
+WARNING:Xst:1291 - FF/Latch <file_info_processor_inst/filesize_17> is unconnected in block <playcontrol>.
+WARNING:Xst:1291 - FF/Latch <file_info_processor_inst/filesize_18> is unconnected in block <playcontrol>.
+WARNING:Xst:1291 - FF/Latch <file_info_processor_inst/filesize_19> is unconnected in block <playcontrol>.
+WARNING:Xst:1291 - FF/Latch <file_info_processor_inst/filesize_20> is unconnected in block <playcontrol>.
+WARNING:Xst:1291 - FF/Latch <file_info_processor_inst/filesize_21> is unconnected in block <playcontrol>.
+WARNING:Xst:1291 - FF/Latch <file_info_processor_inst/filesize_22> is unconnected in block <playcontrol>.
+WARNING:Xst:1291 - FF/Latch <file_info_processor_inst/filesize_23> is unconnected in block <playcontrol>.
+WARNING:Xst:1291 - FF/Latch <file_info_processor_inst/filesize_24> is unconnected in block <playcontrol>.
+WARNING:Xst:1291 - FF/Latch <file_info_processor_inst/filesize_25> is unconnected in block <playcontrol>.
+WARNING:Xst:1291 - FF/Latch <file_info_processor_inst/filesize_26> is unconnected in block <playcontrol>.
+WARNING:Xst:1291 - FF/Latch <file_info_processor_inst/filesize_27> is unconnected in block <playcontrol>.
+WARNING:Xst:1291 - FF/Latch <file_info_processor_inst/filesize_28> is unconnected in block <playcontrol>.
+WARNING:Xst:1291 - FF/Latch <file_info_processor_inst/filesize_29> is unconnected in block <playcontrol>.
+WARNING:Xst:1291 - FF/Latch <file_info_processor_inst/filesize_30> is unconnected in block <playcontrol>.
+WARNING:Xst:1291 - FF/Latch <file_info_processor_inst/filesize_31> is unconnected in block <playcontrol>.
+Building and optimizing final netlist ...
+Found area constraint ratio of 100 (+ 5) on block playcontrol, actual ratio is 1.
+FlipFlop file_info_processor_inst/fname_lcd_counter_0 has been replicated 1 time(s)
+FlipFlop file_info_processor_inst/fname_lcd_counter_1 has been replicated 1 time(s)
+FlipFlop file_info_processor_inst/fname_lcd_counter_2 has been replicated 1 time(s)
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 112
+ Flip-Flops                                            : 112
+
+=========================================================================
+
+=========================================================================
+*                          Partition Report                             *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Final Report                               *
+=========================================================================
+Final Results
+RTL Top Level Output File Name     : playcontrol.ngr
+Top Level Output File Name         : playcontrol
+Output Format                      : NGC
+Optimization Goal                  : Speed
+Keep Hierarchy                     : NO
+
+Design Statistics
+# IOs                              : 193
+
+Cell Usage :
+# BELS                             : 127
+#      GND                         : 1
+#      INV                         : 1
+#      LUT2                        : 7
+#      LUT3                        : 51
+#      LUT3_D                      : 1
+#      LUT4                        : 28
+#      LUT4_D                      : 2
+#      LUT4_L                      : 1
+#      MUXF5                       : 26
+#      MUXF6                       : 8
+#      VCC                         : 1
+# FlipFlops/Latches                : 112
+#      FDC                         : 6
+#      FDCE                        : 99
+#      FDP                         : 3
+#      FDPE                        : 4
+=========================================================================
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 2vp7ff896-7 
+
+ Number of Slices:                      95  out of   4928     1%  
+ Number of Slice Flip Flops:           112  out of   9856     1%  
+ Number of 4 input LUTs:                91  out of   9856     0%  
+ Number of IOs:                        193
+ Number of bonded IOBs:                  0  out of    396     0%  
+
+
+=========================================================================
+TIMING REPORT
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+-----------------------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)                   | Load  |
+-----------------------------------+-----------------------------------------+-------+
+clk                                | NONE(file_info_processor_inst/fname_3_5)| 112   |
+-----------------------------------+-----------------------------------------+-------+
+INFO:Xst:2169 - HDL ADVISOR - Some clock signals were not automatically buffered by XST with BUFG/BUFR resources. Please use the buffer_type constraint in order to insert these buffers to the clock signals to help prevent skew problems.
+
+Asynchronous Control Signals Information:
+----------------------------------------
+-----------------------------------+------------------------+-------+
+Control Signal                     | Buffer(FF name)        | Load  |
+-----------------------------------+------------------------+-------+
+reset                              | NONE                   | 112   |
+-----------------------------------+------------------------+-------+
+
+Timing Summary:
+---------------
+Speed Grade: -7
+
+   Minimum period: 2.762ns (Maximum Frequency: 362.109MHz)
+   Minimum input arrival time before clock: 4.018ns
+   Maximum output required time after clock: 2.718ns
+   Maximum combinational path delay: 0.411ns
+
+Timing Detail:
+--------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'clk'
+  Clock period: 2.762ns (frequency: 362.109MHz)
+  Total number of paths / destination ports: 497 / 125
+-------------------------------------------------------------------------
+Delay:               2.762ns (Levels of Logic = 2)
+  Source:            file_info_processor_inst/fio_data_counter_2 (FF)
+  Destination:       file_info_processor_inst/fname_6_0 (FF)
+  Source Clock:      clk rising
+  Destination Clock: clk rising
+
+  Data Path: file_info_processor_inst/fio_data_counter_2 to file_info_processor_inst/fname_6_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDCE:C->Q             4   0.370   0.511  file_info_processor_inst/fio_data_counter_2 (file_info_processor_inst/fio_data_counter_2)
+     LUT3_D:I1->O          2   0.275   0.396  file_info_processor_inst/_not000811 (file_info_processor_inst/N141)
+     LUT3:I2->O           32   0.275   0.671  file_info_processor_inst/_not00111 (file_info_processor_inst/_not0011)
+     FDCE:CE                   0.263          file_info_processor_inst/fname_6_7
+    ----------------------------------------
+    Total                      2.762ns (1.183ns logic, 1.579ns route)
+                                       (42.8% logic, 57.2% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'clk'
+  Total number of paths / destination ports: 238 / 193
+-------------------------------------------------------------------------
+Offset:              4.018ns (Levels of Logic = 5)
+  Source:            key_data<5> (PAD)
+  Destination:       arbiter_mux_inst/gnt_reg_2 (FF)
+  Destination Clock: clk rising
+
+  Data Path: key_data<5> to arbiter_mux_inst/gnt_reg_2
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     LUT3:I0->O            1   0.275   0.369  kbc_intf_inst/listprev1_SW0 (N11)
+     LUT4:I3->O            2   0.275   0.514  kbc_intf_inst/listprev1 (N21)
+     LUT4:I0->O            2   0.275   0.514  list_ctrl_inst/state_FFd2-In11 (N0)
+     LUT4:I0->O            2   0.275   0.514  list_ctrl_inst/req1 (listcrtl_req)
+     LUT2:I0->O            1   0.275   0.331  arbiter_mux_inst/gnt_le1 (arbiter_mux_inst/gnt_le)
+     FDCE:CE                   0.263          arbiter_mux_inst/gnt_reg_2
+    ----------------------------------------
+    Total                      4.018ns (1.774ns logic, 2.244ns route)
+                                       (44.2% logic, 55.8% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'clk'
+  Total number of paths / destination ports: 213 / 17
+-------------------------------------------------------------------------
+Offset:              2.718ns (Levels of Logic = 4)
+  Source:            file_info_processor_inst/fname_lcd_counter_0 (FF)
+  Destination:       chrm_wdata<7> (PAD)
+  Source Clock:      clk rising
+
+  Data Path: file_info_processor_inst/fname_lcd_counter_0 to chrm_wdata<7>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDCE:C->Q            53   0.370   0.837  file_info_processor_inst/fname_lcd_counter_0 (chrm_addr<0>)
+     LUT3:I0->O            1   0.275   0.000  file_info_processor_inst/fname_lcd_counter<0>45 (file_info_processor_inst/N46)
+     MUXF5:I0->O           1   0.303   0.000  file_info_processor_inst/fname_lcd_counter<1>_f5_14 (file_info_processor_inst/fname_lcd_counter<1>_f515)
+     MUXF6:I0->O           1   0.288   0.370  file_info_processor_inst/fname_lcd_counter<2>_f6_6 (file_info_processor_inst/fname_lcd_counter<2>_f67)
+     LUT4:I3->O            0   0.275   0.000  file_info_processor_inst/fname_lcd_counter<3>7 (chrm_wdata<7>)
+    ----------------------------------------
+    Total                      2.718ns (1.511ns logic, 1.207ns route)
+                                       (55.6% logic, 44.4% route)
+
+=========================================================================
+Timing constraint: Default path analysis
+  Total number of paths / destination ports: 3 / 3
+-------------------------------------------------------------------------
+Delay:               0.411ns (Levels of Logic = 1)
+  Source:            busy (PAD)
+  Destination:       ctrl (PAD)
+
+  Data Path: busy to ctrl
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     LUT3:I0->O            4   0.275   0.000  list_ctrl_inst/state_FFd1-In11 (busiv)
+    ----------------------------------------
+    Total                      0.411ns (0.411ns logic, 0.000ns route)
+                                       (100.0% logic, 0.0% route)
+
+=========================================================================
+CPU : 16.28 / 16.34 s | Elapsed : 26.00 / 26.00 s
+ 
+--> 
+
+
+Total memory usage is 139284 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :   78 (   0 filtered)
+Number of infos    :    2 (   0 filtered)
+

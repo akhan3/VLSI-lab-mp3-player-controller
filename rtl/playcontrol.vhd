@@ -189,8 +189,16 @@ begin
       lcdc_chrm_wen   =>  chrm_wr
     );
 
-
-
-
+-- Unassigned outputs are tied to zero
+  ccrm_wdata  <= x"000000000";
+  ccrm_addr   <= "00000";
+  ccrm_wr     <= '0';
+  hw_wr       <= '0';
+  hw_din      <= x"00000000";
+  dbuf_wr     <= '0';
+  dbuf_din    <= x"00000000";
+  dbuf_rst    <= '0';
+  sbuf_rst    <= '0';
+  dec_rst     <= '0';
 
 end architecture playcontrol_arch;

@@ -1,5 +1,17 @@
 #!/bin/bash
-cd ise_prj
+export LD_LIBRARY_PATH=$XILINX/bin/lin
+
+# remove old temp files
+if [ -e ./xst ]
+then
+  rm -r ./xst
+fi
+mkdir -p ./xst/projnav.tmp
+
+# run xst process
 xst -intstyle xflow -ifn playcontrol.xst -ofn playcontrol.syr
-cp playcontrol.syr ../playcontrol.syr
-cd ..
+
+# clean up temp files
+rm -r ./xst
+rm playcontrol.ngr
+rm playcontrol.lso

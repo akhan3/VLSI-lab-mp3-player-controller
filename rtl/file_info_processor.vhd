@@ -111,19 +111,20 @@ begin
     end if;
   end process;
 
-  filename_lcd_writing: process (clk, reset)
-  begin
-    if (reset = reset_state) then
-      lcdc_chrm_wen <= '0';
-    elsif (clk'event and clk = clk_polarity) then
-      if (fname_lcd_counter < x"C") then
-        lcdc_chrm_wen <= '1';
-      else
-        lcdc_chrm_wen <= '0';
-      end if;
-    end if;
-  end process;
+--   filename_lcd_writing: process (clk, reset)
+--   begin
+--     if (reset = reset_state) then
+--       lcdc_chrm_wen <= '0';
+--     elsif (clk'event and clk = clk_polarity) then
+--       if (fname_lcd_counter < x"C") then
+--         lcdc_chrm_wen <= '1';
+--       else
+--         lcdc_chrm_wen <= '0';
+--       end if;
+--     end if;
+--   end process;
 
+  lcdc_chrm_wen <= '1' when (fname_lcd_counter < x"C") else '0';
   lcdc_chrm_waddr <= x"0" & fname_lcd_counter;
 
   with fname_lcd_counter select
