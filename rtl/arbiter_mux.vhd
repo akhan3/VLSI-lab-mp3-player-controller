@@ -14,20 +14,20 @@ entity arbiter_mux is
 end entity;
 
 architecture arch of arbiter_mux is
-  signal gnt_le   : std_logic;
-  signal gnt_next : std_logic_vector(2 downto 0);
-  signal gnt_reg  : std_logic_vector(2 downto 0);
-  signal req_mask : std_logic_vector(2 downto 0);
+  signal gnt_le     : std_logic;
+  signal gnt_next   : std_logic_vector(2 downto 0);
+  signal gnt_reg    : std_logic_vector(2 downto 0);
+  signal req_mask   : std_logic_vector(2 downto 0);
 begin
 
 -- Arbitration Logic
   gnt_next(0) <= req(0);
-  gnt_next(1) <= not(req(0))           and req(1);
-  gnt_next(2) <= not(req(0) or req(1)) and req(2);
+  gnt_next(1) <= req(1) and not(req(0));
+  gnt_next(2) <= req(2) and not(req(0) or req(1));
 
 -- grant load enable signal
-  req_mask <= req and gnt_reg;
-  gnt_le <= not(req_mask(0) or req_mask(1) or req_mask(2));
+  req_mask <= req and gnt_reg;                              -- request masked with grant
+  gnt_le <= not(req_mask(0) or req_mask(1) or req_mask(2)); -- if not
 
 -- grant signal register
   gnt <= gnt_reg;

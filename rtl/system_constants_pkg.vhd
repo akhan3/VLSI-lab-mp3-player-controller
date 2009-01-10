@@ -66,11 +66,33 @@ package system_constants_pkg is
 ----------------------------------------------------------------------------------
 -- My constants
 ----------------------------------------------------------------------------------
--- For LCD
+-- LCD Commands
   constant  LCD_NOP       : std_logic_vector(1 downto 0) := "00";
   constant  LCD_CLEAR     : std_logic_vector(1 downto 0) := "01";
   constant  LCD_REFRESH   : std_logic_vector(1 downto 0) := "10";
-
-
+-- Keyboard Scan Codes
+  constant KEY_0          : std_logic_vector(7 downto 0) := x"70";
+  constant KEY_1          : std_logic_vector(7 downto 0) := x"69";
+  constant KEY_2          : std_logic_vector(7 downto 0) := x"72";
+  constant KEY_3          : std_logic_vector(7 downto 0) := x"7A";
+  constant KEY_4          : std_logic_vector(7 downto 0) := x"6B";
+  constant KEY_5          : std_logic_vector(7 downto 0) := x"73";
+  constant KEY_6          : std_logic_vector(7 downto 0) := x"74";
+  constant KEY_7          : std_logic_vector(7 downto 0) := x"6C";
+  constant KEY_8          : std_logic_vector(7 downto 0) := x"75";
+  constant KEY_9          : std_logic_vector(7 downto 0) := x"7D";
+  constant KEY_ESC        : std_logic_vector(7 downto 0) := x"76";
+  constant KEY_CTRL       : std_logic_vector(7 downto 0) := x"14";
+  constant KEY_ALT        : std_logic_vector(7 downto 0) := x"11";
+  constant KEY_LEFT       : std_logic_vector(7 downto 0) := x"66";
+  constant KEY_PLUS       : std_logic_vector(7 downto 0) := x"79";
+  constant KEY_MINUS      : std_logic_vector(7 downto 0) := x"7B";
+-- File System Commands
+  constant FIO_FILENEXT   : std_logic_vector(7 downto 0) := x"00";
+  constant FIO_FILEPREV   : std_logic_vector(7 downto 0) := x"01";
+  constant FIO_READ       : std_logic_vector(7 downto 0) := x"02";
+  constant FIO_OPEN       : std_logic_vector(7 downto 0) := x"03";
+  constant FIO_FFSEEK     : std_logic_vector(7 downto 0) := x"04";
+  constant FIO_BFSEEK     : std_logic_vector(7 downto 0) := x"05";
 
 end system_constants_pkg;

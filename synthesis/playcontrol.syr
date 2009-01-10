@@ -2,11 +2,11 @@ Release 8.2i - xst I.31
 Copyright (c) 1995-2006 Xilinx, Inc.  All rights reserved.
 --> 
 Parameter TMPDIR set to ./xst/projnav.tmp
-CPU : 0.00 / 0.05 s | Elapsed : 0.00 / 0.00 s
+CPU : 0.00 / 0.04 s | Elapsed : 0.00 / 0.00 s
  
 --> 
 Parameter xsthdpdir set to ./xst
-CPU : 0.00 / 0.05 s | Elapsed : 0.00 / 0.00 s
+CPU : 0.00 / 0.04 s | Elapsed : 0.00 / 0.00 s
  
 --> 
 Reading design: playcontrol.prj
@@ -443,7 +443,7 @@ Clock Information:
 -----------------------------------+-----------------------------------------+-------+
 Clock Signal                       | Clock buffer(FF name)                   | Load  |
 -----------------------------------+-----------------------------------------+-------+
-clk                                | NONE(file_info_processor_inst/fname_3_5)| 112   |
+clk                                | NONE(file_info_processor_inst/fname_6_2)| 112   |
 -----------------------------------+-----------------------------------------+-------+
 INFO:Xst:2169 - HDL ADVISOR - Some clock signals were not automatically buffered by XST with BUFG/BUFR resources. Please use the buffer_type constraint in order to insert these buffers to the clock signals to help prevent skew problems.
 
@@ -554,12 +554,12 @@ Delay:               0.411ns (Levels of Logic = 1)
                                        (100.0% logic, 0.0% route)
 
 =========================================================================
-CPU : 16.28 / 16.34 s | Elapsed : 26.00 / 26.00 s
+CPU : 19.44 / 19.50 s | Elapsed : 29.00 / 29.00 s
  
 --> 
 
 
-Total memory usage is 139284 kilobytes
+Total memory usage is 139288 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :   78 (   0 filtered)

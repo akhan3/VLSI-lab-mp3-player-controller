@@ -20,8 +20,6 @@ entity list_ctrl is
 end entity;
 
 architecture arch of list_ctrl is
-  constant FILENEXT : std_logic_vector(7 downto 0) := x"00";
-  constant FILEPREV : std_logic_vector(7 downto 0) := x"01";
   type state_type is (IDLE, WRDY, WINFO);
   signal state, next_state: state_type;
   signal busi_le : std_logic;
@@ -97,9 +95,9 @@ begin
     elsif (clk'event and clk = clk_polarity) then
       if (busi_le = '1') then
         if (listnext = '1') then
-          busi <= FILENEXT;
+          busi <= FIO_FILENEXT;
         elsif (listprev = '1') then
-          busi <= FILEPREV;
+          busi <= FIO_FILEPREV;
         end if;
       end if;
     end if;

@@ -28,6 +28,7 @@ architecture arch of arbiter_mux is
   signal ored1    : std_logic;
   signal ored2    : std_logic;
   signal ored3    : std_logic_vector(M-1 downto 0);
+  signal ored : std_logic;
 begin
 
 
@@ -68,9 +69,8 @@ begin
     each_bit: for j in 0 to M-1 generate
   begin
     each_master3: for i in 0 to N-1 generate
-      variable ored : std_logic;
     begin
-      ored := ored or (gnt_reg(i) and bus_in(i*M+j));
+      ored <= ored or (gnt_reg(i) and bus_in(i*M+j));
     end generate;
   end generate;
   bus_out <= ored3;

@@ -3,13 +3,13 @@
 -- vlsi design laboratory
 -- institute for electronic design automation
 -------------------------------------------------------------------------------
--- version 0.1 
+-- version 0.1
 --
 -- This testbench tests only the list and play functions. Further functions,
 -- e.g. stop, pause, mute etc., are not tested. This testbench provides a
 -- basis to test the playcontrol module and it does not guarantee that the list
 -- and play functions will work after passing this testbench. Further test
--- cases should be added to this testbench for different designs. 
+-- cases should be added to this testbench for different designs.
 --
 -- bil 03/08
 -------------------------------------------------------------------------------
@@ -72,7 +72,7 @@ architecture behavior of playcontrol_tb is
   end component;
 
   signal clk   : std_logic := '0';
-  signal reset : std_logic := '1';
+  signal reset : std_logic := '0';
 
   signal key_empty  : std_logic                    := '1';
   signal key_rd     : std_logic;
@@ -183,7 +183,15 @@ architecture behavior of playcontrol_tb is
 begin
 
   clk   <= not clk after pw;
-  reset <= '0'     after 19*pw;
+  power_on_reset: process
+  begin
+    reset <= '0';
+    wait for 19*pw;
+    reset <= '1';
+    wait for 19*pw;
+    reset <= '0';
+    wait;
+  end process;
 
   uut : playcontrol
     port map (
@@ -428,7 +436,7 @@ begin
         severity failure_level;
 
     end if;
-    
+
   end process;
 
   dbuf_almost_full_gen : process
@@ -506,7 +514,7 @@ begin
     assert not (key_empty = '0' and key_empty'stable(500*tclock))
       report "No key code is read in the past 500 clock periods!"
       severity failure_level;
-    
+
     assert not(lcdc_busy = '1' and lcdc_cmd /= "00")
       report "Lcd command should not be sent when lcdc is busy!"
       severity failure_level;
@@ -588,6 +596,6 @@ begin
 
   end process;
 
-  
+
 
 end architecture;

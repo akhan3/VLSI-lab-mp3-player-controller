@@ -1,5 +1,7 @@
 #!/bin/bash
 
+COMP_ONLY=0
+
 TESTNAME="playcontrol_tb"
 DESIGN_FILES="  ../rtl/system_constants_pkg.vhd  \
                 ../sim/playcontrol_tb.vhd        \
@@ -18,20 +20,21 @@ DESIGN_FILES="  ../rtl/system_constants_pkg.vhd  \
 # fi
 # ln -sv $1 sim.inc
 
-echo
-echo "Creating work library ..."
-echo "================================================================================"
-echo vlib work
+# echo "Creating work library ..."
+# echo "================================================================================"
+# echo vlib work
+# echo
 if [ -e work ]
 then
   rm -r work
 fi
 vlib work
 
-echo
 echo "Running VHDL Compilation ..."
 echo "================================================================================"
 VCOM_SWITCH_LIST=" -lint -novopt"
+echo ">>" vlib work
+echo ">>" vcom  $VCOM_SWITCH_LIST $DESIGN_FILES
 vcom  $VCOM_SWITCH_LIST $DESIGN_FILES
 
 if [ $? != 0 ]
@@ -44,25 +47,23 @@ else
   echo
 fi
 
-
-echo
-echo 'Running Simulation ...'
-echo "================================================================================"
-VSIM_SWITCH_LIST=" -L unisims_ver -L simprims_ver -L xilinxcorelib_ver -t ps -novopt"
-vsim $SWITCH_LIST_SIM -l $TESTNAME.log -wlf $TESTNAME.wlf work.$TESTNAME -do 'vsim.do'
-
-echo
-echo "Checking for errors in $TESTNAME.log ..."
-echo "================================================================================"
-SIM_ERR=`grep -i error $TESTNAME.log | wc -l`
-if [ $SIM_ERR == 0 ]
+if [ $COMP_ONLY != 1 ]
 then
-  echo "§§§§§§§§§§§§§§§§ Simulation passed §§§§§§§§§§§§§§§§";
-  echo
-else
-  echo "§§§§§§§§§§§§§§§§ Simulation failed with $SIM_ERR errors §§§§§§§§§§§§§§§§";
+  echo 'Running Simulation ...'
+  echo "================================================================================"
+  VSIM_SWITCH_LIST=" -L unisims_ver -L simprims_ver -L xilinxcorelib_ver -t ps -novopt"
+  echo ">>" vsim $SWITCH_LIST_SIM -l $TESTNAME.log -wlf $TESTNAME.wlf work.$TESTNAME -do vsim.do
+  vsim $SWITCH_LIST_SIM -l $TESTNAME.log -wlf $TESTNAME.wlf work.$TESTNAME -do vsim.do
+
+  # Checking for errors in $TESTNAME.log
+  SIM_ERR=`grep -i error $TESTNAME.log | wc -l`
+  if [ $SIM_ERR == 0 ]
+  then
+    echo "§§§§§§§§§§§§§§§§ Simulation passed §§§§§§§§§§§§§§§§";
+  else
+    echo "§§§§§§§§§§§§§§§§ Simulation failed with $SIM_ERR errors §§§§§§§§§§§§§§§§";
+  fi
   echo "See $TESTNAME.log for details"
-  echo
 fi
 
 # clean up temp files
