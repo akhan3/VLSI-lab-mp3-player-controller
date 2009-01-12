@@ -9,7 +9,7 @@ entity arbiter_mux is
     bus_in  : in  std_logic_vector(3*10-1 downto 0);  -- 10-bit bus input from 3 Masters
     req     : in  std_logic_vector(2 downto 0);       -- request signal from 3 Masters
     gnt     : out std_logic_vector(2 downto 0);       -- grant signal to 3 Masters
-    fio_bus : out std_logic_vector(9 downto 0)        -- 10-bit bus output to FIO
+    bus_out : out std_logic_vector(9 downto 0)        -- 10-bit bus output to FIO
   );
 end entity;
 
@@ -44,7 +44,7 @@ begin
 
 -- Multiplexer
   with gnt_reg select
-    fio_bus <=  bus_in(9 downto 0)    when "001",
+    bus_out <=  bus_in(9 downto 0)    when "001",
                 bus_in(19 downto 10)  when "010",
                 bus_in(29 downto 20)  when "100",
                 bus_in(9 downto 0)    when others;

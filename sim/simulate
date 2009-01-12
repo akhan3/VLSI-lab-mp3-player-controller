@@ -9,21 +9,9 @@ DESIGN_FILES="  ../rtl/system_constants_pkg.vhd  \
                 ../rtl/file_info_processor.vhd   \
                 ../rtl/arbiter_mux.vhd           \
                 ../rtl/list_ctrl.vhd             \
+                ../rtl/play_fsm.vhd              \
                 ../rtl/kbc_intf.vhd"
 
-# echo
-# echo "Creating soft link of test file for simulation..."
-# echo "================================================================================"
-# if [ -f sim.inc ]
-# then
-#   rm sim.inc
-# fi
-# ln -sv $1 sim.inc
-
-# echo "Creating work library ..."
-# echo "================================================================================"
-# echo vlib work
-# echo
 if [ -e work ]
 then
   rm -r work
@@ -32,7 +20,7 @@ vlib work
 
 echo "Running VHDL Compilation ..."
 echo "================================================================================"
-VCOM_SWITCH_LIST=" -lint -novopt"
+VCOM_SWITCH_LIST=" -lint -novopt -quiet"
 echo ">>" vlib work
 echo ">>" vcom  $VCOM_SWITCH_LIST $DESIGN_FILES
 vcom  $VCOM_SWITCH_LIST $DESIGN_FILES
@@ -51,9 +39,9 @@ if [ $COMP_ONLY != 1 ]
 then
   echo 'Running Simulation ...'
   echo "================================================================================"
-  VSIM_SWITCH_LIST=" -L unisims_ver -L simprims_ver -L xilinxcorelib_ver -t ps -novopt"
-  echo ">>" vsim $SWITCH_LIST_SIM -l $TESTNAME.log -wlf $TESTNAME.wlf work.$TESTNAME -do vsim.do
-  vsim $SWITCH_LIST_SIM -l $TESTNAME.log -wlf $TESTNAME.wlf work.$TESTNAME -do vsim.do
+  VSIM_SWITCH_LIST=" -novopt -quiet"
+  echo ">>" vsim $VSIM_SWITCH_LIST -l $TESTNAME.log -wlf $TESTNAME.wlf work.$TESTNAME -do vsim.do
+  vsim $VSIM_SWITCH_LIST -l $TESTNAME.log -wlf $TESTNAME.wlf work.$TESTNAME -do vsim.do
 
   # Checking for errors in $TESTNAME.log
   SIM_ERR=`grep -i error $TESTNAME.log | wc -l`
@@ -67,4 +55,4 @@ then
 fi
 
 # clean up temp files
-rm -r ./work
+# rm -r ./work

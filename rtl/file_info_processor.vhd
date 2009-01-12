@@ -8,12 +8,11 @@ entity file_info_processor is
   port(
     clk             : in  std_logic;
     reset           : in  std_logic;
-    info_start      : in  std_logic;
-    info_ready      : out std_logic;
+    file_info_start      : in  std_logic;
+    file_info_ready      : out std_logic;
     fio_buso        : in  std_logic_vector(31 downto 0);
     fio_busov       : in  std_logic;
---     file_size       : out file_size_reg;
-    filesize        : out std_logic_vector(31 downto 0);
+    file_size        : out std_logic_vector(31 downto 0);
 
     lcdc_busy       : in  std_logic;
 --     lcdc_gnt        : in  std_logic;
@@ -73,10 +72,10 @@ begin
   filesize_register: process (clk, reset)
   begin
     if (reset = reset_state) then
-        filesize <= x"0000_0000";
+        file_size <= x"0000_0000";
     elsif (clk'event and clk = clk_polarity) then
       if (fio_busov = '1' and fio_data_counter = x"7") then
-        filesize <= fio_buso;
+        file_size <= fio_buso;
       end if;
     end if;
   end process;
@@ -88,7 +87,7 @@ begin
       fio_data_counter3_reg <= '1';
     elsif (clk'event and clk = clk_polarity) then
       fio_data_counter3_reg <= fio_data_counter(3);
-      if (info_start = '1') then
+      if (file_info_start = '1') then
         fio_data_counter <= x"0";
       elsif (fio_busov = '1' and fio_data_counter /= x"8") then
         fio_data_counter <= fio_data_counter + x"1";
@@ -147,8 +146,8 @@ begin
 --                          _____________
 -- counter[3]    __________/  ___________
 -- counter3_reg  ____________/__
--- info_ready    ____________/  \________
-  info_ready <= info_ready_bit;
+-- file_info_ready    ____________/  \________
+  file_info_ready <= info_ready_bit;
   process (clk, reset)
   begin
     if (reset = reset_state) then
