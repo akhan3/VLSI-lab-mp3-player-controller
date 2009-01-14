@@ -9,6 +9,7 @@ entity play_fsm is
     play    : in  std_logic;
     pause   : in  std_logic;
     stop    : in  std_logic;
+    dec_status   : in std_logic;
     file_finished:in  std_logic;
     fio_busy    : in  std_logic;
     fio_gnt         : in  std_logic;
@@ -16,7 +17,10 @@ entity play_fsm is
     fio_busi    : out std_logic_vector(7 downto 0);
     fio_busiv   : out std_logic;
     fio_ctrl    : out std_logic;
-    play_en     : out std_logic
+    play_en     : out std_logic;
+    dec_rst     : out std_logic;
+    dbuf_rst    : out std_logic;
+    sbuf_rst    : out std_logic
   );
 end entity;
 
@@ -35,6 +39,19 @@ begin
 
   fio_ctrl <= '1';
   fio_busi <= FIO_OPEN;
+
+  process (clk, reset)
+  begin
+    if (reset = reset_state) then
+      dec_rst   <= '1';
+      dbuf_rst  <= '1';
+      sbuf_rst  <= '1';
+    elsif (clk'event and clk = clk_polarity) then
+      dec_rst   <= '0';
+      dbuf_rst  <= '0';
+      sbuf_rst  <= '0';
+    end if;
+  end process;
 
   state_register: process (clk, reset)
   begin

@@ -39,6 +39,34 @@ add wave -noupdate -format Logic -radix hexadecimal /playcontrol_tb/uut/play_fsm
 add wave -noupdate -format Logic -radix hexadecimal /playcontrol_tb/uut/play_fsm_inst/play_done
 add wave -noupdate -format Logic -radix hexadecimal /playcontrol_tb/uut/play_fsm_inst/stop_done
 add wave -noupdate -format Logic -radix hexadecimal /playcontrol_tb/uut/play_fsm_inst/pause_done
+add wave -noupdate -divider {MONITOR FSM}
+add wave -noupdate -format Logic /playcontrol_tb/uut/monitor_fsm_inst/clk
+add wave -noupdate -format Logic /playcontrol_tb/uut/monitor_fsm_inst/play_en
+add wave -noupdate -format Logic /playcontrol_tb/uut/monitor_fsm_inst/dbuf_afull
+add wave -noupdate -format Logic /playcontrol_tb/uut/monitor_fsm_inst/fetch_en
+add wave -noupdate -format Logic /playcontrol_tb/uut/monitor_fsm_inst/fetch_en_r
+add wave -noupdate -format Logic /playcontrol_tb/uut/monitor_fsm_inst/fetch_start
+add wave -noupdate -format Literal /playcontrol_tb/uut/monitor_fsm_inst/fetch_ring
+add wave -noupdate -format Logic /playcontrol_tb/uut/monitor_fsm_inst/fio_req
+add wave -noupdate -format Logic /playcontrol_tb/uut/monitor_fsm_inst/fio_gnt
+add wave -noupdate -format Logic /playcontrol_tb/uut/monitor_fsm_inst/fio_busy
+add wave -noupdate -format Literal -radix hexadecimal /playcontrol_tb/uut/monitor_fsm_inst/fio_busi
+add wave -noupdate -format Logic /playcontrol_tb/uut/monitor_fsm_inst/fio_busiv
+add wave -noupdate -format Logic /playcontrol_tb/uut/monitor_fsm_inst/fio_ctrl
+add wave -noupdate -format Literal -radix hexadecimal /playcontrol_tb/uut/monitor_fsm_inst/dword_cnt
+add wave -noupdate -format Literal -radix hexadecimal /playcontrol_tb/uut/monitor_fsm_inst/file_size_dword
+add wave -noupdate -format Literal -radix hexadecimal /playcontrol_tb/uut/monitor_fsm_inst/fetch_num_dword
+add wave -noupdate -format Logic /playcontrol_tb/uut/monitor_fsm_inst/sbuf_full
+add wave -noupdate -format Logic /playcontrol_tb/uut/monitor_fsm_inst/sbuf_empty
+add wave -noupdate -format Logic /playcontrol_tb/uut/monitor_fsm_inst/dec_status
+add wave -noupdate -format Literal /playcontrol_tb/uut/monitor_fsm_inst/dbuf_wdata
+add wave -noupdate -format Logic /playcontrol_tb/uut/monitor_fsm_inst/dbuf_wr
+add wave -noupdate -format Literal -radix hexadecimal /playcontrol_tb/uut/monitor_fsm_inst/fio_buso
+add wave -noupdate -format Logic /playcontrol_tb/uut/monitor_fsm_inst/fio_busov
+add wave -noupdate -format Literal -radix hexadecimal /playcontrol_tb/uut/monitor_fsm_inst/file_size_byte
+add wave -noupdate -format Logic /playcontrol_tb/uut/monitor_fsm_inst/file_finished
+add wave -noupdate -format Literal /playcontrol_tb/uut/monitor_fsm_inst/state
+add wave -noupdate -format Literal /playcontrol_tb/uut/monitor_fsm_inst/next_state
 add wave -noupdate -divider {LIST CTRL FSM}
 add wave -noupdate -format Logic -radix hexadecimal /playcontrol_tb/uut/list_ctrl_inst/clk
 add wave -noupdate -format Logic -radix hexadecimal /playcontrol_tb/uut/listcrtl_req
@@ -87,7 +115,7 @@ add wave -noupdate -divider {LCD CTRL}
 add wave -noupdate -format Logic -radix hexadecimal /playcontrol_tb/uut/file_info_processor_inst/clk
 add wave -noupdate -format Literal -radix ascii /playcontrol_tb/uut/chrm_wdata
 add wave -noupdate -format Logic -radix hexadecimal /playcontrol_tb/uut/chrm_wr
-add wave -noupdate -format Literal -radix unsigned -scale 4.0 /playcontrol_tb/uut/chrm_addr
+add wave -noupdate -format Literal -radix unsigned /playcontrol_tb/uut/chrm_addr
 add wave -noupdate -format Literal -radix hexadecimal /playcontrol_tb/uut/lcdc_cmd
 add wave -noupdate -format Logic -radix hexadecimal /playcontrol_tb/uut/lcdc_busy
 add wave -noupdate -format Literal -radix hexadecimal /playcontrol_tb/uut/ccrm_wdata
@@ -99,7 +127,7 @@ add wave -noupdate -format Logic -radix hexadecimal /playcontrol_tb/uut/file_inf
 add wave -noupdate -format Logic -radix hexadecimal /playcontrol_tb/uut/file_info_processor_inst/file_info_ready
 add wave -noupdate -format Literal -radix hexadecimal /playcontrol_tb/uut/file_info_processor_inst/fio_buso
 add wave -noupdate -format Logic -radix hexadecimal /playcontrol_tb/uut/file_info_processor_inst/fio_busov
-add wave -noupdate -format Literal -radix hexadecimal /playcontrol_tb/uut/file_info_processor_inst/file_size
+add wave -noupdate -format Literal -radix hexadecimal /playcontrol_tb/uut/file_info_processor_inst/file_size_byte
 add wave -noupdate -format Logic -radix hexadecimal /playcontrol_tb/uut/file_info_processor_inst/lcdc_busy
 add wave -noupdate -format Literal -radix hexadecimal /playcontrol_tb/uut/file_info_processor_inst/lcdc_cmd
 add wave -noupdate -format Literal -radix hexadecimal /playcontrol_tb/uut/file_info_processor_inst/lcdc_chrm_wdata
@@ -128,7 +156,7 @@ add wave -noupdate -format Logic -radix hexadecimal /playcontrol_tb/uut/dec_rst
 add wave -noupdate -format Logic -radix hexadecimal /playcontrol_tb/uut/dec_status
 add wave -noupdate -divider <NULL>
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {31515 ns} 0} {{Cursor 2} {36135 ns} 0}
+WaveRestoreCursors {{Cursor 1} {32445 ns} 0} {{Cursor 2} {82785 ns} 0}
 configure wave -namecolwidth 188
 configure wave -valuecolwidth 77
 configure wave -justifyvalue left
@@ -142,4 +170,4 @@ configure wave -gridperiod 1
 configure wave -griddelta 40
 configure wave -timeline 0
 update
-WaveRestoreZoom {0 ns} {103273 ns}
+WaveRestoreZoom {81611 ns} {85459 ns}

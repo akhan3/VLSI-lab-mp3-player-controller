@@ -10,6 +10,7 @@ DESIGN_FILES="  ../rtl/system_constants_pkg.vhd  \
                 ../rtl/arbiter_mux.vhd           \
                 ../rtl/list_ctrl.vhd             \
                 ../rtl/play_fsm.vhd              \
+                ../rtl/monitor_fsm.vhd           \
                 ../rtl/kbc_intf.vhd"
 
 if [ -e work ]

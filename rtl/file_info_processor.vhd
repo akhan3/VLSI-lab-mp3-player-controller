@@ -12,7 +12,7 @@ entity file_info_processor is
     file_info_ready      : out std_logic;
     fio_buso        : in  std_logic_vector(31 downto 0);
     fio_busov       : in  std_logic;
-    file_size        : out std_logic_vector(31 downto 0);
+    file_size_byte        : out std_logic_vector(31 downto 0);
 
     lcdc_busy       : in  std_logic;
 --     lcdc_gnt        : in  std_logic;
@@ -72,10 +72,10 @@ begin
   filesize_register: process (clk, reset)
   begin
     if (reset = reset_state) then
-        file_size <= x"0000_0000";
+        file_size_byte <= x"0000_0000";
     elsif (clk'event and clk = clk_polarity) then
       if (fio_busov = '1' and fio_data_counter = x"7") then
-        file_size <= fio_buso;
+        file_size_byte <= fio_buso;
       end if;
     end if;
   end process;

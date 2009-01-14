@@ -100,13 +100,42 @@ architecture playcontrol_arch of playcontrol is
       play    : in  std_logic;
       stop    : in  std_logic;
       pause   : in  std_logic;
+      dec_status  : in  std_logic;
       file_finished:in  std_logic;
       fio_busy    : in  std_logic;
       fio_gnt         : in  std_logic;
       fio_req         : out std_logic;
       fio_busi    : out std_logic_vector(7 downto 0);
       fio_busiv   : out std_logic;
-      fio_ctrl    : out std_logic
+      fio_ctrl    : out std_logic;
+      play_en    : out std_logic;
+      dec_rst   : out  std_logic;
+      dbuf_rst  : out  std_logic;
+      sbuf_rst  : out  std_logic
+    );
+  end component;
+
+  component monitor_fsm is
+    port(
+      clk         : in  std_logic;
+      reset       : in  std_logic;
+      play_en     : in  std_logic;
+      dbuf_afull  : in  std_logic;
+      sbuf_full   : in  std_logic;
+      sbuf_empty  : in  std_logic;
+      dec_status  : in  std_logic;
+      dbuf_wdata  : out std_logic_vector(31 downto 0);
+      dbuf_wr     : out std_logic;
+      fio_buso        : in  std_logic_vector(31 downto 0);
+      fio_busov       : in  std_logic;
+      fio_busy        : in  std_logic;
+      fio_gnt         : in  std_logic;
+      fio_req         : out std_logic;
+      fio_busi        : out std_logic_vector(7 downto 0);
+      fio_busiv       : out std_logic;
+      fio_ctrl        : out std_logic;
+      file_size_byte        : in  std_logic_vector(31 downto 0);
+      file_finished   : out std_logic
     );
   end component;
 
@@ -118,7 +147,7 @@ architecture playcontrol_arch of playcontrol is
       file_info_ready      : out std_logic;
       fio_buso        : in  std_logic_vector(31 downto 0);
       fio_busov       : in  std_logic;
-      file_size        : out std_logic_vector(31 downto 0);
+      file_size_byte         : out std_logic_vector(31 downto 0);
 
       lcdc_busy       : in  std_logic;
   --     lcdc_gnt        : in  std_logic;
@@ -151,6 +180,12 @@ architecture playcontrol_arch of playcontrol is
   signal playfsm_busi   : std_logic_vector(7 downto 0);
   signal playfsm_busiv  : std_logic;
   signal playfsm_ctrl   : std_logic;
+  signal monfsm_gnt    : std_logic;
+  signal monfsm_req    : std_logic;
+  signal monfsm_busi   : std_logic_vector(7 downto 0);
+  signal monfsm_busiv  : std_logic;
+  signal monfsm_ctrl   : std_logic;
+  signal play_en  : std_logic;
   signal file_finished  : std_logic;
   signal file_info_ready     : std_logic;
   signal file_info_start     : std_logic;
@@ -158,18 +193,22 @@ architecture playcontrol_arch of playcontrol is
   signal arbiter_fio_gnt: std_logic_vector(2 downto 0);
   signal arbiter_fio_bus_in : std_logic_vector(29 downto 0);
   signal arbiter_fio_bus_out : std_logic_vector(9 downto 0);
-  signal file_size : std_logic_vector(31 downto 0);
+  signal file_size_byte  : std_logic_vector(31 downto 0);
 
 begin
   ctrl <= arbiter_fio_bus_out(9);
   busiv <= arbiter_fio_bus_out(8);
   busi <= arbiter_fio_bus_out(7 downto 0);
+
   listcrtl_gnt <= arbiter_fio_gnt(2);
-  playfsm_gnt <= arbiter_fio_gnt(1);
-  arbiter_fio_req <= listcrtl_req & playfsm_req  & '0';
+  monfsm_gnt <= arbiter_fio_gnt(1);
+  playfsm_gnt <= arbiter_fio_gnt(0);
+
+  arbiter_fio_req <= listcrtl_req & monfsm_req & playfsm_req;
+
   arbiter_fio_bus_in <= listcrtl_ctrl & listcrtl_busiv & listcrtl_busi &
-                        playfsm_ctrl & playfsm_busiv & playfsm_busi &
-                        "0000000000";
+                        monfsm_ctrl & monfsm_busiv & monfsm_busi &
+                        playfsm_ctrl & playfsm_busiv & playfsm_busi;
 
   kbc_intf_inst: kbc_intf
     port map(
@@ -220,13 +259,41 @@ begin
       play      =>  play,
       stop      =>  stop,
       pause     =>  pause,
+      dec_status   =>  dec_status,
       fio_busy      =>  busy,
       file_finished =>  file_finished,
       fio_gnt           =>  playfsm_gnt,
       fio_req           =>  playfsm_req,
       fio_busi      =>  playfsm_busi,
       fio_busiv     =>  playfsm_busiv,
-      fio_ctrl      =>  playfsm_ctrl
+      fio_ctrl      =>  playfsm_ctrl,
+      play_en         =>  play_en,
+      dec_rst   =>  dec_rst,
+      dbuf_rst  =>  dbuf_rst,
+      sbuf_rst  =>  sbuf_rst
+    );
+
+  monitor_fsm_inst: monitor_fsm
+    port map(
+      clk             =>  clk             ,
+      reset           =>  reset           ,
+      play_en         =>  play_en         ,
+      dbuf_afull      =>  dbuf_almost_full,
+      sbuf_full       =>  sbuf_full    ,
+      sbuf_empty      =>  sbuf_empty   ,
+      dec_status      =>  dec_status   ,
+      dbuf_wr         =>  dbuf_wr      ,
+      dbuf_wdata      =>  dbuf_din     ,
+      fio_buso        =>  buso         ,
+      fio_busov       =>  busov        ,
+      fio_busy        =>  busy         ,
+      fio_gnt         =>  monfsm_gnt      ,
+      fio_req         =>  monfsm_req      ,
+      fio_busi        =>  monfsm_busi         ,
+      fio_busiv       =>  monfsm_busiv        ,
+      fio_ctrl        =>  monfsm_ctrl         ,
+      file_size_byte        =>  file_size_byte     ,
+      file_finished   =>  file_finished
     );
 
   file_info_processor_inst: file_info_processor
@@ -237,7 +304,7 @@ begin
       file_info_ready      =>  file_info_ready,
       fio_buso        =>  buso,
       fio_busov       =>  busov,
-      file_size        =>  file_size,     -- NC
+      file_size_byte         =>  file_size_byte ,     -- NC
       lcdc_busy       =>  lcdc_busy,
       lcdc_cmd        =>  lcdc_cmd,
       lcdc_chrm_wdata =>  chrm_wdata,
@@ -251,8 +318,6 @@ begin
   ccrm_wr     <= '0';
   hw_wr       <= '0';
   hw_din      <= x"00000000";
-  dbuf_wr     <= '0';
-  dbuf_din    <= x"00000000";
   dbuf_rst    <= '0';
   sbuf_rst    <= '0';
   dec_rst     <= '0';
