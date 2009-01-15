@@ -95,4 +95,12 @@ package system_constants_pkg is
   constant FIO_FFSEEK     : std_logic_vector(7 downto 0) := x"04";
   constant FIO_BFSEEK     : std_logic_vector(7 downto 0) := x"05";
 
+-- AC97 Commands
+  constant AC97_PAUSE     : std_logic_vector(3 downto 0) := "1001";
+  constant AC97_CHANGE_VOL: std_logic_vector(3 downto 0) := "1000";
+  constant AC97_VOL_MAX   : std_logic_vector(4 downto 0) := "00000";
+  constant AC97_VOL_MIN   : std_logic_vector(4 downto 0) := "11111";
+  constant AC97_MUTE      : std_logic := '1';
+  constant AC97_UNMUTE    : std_logic := '0';
+
 end system_constants_pkg;

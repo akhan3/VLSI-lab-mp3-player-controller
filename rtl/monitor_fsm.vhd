@@ -5,17 +5,19 @@ use work.system_constants_pkg.all;
 
 entity monitor_fsm is
   port(
-    clk         : in  std_logic;
-    reset       : in  std_logic;
+    clk             : in  std_logic;
+    reset           : in  std_logic;
 
-    play_en     : in  std_logic;
+    play_en         : in  std_logic;
+    file_finished   : out std_logic;
+    file_size_byte  : in  std_logic_vector(31 downto 0);
 
-    dbuf_afull  : in  std_logic;
-    sbuf_full   : in  std_logic;
-    sbuf_empty  : in  std_logic;
-    dec_status  : in  std_logic;
-    dbuf_wdata  : out std_logic_vector(31 downto 0);
-    dbuf_wr     : out std_logic;
+    dbuf_afull      : in  std_logic;
+    sbuf_full       : in  std_logic;
+    sbuf_empty      : in  std_logic;
+    dec_status      : in  std_logic;
+    dbuf_wdata      : out std_logic_vector(31 downto 0);
+    dbuf_wr         : out std_logic;
 
     fio_buso        : in  std_logic_vector(31 downto 0);
     fio_busov       : in  std_logic;
@@ -24,59 +26,95 @@ entity monitor_fsm is
     fio_req         : out std_logic;
     fio_busi        : out std_logic_vector(7 downto 0);
     fio_busiv       : out std_logic;
-    fio_ctrl        : out std_logic;
-
-    file_size_byte : in  std_logic_vector(31 downto 0);
-    file_finished   : out std_logic
+    fio_ctrl        : out std_logic
   );
 end entity;
 
 architecture arch of monitor_fsm is
-  type state_type is (IDLE, FETCH);
-  signal state, next_state: state_type;
-  signal dword_cnt  : std_logic_vector(31 downto 0);
-  signal file_size_dword : std_logic_vector(31 downto 0);
-  signal fetch_num_dword_32bit : std_logic_vector(31 downto 0);
-  signal fetch_num_dword    : std_logic_vector(7 downto 0);
-  signal fetch_en     : std_logic;
-  signal fetch_en_r   : std_logic;
-  signal fetch_start  : std_logic;
-  signal fetch_ring   : std_logic_vector(2 downto 0);
+  type    state_type is (IDLE, PARAM, READ);
+  signal  state, next_state : state_type;
+  signal  param_done        : std_logic;
+  signal  read_done         : std_logic;
+  signal  fio_req_s         : std_logic;
+
+  signal  dword_cnt         : std_logic_vector(31 downto 0);
+  signal  file_size_dword   : std_logic_vector(31 downto 0);
+  signal  fetch_num_dword_32bit : std_logic_vector(31 downto 0);
+  signal  fetch_num_dword   : std_logic_vector(7 downto 0);
 
 begin
+  fio_ctrl <= '1' when (state = READ) else '0';
+  fio_busi <= FIO_READ when (state = READ) else fetch_num_dword;
+  fio_busiv <= fio_gnt and (not fio_busy);
+  fio_req <= fio_req_s;
 
-  fetch_start <= fetch_en and not fetch_en_r;   -- rising edge one shot
---   fetch_start <= fetch_en and fetch_ring = "000";   -- rising edge one shot
-  fetch_en <= play_en and not dbuf_afull;
-  process (clk, reset) begin
+-- request generation
+  process (clk, reset)
+  begin
     if (reset = reset_state) then
-      fetch_en_r <= '0';
+      fio_req_s <= '0';
     elsif (clk'event and clk = clk_polarity) then
-      fetch_en_r <= fetch_en;
-    end if;
-  end process;
-
-  process (clk, reset) begin
-    if (reset = reset_state) then
-      fetch_ring <= "000";
-    elsif (clk'event and clk = clk_polarity) then
-      if (fetch_start = '1') then
-        fetch_ring <= fetch_ring(1 downto 0) & '1';
-      elsif (not (fio_gnt = '1' and fio_busy = '0')) then -- wait until bus becomes available
-        fetch_ring <= fetch_ring;
-      else
-        fetch_ring <= fetch_ring(1 downto 0) & fetch_start;
+      if ((state = IDLE and play_en = '1') or (state = PARAM and param_done = '1')) then
+        fio_req_s <= '1';
+      elsif ((state = PARAM or state = READ) and fio_gnt = '1' and fio_busy = '0') then
+        fio_req_s <= '0';
       end if;
     end if;
   end process;
 
-  fio_req <= fetch_ring(0) or fetch_ring(1) or fetch_ring(2);
-  fio_busiv <= '1' when ((fio_gnt = '1' and fio_busy = '0') and (fetch_ring(1)='1' or fetch_ring(2)='1')) else '0';
-  fio_ctrl <= '1' when (fetch_ring(2)='1') else '0';
-  fio_busi <= fetch_num_dword when (fetch_ring(1)='1') else FIO_READ;
+-- param_done signal
+  process (clk, reset)
+  begin
+    if (reset = reset_state) then
+      param_done <= '0';
+    elsif (clk'event and clk = clk_polarity) then
+      if (state = PARAM and fio_req_s = '0') then
+        param_done <= '1';
+--       elsif (next_state = READ and fio_req_s = '0') then
+--         param_done <= '0';
+      else
+        param_done <= '0';
+      end if;
+    end if;
+  end process;
+
+-- read_done signal
+  process (clk, reset)
+  begin
+    if (reset = reset_state) then
+      read_done <= '0';
+    elsif (clk'event and clk = clk_polarity) then
+      if (state = READ and fio_req_s = '0') then
+        read_done <= '1';
+      else
+        read_done <= '0';
+      end if;
+    end if;
+  end process;
 
 
 
+
+
+-- File DWords counter
+  file_size_dword <= "00" & file_size_byte(31 downto 2);
+  fetch_num_dword_32bit <= (file_size_dword - dword_cnt - 1) when ((file_size_dword - dword_cnt) < 256) else x"000000FF";
+  fetch_num_dword <= fetch_num_dword_32bit(7 downto 0);
+
+  process (clk, reset)
+  begin
+    if (reset = reset_state) then
+      dword_cnt <= x"00000000";
+    elsif (clk'event and clk = clk_polarity) then
+      if (state = IDLE and play_en = '1') then
+        if ((file_size_dword - dword_cnt) < 256) then
+          dword_cnt <= file_size_dword;
+        else
+          dword_cnt <= dword_cnt + 256;
+        end if;
+      end if;
+    end if;
+  end process;
 
   state_register: process (clk, reset)
   begin
@@ -87,47 +125,30 @@ begin
     end if;
   end process;
 
-  next_state_comb_logic: process (state, play_en, fio_gnt, fio_busy)
+  next_state_comb_logic: process (state, play_en, dbuf_afull, param_done, read_done)
   begin
     case state is
       when IDLE =>
         if (play_en = '1' and dbuf_afull = '0') then
-          next_state <= FETCH;
+          next_state <= PARAM;
         else
           next_state <= IDLE;
         end if;
-      when FETCH =>
-        if (play_en = '0') then
+      when PARAM =>
+        if (param_done = '1') then
+          next_state <= READ;
+        else
+          next_state <= PARAM;
+        end if;
+      when READ =>
+        if (read_done = '1') then
           next_state <= IDLE;
         else
-          next_state <= FETCH;
+          next_state <= READ;
         end if;
       when others =>
           next_state <= IDLE;
     end case;
   end process;
-
--- File D-Words counter
-  file_size_dword <= "00" & file_size_byte(31 downto 2);
-  fetch_num_dword_32bit <= (file_size_dword - dword_cnt - 1) when ((file_size_dword - dword_cnt) < 256) else
-                           x"000000FF";
-  fetch_num_dword <= fetch_num_dword_32bit(7 downto 0);
-
-  process (clk, reset)
-  begin
-    if (reset = reset_state) then
-      dword_cnt <= x"00000000";
-    elsif (clk'event and clk = clk_polarity) then
-      if (fetch_start = '1') then
-        if ((file_size_dword - dword_cnt) < 256) then
-          dword_cnt <= file_size_dword;
-        else
-          dword_cnt <= dword_cnt + 256;
-        end if;
-      end if;
-    end if;
-  end process;
-
-
 
 end architecture;

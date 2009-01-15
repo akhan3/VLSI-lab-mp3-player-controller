@@ -97,9 +97,15 @@ architecture playcontrol_arch of playcontrol is
     port(
       clk         : in  std_logic;
       reset       : in  std_logic;
-      play    : in  std_logic;
-      stop    : in  std_logic;
-      pause   : in  std_logic;
+      play          : in  std_logic;
+      pause         : in  std_logic;
+      stop          : in  std_logic;
+      mute          : in  std_logic;
+      volinc        : in  std_logic;
+      voldec        : in  std_logic;
+      hw_full       : in  std_logic;
+      hw_wr         : out std_logic;
+      hw_din        : out std_logic_vector(31 downto 0);
       dec_status  : in  std_logic;
       file_finished:in  std_logic;
       fio_busy    : in  std_logic;
@@ -119,7 +125,7 @@ architecture playcontrol_arch of playcontrol is
     port(
       clk         : in  std_logic;
       reset       : in  std_logic;
-      play_en     : in  std_logic;
+      play_en    : in  std_logic;
       dbuf_afull  : in  std_logic;
       sbuf_full   : in  std_logic;
       sbuf_empty  : in  std_logic;
@@ -185,7 +191,7 @@ architecture playcontrol_arch of playcontrol is
   signal monfsm_busi   : std_logic_vector(7 downto 0);
   signal monfsm_busiv  : std_logic;
   signal monfsm_ctrl   : std_logic;
-  signal play_en  : std_logic;
+  signal play_en      : std_logic;
   signal file_finished  : std_logic;
   signal file_info_ready     : std_logic;
   signal file_info_start     : std_logic;
@@ -256,9 +262,15 @@ begin
     port map(
       clk           =>  clk,
       reset         =>  reset,
+      mute      =>  mute,
+      volinc    =>  volinc,
+      voldec    =>  voldec,
       play      =>  play,
       stop      =>  stop,
       pause     =>  pause,
+      hw_full   =>  hw_full,
+      hw_wr     =>  hw_wr,
+      hw_din    =>  hw_din,
       dec_status   =>  dec_status,
       fio_busy      =>  busy,
       file_finished =>  file_finished,
@@ -267,7 +279,7 @@ begin
       fio_busi      =>  playfsm_busi,
       fio_busiv     =>  playfsm_busiv,
       fio_ctrl      =>  playfsm_ctrl,
-      play_en         =>  play_en,
+      play_en    =>  play_en,
       dec_rst   =>  dec_rst,
       dbuf_rst  =>  dbuf_rst,
       sbuf_rst  =>  sbuf_rst
@@ -277,7 +289,7 @@ begin
     port map(
       clk             =>  clk             ,
       reset           =>  reset           ,
-      play_en         =>  play_en         ,
+      play_en        =>  play_en    ,
       dbuf_afull      =>  dbuf_almost_full,
       sbuf_full       =>  sbuf_full    ,
       sbuf_empty      =>  sbuf_empty   ,
@@ -316,10 +328,5 @@ begin
   ccrm_wdata  <= x"000000000";
   ccrm_addr   <= "00000";
   ccrm_wr     <= '0';
-  hw_wr       <= '0';
-  hw_din      <= x"00000000";
-  dbuf_rst    <= '0';
-  sbuf_rst    <= '0';
-  dec_rst     <= '0';
 
 end architecture playcontrol_arch;
