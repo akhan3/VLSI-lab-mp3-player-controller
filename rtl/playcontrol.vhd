@@ -316,7 +316,7 @@ begin
       file_info_ready      =>  file_info_ready,
       fio_buso        =>  buso,
       fio_busov       =>  busov,
-      file_size_byte         =>  file_size_byte ,     -- NC
+      file_size_byte  =>  file_size_byte,
       lcdc_busy       =>  lcdc_busy,
       lcdc_cmd        =>  lcdc_cmd,
       lcdc_chrm_wdata =>  chrm_wdata,

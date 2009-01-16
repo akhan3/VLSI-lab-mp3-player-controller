@@ -37,9 +37,10 @@ entity play_fsm is
 end entity;
 
 architecture arch of play_fsm is
-  type    state_type is (STOP_ST, OPEN_ST, PLAY_ST, PAUSE_ST);
+  type    state_type is (IDLE, OPEN_ST, PLAY_ST, PAUSE_ST, STOP_ST);
   signal  state, next_state: state_type;
   signal  open_done   : std_logic;
+  signal  stop_done   : std_logic;
   signal  fio_req_s   : std_logic;
   signal  mute_state  : std_logic;
   signal  vol_state   : std_logic_vector(4 downto 0);
@@ -56,7 +57,7 @@ begin
     if (reset = reset_state) then
       fio_req_s <= '0';
     elsif (clk'event and clk = clk_polarity) then
-      if (state = STOP_ST and play = '1') then
+      if (state = IDLE and play = '1') then
         fio_req_s <= '1';
       elsif (state = OPEN_ST and fio_gnt = '1' and fio_busy = '0') then
         fio_req_s <= '0';
@@ -72,7 +73,7 @@ begin
       dbuf_rst  <= '0';
       sbuf_rst  <= '0';
     elsif (clk'event and clk = clk_polarity) then
-      if (state = STOP_ST and play = '1') then
+      if (state = IDLE and play = '1') then
         dec_rst   <= '1';
         dbuf_rst  <= '1';
         sbuf_rst  <= '1';
@@ -110,8 +111,8 @@ begin
       hw_din <= x"00000000";
       hw_wr <= '0';
     elsif (clk'event and clk = clk_polarity) then
-      if ( ((state = PLAY_ST and pause = '1') or      -- play/pause toggle
-            (state = PAUSE_ST and play = '1'))
+      if ( ((state = PLAY_ST and pause = '1') or    -- play/pause toggle
+            (state = PAUSE_ST and play = '1') )
            and hw_full = '0') then
         hw_din <= AC97_PAUSE & x"0000000";
         hw_wr <= '1';
@@ -148,32 +149,31 @@ begin
       vol_state <= AC97_VOL_MAX;
     elsif (clk'event and clk = clk_polarity) then
       if (volinc = '1') then
-        vol_state <= vol_state - '1';
+        vol_state <= vol_state - 1;
       elsif (voldec = '1') then
-        vol_state <= vol_state + '1';
+        vol_state <= vol_state + 1;
       end if;
     end if;
   end process;
 
-
-
+-- FSM
   state_register: process (clk, reset)
   begin
     if (reset = reset_state) then
-      state <= STOP_ST;
+      state <= IDLE;
     elsif (clk'event and clk = clk_polarity) then
       state <= next_state;
     end if;
   end process;
 
-  next_state_comb_logic: process (state, stop, play, pause, open_done, file_finished)
+  next_state_comb_logic: process (state, play, pause, stop, open_done, stop_done, file_finished)
   begin
     case state is
-      when STOP_ST =>
+      when IDLE =>
         if (play = '1') then
           next_state <= OPEN_ST;
         else
-          next_state <= STOP_ST;
+          next_state <= IDLE;
         end if;
       when OPEN_ST =>
         if (open_done = '1') then
@@ -182,27 +182,32 @@ begin
           next_state <= OPEN_ST;
         end if;
       when PLAY_ST =>
-        if (stop = '1' or file_finished = '1') then
-          next_state <= STOP_ST;
+        if (file_finished = '1') then
+          next_state <= IDLE;
         elsif (pause = '1') then
           next_state <= PAUSE_ST;
+        elsif (stop = '1') then
+          next_state <= STOP_ST;
         else
           next_state <= PLAY_ST;
         end if;
       when PAUSE_ST =>
-        if (stop = '1') then
-          next_state <= STOP_ST;
-        elsif (play = '1') then
+        if (play = '1') then
           next_state <= PLAY_ST;
+        elsif (stop = '1') then
+          next_state <= STOP_ST;
         else
           next_state <= PAUSE_ST;
         end if;
-      when others =>
+      when STOP_ST =>
+        if (stop_done = '1') then
+          next_state <= IDLE;
+        else
           next_state <= STOP_ST;
+        end if;
+      when others =>
+          next_state <= IDLE;
     end case;
   end process;
-
-
-
 
 end architecture;

@@ -2,11 +2,11 @@ Release 8.2i - xst I.31
 Copyright (c) 1995-2006 Xilinx, Inc.  All rights reserved.
 --> 
 Parameter TMPDIR set to ./xst/projnav.tmp
-CPU : 0.00 / 0.04 s | Elapsed : 0.00 / 0.00 s
+CPU : 0.01 / 0.05 s | Elapsed : 0.00 / 0.00 s
  
 --> 
 Parameter xsthdpdir set to ./xst
-CPU : 0.00 / 0.04 s | Elapsed : 0.00 / 0.00 s
+CPU : 0.00 / 0.05 s | Elapsed : 0.00 / 0.00 s
  
 --> 
 Reading design: playcontrol.prj
@@ -158,12 +158,11 @@ Analyzing Entity <list_ctrl> in library <work> (Architecture <arch>).
 Entity <list_ctrl> analyzed. Unit <list_ctrl> generated.
 
 Analyzing Entity <play_fsm> in library <work> (Architecture <arch>).
-INFO:Xst:1304 - Contents of register <play_start> in unit <play_fsm> never changes during circuit operation. The register is replaced by logic.
 Entity <play_fsm> analyzed. Unit <play_fsm> generated.
 
 Analyzing Entity <monitor_fsm> in library <work> (Architecture <arch>).
-WARNING:Xst:819 - "/home/aak/work/vlsi_prj/playcontrol/rtl/monitor_fsm.vhd" line 89: The following signals are missing in the process sensitivity list:
-   dbuf_afull.
+WARNING:Xst:819 - "/home/aak/work/vlsi_prj/playcontrol/rtl/monitor_fsm.vhd" line 171: The following signals are missing in the process sensitivity list:
+   file_finished_s.
 Entity <monitor_fsm> analyzed. Unit <monitor_fsm> generated.
 
 Analyzing Entity <file_info_processor> in library <work> (Architecture <arch>).
@@ -214,70 +213,89 @@ Unit <list_ctrl> synthesized.
 
 Synthesizing Unit <play_fsm>.
     Related source file is "/home/aak/work/vlsi_prj/playcontrol/rtl/play_fsm.vhd".
-WARNING:Xst:1780 - Signal <play_done> is never used or assigned.
-WARNING:Xst:646 - Signal <stop_start> is assigned but never used.
-WARNING:Xst:1780 - Signal <pause_done> is never used or assigned.
-WARNING:Xst:646 - Signal <open_start> is assigned but never used.
-WARNING:Xst:646 - Signal <pause_start> is assigned but never used.
-WARNING:Xst:1780 - Signal <stop_done> is never used or assigned.
-WARNING:Xst:646 - Signal <open_done> is assigned but never used.
-WARNING:Xst:646 - Signal <play_start> is assigned but never used.
+WARNING:Xst:653 - Signal <stop_done> is used but never assigned. Tied to value 0.
+    Register <sbuf_rst> equivalent to <dec_rst> has been removed
+    Register <dbuf_rst> equivalent to <dec_rst> has been removed
     Found finite state machine <FSM_1> for signal <state>.
     -----------------------------------------------------------------------
-    | States             | 3                                              |
-    | Transitions        | 9                                              |
-    | Inputs             | 4                                              |
-    | Outputs            | 3                                              |
+    | States             | 5                                              |
+    | Transitions        | 12                                             |
+    | Inputs             | 6                                              |
+    | Outputs            | 5                                              |
     | Clock              | clk (rising_edge)                              |
     | Reset              | reset (positive)                               |
     | Reset type         | asynchronous                                   |
-    | Reset State        | stops                                          |
-    | Power Up State     | stops                                          |
+    | Reset State        | idle                                           |
+    | Power Up State     | idle                                           |
     | Encoding           | automatic                                      |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 1-bit register for signal <fio_req>.
+    Found 1-bit register for signal <dec_rst>.
+    Found 32-bit register for signal <hw_din>.
+    Found 1-bit register for signal <hw_wr>.
+    Found 5-bit adder for signal <$add0000> created at line 123.
+    Found 5-bit subtractor for signal <$sub0000> created at line 126.
+    Found 1-bit register for signal <fio_req_s>.
+    Found 1-bit register for signal <mute_state>.
+    Found 1-bit register for signal <open_done>.
+    Found 5-bit updown counter for signal <vol_state>.
     Summary:
 	inferred   1 Finite State Machine(s).
-	inferred   1 D-type flip-flop(s).
+	inferred   1 Counter(s).
+	inferred  37 D-type flip-flop(s).
+	inferred   2 Adder/Subtractor(s).
 Unit <play_fsm> synthesized.
 
 
 Synthesizing Unit <monitor_fsm>.
     Related source file is "/home/aak/work/vlsi_prj/playcontrol/rtl/monitor_fsm.vhd".
-WARNING:Xst:647 - Input <fio_busov> is never used.
-WARNING:Xst:1305 - Output <dbuf_wr> is never assigned. Tied to value 0.
 WARNING:Xst:647 - Input <sbuf_full> is never used.
 WARNING:Xst:647 - Input <sbuf_empty> is never used.
-WARNING:Xst:647 - Input <fio_buso> is never used.
-WARNING:Xst:1305 - Output <file_finished> is never assigned. Tied to value 0.
-WARNING:Xst:1305 - Output <dbuf_wdata> is never assigned. Tied to value 00000000000000000000000000000000.
+WARNING:Xst:647 - Input <file_size_byte<1:0>> is never used.
 WARNING:Xst:647 - Input <dec_status> is never used.
-WARNING:Xst:647 - Input <file_size<1:0>> is never used.
-WARNING:Xst:646 - Signal <fetch_num_dword_32bit<31:8>> is assigned but never used.
-    Found 4x1-bit ROM for signal <next_state<0>>.
-    Found 32-bit subtractor for signal <$addsub0000> created at line 111.
-    Found 32-bit adder for signal <$addsub0001> created at line 124.
-    Found 33-bit comparator less for signal <$cmp_lt0000> created at line 111.
-    Found 33-bit comparator less for signal <$cmp_lt0001> created at line 121.
-    Found 32-bit subtractor for signal <$sub0001> created at line 111.
-    Found 32-bit register for signal <dword_cnt>.
-    Found 1-bit register for signal <fetch_en_r>.
-    Found 3-bit register for signal <fetch_ring>.
-    Found 1-bit register for signal <state<0>>.
+WARNING:Xst:646 - Signal <fetch_param_dword<8>> is assigned but never used.
+    Found finite state machine <FSM_2> for signal <state>.
+    -----------------------------------------------------------------------
+    | States             | 4                                              |
+    | Transitions        | 10                                             |
+    | Inputs             | 6                                              |
+    | Outputs            | 4                                              |
+    | Clock              | clk (rising_edge)                              |
+    | Reset              | reset (positive)                               |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | idle                                           |
+    | Power Up State     | idle                                           |
+    | Encoding           | automatic                                      |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 32-bit subtractor for signal <$addsub0000> created at line 131.
+    Found 32-bit adder for signal <$addsub0001> created at line 108.
+    Found 32-bit adder for signal <$addsub0002> created at line 156.
+    Found 32-bit comparator equal for signal <$cmp_eq0004> created at line 93.
+    Found 32-bit comparator equal for signal <$cmp_eq0005> created at line 108.
+    Found 32-bit comparator less for signal <$cmp_lt0000> created at line 131.
+    Found 9-bit subtractor for signal <fetch_param_dword>.
+    Found 1-bit register for signal <file_finished_s>.
+    Found 1-bit register for signal <finish_done>.
+    Found 1-bit register for signal <fio_req_s>.
+    Found 1-bit register for signal <param_done>.
+    Found 1-bit register for signal <read_done>.
+    Found 9-bit up counter for signal <this_dword_cnt>.
+    Found 32-bit register for signal <total_dword_cnt>.
     Summary:
-	inferred   1 ROM(s).
+	inferred   1 Finite State Machine(s).
+	inferred   1 Counter(s).
 	inferred  37 D-type flip-flop(s).
-	inferred   3 Adder/Subtractor(s).
-	inferred   2 Comparator(s).
+	inferred   4 Adder/Subtractor(s).
+	inferred   3 Comparator(s).
 Unit <monitor_fsm> synthesized.
 
 
 Synthesizing Unit <file_info_processor>.
     Related source file is "/home/aak/work/vlsi_prj/playcontrol/rtl/file_info_processor.vhd".
     Found 8-bit 16-to-1 multiplexer for signal <lcdc_chrm_wdata>.
-    Found 32-bit register for signal <file_size>.
-    Found 4-bit comparator less for signal <$cmp_lt0000> created at line 126.
+    Found 32-bit register for signal <file_size_byte>.
+    Found 4-bit comparator less for signal <$cmp_lt0000> created at line 125.
     Found 4-bit up counter for signal <fio_data_counter>.
     Found 1-bit register for signal <fio_data_counter3_reg>.
     Found 96-bit register for signal <fname>.
@@ -296,10 +314,6 @@ Unit <file_info_processor> synthesized.
 
 Synthesizing Unit <playcontrol>.
     Related source file is "/home/aak/work/vlsi_prj/playcontrol/rtl/playcontrol.vhd".
-WARNING:Xst:647 - Input <hw_full> is never used.
-WARNING:Xst:646 - Signal <volinc> is assigned but never used.
-WARNING:Xst:646 - Signal <mute> is assigned but never used.
-WARNING:Xst:646 - Signal <voldec> is assigned but never used.
 Unit <playcontrol> synthesized.
 
 
@@ -307,22 +321,26 @@ Unit <playcontrol> synthesized.
 HDL Synthesis Report
 
 Macro Statistics
-# ROMs                                                 : 1
- 4x1-bit ROM                                           : 1
-# Adders/Subtractors                                   : 3
- 32-bit adder                                          : 1
- 32-bit subtractor                                     : 2
-# Counters                                             : 2
+# Adders/Subtractors                                   : 6
+ 32-bit adder                                          : 2
+ 32-bit subtractor                                     : 1
+ 5-bit adder                                           : 1
+ 5-bit subtractor                                      : 1
+ 9-bit subtractor                                      : 1
+# Counters                                             : 4
  4-bit up counter                                      : 2
-# Registers                                            : 25
- 1-bit register                                        : 6
+ 5-bit updown counter                                  : 1
+ 9-bit up counter                                      : 1
+# Registers                                            : 32
+ 1-bit register                                        : 13
  2-bit register                                        : 1
- 3-bit register                                        : 2
- 32-bit register                                       : 2
+ 3-bit register                                        : 1
+ 32-bit register                                       : 3
  4-bit register                                        : 1
  8-bit register                                        : 13
-# Comparators                                          : 3
- 33-bit comparator less                                : 2
+# Comparators                                          : 4
+ 32-bit comparator equal                               : 2
+ 32-bit comparator less                                : 1
  4-bit comparator less                                 : 1
 # Multiplexers                                         : 1
  8-bit 16-to-1 multiplexer                             : 1
@@ -333,15 +351,27 @@ Macro Statistics
 *                       Advanced HDL Synthesis                          *
 =========================================================================
 
-Analyzing FSM <FSM_1> for best encoding.
-Optimizing FSM <play_fsm_inst/state> on signal <state[1:2]> with sequential encoding.
+Analyzing FSM <FSM_2> for best encoding.
+Optimizing FSM <monitor_fsm_inst/state> on signal <state[1:2]> with gray encoding.
 --------------------
  State  | Encoding
 --------------------
- stops  | 00
- plays  | 01
- pauses | 10
+ idle   | 00
+ param  | 01
+ read   | 11
+ finish | 10
 --------------------
+Analyzing FSM <FSM_1> for best encoding.
+Optimizing FSM <play_fsm_inst/state> on signal <state[1:3]> with sequential encoding.
+----------------------
+ State    | Encoding
+----------------------
+ idle     | 000
+ open_st  | 001
+ play_st  | 010
+ pause_st | 011
+ stop_st  | 100
+----------------------
 Analyzing FSM <FSM_0> for best encoding.
 Optimizing FSM <list_ctrl_inst/state> on signal <state[1:2]> with sequential encoding.
 -------------------
@@ -354,27 +384,58 @@ Optimizing FSM <list_ctrl_inst/state> on signal <state[1:2]> with sequential enc
 Loading device for application Rf_Device from file '2vp7.nph' in environment /tools/Xilinx.
 WARNING:Xst:2404 -  FFs/Latches <fio_busi<7:1>> (without init value) have a constant value of 0 in block <list_ctrl>.
 WARNING:Xst:2404 -  FFs/Latches <fname_8<7:6>> (without init value) have a constant value of 0 in block <file_info_processor>.
+WARNING:Xst:1710 - FF/Latch  <hw_din_30> (without init value) has a constant value of 0 in block <play_fsm>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <hw_din_29> (without init value) has a constant value of 0 in block <play_fsm>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <hw_din_27> (without init value) has a constant value of 0 in block <play_fsm>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <hw_din_26> (without init value) has a constant value of 0 in block <play_fsm>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <hw_din_25> (without init value) has a constant value of 0 in block <play_fsm>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <hw_din_24> (without init value) has a constant value of 0 in block <play_fsm>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <hw_din_23> (without init value) has a constant value of 0 in block <play_fsm>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <hw_din_22> (without init value) has a constant value of 0 in block <play_fsm>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <hw_din_21> (without init value) has a constant value of 0 in block <play_fsm>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <hw_din_20> (without init value) has a constant value of 0 in block <play_fsm>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <hw_din_19> (without init value) has a constant value of 0 in block <play_fsm>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <hw_din_18> (without init value) has a constant value of 0 in block <play_fsm>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <hw_din_17> (without init value) has a constant value of 0 in block <play_fsm>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <hw_din_16> (without init value) has a constant value of 0 in block <play_fsm>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <hw_din_14> (without init value) has a constant value of 0 in block <play_fsm>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <hw_din_13> (without init value) has a constant value of 0 in block <play_fsm>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <hw_din_7> (without init value) has a constant value of 0 in block <play_fsm>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <hw_din_6> (without init value) has a constant value of 0 in block <play_fsm>.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <hw_din_5> (without init value) has a constant value of 0 in block <play_fsm>.
+INFO:Xst:2261 - The FF/Latch <hw_din_4> in Unit <play_fsm> is equivalent to the following FF/Latch, which will be removed : <hw_din_12> 
+INFO:Xst:2261 - The FF/Latch <hw_din_0> in Unit <play_fsm> is equivalent to the following FF/Latch, which will be removed : <hw_din_8> 
+INFO:Xst:2261 - The FF/Latch <hw_din_31> in Unit <play_fsm> is equivalent to the following FF/Latch, which will be removed : <hw_wr> 
+INFO:Xst:2261 - The FF/Latch <hw_din_3> in Unit <play_fsm> is equivalent to the following FF/Latch, which will be removed : <hw_din_11> 
+INFO:Xst:2261 - The FF/Latch <hw_din_2> in Unit <play_fsm> is equivalent to the following FF/Latch, which will be removed : <hw_din_10> 
+INFO:Xst:2261 - The FF/Latch <hw_din_1> in Unit <play_fsm> is equivalent to the following FF/Latch, which will be removed : <hw_din_9> 
 WARNING:Xst:1710 - FF/Latch  <lcdc_command_0> (without init value) has a constant value of 0 in block <file_info_processor>.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <fname_8_5> (without init value) has a constant value of 0 in block <file_info_processor>.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <fname_8_1> (without init value) has a constant value of 0 in block <file_info_processor>.
 INFO:Xst:2261 - The FF/Latch <fname_8_4> in Unit <file_info_processor> is equivalent to the following 3 FFs/Latches, which will be removed : <fname_8_3> <fname_8_2> <fname_8_0> 
-WARNING:Xst:1291 - FF/Latch <file_size_0> is unconnected in block <file_info_processor_inst>.
-WARNING:Xst:1291 - FF/Latch <file_size_1> is unconnected in block <file_info_processor_inst>.
+WARNING:Xst:1291 - FF/Latch <file_size_byte_0> is unconnected in block <file_info_processor_inst>.
+WARNING:Xst:1291 - FF/Latch <file_size_byte_1> is unconnected in block <file_info_processor_inst>.
 
 =========================================================================
 Advanced HDL Synthesis Report
 
 Macro Statistics
-# FSMs                                                 : 2
-# Adders/Subtractors                                   : 3
- 32-bit adder                                          : 1
- 32-bit subtractor                                     : 2
-# Counters                                             : 2
+# FSMs                                                 : 3
+# Adders/Subtractors                                   : 6
+ 32-bit adder                                          : 2
+ 32-bit subtractor                                     : 1
+ 5-bit adder                                           : 1
+ 5-bit subtractor                                      : 1
+ 9-bit subtractor                                      : 1
+# Counters                                             : 4
  4-bit up counter                                      : 2
-# Registers                                            : 182
- Flip-Flops                                            : 182
-# Comparators                                          : 3
- 33-bit comparator less                                : 2
+ 5-bit updown counter                                  : 1
+ 9-bit up counter                                      : 1
+# Registers                                            : 197
+ Flip-Flops                                            : 197
+# Comparators                                          : 4
+ 32-bit comparator equal                               : 2
+ 32-bit comparator less                                : 1
  4-bit comparator less                                 : 1
 # Multiplexers                                         : 1
  8-bit 16-to-1 multiplexer                             : 1
@@ -384,23 +445,24 @@ Macro Statistics
 =========================================================================
 *                         Low Level Synthesis                           *
 =========================================================================
-WARNING:Xst:1989 - Unit <monitor_fsm>: instances <Mcompar__cmp_lt0000>, <Mcompar__cmp_lt0001> of unit <LPM_COMPARE_1> are equivalent, second instance is removed
 
 Optimizing unit <playcontrol> ...
 
-Optimizing unit <arbiter_mux> ...
+Optimizing unit <play_fsm> ...
 
 Optimizing unit <kbc_intf> ...
 
 Optimizing unit <monitor_fsm> ...
 
+Optimizing unit <arbiter_mux> ...
+
 Optimizing unit <file_info_processor> ...
 
 Mapping all equations...
-WARNING:Xst:1291 - FF/Latch <file_info_processor_inst/file_size_0> is unconnected in block <playcontrol>.
-WARNING:Xst:1291 - FF/Latch <file_info_processor_inst/file_size_1> is unconnected in block <playcontrol>.
+WARNING:Xst:1291 - FF/Latch <file_info_processor_inst/file_size_byte_0> is unconnected in block <playcontrol>.
+WARNING:Xst:1291 - FF/Latch <file_info_processor_inst/file_size_byte_1> is unconnected in block <playcontrol>.
 Building and optimizing final netlist ...
-Found area constraint ratio of 100 (+ 5) on block playcontrol, actual ratio is 3.
+Found area constraint ratio of 100 (+ 5) on block playcontrol, actual ratio is 4.
 
 Final Macro Processing ...
 
@@ -408,8 +470,8 @@ Final Macro Processing ...
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 180
- Flip-Flops                                            : 180
+# Registers                                            : 209
+ Flip-Flops                                            : 209
 
 =========================================================================
 
@@ -438,22 +500,22 @@ Design Statistics
 # IOs                              : 193
 
 Cell Usage :
-# BELS                             : 401
+# BELS                             : 666
 #      GND                         : 1
-#      INV                         : 11
-#      LUT1                        : 25
-#      LUT2                        : 39
-#      LUT3                        : 93
-#      LUT4                        : 62
-#      LUT4_L                      : 1
-#      MUXCY                       : 68
-#      MUXF5                       : 29
+#      INV                         : 5
+#      LUT1                        : 24
+#      LUT2                        : 63
+#      LUT3                        : 153
+#      LUT4                        : 126
+#      MULT_AND                    : 1
+#      MUXCY                       : 142
+#      MUXF5                       : 40
 #      MUXF6                       : 8
 #      VCC                         : 1
-#      XORCY                       : 63
-# FlipFlops/Latches                : 180
-#      FDC                         : 9
-#      FDCE                        : 165
+#      XORCY                       : 102
+# FlipFlops/Latches                : 209
+#      FDC                         : 24
+#      FDCE                        : 179
 #      FDP                         : 3
 #      FDPE                        : 3
 =========================================================================
@@ -463,9 +525,9 @@ Device utilization summary:
 
 Selected Device : 2vp7ff896-7 
 
- Number of Slices:                     176  out of   4928     3%  
- Number of Slice Flip Flops:           180  out of   9856     1%  
- Number of 4 input LUTs:               231  out of   9856     2%  
+ Number of Slices:                     236  out of   4928     4%  
+ Number of Slice Flip Flops:           209  out of   9856     2%  
+ Number of 4 input LUTs:               371  out of   9856     3%  
  Number of IOs:                        193
  Number of bonded IOBs:                  0  out of    396     0%  
 
@@ -479,11 +541,11 @@ NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
 
 Clock Information:
 ------------------
------------------------------------+--------------------------------------------------+-------+
-Clock Signal                       | Clock buffer(FF name)                            | Load  |
------------------------------------+--------------------------------------------------+-------+
-clk                                | NONE(file_info_processor_inst/fio_data_counter_2)| 180   |
------------------------------------+--------------------------------------------------+-------+
+-----------------------------------+-----------------------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)                   | Load  |
+-----------------------------------+-----------------------------------------+-------+
+clk                                | NONE(file_info_processor_inst/fname_5_2)| 209   |
+-----------------------------------+-----------------------------------------+-------+
 INFO:Xst:2169 - HDL ADVISOR - Some clock signals were not automatically buffered by XST with BUFG/BUFR resources. Please use the buffer_type constraint in order to insert these buffers to the clock signals to help prevent skew problems.
 
 Asynchronous Control Signals Information:
@@ -491,17 +553,17 @@ Asynchronous Control Signals Information:
 -----------------------------------+------------------------+-------+
 Control Signal                     | Buffer(FF name)        | Load  |
 -----------------------------------+------------------------+-------+
-reset                              | NONE                   | 180   |
+reset                              | NONE                   | 209   |
 -----------------------------------+------------------------+-------+
 
 Timing Summary:
 ---------------
 Speed Grade: -7
 
-   Minimum period: 5.942ns (Maximum Frequency: 168.283MHz)
-   Minimum input arrival time before clock: 4.085ns
-   Maximum output required time after clock: 6.379ns
-   Maximum combinational path delay: 0.596ns
+   Minimum period: 8.688ns (Maximum Frequency: 115.095MHz)
+   Minimum input arrival time before clock: 5.441ns
+   Maximum output required time after clock: 8.008ns
+   Maximum combinational path delay: 0.676ns
 
 Timing Detail:
 --------------
@@ -509,140 +571,182 @@ All values displayed in nanoseconds (ns)
 
 =========================================================================
 Timing constraint: Default period analysis for Clock 'clk'
-  Clock period: 5.942ns (frequency: 168.283MHz)
-  Total number of paths / destination ports: 47389 / 228
+  Clock period: 8.688ns (frequency: 115.095MHz)
+  Total number of paths / destination ports: 862359 / 265
 -------------------------------------------------------------------------
-Delay:               5.942ns (Levels of Logic = 34)
-  Source:            file_info_processor_inst/file_size_2 (FF)
-  Destination:       monitor_fsm_inst/dword_cnt_30 (FF)
+Delay:               8.688ns (Levels of Logic = 69)
+  Source:            file_info_processor_inst/file_size_byte_2 (FF)
+  Destination:       monitor_fsm_inst/total_dword_cnt_31 (FF)
   Source Clock:      clk rising
   Destination Clock: clk rising
 
-  Data Path: file_info_processor_inst/file_size_2 to monitor_fsm_inst/dword_cnt_30
+  Data Path: file_info_processor_inst/file_size_byte_2 to monitor_fsm_inst/total_dword_cnt_31
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDCE:C->Q             2   0.370   0.514  file_info_processor_inst/file_size_2 (file_info_processor_inst/file_size_2)
-     LUT2:I0->O            1   0.275   0.000  monitor_fsm_inst/Msub__sub0001_lut<0> (monitor_fsm_inst/N6)
-     MUXCY:S->O            1   0.334   0.000  monitor_fsm_inst/Msub__sub0001_cy<0> (monitor_fsm_inst/Msub__sub0001_cy<0>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<1> (monitor_fsm_inst/Msub__sub0001_cy<1>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<2> (monitor_fsm_inst/Msub__sub0001_cy<2>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<3> (monitor_fsm_inst/Msub__sub0001_cy<3>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<4> (monitor_fsm_inst/Msub__sub0001_cy<4>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<5> (monitor_fsm_inst/Msub__sub0001_cy<5>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<6> (monitor_fsm_inst/Msub__sub0001_cy<6>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<7> (monitor_fsm_inst/Msub__sub0001_cy<7>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<8> (monitor_fsm_inst/Msub__sub0001_cy<8>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<9> (monitor_fsm_inst/Msub__sub0001_cy<9>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<10> (monitor_fsm_inst/Msub__sub0001_cy<10>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<11> (monitor_fsm_inst/Msub__sub0001_cy<11>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<12> (monitor_fsm_inst/Msub__sub0001_cy<12>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<13> (monitor_fsm_inst/Msub__sub0001_cy<13>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<14> (monitor_fsm_inst/Msub__sub0001_cy<14>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<15> (monitor_fsm_inst/Msub__sub0001_cy<15>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<16> (monitor_fsm_inst/Msub__sub0001_cy<16>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<17> (monitor_fsm_inst/Msub__sub0001_cy<17>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<18> (monitor_fsm_inst/Msub__sub0001_cy<18>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<19> (monitor_fsm_inst/Msub__sub0001_cy<19>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<20> (monitor_fsm_inst/Msub__sub0001_cy<20>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<21> (monitor_fsm_inst/Msub__sub0001_cy<21>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<22> (monitor_fsm_inst/Msub__sub0001_cy<22>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<23> (monitor_fsm_inst/Msub__sub0001_cy<23>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<24> (monitor_fsm_inst/Msub__sub0001_cy<24>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<25> (monitor_fsm_inst/Msub__sub0001_cy<25>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<26> (monitor_fsm_inst/Msub__sub0001_cy<26>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<27> (monitor_fsm_inst/Msub__sub0001_cy<27>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<28> (monitor_fsm_inst/Msub__sub0001_cy<28>)
-     XORCY:CI->O           1   0.708   0.467  monitor_fsm_inst/Msub__sub0001_xor<29> (monitor_fsm_inst/_sub0001<29>)
-     LUT3:I0->O            1   0.275   0.000  monitor_fsm_inst/Mcompar__cmp_lt0000_lut<6> (monitor_fsm_inst/N75)
-     MUXCY:S->O           40   0.713   0.781  monitor_fsm_inst/Mcompar__cmp_lt0000_cy<6> (monitor_fsm_inst/Mcompar__cmp_lt0000_cy<6>)
-     LUT2:I1->O            1   0.275   0.000  monitor_fsm_inst/_mux0005<31>1 (monitor_fsm_inst/_mux0005<31>)
-     FDCE:D                    0.208          monitor_fsm_inst/dword_cnt_31
+     FDCE:C->Q             2   0.370   0.514  file_info_processor_inst/file_size_byte_2 (file_info_processor_inst/file_size_byte_2)
+     LUT2:I0->O            1   0.275   0.000  monitor_fsm_inst/Msub__addsub0000_lut<0> (monitor_fsm_inst/N8)
+     MUXCY:S->O            1   0.334   0.000  monitor_fsm_inst/Msub__addsub0000_cy<0> (monitor_fsm_inst/Msub__addsub0000_cy<0>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<1> (monitor_fsm_inst/Msub__addsub0000_cy<1>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<2> (monitor_fsm_inst/Msub__addsub0000_cy<2>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<3> (monitor_fsm_inst/Msub__addsub0000_cy<3>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<4> (monitor_fsm_inst/Msub__addsub0000_cy<4>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<5> (monitor_fsm_inst/Msub__addsub0000_cy<5>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<6> (monitor_fsm_inst/Msub__addsub0000_cy<6>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<7> (monitor_fsm_inst/Msub__addsub0000_cy<7>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<8> (monitor_fsm_inst/Msub__addsub0000_cy<8>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<9> (monitor_fsm_inst/Msub__addsub0000_cy<9>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<10> (monitor_fsm_inst/Msub__addsub0000_cy<10>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<11> (monitor_fsm_inst/Msub__addsub0000_cy<11>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<12> (monitor_fsm_inst/Msub__addsub0000_cy<12>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<13> (monitor_fsm_inst/Msub__addsub0000_cy<13>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<14> (monitor_fsm_inst/Msub__addsub0000_cy<14>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<15> (monitor_fsm_inst/Msub__addsub0000_cy<15>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<16> (monitor_fsm_inst/Msub__addsub0000_cy<16>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<17> (monitor_fsm_inst/Msub__addsub0000_cy<17>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<18> (monitor_fsm_inst/Msub__addsub0000_cy<18>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<19> (monitor_fsm_inst/Msub__addsub0000_cy<19>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<20> (monitor_fsm_inst/Msub__addsub0000_cy<20>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<21> (monitor_fsm_inst/Msub__addsub0000_cy<21>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<22> (monitor_fsm_inst/Msub__addsub0000_cy<22>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<23> (monitor_fsm_inst/Msub__addsub0000_cy<23>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<24> (monitor_fsm_inst/Msub__addsub0000_cy<24>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<25> (monitor_fsm_inst/Msub__addsub0000_cy<25>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<26> (monitor_fsm_inst/Msub__addsub0000_cy<26>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<27> (monitor_fsm_inst/Msub__addsub0000_cy<27>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<28> (monitor_fsm_inst/Msub__addsub0000_cy<28>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<29> (monitor_fsm_inst/Msub__addsub0000_cy<29>)
+     MUXCY:CI->O           0   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<30> (monitor_fsm_inst/Msub__addsub0000_cy<30>)
+     XORCY:CI->O           3   0.708   0.435  monitor_fsm_inst/Msub__addsub0000_xor<31> (monitor_fsm_inst/_addsub0000<31>)
+     LUT4:I3->O            1   0.275   0.000  monitor_fsm_inst/Mcompar__cmp_lt0000_lut<8> (monitor_fsm_inst/N105)
+     MUXCY:S->O           57   0.713   0.725  monitor_fsm_inst/Mcompar__cmp_lt0000_cy<8> (monitor_fsm_inst/Mcompar__cmp_lt0000_cy<8>)
+     LUT3:I2->O            1   0.275   0.000  monitor_fsm_inst/Madd__addsub0002_lut<0> (monitor_fsm_inst/N49)
+     MUXCY:S->O            1   0.334   0.000  monitor_fsm_inst/Madd__addsub0002_cy<0> (monitor_fsm_inst/Madd__addsub0002_cy<0>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Madd__addsub0002_cy<1> (monitor_fsm_inst/Madd__addsub0002_cy<1>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Madd__addsub0002_cy<2> (monitor_fsm_inst/Madd__addsub0002_cy<2>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Madd__addsub0002_cy<3> (monitor_fsm_inst/Madd__addsub0002_cy<3>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Madd__addsub0002_cy<4> (monitor_fsm_inst/Madd__addsub0002_cy<4>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Madd__addsub0002_cy<5> (monitor_fsm_inst/Madd__addsub0002_cy<5>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Madd__addsub0002_cy<6> (monitor_fsm_inst/Madd__addsub0002_cy<6>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Madd__addsub0002_cy<7> (monitor_fsm_inst/Madd__addsub0002_cy<7>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Madd__addsub0002_cy<8> (monitor_fsm_inst/Madd__addsub0002_cy<8>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Madd__addsub0002_cy<9> (monitor_fsm_inst/Madd__addsub0002_cy<9>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Madd__addsub0002_cy<10> (monitor_fsm_inst/Madd__addsub0002_cy<10>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Madd__addsub0002_cy<11> (monitor_fsm_inst/Madd__addsub0002_cy<11>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Madd__addsub0002_cy<12> (monitor_fsm_inst/Madd__addsub0002_cy<12>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Madd__addsub0002_cy<13> (monitor_fsm_inst/Madd__addsub0002_cy<13>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Madd__addsub0002_cy<14> (monitor_fsm_inst/Madd__addsub0002_cy<14>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Madd__addsub0002_cy<15> (monitor_fsm_inst/Madd__addsub0002_cy<15>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Madd__addsub0002_cy<16> (monitor_fsm_inst/Madd__addsub0002_cy<16>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Madd__addsub0002_cy<17> (monitor_fsm_inst/Madd__addsub0002_cy<17>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Madd__addsub0002_cy<18> (monitor_fsm_inst/Madd__addsub0002_cy<18>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Madd__addsub0002_cy<19> (monitor_fsm_inst/Madd__addsub0002_cy<19>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Madd__addsub0002_cy<20> (monitor_fsm_inst/Madd__addsub0002_cy<20>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Madd__addsub0002_cy<21> (monitor_fsm_inst/Madd__addsub0002_cy<21>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Madd__addsub0002_cy<22> (monitor_fsm_inst/Madd__addsub0002_cy<22>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Madd__addsub0002_cy<23> (monitor_fsm_inst/Madd__addsub0002_cy<23>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Madd__addsub0002_cy<24> (monitor_fsm_inst/Madd__addsub0002_cy<24>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Madd__addsub0002_cy<25> (monitor_fsm_inst/Madd__addsub0002_cy<25>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Madd__addsub0002_cy<26> (monitor_fsm_inst/Madd__addsub0002_cy<26>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Madd__addsub0002_cy<27> (monitor_fsm_inst/Madd__addsub0002_cy<27>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Madd__addsub0002_cy<28> (monitor_fsm_inst/Madd__addsub0002_cy<28>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Madd__addsub0002_cy<29> (monitor_fsm_inst/Madd__addsub0002_cy<29>)
+     MUXCY:CI->O           0   0.036   0.000  monitor_fsm_inst/Madd__addsub0002_cy<30> (monitor_fsm_inst/Madd__addsub0002_cy<30>)
+     XORCY:CI->O           1   0.708   0.349  monitor_fsm_inst/Madd__addsub0002_xor<31> (monitor_fsm_inst/_addsub0002<31>)
+     LUT3:I2->O            1   0.275   0.000  monitor_fsm_inst/_mux0012<0>1 (monitor_fsm_inst/_mux0012<0>)
+     FDCE:D                    0.208          monitor_fsm_inst/total_dword_cnt_31
     ----------------------------------------
-    Total                      5.942ns (4.180ns logic, 1.762ns route)
-                                       (70.3% logic, 29.7% route)
+    Total                      8.688ns (6.665ns logic, 2.023ns route)
+                                       (76.7% logic, 23.3% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'clk'
-  Total number of paths / destination ports: 438 / 296
+  Total number of paths / destination ports: 897 / 292
 -------------------------------------------------------------------------
-Offset:              4.085ns (Levels of Logic = 5)
-  Source:            key_data<5> (PAD)
-  Destination:       play_fsm_inst/fio_req (FF)
+Offset:              5.441ns (Levels of Logic = 8)
+  Source:            key_data<6> (PAD)
+  Destination:       play_fsm_inst/hw_din_3 (FF)
   Destination Clock: clk rising
 
-  Data Path: key_data<5> to play_fsm_inst/fio_req
+  Data Path: key_data<6> to play_fsm_inst/hw_din_3
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     LUT3:I0->O            1   0.275   0.369  kbc_intf_inst/listnext3_SW0 (N31)
-     LUT4:I3->O            6   0.275   0.581  kbc_intf_inst/listnext3 (kbc_intf_inst/N11)
-     LUT4:I0->O            2   0.275   0.514  kbc_intf_inst/play11 (play)
-     LUT3:I0->O            2   0.275   0.514  play_fsm_inst/_and00001 (play_fsm_inst/_and0000)
-     LUT4:I0->O            1   0.275   0.331  play_fsm_inst/_not00011 (play_fsm_inst/_not0001)
-     FDCE:CE                   0.263          play_fsm_inst/fio_req
+     LUT4:I0->O            3   0.275   0.495  kbc_intf_inst/listnext51 (kbc_intf_inst/N32)
+     LUT3:I1->O            5   0.275   0.446  kbc_intf_inst/listnext31 (kbc_intf_inst/N11)
+     LUT4:I2->O            6   0.275   0.543  kbc_intf_inst/play11 (play)
+     LUT3:I1->O            1   0.275   0.000  play_fsm_inst/_xor00031 (N408)
+     MUXF5:I1->O           7   0.303   0.483  play_fsm_inst/_xor0003_f5 (play_fsm_inst/_xor0003)
+     LUT3:I2->O            3   0.275   0.533  play_fsm_inst/_mux0014<16>11 (play_fsm_inst/N10)
+     LUT3:I0->O            1   0.275   0.369  play_fsm_inst/_mux0014<20>_SW0 (N244)
+     LUT4:I3->O            1   0.275   0.000  play_fsm_inst/_mux0014<20> (play_fsm_inst/_mux0014<20>)
+     FDC:D                     0.208          play_fsm_inst/hw_din_3
     ----------------------------------------
-    Total                      4.085ns (1.774ns logic, 2.311ns route)
-                                       (43.4% logic, 56.6% route)
+    Total                      5.441ns (2.572ns logic, 2.869ns route)
+                                       (47.3% logic, 52.7% route)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'clk'
-  Total number of paths / destination ports: 12165 / 24
+  Total number of paths / destination ports: 46600 / 42
 -------------------------------------------------------------------------
-Offset:              6.379ns (Levels of Logic = 35)
-  Source:            file_info_processor_inst/file_size_2 (FF)
-  Destination:       busi<1> (PAD)
+Offset:              8.008ns (Levels of Logic = 39)
+  Source:            file_info_processor_inst/file_size_byte_2 (FF)
+  Destination:       busi<7> (PAD)
   Source Clock:      clk rising
 
-  Data Path: file_info_processor_inst/file_size_2 to busi<1>
+  Data Path: file_info_processor_inst/file_size_byte_2 to busi<7>
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDCE:C->Q             2   0.370   0.514  file_info_processor_inst/file_size_2 (file_info_processor_inst/file_size_2)
-     LUT2:I0->O            1   0.275   0.000  monitor_fsm_inst/Msub__sub0001_lut<0> (monitor_fsm_inst/N6)
-     MUXCY:S->O            1   0.334   0.000  monitor_fsm_inst/Msub__sub0001_cy<0> (monitor_fsm_inst/Msub__sub0001_cy<0>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<1> (monitor_fsm_inst/Msub__sub0001_cy<1>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<2> (monitor_fsm_inst/Msub__sub0001_cy<2>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<3> (monitor_fsm_inst/Msub__sub0001_cy<3>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<4> (monitor_fsm_inst/Msub__sub0001_cy<4>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<5> (monitor_fsm_inst/Msub__sub0001_cy<5>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<6> (monitor_fsm_inst/Msub__sub0001_cy<6>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<7> (monitor_fsm_inst/Msub__sub0001_cy<7>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<8> (monitor_fsm_inst/Msub__sub0001_cy<8>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<9> (monitor_fsm_inst/Msub__sub0001_cy<9>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<10> (monitor_fsm_inst/Msub__sub0001_cy<10>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<11> (monitor_fsm_inst/Msub__sub0001_cy<11>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<12> (monitor_fsm_inst/Msub__sub0001_cy<12>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<13> (monitor_fsm_inst/Msub__sub0001_cy<13>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<14> (monitor_fsm_inst/Msub__sub0001_cy<14>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<15> (monitor_fsm_inst/Msub__sub0001_cy<15>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<16> (monitor_fsm_inst/Msub__sub0001_cy<16>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<17> (monitor_fsm_inst/Msub__sub0001_cy<17>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<18> (monitor_fsm_inst/Msub__sub0001_cy<18>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<19> (monitor_fsm_inst/Msub__sub0001_cy<19>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<20> (monitor_fsm_inst/Msub__sub0001_cy<20>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<21> (monitor_fsm_inst/Msub__sub0001_cy<21>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<22> (monitor_fsm_inst/Msub__sub0001_cy<22>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<23> (monitor_fsm_inst/Msub__sub0001_cy<23>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<24> (monitor_fsm_inst/Msub__sub0001_cy<24>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<25> (monitor_fsm_inst/Msub__sub0001_cy<25>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<26> (monitor_fsm_inst/Msub__sub0001_cy<26>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<27> (monitor_fsm_inst/Msub__sub0001_cy<27>)
-     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__sub0001_cy<28> (monitor_fsm_inst/Msub__sub0001_cy<28>)
-     XORCY:CI->O           1   0.708   0.467  monitor_fsm_inst/Msub__sub0001_xor<29> (monitor_fsm_inst/_sub0001<29>)
-     LUT3:I0->O            1   0.275   0.000  monitor_fsm_inst/Mcompar__cmp_lt0000_lut<6> (monitor_fsm_inst/N75)
-     MUXCY:S->O           40   0.713   0.781  monitor_fsm_inst/Mcompar__cmp_lt0000_cy<6> (monitor_fsm_inst/Mcompar__cmp_lt0000_cy<6>)
-     LUT3:I1->O            1   0.275   0.370  arbiter_mux_inst/bus_out<1>_SW2 (N241)
-     LUT4:I3->O            0   0.275   0.000  arbiter_mux_inst/bus_out<1> (busi<1>)
+     FDCE:C->Q             2   0.370   0.514  file_info_processor_inst/file_size_byte_2 (file_info_processor_inst/file_size_byte_2)
+     LUT2:I0->O            1   0.275   0.000  monitor_fsm_inst/Msub__addsub0000_lut<0> (monitor_fsm_inst/N8)
+     MUXCY:S->O            1   0.334   0.000  monitor_fsm_inst/Msub__addsub0000_cy<0> (monitor_fsm_inst/Msub__addsub0000_cy<0>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<1> (monitor_fsm_inst/Msub__addsub0000_cy<1>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<2> (monitor_fsm_inst/Msub__addsub0000_cy<2>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<3> (monitor_fsm_inst/Msub__addsub0000_cy<3>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<4> (monitor_fsm_inst/Msub__addsub0000_cy<4>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<5> (monitor_fsm_inst/Msub__addsub0000_cy<5>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<6> (monitor_fsm_inst/Msub__addsub0000_cy<6>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<7> (monitor_fsm_inst/Msub__addsub0000_cy<7>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<8> (monitor_fsm_inst/Msub__addsub0000_cy<8>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<9> (monitor_fsm_inst/Msub__addsub0000_cy<9>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<10> (monitor_fsm_inst/Msub__addsub0000_cy<10>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<11> (monitor_fsm_inst/Msub__addsub0000_cy<11>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<12> (monitor_fsm_inst/Msub__addsub0000_cy<12>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<13> (monitor_fsm_inst/Msub__addsub0000_cy<13>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<14> (monitor_fsm_inst/Msub__addsub0000_cy<14>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<15> (monitor_fsm_inst/Msub__addsub0000_cy<15>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<16> (monitor_fsm_inst/Msub__addsub0000_cy<16>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<17> (monitor_fsm_inst/Msub__addsub0000_cy<17>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<18> (monitor_fsm_inst/Msub__addsub0000_cy<18>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<19> (monitor_fsm_inst/Msub__addsub0000_cy<19>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<20> (monitor_fsm_inst/Msub__addsub0000_cy<20>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<21> (monitor_fsm_inst/Msub__addsub0000_cy<21>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<22> (monitor_fsm_inst/Msub__addsub0000_cy<22>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<23> (monitor_fsm_inst/Msub__addsub0000_cy<23>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<24> (monitor_fsm_inst/Msub__addsub0000_cy<24>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<25> (monitor_fsm_inst/Msub__addsub0000_cy<25>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<26> (monitor_fsm_inst/Msub__addsub0000_cy<26>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<27> (monitor_fsm_inst/Msub__addsub0000_cy<27>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<28> (monitor_fsm_inst/Msub__addsub0000_cy<28>)
+     MUXCY:CI->O           1   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<29> (monitor_fsm_inst/Msub__addsub0000_cy<29>)
+     MUXCY:CI->O           0   0.036   0.000  monitor_fsm_inst/Msub__addsub0000_cy<30> (monitor_fsm_inst/Msub__addsub0000_cy<30>)
+     XORCY:CI->O           3   0.708   0.435  monitor_fsm_inst/Msub__addsub0000_xor<31> (monitor_fsm_inst/_addsub0000<31>)
+     LUT4:I3->O            1   0.275   0.000  monitor_fsm_inst/Mcompar__cmp_lt0000_lut<8> (monitor_fsm_inst/N105)
+     MUXCY:S->O           57   0.713   0.805  monitor_fsm_inst/Mcompar__cmp_lt0000_cy<8> (monitor_fsm_inst/Mcompar__cmp_lt0000_cy<8>)
+     LUT2:I1->O            3   0.275   0.533  monitor_fsm_inst/fetch_num_dword<0>1 (monitor_fsm_inst/fetch_num_dword<0>)
+     LUT4:I0->O            3   0.275   0.435  monitor_fsm_inst/Msub_fetch_param_dword_cy<3>11 (monitor_fsm_inst/Msub_fetch_param_dword_cy<3>)
+     LUT4:I3->O            2   0.275   0.416  monitor_fsm_inst/Msub_fetch_param_dword_cy<5>11 (monitor_fsm_inst/Msub_fetch_param_dword_cy<5>)
+     LUT4:I3->O            0   0.275   0.000  arbiter_mux_inst/bus_out<7>1 (busi<7>)
     ----------------------------------------
-    Total                      6.379ns (4.247ns logic, 2.132ns route)
-                                       (66.6% logic, 33.4% route)
+    Total                      8.008ns (4.870ns logic, 3.138ns route)
+                                       (60.8% logic, 39.2% route)
 
 =========================================================================
 Timing constraint: Default path analysis
-  Total number of paths / destination ports: 3 / 3
+  Total number of paths / destination ports: 37 / 36
 -------------------------------------------------------------------------
-Delay:               0.596ns (Levels of Logic = 2)
+Delay:               0.676ns (Levels of Logic = 2)
   Source:            busy (PAD)
   Destination:       ctrl (PAD)
 
@@ -650,21 +754,21 @@ Delay:               0.596ns (Levels of Logic = 2)
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     LUT4:I2->O            1   0.275   0.000  arbiter_mux_inst/bus_out<9>_F (N267)
-     MUXF5:I0->O           0   0.303   0.000  arbiter_mux_inst/bus_out<9> (ctrl)
+     LUT4:I1->O            1   0.275   0.000  arbiter_mux_inst/bus_out<9>_G (N397)
+     MUXF5:I1->O           0   0.303   0.000  arbiter_mux_inst/bus_out<9> (ctrl)
     ----------------------------------------
-    Total                      0.596ns (0.596ns logic, 0.000ns route)
+    Total                      0.676ns (0.676ns logic, 0.000ns route)
                                        (100.0% logic, 0.0% route)
 
 =========================================================================
-CPU : 16.43 / 16.48 s | Elapsed : 28.00 / 28.00 s
+CPU : 24.48 / 24.55 s | Elapsed : 62.00 / 62.00 s
  
 --> 
 
 
-Total memory usage is 140320 kilobytes
+Total memory usage is 140972 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :   33 (   0 filtered)
-Number of infos    :    3 (   0 filtered)
+Number of warnings :   35 (   0 filtered)
+Number of infos    :    8 (   0 filtered)
 
