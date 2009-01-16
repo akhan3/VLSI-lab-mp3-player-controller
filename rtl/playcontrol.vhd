@@ -107,14 +107,15 @@ architecture playcontrol_arch of playcontrol is
       hw_wr         : out std_logic;
       hw_din        : out std_logic_vector(31 downto 0);
       dec_status  : in  std_logic;
-      file_finished:in  std_logic;
+      file_finished   : in  std_logic;
+      music_finished  : in  std_logic;
       fio_busy    : in  std_logic;
       fio_gnt         : in  std_logic;
       fio_req         : out std_logic;
       fio_busi    : out std_logic_vector(7 downto 0);
       fio_busiv   : out std_logic;
       fio_ctrl    : out std_logic;
-      play_en    : out std_logic;
+      play_fetch_en   : out std_logic;
       dec_rst   : out  std_logic;
       dbuf_rst  : out  std_logic;
       sbuf_rst  : out  std_logic
@@ -125,7 +126,7 @@ architecture playcontrol_arch of playcontrol is
     port(
       clk         : in  std_logic;
       reset       : in  std_logic;
-      play_en    : in  std_logic;
+      play_fetch_en    : in  std_logic;
       dbuf_afull  : in  std_logic;
       sbuf_full   : in  std_logic;
       sbuf_empty  : in  std_logic;
@@ -141,7 +142,8 @@ architecture playcontrol_arch of playcontrol is
       fio_busiv       : out std_logic;
       fio_ctrl        : out std_logic;
       file_size_byte        : in  std_logic_vector(31 downto 0);
-      file_finished   : out std_logic
+      file_finished   : out  std_logic;
+      music_finished  : out  std_logic
     );
   end component;
 
@@ -191,8 +193,9 @@ architecture playcontrol_arch of playcontrol is
   signal monfsm_busi   : std_logic_vector(7 downto 0);
   signal monfsm_busiv  : std_logic;
   signal monfsm_ctrl   : std_logic;
-  signal play_en      : std_logic;
+  signal play_fetch_en      : std_logic;
   signal file_finished  : std_logic;
+  signal music_finished  : std_logic;
   signal file_info_ready     : std_logic;
   signal file_info_start     : std_logic;
   signal arbiter_fio_req: std_logic_vector(2 downto 0);
@@ -273,13 +276,14 @@ begin
       hw_din    =>  hw_din,
       dec_status   =>  dec_status,
       fio_busy      =>  busy,
-      file_finished =>  file_finished,
+      file_finished   =>  file_finished,
+      music_finished  =>  music_finished,
       fio_gnt           =>  playfsm_gnt,
       fio_req           =>  playfsm_req,
       fio_busi      =>  playfsm_busi,
       fio_busiv     =>  playfsm_busiv,
       fio_ctrl      =>  playfsm_ctrl,
-      play_en    =>  play_en,
+      play_fetch_en    =>  play_fetch_en,
       dec_rst   =>  dec_rst,
       dbuf_rst  =>  dbuf_rst,
       sbuf_rst  =>  sbuf_rst
@@ -289,7 +293,7 @@ begin
     port map(
       clk             =>  clk             ,
       reset           =>  reset           ,
-      play_en        =>  play_en    ,
+      play_fetch_en        =>  play_fetch_en    ,
       dbuf_afull      =>  dbuf_almost_full,
       sbuf_full       =>  sbuf_full    ,
       sbuf_empty      =>  sbuf_empty   ,
@@ -305,7 +309,8 @@ begin
       fio_busiv       =>  monfsm_busiv        ,
       fio_ctrl        =>  monfsm_ctrl         ,
       file_size_byte        =>  file_size_byte     ,
-      file_finished   =>  file_finished
+      file_finished   =>  file_finished,
+      music_finished  =>  music_finished
     );
 
   file_info_processor_inst: file_info_processor

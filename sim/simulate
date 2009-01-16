@@ -56,4 +56,4 @@ then
 fi
 
 # clean up temp files
-# rm -r ./work
+rm -r ./work

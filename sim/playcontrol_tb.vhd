@@ -3,15 +3,16 @@
 -- vlsi design laboratory
 -- institute for electronic design automation
 -------------------------------------------------------------------------------
--- version 0.1 
+-- version 0.2
 --
 -- This testbench tests only the list and play functions. Further functions,
 -- e.g. stop, pause, mute etc., are not tested. This testbench provides a
 -- basis to test the playcontrol module and it does not guarantee that the list
 -- and play functions will work after passing this testbench. Further test
--- cases should be added to this testbench for different designs. 
+-- cases should be added to this testbench for different designs.
 --
 -- bil 03/08
+-- qic 01/09
 -------------------------------------------------------------------------------
 
 
@@ -428,7 +429,7 @@ begin
         severity failure_level;
 
     end if;
-    
+
   end process;
 
   dbuf_almost_full_gen : process
@@ -445,11 +446,11 @@ begin
 
   fio_busy <= '1' when test_state = return_file_info else
               '1' when test_state = return_file_data else
-	      '1' when fio_busiv='1' and clk'event and clk=clk_polarity else --generate at least one period fio_busy='1' after receiving a parameter or command
-              '0' after 10*tclock;
+              '1' when fio_busiv='1' and clk'event and clk=clk_polarity else --generate at least one period fio_busy='1' after receiving a parameter or command
+              '0' after 10*tclock + 3 ns;
 
   lcdc_busy <= '1' when (lcdc_cmd = "01" or lcdc_cmd = "10") and clk'event and clk = clk_polarity else
-               '0' after 500*tclock;
+               '0' after 500*tclock + 3 ns;
 
   check_resets : process
   begin
@@ -485,7 +486,7 @@ begin
         severity warning;
 
       assert sbuf_reset_status = '1'
-        report "Dbuf is not reset before sending read command to fio!"
+        report "Sbuf is not reset before sending read command to fio!"
         severity warning;
 
       assert dec_reset_status = '1'
@@ -506,7 +507,7 @@ begin
     assert not (key_empty = '0' and key_empty'stable(500*tclock))
       report "No key code is read in the past 500 clock periods!"
       severity failure_level;
-    
+
     assert not(lcdc_busy = '1' and lcdc_cmd /= "00")
       report "Lcd command should not be sent when lcdc is busy!"
       severity failure_level;
@@ -522,7 +523,7 @@ begin
 
       if fio_busiv = '1' then
         assert fio_ctrl = '1' and fio_busi = fio_next_cmd
-          report "List next comand is expected!"
+          report "List next command is expected!"
           severity failure_level;
       end if;
     end if;
@@ -534,7 +535,7 @@ begin
 
       if fio_busiv = '1' then
         assert fio_ctrl = '1' and fio_busi = fio_prev_cmd
-          report "List next comand is expected!"
+          report "List prev command is expected!"
           severity failure_level;
       end if;
     end if;
@@ -588,6 +589,15 @@ begin
 
   end process;
 
-  
+-- To deifne dec_status behaviour on dec_rst
+  process
+  begin
+    wait until (clk'event and clk = clk_polarity);
+    if (dec_rst = '1') then
+      dec_status <= '1';
+    elsif (dec_rst = '0') then
+      dec_status <= '0' after (50*tclock);
+    end if;
+  end process;
 
 end architecture;
