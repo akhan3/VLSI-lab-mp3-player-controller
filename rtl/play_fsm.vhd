@@ -121,9 +121,9 @@ begin
       dec_rst   <= '0';
     elsif (clk'event and clk = clk_polarity) then
       if (state = OPEN_ST and open_done = '1') then -- recent edit
-        dec_rst   <= '1';
+        dec_rst <= '1';
       else
-        dec_rst   <= '0';
+        dec_rst <= '0';
       end if;
     end if;
   end process;
@@ -265,6 +265,8 @@ begin
           next_state <= PLAY_ST;
         end if;
       when PAUSE_ST =>
+--         if (file_finished = '1') then -- recent edit
+--           next_state <= IDLE;
         if (play = '1') then
           next_state <= PLAY_ST;
         elsif (stop = '1') then
