@@ -1,0 +1,244 @@
+%% Report generated on Sat Jan 17 20:15:04 CET 2009
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Running MP3download script ...
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Release 9.1.03i - iMPACT J.33
+Copyright (c) 1995-2007 Xilinx, Inc.  All rights reserved.
+Loading cdf file top_system.cdf...
+
+INFO:iMPACT:1777 - 
+   Reading
+   /afs/regent.e-technik.tu-muenchen.de/home/xilinx/ise-9.1i-sp3/xcfp/data/xcf32
+   p.bsd...
+INFO:iMPACT:501 - '1': Added Device xcf32p successfully.
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+INFO:iMPACT:1835 - Loading CFI file -- File ? --.cfi
+CFI file not found, proceed with device default setting.
+INFO:iMPACT:1777 - 
+   Reading
+   /afs/regent.e-technik.tu-muenchen.de/home/xilinx/ise-9.1i-sp3/acecf/data/xcca
+   ce.bsd...
+INFO:iMPACT:501 - '2': Added Device xccace successfully.
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+'3': Loading file './top_system.bit' ...
+
+done.
+INFO:iMPACT:1777 - 
+   Reading
+   /afs/regent.e-technik.tu-muenchen.de/home/xilinx/ise-9.1i-sp3/virtex2p/data/x
+   c2vp30.bsd...
+
+WARNING:iMPACT:2257 - Startup Clock has been changed to 'JtagClk' in the
+   bitstream stored in memory,
+   but the original bitstream file remains unchanged.
+INFO:iMPACT:501 - '3': Added Device xc2vp30 successfully.
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+Reusing A0008001 key.
+Reusing 24008001 key.
+Connecting to cable (Usb Port - USB21).
+Checking cable driver.
+File version of
+/afs/regent.e-technik.tu-muenchen.de/home/xilinx/ise-9.1i-sp3/bin/lin/xusbdfwu.h
+ex = 1025(dec), 0x0401.
+File version of /usr/share/xusbdfwu.hex = 1030(dec), 0x0406.
+
+ libusb-driver.so version: 2008-10-15 11:29:28.
+Calling setinterface num=0, alternate=0.
+DeviceAttach: received and accepted attach for:
+  vendor id 0x3fd, product id 0x8, device handle 0x864eca0
+ Cable PID = 0008.
+ Max current requested during enumeration is 150 mA.
+
+ Cable Type = 3, Revision = 0.
+ Cable Type = 0x0605.
+ Setting cable speed to 6 MHz.
+Cable connection established.
+Firmware version = 1030.
+CPLD file version = 0012h.
+CPLD version = 0012h.
+Finish loading cdf file top_system.cdf.
+Maximum TCK operating frequency for this device chain: 15000000.
+Validating chain...
+Boundary-scan chain validated successfully.
+'3': Programming device...
+
+done.
+'3': Reading status register contents...
+CRC error                                         :         0
+Decryptor security set                            :         0
+DCM locked                                        :         1
+DCI matched                                       :         1
+legacy input error                                :         0
+status of GTS_CFG_B                               :         1
+status of GWE                                     :         1
+status of GHIGH                                   :         1
+value of MODE pin M0                              :         1
+value of MODE pin M1                              :         0
+value of MODE pin M2                              :         1
+value of CFG_RDY (INIT_B)                         :         1
+DONEIN input from DONE pin                        :         1
+IDCODE not validated while trying to write FDRI   :         0
+write FDRI issued before or after decrypt operation:         0
+Decryptor keys not used in proper sequence        :         0
+INFO:iMPACT:2219 - Status register values:
+INFO:iMPACT - 0011 0111 1011 1000 0000 0000 0000 0000 
+INFO:iMPACT:579 - '3': Completed downloading bit file to device.
+INFO:iMPACT - '3': Checking done pin....done.
+'3': Programmed successfully.
+Elapsed time =      6 sec.
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+Xilinx Microprocessor Debug (XMD) Engine
+Xilinx EDK 9.1.02 Build EDK_J_SP2.4
+Copyright (c) 1995-2006 Xilinx, Inc.  All rights reserved.
+Executing user script : ./MP3xmd.tcl
+Info:AutoDetecting cable. Please wait.
+Info:Reusing 78008001 key.
+Info:Reusing FC008001 key.
+Info:Connecting to cable (Parallel Port - parport0).
+Info: libusb-driver.so version: 2008-10-15 11:29:28.
+Info: parport0: Info:baseAddress=0x0Info:, ecpAddress=0x400Info:
+Info: LPT base address = 0000h.
+Info: ECP base address = 0400h.
+Info:LPT port is already in use. rc = FFFFFFFFh
+Info:Cable connection failed.
+Info:Reusing 79008001 key.
+Info:Reusing FD008001 key.
+Info:Connecting to cable (Parallel Port - parport1).
+Info: libusb-driver.so version: 2008-10-15 11:29:28.
+Info:Cable connection failed.
+Info:Reusing 7A008001 key.
+Info:Reusing FE008001 key.
+Info:Connecting to cable (Parallel Port - parport2).
+Info: libusb-driver.so version: 2008-10-15 11:29:28.
+Info:Cable connection failed.
+Info:Reusing 7B008001 key.
+Info:Reusing FF008001 key.
+Info:Connecting to cable (Parallel Port - parport3).
+Info: libusb-driver.so version: 2008-10-15 11:29:28.
+Info:Cable connection failed.
+Info:Reusing A0008001 key.
+Info:Reusing 24008001 key.
+Info:Connecting to cable (Usb Port - USB21).
+Info:Checking cable driver.
+Info:File version of /afs/regent/home/xilinx/ise-9.1i-sp3/bin/lin/xusbdfwu.hex = 1025(dec), 0x0401.
+Info:File version of /usr/share/xusbdfwu.hex = 1030(dec), 0x0406.
+Info: libusb-driver.so version: 2008-10-15 11:29:28.
+Calling setinterface num=0, alternate=0.
+DeviceAttach: received and accepted attach for:
+  vendor id 0x3fd, product id 0x8, device handle 0xa194198
+Info: Cable PID = 0008.
+Info: Max current requested during enumeration is 150 mA.
+Info: Cable Type = 3, Revision = 0.
+Info: Cable Type = 0x0605.
+Info: Setting cable speed to 6 MHz.
+Info:Cable connection established.
+Info:Firmware version = 1030.
+Info:CPLD file version = 0012h.
+Info:CPLD version = 0012h.
+
+JTAG chain configuration
+--------------------------------------------------
+Device   ID Code        IR Length    Part Name
+ 1       05059093          16        XCF32P
+ 2       0a001093           8        System_ACE
+ 3       0127e093          14        XC2VP30
+
+PowerPC405 Processor Configuration
+-------------------------------------
+Version.............................0x200108a0
+User ID.............................0x00000000
+No of PC Breakpoints................4
+No of Read Addr/Data Watchpoints....1
+No of Write Addr/Data Watchpoints...1
+User Defined Address Map to access Special PowerPC Features using XMD:
+	I-Cache	(Data)........0x70000000 - 0x70003fff
+	I-Cache	(TAG).........0x70004000 - 0x70007fff
+	D-Cache	(Data)........0x78000000 - 0x78003fff
+	D-Cache	(TAG).........0x78004000 - 0x78007fff
+	DCR...................0x78004000 - 0x78004fff
+	TLB...................0x70004000 - 0x70007fff
+
+Connected to "ppc" target. id = 0
+Starting GDB server for "ppc" target (id = 0) at TCP port no 1234
+	section, .vectors: 0x00000000-0x000020c3
+	section, .text: 0x000020c4-0x0001cbc3
+	section, .init: 0x0001cbc4-0x0001cbe7
+	section, .fini: 0x0001cbe8-0x0001cc07
+	section, .boot0: 0x0082dd20-0x0082dd2f
+	section, .boot: 0xfffffffc-0xffffffff
+	section, .rodata: 0x0001cc08-0x00028072
+	section, .sdata2: 0x00028074-0x00028073
+	section, .sbss2: 0x00028074-0x00028073
+	section, .data: 0x00028074-0x000285d7
+	section, .got1: 0x000285d8-0x000285d7
+	section, .got2: 0x000285d8-0x000285f3
+	section, .ctors: 0x000285f4-0x000285fb
+	section, .dtors: 0x000285fc-0x00028603
+	section, .fixup: 0x00028604-0x00028603
+	section, .got: 0x00028604-0x00028603
+	section, .eh_frame: 0x00028604-0x00028657
+	section, .jcr: 0x00028658-0x0002865b
+	section, .gcc_except_table: 0x0002865c-0x0002865b
+	section, .sdata: 0x0002865c-0x00028697
+	section, .sbss: 0x00028698-0x0002876f
+	section, .bss: 0x00028770-0x0082dd1f
+Downloaded Program ../ppc_core/decoder_fio_ac97/executable.elf
+Setting PC with Program Start Address 0xfffffffc
+
+Info:Processor started. Type "stop" to stop processor
+
+RUNNING> 
+PowerPC405 Processor Configuration
+-------------------------------------
+Version.............................0x200108a0
+User ID.............................0x00000000
+No of PC Breakpoints................4
+No of Read Addr/Data Watchpoints....1
+No of Write Addr/Data Watchpoints...1
+User Defined Address Map to access Special PowerPC Features using XMD:
+	I-Cache	(Data)........0x70000000 - 0x70003fff
+	I-Cache	(TAG).........0x70004000 - 0x70007fff
+	D-Cache	(Data)........0x78000000 - 0x78003fff
+	D-Cache	(TAG).........0x78004000 - 0x78007fff
+	DCR...................0x78004000 - 0x78004fff
+	TLB...................0x70004000 - 0x70007fff
+
+Connected to "ppc" target. id = 1
+Starting GDB server for "ppc" target (id = 1) at TCP port no 1235
+	section, .text: 0xffffc000-0xffffcd53
+	section, .init: 0xffffcd54-0xffffcd77
+	section, .fini: 0xffffcd78-0xffffcd97
+	section, .boot0: 0xfffff130-0xfffff13f
+	section, .boot: 0xfffffffc-0xffffffff
+	section, .rodata: 0xffffcd98-0xffffcd99
+	section, .sdata2: 0xffffcd9c-0xffffcd9b
+	section, .sbss2: 0xffffcd9c-0xffffcd9b
+	section, .data: 0xffffcd9c-0xffffce93
+	section, .got1: 0xffffce94-0xffffce93
+	section, .got2: 0xffffce94-0xffffceaf
+	section, .ctors: 0xffffceb0-0xffffceb7
+	section, .dtors: 0xffffceb8-0xffffcebf
+	section, .fixup: 0xffffcec0-0xffffcebf
+	section, .got: 0xffffcec0-0xffffcebf
+	section, .eh_frame: 0xffffcec0-0xffffcec7
+	section, .jcr: 0xffffcec8-0xffffcecb
+	section, .gcc_except_table: 0xffffcecc-0xffffcecb
+	section, .sdata: 0xffffcecc-0xffffced3
+	section, .sbss: 0xffffced4-0xffffcf13
+	section, .bss: 0xffffcf14-0xfffff12f
+Downloaded Program ../ppc_core/lcdc/executable.elf
+Setting PC with Program Start Address 0xfffffffc
+
+Info:Processor started. Type "stop" to stop processor
+
+RUNNING> 

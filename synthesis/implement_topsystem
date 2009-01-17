@@ -1,0 +1,59 @@
+#!/bin/bash
+export LD_LIBRARY_PATH=$XILINX/bin/lin
+
+CURRDIR=`pwd`
+PRJDIR="../../top_system"
+REPORT=$CURRDIR/implement.report
+TIMENOW=`date`
+
+# Clean up older report
+rm -f $REPORT
+touch $REPORT
+
+echo "%% Report generated on $TIMENOW" >> $REPORT
+echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" >> $REPORT
+echo >> $REPORT
+
+# Run implement processes from the ISE project folder
+cd $PRJDIR
+
+echo >> $REPORT
+echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" >> $REPORT
+echo "%% Running xst (Synthesis)..." >> $REPORT
+echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" >> $REPORT
+xst -ise "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/top_system/top_system.ise" -intstyle ise -ifn top_system.xst -ofn top_system.syr | tee -a $REPORT
+
+echo >> $REPORT
+echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" >> $REPORT
+echo "%% Running ngdbuild (Translate)..." >> $REPORT
+echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" >> $REPORT
+ngdbuild -ise "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/top_system/top_system.ise" -intstyle ise -dd _ngo  -sd "../playcontrol/synthesis/" -sd "../ppc_ctrl" -sd "../ppc_core/implementation/" -sd "../ps2_kbc" -sd "../sysctrl" -sd "../test_modules" -nt timestamp -uc "top_system.ucf" -p xc2vp30-ff896-7 "top_system.ngc" top_system.ngd | tee -a $REPORT
+
+echo >> $REPORT
+echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" >> $REPORT
+echo "%% Running map (Map)..." >> $REPORT
+echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" >> $REPORT
+map -ise "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/top_system/top_system.ise" -intstyle ise -p xc2vp30-ff896-7 -cm area -pr b -k 4 -c 100 -tx off -o top_system_map.ncd top_system.ngd top_system.pcf | tee -a $REPORT
+
+echo >> $REPORT
+echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" >> $REPORT
+echo "%% Running par (Place and Route)..." >> $REPORT
+echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" >> $REPORT
+par -ise "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/top_system/top_system.ise" -w -intstyle ise -ol std -t 1 top_system_map.ncd top_system.ncd top_system.pcf | tee -a $REPORT
+
+echo >> $REPORT
+echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" >> $REPORT
+echo "%% Running trce (TRACE)..." >> $REPORT
+echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" >> $REPORT
+trce -ise "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/top_system/top_system.ise" -intstyle ise -e 3 -s 7 -xml top_system top_system.ncd -o top_system.twr top_system.pcf -ucf top_system.ucf | tee -a $REPORT
+
+echo >> $REPORT
+echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" >> $REPORT
+echo "%% Running bitgen (Bitfile generation)..." >> $REPORT
+echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" >> $REPORT
+bitgen -ise "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/top_system/top_system.ise" -intstyle ise -f top_system.ut top_system.ncd | tee -a $REPORT
+
+
+# Copy report to project folder also
+cd $CURRDIR
+cp -f $REPORT $PRJDIR

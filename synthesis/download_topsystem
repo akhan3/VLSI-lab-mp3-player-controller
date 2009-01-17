@@ -1,0 +1,28 @@
+#!/bin/bash
+# export LD_LIBRARY_PATH=$XILINX/bin/lin
+
+CURRDIR=`pwd`
+PRJDIR="../../top_system"
+REPORT=$CURRDIR/download.report
+TIMENOW=`date`
+
+# Clean up older report
+rm -f $REPORT
+touch $REPORT
+
+echo "%% Report generated on $TIMENOW" >> $REPORT
+echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" >> $REPORT
+echo >> $REPORT
+
+# Run download processes from the ISE project folder
+cd $PRJDIR
+
+echo >> $REPORT
+echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" >> $REPORT
+echo "%% Running MP3download script ..." >> $REPORT
+echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" >> $REPORT
+./MP3download | tee -a $REPORT
+
+# Copy report to project folder also
+cd $CURRDIR
+cp -f $REPORT $PRJDIR
