@@ -168,8 +168,19 @@ begin
     end if;
   end process;
 
-  stop_done <= '0';
-
+-- stop_done signal
+  process (clk, reset)
+  begin
+    if (reset = reset_state) then
+      stop_done <= '0';
+    elsif (clk'event and clk = clk_polarity) then
+      if (state = STOP_ST) then
+        stop_done <= '1';
+      else
+        stop_done <= '0';
+      end if;
+    end if;
+  end process;
 
 -- Play/Pause and Change Volume command to AC97
   process (clk, reset)
@@ -187,10 +198,10 @@ begin
         hw_din <= AC97_CHANGE_VOL & x"000" & (not mute_state) & "000" & x"000";
         hw_wr <= '1';
       elsif (volinc = '1' and hw_full = '0') then   -- Increase Volume
-        hw_din <= AC97_CHANGE_VOL & x"000" & mute_state & "00" & (vol_state+1) & "000" & (vol_state+1);
+        hw_din <= AC97_CHANGE_VOL & x"000" & mute_state & "00" & (vol_state-1) & "000" & (vol_state-1);
         hw_wr <= '1';
       elsif (voldec = '1' and hw_full = '0') then   -- Decrease Volume
-        hw_din <= AC97_CHANGE_VOL & x"000" & mute_state & "00" & (vol_state-1) & "000" & (vol_state-1);
+        hw_din <= AC97_CHANGE_VOL & x"000" & mute_state & "00" & (vol_state+1) & "000" & (vol_state+1);
         hw_wr <= '1';
       else
         hw_din <= x"00000000";
@@ -265,9 +276,9 @@ begin
           next_state <= PLAY_ST;
         end if;
       when PAUSE_ST =>
---         if (file_finished = '1') then -- recent edit
---           next_state <= IDLE;
-        if (play = '1') then
+        if (file_finished = '1') then -- recent edit
+          next_state <= IDLE;         -- recent edit
+        elsif (play = '1') then       -- recent edit
           next_state <= PLAY_ST;
         elsif (stop = '1') then
           next_state <= STOP_ST;
@@ -275,11 +286,12 @@ begin
           next_state <= PAUSE_ST;
         end if;
       when STOP_ST =>
-        if (stop_done = '1') then
-          next_state <= IDLE;
-        else
-          next_state <= STOP_ST;
-        end if;
+          next_state <= IDLE;         -- recent edit
+--         if (stop_done = '1') then  -- recent edit
+--           next_state <= IDLE;
+--         else
+--           next_state <= STOP_ST;
+--         end if;
       when others =>
           next_state <= IDLE;
     end case;
