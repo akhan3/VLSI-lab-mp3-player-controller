@@ -1,28 +1,45 @@
 #!/bin/bash
-# export LD_LIBRARY_PATH=$XILINX/bin/lin
+
+BITFILE=$1
+
+if [ $# -ne 1 ]
+then
+  echo "Usage: download_topsystem BITFILE"
+  echo "BITFILE must be given."
+  exit 1
+fi
+
+if [ ! -f $BITFILE ]
+then
+  echo "BITFILE $BITFILE doesn't exist."
+  exit 1
+fi
 
 CURRDIR=`pwd`
 PRJDIR="../../top_system"
 REPORT=$CURRDIR/download.report
-TIMENOW=`date`
+
+# Copy required bit file to project folder
+ln -sf $CURRDIR/$BITFILE $PRJDIR/top_system.bit
 
 # Clean up older report
 rm -f $REPORT
 touch $REPORT
 
-echo "%% Report generated on $TIMENOW" >> $REPORT
-echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" >> $REPORT
+echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" >> $REPORT
+echo "%% Report generated on `date`" >> $REPORT
+echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" >> $REPORT
 echo >> $REPORT
 
 # Run download processes from the ISE project folder
 cd $PRJDIR
 
 echo >> $REPORT
-echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" >> $REPORT
+echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" >> $REPORT
 echo "%% Running MP3download script ..." >> $REPORT
-echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" >> $REPORT
+echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" >> $REPORT
 ./MP3download | tee -a $REPORT
 
 # Copy report to project folder also
 cd $CURRDIR
-cp -f $REPORT $PRJDIR
+cp -pf $REPORT $PRJDIR

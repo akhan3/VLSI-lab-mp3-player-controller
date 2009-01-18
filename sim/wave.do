@@ -25,6 +25,8 @@ add wave -noupdate -format Logic /playcontrol_tb/uut/play_fsm_inst/fio_ctrl
 add wave -noupdate -format Logic /playcontrol_tb/uut/play_fsm_inst/open_done
 add wave -noupdate -format Logic /playcontrol_tb/uut/play_fsm_inst/dec_rst
 add wave -noupdate -format Logic /playcontrol_tb/uut/play_fsm_inst/dec_status
+add wave -noupdate -format Logic /playcontrol_tb/uut/play_fsm_inst/dec_status_r
+add wave -noupdate -format Logic /playcontrol_tb/uut/play_fsm_inst/dec_status_fall
 add wave -noupdate -format Logic /playcontrol_tb/uut/play_fsm_inst/dbuf_rst
 add wave -noupdate -format Logic /playcontrol_tb/uut/play_fsm_inst/sbuf_rst
 add wave -noupdate -format Logic /playcontrol_tb/uut/play_fsm_inst/dec_rst_done
@@ -33,6 +35,9 @@ add wave -noupdate -format Logic /playcontrol_tb/uut/play_fsm_inst/hw_wr
 add wave -noupdate -format Literal -radix hexadecimal /playcontrol_tb/uut/play_fsm_inst/hw_din
 add wave -noupdate -format Logic /playcontrol_tb/uut/play_fsm_inst/mute_state
 add wave -noupdate -format Literal /playcontrol_tb/uut/play_fsm_inst/vol_state
+add wave -noupdate -format Logic /playcontrol_tb/uut/play_fsm_inst/volinc_r
+add wave -noupdate -format Logic /playcontrol_tb/uut/play_fsm_inst/voldec_r
+add wave -noupdate -format Logic /playcontrol_tb/uut/play_fsm_inst/mute_r
 add wave -noupdate -format Literal /playcontrol_tb/uut/play_fsm_inst/next_state
 add wave -noupdate -divider {MONITOR FSM}
 add wave -noupdate -format Logic /playcontrol_tb/uut/monitor_fsm_inst/clk
@@ -212,7 +217,7 @@ add wave -noupdate -format Literal -radix hexadecimal /playcontrol_tb/curr_key
 add wave -noupdate -format Logic /playcontrol_tb/first_list
 add wave -noupdate -divider <NULL>
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {322995 ns} 0} {{Cursor 2} {83205 ns} 0}
+WaveRestoreCursors {{Cursor 1} {322995 ns} 0} {{Cursor 2} {82785 ns} 0}
 configure wave -namecolwidth 160
 configure wave -valuecolwidth 77
 configure wave -justifyvalue left
@@ -226,4 +231,4 @@ configure wave -gridperiod 1
 configure wave -griddelta 40
 configure wave -timeline 0
 update
-WaveRestoreZoom {321827 ns} {324163 ns}
+WaveRestoreZoom {80979 ns} {84755 ns}

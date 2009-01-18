@@ -48,6 +48,9 @@ architecture arch of play_fsm is
   signal  fio_req_s     : std_logic;
   signal  mute_state    : std_logic;
   signal  vol_state     : std_logic_vector(4 downto 0);
+  signal  volinc_r      : std_logic;
+  signal  voldec_r      : std_logic;
+  signal  mute_r        : std_logic;
 
 begin
 
@@ -183,33 +186,40 @@ begin
   end process;
 
 -- Play/Pause and Change Volume command to AC97
+  hw_din(27 downto 0) <= x"000" & mute_state & "00" & vol_state & "000" & vol_state;
   process (clk, reset)
   begin
     if (reset = reset_state) then
-      hw_din <= x"00000000";
+      hw_din(31 downto 28) <= x"0";
       hw_wr <= '0';
     elsif (clk'event and clk = clk_polarity) then
-      if ( ((state = PLAY_ST and pause = '1') or    -- play/pause toggle
-            (state = PAUSE_ST and play = '1') )
-           and hw_full = '0') then
-        hw_din <= AC97_PAUSE & x"0000000";
+      if (((state = PLAY_ST and pause = '1') or (state = PAUSE_ST and play = '1')) and hw_full = '0') then  -- play/pause toggle
+        hw_din(31 downto 28) <= AC97_PAUSE;
         hw_wr <= '1';
-      elsif (mute = '1' and hw_full = '0') then     -- mute/unmute toggle
-        hw_din <= AC97_CHANGE_VOL & x"000" & (not mute_state) & "000" & x"000";
-        hw_wr <= '1';
-      elsif (volinc = '1' and hw_full = '0') then   -- Increase Volume
-        hw_din <= AC97_CHANGE_VOL & x"000" & mute_state & "00" & (vol_state-1) & "000" & (vol_state-1);
-        hw_wr <= '1';
-      elsif (voldec = '1' and hw_full = '0') then   -- Decrease Volume
-        hw_din <= AC97_CHANGE_VOL & x"000" & mute_state & "00" & (vol_state+1) & "000" & (vol_state+1);
+      elsif ((volinc_r = '1' or voldec_r = '1' or mute_r = '1') and hw_full = '0') then   -- Volume change command -- recent edit
+        hw_din(31 downto 28) <= AC97_CHANGE_VOL;
         hw_wr <= '1';
       else
-        hw_din <= x"00000000";
+        hw_din(31 downto 28) <= x"0";
         hw_wr <= '0';
       end if;
     end if;
   end process;
 
+  process (clk, reset)
+  begin
+    if (reset = reset_state) then
+      volinc_r <= '0';
+      voldec_r <= '0';
+      mute_r <= '0';
+    elsif (clk'event and clk = clk_polarity) then
+      volinc_r <= volinc;
+      voldec_r <= voldec;
+      mute_r <= mute;
+    end if;
+  end process;
+
+-- Toggle mute state
   process (clk, reset)
   begin
     if (reset = reset_state) then
@@ -221,18 +231,20 @@ begin
     end if;
   end process;
 
+-- Change volume state with max/min saturation
   process (clk, reset)
   begin
     if (reset = reset_state) then
       vol_state <= AC97_VOL_MAX;
     elsif (clk'event and clk = clk_polarity) then
-      if (volinc = '1') then
+      if (volinc = '1' and vol_state /= AC97_VOL_MAX) then
         vol_state <= vol_state - 1;
-      elsif (voldec = '1') then
+      elsif (voldec = '1' and vol_state /= AC97_VOL_MIN) then
         vol_state <= vol_state + 1;
       end if;
     end if;
   end process;
+
 
 -- FSM
   state_register: process (clk, reset)

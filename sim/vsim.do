@@ -1,2 +1,2 @@
 do wave.do
-run -all
+run 100us
