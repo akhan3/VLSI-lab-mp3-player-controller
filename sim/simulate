@@ -1,17 +1,45 @@
 #!/bin/bash
 
-COMP_ONLY=0
+if [ $# -lt 1 ]
+then
+  echo "Usage: simulate SIMFILE"
+  echo "SIMFILE must be specified."
+  exit 1
+fi
 
-TESTNAME="playcontrol_tb"
-DESIGN_FILES="  ../rtl/system_constants_pkg.vhd  \
-                ../sim/playcontrol_tb.vhd        \
-                ../rtl/playcontrol.vhd           \
-                ../rtl/file_info_processor.vhd   \
-                ../rtl/arbiter_mux.vhd           \
-                ../rtl/list_ctrl.vhd             \
-                ../rtl/play_fsm.vhd              \
-                ../rtl/monitor_fsm.vhd           \
-                ../rtl/kbc_intf.vhd"
+SIMFILE=$1
+TESTNAME=${SIMFILE%.*}
+
+if [ ! -f $SIMFILE ]
+then
+  echo "SIMFILE $SIMFILE doesn't exist."
+  exit 1
+fi
+
+COMP_ONLY=0
+CONSOLE=0
+
+if [ $# -eq 2 ]
+then
+  if [ $2 = "-c" ];then
+    COMP_ONLY=1
+  fi
+
+  if [ $2 = "-b" ];then
+    CONSOLE=1
+  fi
+fi
+
+DESIGN_FILES="  $SIMFILE                          \
+                ../rtl/system_constants_pkg.vhd   \
+                ../sim/playcontrol_tb.vhd         \
+                ../rtl/playcontrol.vhd            \
+                ../rtl/file_info_processor.vhd    \
+                ../rtl/arbiter_mux.vhd            \
+                ../rtl/list_ctrl.vhd              \
+                ../rtl/play_fsm.vhd               \
+                ../rtl/monitor_fsm.vhd            \
+                ../rtl/kbc_intf.vhd               "
 
 if [ -e work ]
 then
@@ -36,11 +64,16 @@ else
   echo
 fi
 
-if [ $COMP_ONLY != 1 ]
+if [ $COMP_ONLY -ne 1 ]
 then
   echo 'Running Simulation ...'
   echo "================================================================================"
-  VSIM_SWITCH_LIST=" -novopt -quiet"
+  if [ $CONSOLE -eq 1 ]
+  then
+    VSIM_SWITCH_LIST=" -novopt -quiet -c"
+  else
+    VSIM_SWITCH_LIST=" -novopt -quiet"
+  fi
   echo ">>" vsim $VSIM_SWITCH_LIST -l $TESTNAME.log -wlf $TESTNAME.wlf work.$TESTNAME -do vsim.do
   vsim $VSIM_SWITCH_LIST -l $TESTNAME.log -wlf $TESTNAME.wlf work.$TESTNAME -do vsim.do
 

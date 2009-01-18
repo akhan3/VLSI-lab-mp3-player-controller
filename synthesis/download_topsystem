@@ -5,7 +5,7 @@ BITFILE=$1
 if [ $# -ne 1 ]
 then
   echo "Usage: download_topsystem BITFILE"
-  echo "BITFILE must be given."
+  echo "BITFILE must be specified."
   exit 1
 fi
 

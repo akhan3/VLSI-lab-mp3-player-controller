@@ -1,3 +1,14 @@
+-------------------------------------------------------------------------------
+-- Project                    : MP3 Player Controller
+-- Entity                     : kbc_intf
+-- Entity description         :
+--
+-- Author                     : AAK
+-- Created on                 : 02 Jan, 2009
+-- Last revision on           : 12 Jan, 2009
+-- Last revision description  :
+-------------------------------------------------------------------------------
+
 library ieee;
 use ieee.std_logic_1164.all;
 use work.system_constants_pkg.all;

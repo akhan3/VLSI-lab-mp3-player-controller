@@ -1,3 +1,18 @@
+-------------------------------------------------------------------------------
+-- Project                    : MP3 Player Controller
+-- Entity                     : play_fsm
+-- Entity description         : Takes commands from keypad and supervises the
+--                              play process. Also controls monitor_fsm
+--
+-- Author                     : AAK
+-- Created on                 : 12 Jan, 2009
+-- Last revision on           : 18 Jan, 2009
+-- Last revision description  : Decoder reset and play/pause logic is improved.
+--                              FSM Design is almost OK.
+-- To do                      : Improve FSM to better control monitor_fsm in
+--                              PAUSE and STOP
+-------------------------------------------------------------------------------
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
@@ -44,7 +59,7 @@ architecture arch of play_fsm is
   signal  dec_status_r  : std_logic;
   signal  dec_status_fall  : std_logic;
   signal  dec_rst_done  : std_logic;
-  signal  stop_done     : std_logic;
+  signal  stopping      : std_logic;
   signal  fio_req_s     : std_logic;
   signal  mute_state    : std_logic;
   signal  vol_state     : std_logic_vector(4 downto 0);
@@ -125,6 +140,8 @@ begin
     elsif (clk'event and clk = clk_polarity) then
       if (state = OPEN_ST and open_done = '1') then -- recent edit
         dec_rst <= '1';
+      elsif (state = STOP_ST) then -- recent edit
+        dec_rst <= '1';
       else
         dec_rst <= '0';
       end if;
@@ -137,8 +154,16 @@ begin
       dbuf_rst <= '0';
       sbuf_rst <= '0';
     elsif (clk'event and clk = clk_polarity) then
-      dbuf_rst <= dec_status_fall;
-      sbuf_rst <= dec_status_fall;
+      if (state = OPEN_ST and open_done = '1') then -- recent edit
+        dbuf_rst <= '1';
+        sbuf_rst <= '1';
+      elsif (state = STOP_ST) then                     -- recent edit
+        dbuf_rst <= '1';
+        sbuf_rst <= '1';
+      else                                          -- recent edit
+        dbuf_rst <= dec_status_fall;
+        sbuf_rst <= dec_status_fall;
+      end if;
     end if;
   end process;
 
@@ -163,7 +188,7 @@ begin
     if (reset = reset_state) then
       play_fetch_en <= '0';
     elsif (clk'event and clk = clk_polarity) then
-      if (state = PLAY_ST or state = PAUSE_ST) then
+      if (state = PLAY_ST) then -- recent edit
         play_fetch_en <= '1';
       else
         play_fetch_en <= '0';
@@ -171,16 +196,18 @@ begin
     end if;
   end process;
 
--- stop_done signal
+-- stopping signal
   process (clk, reset)
   begin
     if (reset = reset_state) then
-      stop_done <= '0';
+      stopping <= '0';
     elsif (clk'event and clk = clk_polarity) then
       if (state = STOP_ST) then
-        stop_done <= '1';
+        stopping <= '1';
+      elsif (state = DEC_RESET and stopping = '1' and dec_rst_done = '0') then
+        stopping <= '1';
       else
-        stop_done <= '0';
+        stopping <= '0';
       end if;
     end if;
   end process;
@@ -256,7 +283,7 @@ begin
     end if;
   end process;
 
-  next_state_comb_logic: process (state, play, pause, stop, open_done, dec_rst_done, stop_done, file_finished)
+  next_state_comb_logic: process (state, play, pause, stop, open_done, dec_rst_done, file_finished)
   begin
     case state is
       when IDLE =>
@@ -272,7 +299,9 @@ begin
           next_state <= OPEN_ST;
         end if;
       when DEC_RESET =>
-        if (dec_rst_done = '1') then
+        if (dec_rst_done = '1' and stopping = '1') then -- recent edit
+          next_state <= IDLE;
+        elsif (dec_rst_done = '1') then                 -- recent edit
           next_state <= PLAY_ST;
         else
           next_state <= DEC_RESET;
@@ -288,9 +317,7 @@ begin
           next_state <= PLAY_ST;
         end if;
       when PAUSE_ST =>
-        if (file_finished = '1') then -- recent edit
-          next_state <= IDLE;         -- recent edit
-        elsif (play = '1') then       -- recent edit
+        if (play = '1') then       -- recent edit
           next_state <= PLAY_ST;
         elsif (stop = '1') then
           next_state <= STOP_ST;
@@ -298,12 +325,7 @@ begin
           next_state <= PAUSE_ST;
         end if;
       when STOP_ST =>
-          next_state <= IDLE;         -- recent edit
---         if (stop_done = '1') then  -- recent edit
---           next_state <= IDLE;
---         else
---           next_state <= STOP_ST;
---         end if;
+          next_state <= DEC_RESET;    -- recent edit
       when others =>
           next_state <= IDLE;
     end case;

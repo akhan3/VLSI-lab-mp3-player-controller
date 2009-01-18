@@ -1,3 +1,16 @@
+-------------------------------------------------------------------------------
+-- Project                    : MP3 Player Controller
+-- Entity                     : monitor_fsm
+-- Entity description         : Fetches the MP3 data from the FIO to the
+--                              decoder and monitors the condition of buffers
+--
+-- Author                     : AAK
+-- Created on                 : 12 Jan, 2009
+-- Last revision on           : 18 Jan, 2009
+-- Last revision description  :
+-- To do                      : Improve FSM to better handle PAUSE and STOP
+-------------------------------------------------------------------------------
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
@@ -45,7 +58,7 @@ architecture arch of monitor_fsm is
   signal  fetch_num_dword   : std_logic_vector(31 downto 0);
   signal  this_dword_cnt    : std_logic_vector(8 downto 0);
   signal  fetch_param_dword : std_logic_vector(8 downto 0);
-  constant FETCH_DWORD_MAX  : std_logic_vector(31 downto 0) := x"00000100"; -- 256 in decimal
+  constant FETCH_DWORD_MAX  : std_logic_vector(31 downto 0) := x"000000C8"; -- 256 in decimal
 
 begin
 
@@ -151,6 +164,9 @@ begin
     end if;
   end process;
 
+  music_finished_s <= sbuf_empty;
+  music_finished <= music_finished_s;
+
   file_size_dword <= "00" & file_size_byte(31 downto 2);
   fetch_num_dword <= file_size_dword - total_dword_cnt when ((file_size_dword - total_dword_cnt) < FETCH_DWORD_MAX) else FETCH_DWORD_MAX;
   fetch_param_dword <= fetch_num_dword(8 downto 0) - 1;
@@ -174,7 +190,7 @@ begin
     if (reset = reset_state) then
       total_dword_cnt <= x"00000000";
     elsif (clk'event and clk = clk_polarity) then
-      if (STATE = READ and file_finished_s = '1') then -- recent edit
+      if (STATE = READ and file_finished_s = '1') then
         total_dword_cnt <= x"00000000";
       elsif (state = READ and read_done = '1') then
         total_dword_cnt <= total_dword_cnt + fetch_num_dword;

@@ -1,3 +1,15 @@
+-------------------------------------------------------------------------------
+-- Project                    : MP3 Player Controller
+-- Entity                     : file_info_processor
+-- Entity description         : Writes the MP3 filename to the LCD and also
+--                              extracts the file size information
+--
+-- Author                     : AAK
+-- Created on                 : 04 Jan, 2009
+-- Last revision on           : 15 Jan, 2009
+-- Last revision description  : Changes in ports and internal signals names
+-------------------------------------------------------------------------------
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;

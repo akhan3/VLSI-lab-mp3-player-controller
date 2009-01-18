@@ -1,3 +1,14 @@
+-------------------------------------------------------------------------------
+-- Project                    : MP3 Player Controller
+-- Entity                     : arbiter_mux
+-- Entity description         : Arbiter for access to FIO module
+--
+-- Author                     : AAK
+-- Created on                 : 04 Jan, 2009
+-- Last revision on           : 12 Jan, 2009
+-- Last revision description  : Changes in ports and internal signals names
+-------------------------------------------------------------------------------
+
 library ieee;
 use ieee.std_logic_1164.all;
 use work.system_constants_pkg.all;

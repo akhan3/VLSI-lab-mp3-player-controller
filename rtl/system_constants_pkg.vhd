@@ -1,4 +1,16 @@
--- Purpose: This package defines supplemental constants and the basic address mapping
+-------------------------------------------------------------------------------
+-- Project                    : MP3 Player Controller
+-- Package                    : system_constants_pkg
+-- Package description        : defines supplemental constants and the basic
+--                              address mapping
+--
+-- Author                     : AAK
+-- Created on                 : 02 Jan, 2009
+-- Last revision on           : 15 Jan, 2009
+-- Last revision description  : Added AC97 hardware commands
+-------------------------------------------------------------------------------
+
+-- Purpose:
 
 
 library IEEE;

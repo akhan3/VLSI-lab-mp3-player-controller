@@ -1,3 +1,15 @@
+-------------------------------------------------------------------------------
+-- Project                    : MP3 Player Controller
+-- Entity                     : list_ctrl
+-- Entity description         : Receives keypad commands and fetches file
+--                              information from the FIO
+--
+-- Author                     : AAK
+-- Created on                 : 04 Jan, 2009
+-- Last revision on           : 12 Jan, 2009
+-- Last revision description  : Changes in ports and internal signals names
+-------------------------------------------------------------------------------
+
 library ieee;
 use ieee.std_logic_1164.all;
 use work.system_constants_pkg.all;

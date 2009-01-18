@@ -13,7 +13,6 @@ add wave -noupdate -format Logic /playcontrol_tb/uut/play_fsm_inst/volinc
 add wave -noupdate -format Logic /playcontrol_tb/uut/play_fsm_inst/voldec
 add wave -noupdate -format Logic /playcontrol_tb/uut/play_fsm_inst/file_finished
 add wave -noupdate -format Logic /playcontrol_tb/uut/play_fsm_inst/music_finished
-add wave -noupdate -format Logic /playcontrol_tb/uut/play_fsm_inst/stop_done
 add wave -noupdate -format Literal /playcontrol_tb/uut/play_fsm_inst/state
 add wave -noupdate -format Logic /playcontrol_tb/uut/play_fsm_inst/play_fetch_en
 add wave -noupdate -format Logic /playcontrol_tb/uut/play_fsm_inst/fio_req
@@ -23,6 +22,7 @@ add wave -noupdate -format Literal -radix hexadecimal /playcontrol_tb/uut/play_f
 add wave -noupdate -format Logic /playcontrol_tb/uut/play_fsm_inst/fio_busiv
 add wave -noupdate -format Logic /playcontrol_tb/uut/play_fsm_inst/fio_ctrl
 add wave -noupdate -format Logic /playcontrol_tb/uut/play_fsm_inst/open_done
+add wave -noupdate -format Logic /playcontrol_tb/uut/play_fsm_inst/stopping
 add wave -noupdate -format Logic /playcontrol_tb/uut/play_fsm_inst/dec_rst
 add wave -noupdate -format Logic /playcontrol_tb/uut/play_fsm_inst/dec_status
 add wave -noupdate -format Logic /playcontrol_tb/uut/play_fsm_inst/dec_status_r
@@ -217,7 +217,7 @@ add wave -noupdate -format Literal -radix hexadecimal /playcontrol_tb/curr_key
 add wave -noupdate -format Logic /playcontrol_tb/first_list
 add wave -noupdate -divider <NULL>
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {322995 ns} 0} {{Cursor 2} {82785 ns} 0}
+WaveRestoreCursors {{Cursor 1} {322995 ns} 0} {{Cursor 2} {107064 ns} 0}
 configure wave -namecolwidth 160
 configure wave -valuecolwidth 77
 configure wave -justifyvalue left
@@ -231,4 +231,4 @@ configure wave -gridperiod 1
 configure wave -griddelta 40
 configure wave -timeline 0
 update
-WaveRestoreZoom {80979 ns} {84755 ns}
+WaveRestoreZoom {0 ns} {136500 ns}

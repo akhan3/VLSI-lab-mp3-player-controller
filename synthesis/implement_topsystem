@@ -4,7 +4,7 @@ export LD_LIBRARY_PATH=$XILINX/bin/lin
 if [ $# -ne 1 ]
 then
   echo "Usage: implement_topsystem BITFILE_REVISION"
-  echo "BITFILE_REVISION must be given."
+  echo "BITFILE_REVISION must be specified."
   exit 1
 fi
 
