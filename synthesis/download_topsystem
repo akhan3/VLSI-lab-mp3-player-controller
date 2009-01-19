@@ -1,7 +1,5 @@
 #!/bin/bash
 
-BITFILE=$1
-
 if [ $# -ne 1 ]
 then
   echo "Usage: download_topsystem BITFILE"
@@ -16,11 +14,17 @@ then
 fi
 
 CURRDIR=`pwd`
-PRJDIR="../../top_system"
-REPORT=$CURRDIR/download.report
+PRJDIR="$CURRDIR/../../top_system"
+BITFILE=$CURRDIR/$1
+BITFILE_NAME=${BITFILE##*/}
+BITFILE_REV=${BITFILE_NAME#*.}
+REV_LENGTH=`expr ${#BITFILE_REV} - 4`
+BITFILE_REV=${BITFILE_REV:0:$REV_LENGTH}
+REPORT=$CURRDIR/download.report.$BITFILE_REV
 
 # Copy required bit file to project folder
-ln -sf $CURRDIR/$BITFILE $PRJDIR/top_system.bit
+mv -sf $PRJDIR/top_system.bit $PRJDIR/top_system.bit.orig
+ln -sf $BITFILE $PRJDIR/top_system.bit
 
 # Clean up older report
 rm -f $REPORT
@@ -40,6 +44,8 @@ echo "%% Running MP3download script ..." >> $REPORT
 echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" >> $REPORT
 ./MP3download | tee -a $REPORT
 
-# Copy report to project folder also
+# Restore original bitfile in project folder
+mv -sf $PRJDIR/top_system.bit.orig $PRJDIR/top_system.bit
+
+# Go back to current directory
 cd $CURRDIR
-cp -pf $REPORT $PRJDIR

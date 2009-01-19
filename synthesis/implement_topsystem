@@ -9,9 +9,10 @@ then
 fi
 
 CURRDIR=`pwd`
-PRJDIR="../../top_system"
-REPORT=$CURRDIR/implement.report
+PRJDIR="$CURRDIR/../../top_system"
 BITFILE_REV=$1
+BITFILE=$CURRDIR/bitfiles/top_system.$BITFILE_REV.bit
+REPORT=$CURRDIR/implement.report.$BITFILE_REV
 
 # Clean up older report
 rm -f $REPORT
@@ -80,6 +81,7 @@ echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" >> $REPORT
 echo "%% Running bitgen (Bitfile generation)..." >> $REPORT
 echo "%% Process started at `date`" >> $REPORT
 echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" >> $REPORT
+rm -f $PRJDIR/top_system.bit  # clean up older bitfile first
 bitgen -ise "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/top_system/top_system.ise" -intstyle ise -f top_system.ut top_system.ncd | tee -a $REPORT
 
 
@@ -91,8 +93,7 @@ echo "%% All processes finished at `date`" >> $REPORT
 echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" >> $REPORT
 
 # Copy bit file to current folder
-cp -pf top_system.bit $CURRDIR/bitfiles/top_system.bit.$BITFILE_REV
+cp -pf $PRJDIR/top_system.bit $BITFILE
 
-# Copy report to project folder also
+# Go back to current directory
 cd $CURRDIR
-cp -pf $REPORT $PRJDIR
