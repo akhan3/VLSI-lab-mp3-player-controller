@@ -22,11 +22,11 @@ use ieee.std_logic_arith.all;
 use ieee.std_logic_unsigned.all;
 
 
-entity playcontrol_tb is
+entity sim is
 
-end playcontrol_tb;
+end sim;
 
-architecture behavior of playcontrol_tb is
+architecture behavior of sim is
 
   component playcontrol is
     port(
@@ -589,7 +589,7 @@ begin
 
   end process;
 
--- To deifne dec_status behaviour on dec_rst
+-- To define dec_status behaviour on dec_rst
   process
   begin
     wait until (clk'event and clk = clk_polarity);

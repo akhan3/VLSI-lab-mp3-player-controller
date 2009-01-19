@@ -30,60 +30,59 @@ then
   fi
 fi
 
-DESIGN_FILES="  $SIMFILE                          \
-                ../rtl/system_constants_pkg.vhd   \
-                ../sim/playcontrol_tb.vhd         \
+DESIGN_FILES="  ../rtl/system_constants_pkg.vhd   \
                 ../rtl/playcontrol.vhd            \
                 ../rtl/file_info_processor.vhd    \
                 ../rtl/arbiter_mux.vhd            \
                 ../rtl/list_ctrl.vhd              \
                 ../rtl/play_fsm.vhd               \
                 ../rtl/monitor_fsm.vhd            \
-                ../rtl/kbc_intf.vhd               "
+                ../rtl/kbc_intf.vhd               \
+                $SIMFILE"
 
-if [ -e work ]
-then
-  rm -r work
-fi
+# Adding compilation library
+rm -rf work
 vlib work
 
-echo "Running VHDL Compilation ..."
-echo "================================================================================"
+echo "%% Running VHDL Compilation ..."
 VCOM_SWITCH_LIST=" -lint -novopt -quiet"
-echo ">>" vlib work
-echo ">>" vcom  $VCOM_SWITCH_LIST $DESIGN_FILES
+echo "%%" vlib work
+echo "%%" vcom  $VCOM_SWITCH_LIST $DESIGN_FILES
 vcom  $VCOM_SWITCH_LIST $DESIGN_FILES
 
 if [ $? != 0 ]
 then
-  echo "§§§§§§§§§§§§§§§§ Compilation error §§§§§§§§§§§§§§§§";
+  echo
+  echo "%%%%%%%%%%% Compilation error %%%%%%%%%%%";
   echo
   exit 0;
 else
-  echo "§§§§§§§§§§§§§§§§ Compilation successful §§§§§§§§§§§§§§§§";
+  echo
+  echo "%%%%%%%%%%% Compilation successful %%%%%%%%%%%";
   echo
 fi
 
 if [ $COMP_ONLY -ne 1 ]
 then
-  echo 'Running Simulation ...'
-  echo "================================================================================"
+  echo '%% Running Simulation ...'
   if [ $CONSOLE -eq 1 ]
   then
     VSIM_SWITCH_LIST=" -novopt -quiet -c"
   else
     VSIM_SWITCH_LIST=" -novopt -quiet"
   fi
-  echo ">>" vsim $VSIM_SWITCH_LIST -l $TESTNAME.log -wlf $TESTNAME.wlf work.$TESTNAME -do vsim.do
-  vsim $VSIM_SWITCH_LIST -l $TESTNAME.log -wlf $TESTNAME.wlf work.$TESTNAME -do vsim.do
+  echo "%%" vsim $VSIM_SWITCH_LIST -l $TESTNAME.log -wlf $TESTNAME.wlf work.sim -do vsim.do
+  vsim $VSIM_SWITCH_LIST -l $TESTNAME.log -wlf $TESTNAME.wlf work.sim -do vsim.do
 
-  # Checking for errors in $TESTNAME.log
+  # Checking for errors in simulation report
   SIM_ERR=`grep -i error $TESTNAME.log | wc -l`
   if [ $SIM_ERR == 0 ]
   then
-    echo "§§§§§§§§§§§§§§§§ Simulation passed §§§§§§§§§§§§§§§§";
+    echo
+    echo "%%%%%%%%%%% Simulation passed %%%%%%%%%%%";
   else
-    echo "§§§§§§§§§§§§§§§§ Simulation failed with $SIM_ERR errors §§§§§§§§§§§§§§§§";
+    echo
+    echo "%%%%%%%%%%% Simulation failed with $SIM_ERR errors %%%%%%%%%%%";
   fi
   echo "See $TESTNAME.log for details"
 fi

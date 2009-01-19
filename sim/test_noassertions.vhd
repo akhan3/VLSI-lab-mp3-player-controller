@@ -1,20 +1,15 @@
 -------------------------------------------------------------------------------
--- vhdl test bench for playcontrol.vhd
--- vlsi design laboratory
--- institute for electronic design automation
--------------------------------------------------------------------------------
--- version 0.2
+-- Project                    : MP3 Player Controller
+-- Testbench                  : test_noassertions
+-- Testbench description      : Insert keypad events by forcing.
+--                              So Several assertions are disabled
 --
--- This testbench tests only the list and play functions. Further functions,
--- e.g. stop, pause, mute etc., are not tested. This testbench provides a
--- basis to test the playcontrol module and it does not guarantee that the list
--- and play functions will work after passing this testbench. Further test
--- cases should be added to this testbench for different designs.
---
--- bil 03/08
--- qic 01/09
+-- Author                     : AAK
+-- Created on                 : 18 Jan, 2009
+-- Last revision on           : 18 Jan, 2009
+-- Last revision description  :
+-- To do                      :
 -------------------------------------------------------------------------------
-
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -22,12 +17,13 @@ use ieee.std_logic_arith.all;
 use ieee.std_logic_unsigned.all;
 
 
-entity playcontrol_tb is
+entity sim is
 
-end playcontrol_tb;
+end sim;
 
-architecture behavior of playcontrol_tb is
+architecture behavior of sim is
 
+-- UUT declaration
   component playcontrol is
     port(
       clk   : in std_logic;
@@ -134,13 +130,11 @@ architecture behavior of playcontrol_tb is
   type     vector_array32xn is array (natural range <>) of vector_array32(7 downto 0);
   constant current_file_size       : std_logic_vector(31 downto 0) := x"00002000";
   constant current_file_size_dword : std_logic_vector(31 downto 0) := "00"&current_file_size(31 downto 2);
-  constant file_info : vector_array32xn(2 downto 0) := (
-    0                                                            => (0 => x"54534554", 1 => x"20202031", 2 => x"2033504d", 3 => x"7db93500",
-                                                               4 => x"32643264", 5 => x"88110000", 6 => x"2eee323b", 7 => current_file_size),
-    1                                                            => (0 => x"54534554", 1 => x"20202032", 2 => x"2033504d", 3 => x"7dba2c18",
-                                                               4 => x"32643264", 5 => x"66490000", 6 => x"3a0a323c", 7 => current_file_size),
-    2                                                            => (0 => x"54534554", 1 => x"20202033", 2 => x"2033504d", 3 => x"00011000",
-                                                               4 => x"32643264", 5 => x"88110000", 6 => x"2eee323b", 7 => current_file_size)
+  constant file_info : vector_array32xn(2 downto 0) :=
+    (
+      0 => (0 => x"54534554", 1 => x"20202031", 2 => x"2033504d", 3 => x"7db93500", 4 => x"32643264", 5 => x"88110000", 6 => x"2eee323b", 7 => current_file_size),
+      1 => (0 => x"54534554", 1 => x"20202032", 2 => x"2033504d", 3 => x"7dba2c18", 4 => x"32643264", 5 => x"66490000", 6 => x"3a0a323c", 7 => current_file_size),
+      2 => (0 => x"54534554", 1 => x"20202033", 2 => x"2033504d", 3 => x"00011000", 4 => x"32643264", 5 => x"88110000", 6 => x"2eee323b", 7 => current_file_size)
     );
 
 
@@ -174,7 +168,6 @@ architecture behavior of playcontrol_tb is
 
   constant dbuf_size : integer := 512;
 
-  constant failure_level : severity_level := failure;
   constant clk_polarity  : std_logic      := '1';
 
   constant tclock : time := (1000 ns / 32);  --the clock frequency is 32 mhz in this simulation
@@ -183,9 +176,7 @@ architecture behavior of playcontrol_tb is
 
 begin
 
-  clk   <= not clk after pw;
-  reset <= '0'     after 19*pw;
-
+-- instantiate Unit Under Test
   uut : playcontrol
     port map (
       clk   => clk,
@@ -229,12 +220,16 @@ begin
       dec_status => dec_status
       );
 
+  clk   <= not clk after pw;
+  reset <= '0'     after 19*pw;
+
+-- main simulation activity
   state_gen : process
     procedure list_state_gen(constant nptype : integer) is
     begin
       --check the default state
       assert test_state = idle
-        severity failure_level;
+        severity failure;
 
       if first_list = '1' then
         wait until clk'event and clk = clk_polarity and fio_busiv = '1' and fio_ctrl = '1' for 1000*tclock;
@@ -316,7 +311,7 @@ begin
     procedure play_state_gen is
     begin
       assert test_state = idle
-        severity failure_level;
+        severity failure;
 
       file_data_cnt <= (others => '0');
 
@@ -367,7 +362,7 @@ begin
 
     assert false
       report "The simulation is finished successfully. This is not a failure!!!"
-      severity failure_level;
+      severity failure;
     wait;
   end process;
 
@@ -409,13 +404,13 @@ begin
     end if;
 
     assert dbuf_all_data_cnt <= current_file_size_dword
-                                report "Too many DWORDs are written to dbuf!"
-                                severity failure_level;
+      report "Too many DWORDs are written to dbuf!"
+      severity failure;
 
     if dbuf_wr = '1' then
       assert dec_status = '0'
         report "The decoder is busy. Can not write to dbuf!"
-        severity failure_level;
+        severity failure;
 
       dbuf_all_data_cnt  <= dbuf_all_data_cnt+1;
       dbuf_curr_data_cnt <= dbuf_curr_data_cnt+1;
@@ -426,7 +421,7 @@ begin
 
       assert dbuf_din = dbuf_all_data_cnt  --data is same as the index, see the play_state process.
         report "data to dbuf are incorrect!"
-        severity failure_level;
+        severity failure;
 
     end if;
 
@@ -457,17 +452,17 @@ begin
     wait until clk'event and clk = clk_polarity;
     assert not (dbuf_rst = '1' and dbuf_rst'stable(100*tclock))
       report "dbuf_rst should not always be '1'!"
-      --severity failure_level;
+      --severity failure;
       severity warning;
 
     assert not (sbuf_rst = '1' and sbuf_rst'stable(100*tclock))
       report "sbuf_rst should not always be '1'!"
-      --severity failure_level;
+      --severity failure;
       severity warning;
 
     assert not (dec_rst = '1' and dec_rst'stable(100*tclock))
       report "dec_rst should not always be '1'!"
-      --severity failure_level;
+      --severity failure;
       severity warning;
 
     if dbuf_rst = '1' then
@@ -506,84 +501,84 @@ begin
     wait until clk'event and clk = clk_polarity;
     assert not (key_empty = '0' and key_empty'stable(500*tclock))
       report "No key code is read in the past 500 clock periods!"
-      severity failure_level;
+      severity failure;
 
     assert not(lcdc_busy = '1' and lcdc_cmd /= "00")
       report "Lcd command should not be sent when lcdc is busy!"
-      severity failure_level;
+      severity failure;
 
     assert not(fio_busy = '1' and fio_busiv = '1')
       report "Fio command/parameter should not be sent when fio is busy!"
-      severity failure_level;
+      severity failure;
 
     if test_state = wait_next_cmd then
       assert not test_state'stable(500*tclock)
         report "List next command is not sent in the past 500 clock periods!"
-        severity failure_level;
+        severity failure;
 
       if fio_busiv = '1' then
         assert fio_ctrl = '1' and fio_busi = fio_next_cmd
           report "List next command is expected!"
-          severity failure_level;
+          severity failure;
       end if;
     end if;
 
     if test_state = wait_prev_cmd then
       assert not test_state'stable(500*tclock)
         report "List prev command is not sent in the past 500 clock periods!"
-        severity failure_level;
+        severity failure;
 
       if fio_busiv = '1' then
         assert fio_ctrl = '1' and fio_busi = fio_prev_cmd
           report "List prev command is expected!"
-          severity failure_level;
+          severity failure;
       end if;
     end if;
 
     if test_state = wait_lcd_refresh then
       assert not test_state'stable(500*tclock)
         report "Lcd refresh command is not sent in the past 500 clock periods!"
-        severity failure_level;
+        severity failure;
     end if;
 
 
     if test_state = wait_open_cmd then
       assert not test_state'stable(500*tclock)
         report "Open command is not sent in the past 500 clock periods!"
-        severity failure_level;
+        severity failure;
 
       if fio_busiv = '1' then
         assert fio_ctrl = '1' and fio_busi = fio_open_cmd
           report "Open comand is expected!"
-          severity failure_level;
+          severity failure;
       end if;
     end if;
 
     if test_state = wait_data_size then
       assert not (dbuf_almost_full = '0' and dbuf_almost_full'stable(500*tclock) and test_state'stable(500*tclock))
         report "Data size is not sent in the past 500 clock periods!"
-        severity failure_level;
+        severity failure;
 
       assert not (dbuf_almost_full = '1' and fio_busiv = '1' and fio_ctrl = '1' and fio_busi = fio_read_cmd)
         report "No read command should be sent when dbuf is almost full!"
-        severity failure_level;
+        severity failure;
 
       if fio_busiv = '1' then
         assert fio_ctrl = '0'
           report "Data size is expected!"
-          severity failure_level;
+          severity failure;
       end if;
     end if;
 
     if test_state = wait_read_cmd then
       assert not test_state'stable(500*tclock)
         report "Read command is not sent in the past 500 clock periods!"
-        severity failure_level;
+        severity failure;
 
       if fio_busiv = '1' then
         assert fio_ctrl = '1' and fio_busi = fio_read_cmd
           report "Read comand is expected!"
-          severity failure_level;
+          severity failure;
       end if;
     end if;
 
@@ -601,32 +596,28 @@ begin
   end process;
 
 
+-------------------------------------------------------------------------------
+-- My additions
+-------------------------------------------------------------------------------
 
-  process
-    procedure send_key(
-      signal scan_code : in std_logic_vector(7 downto 0)
-    ) is
-    begin
-      wait until (clk'event and clk = clk_polarity);
-      key_empty <= '0';
-      wait until (clk'event and clk = clk_polarity);
-      if key_rd = '1' then
-        key_data   <= curr_key;
-        key_rd_ack <= '1';
-        key_empty  <= '1';
-      end if;
-
-    end procedure;
-  begin
-    wait for 100 us;
-    
-  end process;
-
-
-
-
-
-
-
+--   process
+--     procedure send_key(
+--       signal scan_code : in std_logic_vector(7 downto 0)
+--     ) is
+--     begin
+--       wait until (clk'event and clk = clk_polarity);
+--       key_empty <= '0';
+--       wait until (clk'event and clk = clk_polarity);
+--       if key_rd = '1' then
+--         key_data   <= curr_key;
+--         key_rd_ack <= '1';
+--         key_empty  <= '1';
+--       end if;
+--
+--     end procedure;
+--   begin
+--     wait for 100 us;
+--
+--   end process;
 
 end architecture;
