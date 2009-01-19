@@ -14,7 +14,7 @@ add wave -noupdate -format Logic /sim/uut/play_fsm_inst/voldec
 add wave -noupdate -format Logic /sim/uut/play_fsm_inst/file_finished
 add wave -noupdate -format Logic /sim/uut/play_fsm_inst/music_finished
 add wave -noupdate -format Literal /sim/uut/play_fsm_inst/state
-add wave -noupdate -format Logic /sim/uut/play_fsm_inst/play_fetch_en
+add wave -noupdate -format Logic /sim/uut/play_fsm_inst/fetch_en
 add wave -noupdate -format Logic /sim/uut/play_fsm_inst/fio_req
 add wave -noupdate -format Logic /sim/uut/play_fsm_inst/fio_gnt
 add wave -noupdate -format Logic /sim/uut/play_fsm_inst/fio_busy
@@ -41,9 +41,9 @@ add wave -noupdate -format Logic /sim/uut/play_fsm_inst/mute_r
 add wave -noupdate -format Literal /sim/uut/play_fsm_inst/next_state
 add wave -noupdate -divider {MONITOR FSM}
 add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/clk
-add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/play_fetch_en
-add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/dbuf_afull
 add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/fetch_en
+add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/dbuf_afull
+add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/dbuf_rd_en
 add wave -noupdate -format Literal /sim/uut/monitor_fsm_inst/state
 add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/fio_req
 add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/fio_gnt
@@ -64,7 +64,6 @@ add wave -noupdate -format Literal -radix hexadecimal /sim/uut/monitor_fsm_inst/
 add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/fio_busov
 add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/sbuf_full
 add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/sbuf_empty
-add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/dec_status
 add wave -noupdate -format Literal -radix hexadecimal /sim/uut/monitor_fsm_inst/dbuf_wdata
 add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/dbuf_wr
 add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/fio_req_s
@@ -217,7 +216,7 @@ add wave -noupdate -format Literal -radix hexadecimal /sim/curr_key
 add wave -noupdate -format Logic /sim/first_list
 add wave -noupdate -divider <NULL>
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {322995 ns} 0} {{Cursor 2} {107064 ns} 0}
+WaveRestoreCursors {{Cursor 1} {322995 ns} 0} {{Cursor 2} {111781 ns} 0}
 configure wave -namecolwidth 160
 configure wave -valuecolwidth 77
 configure wave -justifyvalue left
@@ -231,4 +230,4 @@ configure wave -gridperiod 1
 configure wave -griddelta 40
 configure wave -timeline 0
 update
-WaveRestoreZoom {0 ns} {136500 ns}
+WaveRestoreZoom {109808 ns} {113318 ns}

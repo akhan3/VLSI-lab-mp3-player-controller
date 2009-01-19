@@ -7,9 +7,9 @@ then
   exit 1
 fi
 
-if [ ! -f $BITFILE ]
+if [ ! -f $1 ]
 then
-  echo "BITFILE $BITFILE doesn't exist."
+  echo "BITFILE $1 doesn't exist."
   exit 1
 fi
 
@@ -23,8 +23,7 @@ BITFILE_REV=${BITFILE_REV:0:$REV_LENGTH}
 REPORT=$CURRDIR/download.report.$BITFILE_REV
 
 # Copy required bit file to project folder
-mv -sf $PRJDIR/top_system.bit $PRJDIR/top_system.bit.orig
-ln -sf $BITFILE $PRJDIR/top_system.bit
+cp -pf $BITFILE $PRJDIR/top_system.bit
 
 # Clean up older report
 rm -f $REPORT
@@ -43,9 +42,6 @@ echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" >> $REPORT
 echo "%% Running MP3download script ..." >> $REPORT
 echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" >> $REPORT
 ./MP3download | tee -a $REPORT
-
-# Restore original bitfile in project folder
-mv -sf $PRJDIR/top_system.bit.orig $PRJDIR/top_system.bit
 
 # Go back to current directory
 cd $CURRDIR

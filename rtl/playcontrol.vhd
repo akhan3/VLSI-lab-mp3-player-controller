@@ -5,8 +5,8 @@
 --
 -- Author                     : AAK
 -- Created on                 : 04 Jan, 2009
--- Last revision on           : 16 Jan, 2009
--- Last revision description  :
+-- Last revision on           : 19 Jan, 2009
+-- Last revision description  : Changes in few signal names.
 -------------------------------------------------------------------------------
 
 library ieee;
@@ -126,7 +126,7 @@ architecture playcontrol_arch of playcontrol is
       fio_busi    : out std_logic_vector(7 downto 0);
       fio_busiv   : out std_logic;
       fio_ctrl    : out std_logic;
-      play_fetch_en   : out std_logic;
+      fetch_en  : out std_logic;
       dec_rst   : out  std_logic;
       dbuf_rst  : out  std_logic;
       sbuf_rst  : out  std_logic
@@ -137,11 +137,10 @@ architecture playcontrol_arch of playcontrol is
     port(
       clk         : in  std_logic;
       reset       : in  std_logic;
-      play_fetch_en    : in  std_logic;
+      fetch_en    : in  std_logic;
       dbuf_afull  : in  std_logic;
       sbuf_full   : in  std_logic;
       sbuf_empty  : in  std_logic;
-      dec_status  : in  std_logic;
       dbuf_wdata  : out std_logic_vector(31 downto 0);
       dbuf_wr     : out std_logic;
       fio_buso        : in  std_logic_vector(31 downto 0);
@@ -204,7 +203,7 @@ architecture playcontrol_arch of playcontrol is
   signal monfsm_busi   : std_logic_vector(7 downto 0);
   signal monfsm_busiv  : std_logic;
   signal monfsm_ctrl   : std_logic;
-  signal play_fetch_en      : std_logic;
+  signal fetch_en      : std_logic;
   signal file_finished  : std_logic;
   signal music_finished  : std_logic;
   signal file_info_ready     : std_logic;
@@ -294,7 +293,7 @@ begin
       fio_busi      =>  playfsm_busi,
       fio_busiv     =>  playfsm_busiv,
       fio_ctrl      =>  playfsm_ctrl,
-      play_fetch_en    =>  play_fetch_en,
+      fetch_en    =>  fetch_en,
       dec_rst   =>  dec_rst,
       dbuf_rst  =>  dbuf_rst,
       sbuf_rst  =>  sbuf_rst
@@ -304,11 +303,10 @@ begin
     port map(
       clk             =>  clk             ,
       reset           =>  reset           ,
-      play_fetch_en        =>  play_fetch_en    ,
+      fetch_en        =>  fetch_en,
       dbuf_afull      =>  dbuf_almost_full,
       sbuf_full       =>  sbuf_full    ,
       sbuf_empty      =>  sbuf_empty   ,
-      dec_status      =>  dec_status   ,
       dbuf_wr         =>  dbuf_wr      ,
       dbuf_wdata      =>  dbuf_din     ,
       fio_buso        =>  buso         ,

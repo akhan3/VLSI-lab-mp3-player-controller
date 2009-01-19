@@ -7,10 +7,9 @@
 -- Author                     : AAK
 -- Created on                 : 12 Jan, 2009
 -- Last revision on           : 18 Jan, 2009
--- Last revision description  : Decoder reset and play/pause logic is improved.
---                              FSM Design is almost OK.
--- To do                      : Improve FSM to better control monitor_fsm in
---                              PAUSE and STOP
+-- Last revision description  : Play-Pause-Stop logic imporved and tested in
+--                              hardware. Better interaction with monitor_fsm.
+--                              Changes in few signal names also.
 -------------------------------------------------------------------------------
 
 library ieee;
@@ -48,7 +47,7 @@ entity play_fsm is
 
     file_finished   : in  std_logic;
     music_finished  : in  std_logic;
-    play_fetch_en   : out std_logic
+    fetch_en        : out std_logic
   );
 end entity;
 
@@ -138,9 +137,9 @@ begin
     if (reset = reset_state) then
       dec_rst   <= '0';
     elsif (clk'event and clk = clk_polarity) then
-      if (state = OPEN_ST and open_done = '1') then -- recent edit
+      if (state = OPEN_ST and open_done = '1') then
         dec_rst <= '1';
-      elsif (state = STOP_ST) then -- recent edit
+      elsif (state = STOP_ST) then
         dec_rst <= '1';
       else
         dec_rst <= '0';
@@ -154,13 +153,13 @@ begin
       dbuf_rst <= '0';
       sbuf_rst <= '0';
     elsif (clk'event and clk = clk_polarity) then
-      if (state = OPEN_ST and open_done = '1') then -- recent edit
+      if (state = OPEN_ST and open_done = '1') then
         dbuf_rst <= '1';
         sbuf_rst <= '1';
-      elsif (state = STOP_ST) then                     -- recent edit
+      elsif (state = STOP_ST) then
         dbuf_rst <= '1';
         sbuf_rst <= '1';
-      else                                          -- recent edit
+      else
         dbuf_rst <= dec_status_fall;
         sbuf_rst <= dec_status_fall;
       end if;
@@ -182,16 +181,16 @@ begin
     end if;
   end process;
 
--- Data Fetch enable when in play/pause state
+-- Data Fetch enable when in play or pause state
   process (clk, reset)
   begin
     if (reset = reset_state) then
-      play_fetch_en <= '0';
+      fetch_en <= '0';
     elsif (clk'event and clk = clk_polarity) then
-      if (state = PLAY_ST) then -- recent edit
-        play_fetch_en <= '1';
+      if (state = PLAY_ST or state = PAUSE_ST) then
+        fetch_en <= '1';
       else
-        play_fetch_en <= '0';
+        fetch_en <= '0';
       end if;
     end if;
   end process;
@@ -220,10 +219,12 @@ begin
       hw_din(31 downto 28) <= x"0";
       hw_wr <= '0';
     elsif (clk'event and clk = clk_polarity) then
-      if (((state = PLAY_ST and pause = '1') or (state = PAUSE_ST and play = '1')) and hw_full = '0') then  -- play/pause toggle
+      if (  ( (state = PLAY_ST and pause = '1') or
+              (state = PAUSE_ST and play = '1') or
+              (state = PAUSE_ST and stop = '1')   ) and hw_full = '0' ) then  -- play/pause toggle
         hw_din(31 downto 28) <= AC97_PAUSE;
         hw_wr <= '1';
-      elsif ((volinc_r = '1' or voldec_r = '1' or mute_r = '1') and hw_full = '0') then   -- Volume change command -- recent edit
+      elsif ((volinc_r = '1' or voldec_r = '1' or mute_r = '1') and hw_full = '0') then   -- Volume change command
         hw_din(31 downto 28) <= AC97_CHANGE_VOL;
         hw_wr <= '1';
       else
@@ -299,9 +300,9 @@ begin
           next_state <= OPEN_ST;
         end if;
       when DEC_RESET =>
-        if (dec_rst_done = '1' and stopping = '1') then -- recent edit
+        if (dec_rst_done = '1' and stopping = '1') then
           next_state <= IDLE;
-        elsif (dec_rst_done = '1') then                 -- recent edit
+        elsif (dec_rst_done = '1') then
           next_state <= PLAY_ST;
         else
           next_state <= DEC_RESET;
@@ -317,7 +318,7 @@ begin
           next_state <= PLAY_ST;
         end if;
       when PAUSE_ST =>
-        if (play = '1') then       -- recent edit
+        if (play = '1') then
           next_state <= PLAY_ST;
         elsif (stop = '1') then
           next_state <= STOP_ST;
@@ -325,7 +326,7 @@ begin
           next_state <= PAUSE_ST;
         end if;
       when STOP_ST =>
-          next_state <= DEC_RESET;    -- recent edit
+          next_state <= DEC_RESET;
       when others =>
           next_state <= IDLE;
     end case;

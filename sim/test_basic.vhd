@@ -419,9 +419,9 @@ begin
         dbuf_curr_data_cnt <= (others => '0');
       end if;
 
---       assert dbuf_din = dbuf_all_data_cnt  --data is same as the index, see the play_state process.
---         report "data to dbuf are incorrect!"
---         severity failure;
+      assert dbuf_din = dbuf_all_data_cnt  --data is same as the index, see the play_state process.
+        report "data to dbuf are incorrect!"
+        severity failure;
 
     end if;
 
@@ -543,9 +543,9 @@ begin
 
 
     if test_state = wait_open_cmd then
---       assert not test_state'stable(500*tclock)
---         report "Open command is not sent in the past 500 clock periods!"
---         severity failure;
+      assert not test_state'stable(500*tclock)
+        report "Open command is not sent in the past 500 clock periods!"
+        severity failure;
 
       if fio_busiv = '1' then
         assert fio_ctrl = '1' and fio_busi = fio_open_cmd
@@ -555,18 +555,18 @@ begin
     end if;
 
     if test_state = wait_data_size then
---       assert not (dbuf_almost_full = '0' and dbuf_almost_full'stable(500*tclock) and test_state'stable(500*tclock))
---         report "Data size is not sent in the past 500 clock periods!"
---         severity failure;
+      assert not (dbuf_almost_full = '0' and dbuf_almost_full'stable(500*tclock) and test_state'stable(500*tclock))
+        report "Data size is not sent in the past 500 clock periods!"
+        severity failure;
 
       assert not (dbuf_almost_full = '1' and fio_busiv = '1' and fio_ctrl = '1' and fio_busi = fio_read_cmd)
         report "No read command should be sent when dbuf is almost full!"
         severity failure;
 
       if fio_busiv = '1' then
---         assert fio_ctrl = '0'
---           report "Data size is expected!"
---           severity failure;
+        assert fio_ctrl = '0'
+          report "Data size is expected!"
+          severity failure;
       end if;
     end if;
 

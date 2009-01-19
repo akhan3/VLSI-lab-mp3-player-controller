@@ -67,12 +67,12 @@ then
   echo '%% Running Simulation ...'
   if [ $CONSOLE -eq 1 ]
   then
-    VSIM_SWITCH_LIST=" -novopt -quiet -c"
+    VSIM_SWITCH_LIST=" -novopt -quiet -do vsim.do -c"
   else
-    VSIM_SWITCH_LIST=" -novopt -quiet"
+    VSIM_SWITCH_LIST=" -novopt -quiet -do vsim.do"
   fi
-  echo "%%" vsim $VSIM_SWITCH_LIST -l $TESTNAME.log -wlf $TESTNAME.wlf work.sim -do vsim.do
-  vsim $VSIM_SWITCH_LIST -l $TESTNAME.log -wlf $TESTNAME.wlf work.sim -do vsim.do
+  echo "%%" vsim work.sim $VSIM_SWITCH_LIST -l $TESTNAME.log -wlf $TESTNAME.wlf
+  vsim work.sim $VSIM_SWITCH_LIST -l $TESTNAME.log -wlf $TESTNAME.wlf
 
   # Checking for errors in simulation report
   SIM_ERR=`grep -i error $TESTNAME.log | wc -l`
@@ -88,4 +88,4 @@ then
 fi
 
 # clean up temp files
-rm -r ./work
+rm -rf ./work

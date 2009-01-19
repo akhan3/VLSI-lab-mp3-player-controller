@@ -7,8 +7,8 @@
 -- Author                     : AAK
 -- Created on                 : 12 Jan, 2009
 -- Last revision on           : 18 Jan, 2009
--- Last revision description  :
--- To do                      : Improve FSM to better handle PAUSE and STOP
+-- Last revision description  : Improved handling of PAUSE and STOP
+--                              Changes in few signal names also.
 -------------------------------------------------------------------------------
 
 library ieee;
@@ -21,7 +21,7 @@ entity monitor_fsm is
     clk             : in  std_logic;
     reset           : in  std_logic;
 
-    play_fetch_en   : in  std_logic;
+    fetch_en        : in  std_logic;
     file_size_byte  : in  std_logic_vector(31 downto 0);
     file_finished   : out std_logic;
     music_finished  : out std_logic;
@@ -29,7 +29,7 @@ entity monitor_fsm is
     dbuf_afull      : in  std_logic;
     sbuf_full       : in  std_logic;
     sbuf_empty      : in  std_logic;
-    dec_status      : in  std_logic;
+--     dec_status      : in  std_logic;
     dbuf_wdata      : out std_logic_vector(31 downto 0);
     dbuf_wr         : out std_logic;
 
@@ -47,7 +47,7 @@ end entity;
 architecture arch of monitor_fsm is
   type    state_type is (IDLE, PARAM, READ, FINISH);
   signal  state, next_state : state_type;
-  signal  fetch_en          : std_logic;
+  signal  dbuf_rd_en        : std_logic;
   signal  param_done        : std_logic;
   signal  read_done         : std_logic;
   signal  fio_req_s         : std_logic;
@@ -111,7 +111,9 @@ begin
     if (reset = reset_state) then
       fio_req_s <= '0';
     elsif (clk'event and clk = clk_polarity) then
-      if ((state = IDLE and fetch_en = '1') or (state = PARAM and param_done = '1') or (state = READ and read_done = '1' and file_finished_s = '0' and fetch_en = '1')) then -- recent edit
+      if (  (state = IDLE and dbuf_rd_en = '1') or
+            (state = PARAM and param_done = '1') or
+            (state = READ and read_done = '1' and file_finished_s = '0' and dbuf_rd_en = '1') ) then
         fio_req_s <= '1';
       elsif ((state = PARAM or state = READ) and fio_gnt = '1' and fio_busy = '0') then
         fio_req_s <= '0';
@@ -177,7 +179,9 @@ begin
     if (reset = reset_state) then
       this_dword_cnt <= '0' & x"00";
     elsif (clk'event and clk = clk_polarity) then
-      if (state = READ and read_done = '1') then
+      if (fetch_en = '0') then -- if stop command
+        this_dword_cnt <= '0' & x"00";
+      elsif (state = READ and read_done = '1') then
         this_dword_cnt <= '0' & x"00";
       elsif (state = READ and fio_busov = '1') then
         this_dword_cnt <= this_dword_cnt + 1;
@@ -190,7 +194,9 @@ begin
     if (reset = reset_state) then
       total_dword_cnt <= x"00000000";
     elsif (clk'event and clk = clk_polarity) then
-      if (STATE = READ and file_finished_s = '1') then
+      if (fetch_en = '0') then -- if stop command
+        total_dword_cnt <= x"00000000";
+      elsif (STATE = READ and file_finished_s = '1') then
         total_dword_cnt <= x"00000000";
       elsif (state = READ and read_done = '1') then
         total_dword_cnt <= total_dword_cnt + fetch_num_dword;
@@ -208,19 +214,19 @@ begin
     end if;
   end process;
 
-  fetch_en <= '1' when (play_fetch_en = '1' and dbuf_afull = '0') else '0';
+  dbuf_rd_en <= '1' when (fetch_en = '1' and dbuf_afull = '0') else '0';
 
-  next_state_comb_logic: process (state, fetch_en, play_fetch_en, param_done, read_done, file_finished_s)
+  next_state_comb_logic: process (state, dbuf_rd_en, fetch_en, param_done, read_done, file_finished_s)
   begin
     case state is
       when IDLE =>
-        if (fetch_en = '1') then
+        if (dbuf_rd_en = '1') then
           next_state <= PARAM;
         else
           next_state <= IDLE;
         end if;
       when PARAM =>
-        if (play_fetch_en = '0') then   -- If stop is asked
+        if (fetch_en = '0') then   -- If stop command
           next_state <= IDLE;
         elsif (param_done = '1') then
           next_state <= READ;
@@ -228,13 +234,13 @@ begin
           next_state <= PARAM;
         end if;
       when READ =>
-        if (play_fetch_en = '0') then   -- If stop is asked
+        if (fetch_en = '0') then   -- If stop command
           next_state <= IDLE;
         elsif (file_finished_s = '1') then
           next_state <= FINISH;
-        elsif (read_done = '1' and fetch_en = '0') then
+        elsif (read_done = '1' and dbuf_rd_en = '0') then
           next_state <= IDLE;
-        elsif (read_done = '1') then
+        elsif (read_done = '1' and dbuf_rd_en = '1') then
           next_state <= PARAM;
         else
           next_state <= READ;

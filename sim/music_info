@@ -1,0 +1,6 @@
+File        Size    Duration                                        My result
+---------------------------------------------------------------------------------------------------
+TEST1.cdr   959K    Time: 00:05.56 (100%  Samples out: 245k)        00:05 
+TEST2.cdr   48M     Time: 04:44.68 (2.06% Samples out: 258k)        
+TEST3.cdr   44M     Time: 04:17.65 (1.30% Samples out: 147k)
+TEST4.cdr   30M     Time: 02:53.58 (1.77% Samples out: 131k)        02:53
