@@ -1,14 +1,15 @@
 source proc_force.do
 do wave.do
+run -all
 
-run 110us
+#run 110us
 
 # STOP key
-send_key 14
+#send_key 14
 
-run 100us
+#run 100us
 
 # PLAY key
-send_key 76
+#send_key 76
 
-run 600us
+#run 600us

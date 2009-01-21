@@ -96,7 +96,7 @@ package system_constants_pkg is
   constant KEY_ESC        : std_logic_vector(7 downto 0) := x"76";
   constant KEY_CTRL       : std_logic_vector(7 downto 0) := x"14";
   constant KEY_ALT        : std_logic_vector(7 downto 0) := x"11";
-  constant KEY_LEFT       : std_logic_vector(7 downto 0) := x"66";
+  constant KEY_BKSP       : std_logic_vector(7 downto 0) := x"66";
   constant KEY_PLUS       : std_logic_vector(7 downto 0) := x"79";
   constant KEY_MINUS      : std_logic_vector(7 downto 0) := x"7B";
 -- File System Commands

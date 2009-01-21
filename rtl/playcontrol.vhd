@@ -72,7 +72,9 @@ architecture playcontrol_arch of playcontrol is
       pause : out std_logic;
       mute  : out std_logic;
       volinc: out std_logic;
-      voldec: out std_logic
+      voldec: out std_logic;
+      seekfwd         : out std_logic;
+      seekbkw         : out std_logic
     );
   end component;
 
@@ -137,6 +139,8 @@ architecture playcontrol_arch of playcontrol is
     port(
       clk         : in  std_logic;
       reset       : in  std_logic;
+      seekfwd     : in std_logic;
+      seekbkw     : in std_logic;
       fetch_en    : in  std_logic;
       dbuf_afull  : in  std_logic;
       sbuf_full   : in  std_logic;
@@ -188,6 +192,8 @@ architecture playcontrol_arch of playcontrol is
   signal mute       : std_logic;
   signal volinc     : std_logic;
   signal voldec     : std_logic;
+  signal seekfwd    : std_logic;
+  signal seekbkw    : std_logic;
   signal listcrtl_req   : std_logic;
   signal listcrtl_gnt   : std_logic;
   signal listcrtl_ctrl  : std_logic;
@@ -242,7 +248,9 @@ begin
       pause =>  pause,
       mute  =>  mute,
       volinc=>  volinc,
-      voldec=>  voldec
+      voldec=>  voldec,
+      seekfwd         =>  seekfwd,
+      seekbkw         =>  seekbkw
     );
 
   arbiter_mux_inst: arbiter_mux
@@ -303,6 +311,8 @@ begin
     port map(
       clk             =>  clk             ,
       reset           =>  reset           ,
+      seekfwd         =>  seekfwd,
+      seekbkw         =>  seekbkw,
       fetch_en        =>  fetch_en,
       dbuf_afull      =>  dbuf_almost_full,
       sbuf_full       =>  sbuf_full    ,
