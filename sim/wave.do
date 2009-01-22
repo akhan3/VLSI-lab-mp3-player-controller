@@ -1,5 +1,42 @@
 onerror {resume}
 quietly WaveActivateNextPane {} 0
+add wave -noupdate -divider {MONITOR FSM}
+add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/clk
+add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/seekfwd
+add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/seekbkw
+add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/seek_param_done
+add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/seek_cmd_done
+add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/decrst_onseek
+add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/seek_req
+add wave -noupdate -format Literal -radix hexadecimal /sim/uut/monitor_fsm_inst/seek_cmd_val
+add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/fetch_en
+add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/dbuf_afull
+add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/dbuf_rd_en
+add wave -noupdate -format Literal /sim/uut/monitor_fsm_inst/state
+add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/fio_req
+add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/fio_gnt
+add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/fio_busy
+add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/fio_busiv
+add wave -noupdate -format Literal -radix hexadecimal /sim/uut/monitor_fsm_inst/fio_busi
+add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/fio_ctrl
+add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/read_param_done
+add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/read_done
+add wave -noupdate -format Literal -radix unsigned /sim/uut/monitor_fsm_inst/fetch_param_dword
+add wave -noupdate -format Literal -radix unsigned /sim/uut/monitor_fsm_inst/fetch_num_dword
+add wave -noupdate -format Literal -radix unsigned /sim/uut/monitor_fsm_inst/remain_num_dword
+add wave -noupdate -format Literal -radix unsigned /sim/uut/monitor_fsm_inst/this_dword_cnt
+add wave -noupdate -format Literal -radix unsigned /sim/uut/monitor_fsm_inst/total_dword_cnt
+add wave -noupdate -format Literal -radix unsigned /sim/uut/monitor_fsm_inst/file_size_dword
+add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/file_finished
+add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/music_finished
+add wave -noupdate -format Literal -radix hexadecimal /sim/uut/monitor_fsm_inst/fio_buso
+add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/fio_busov
+add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/sbuf_full
+add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/sbuf_empty
+add wave -noupdate -format Literal -radix hexadecimal /sim/uut/monitor_fsm_inst/dbuf_wdata
+add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/dbuf_wr
+add wave -noupdate -format Literal /sim/uut/monitor_fsm_inst/next_state
+add wave -noupdate -format Literal -radix unsigned /sim/uut/monitor_fsm_inst/file_size_byte
 add wave -noupdate -divider {playcontrol - DUT}
 add wave -noupdate -format Logic -radix hexadecimal /sim/uut/clk
 add wave -noupdate -format Logic -radix hexadecimal /sim/uut/reset
@@ -13,6 +50,7 @@ add wave -noupdate -format Logic /sim/uut/play_fsm_inst/volinc
 add wave -noupdate -format Logic /sim/uut/play_fsm_inst/voldec
 add wave -noupdate -format Logic /sim/uut/play_fsm_inst/file_finished
 add wave -noupdate -format Logic /sim/uut/play_fsm_inst/music_finished
+add wave -noupdate -format Logic /sim/uut/play_fsm_inst/decrst_onseek
 add wave -noupdate -format Literal /sim/uut/play_fsm_inst/state
 add wave -noupdate -format Logic /sim/uut/play_fsm_inst/fetch_en
 add wave -noupdate -format Logic /sim/uut/play_fsm_inst/fio_req
@@ -39,36 +77,6 @@ add wave -noupdate -format Logic /sim/uut/play_fsm_inst/volinc_r
 add wave -noupdate -format Logic /sim/uut/play_fsm_inst/voldec_r
 add wave -noupdate -format Logic /sim/uut/play_fsm_inst/mute_r
 add wave -noupdate -format Literal /sim/uut/play_fsm_inst/next_state
-add wave -noupdate -divider {MONITOR FSM}
-add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/clk
-add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/fetch_en
-add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/dbuf_afull
-add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/dbuf_rd_en
-add wave -noupdate -format Literal /sim/uut/monitor_fsm_inst/state
-add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/fio_req
-add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/fio_gnt
-add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/fio_busy
-add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/fio_busiv
-add wave -noupdate -format Literal -radix hexadecimal /sim/uut/monitor_fsm_inst/fio_busi
-add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/fio_ctrl
-add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/param_done
-add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/read_done
-add wave -noupdate -format Literal -radix unsigned /sim/uut/monitor_fsm_inst/fetch_param_dword
-add wave -noupdate -format Literal -radix unsigned /sim/uut/monitor_fsm_inst/fetch_num_dword
-add wave -noupdate -format Literal -radix unsigned /sim/uut/monitor_fsm_inst/this_dword_cnt
-add wave -noupdate -format Literal -radix unsigned /sim/uut/monitor_fsm_inst/total_dword_cnt
-add wave -noupdate -format Literal -radix unsigned /sim/uut/monitor_fsm_inst/file_size_dword
-add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/file_finished
-add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/music_finished
-add wave -noupdate -format Literal -radix hexadecimal /sim/uut/monitor_fsm_inst/fio_buso
-add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/fio_busov
-add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/sbuf_full
-add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/sbuf_empty
-add wave -noupdate -format Literal -radix hexadecimal /sim/uut/monitor_fsm_inst/dbuf_wdata
-add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/dbuf_wr
-add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/fio_req_s
-add wave -noupdate -format Literal /sim/uut/monitor_fsm_inst/next_state
-add wave -noupdate -format Literal -radix unsigned /sim/uut/monitor_fsm_inst/file_size_byte
 add wave -noupdate -divider {LIST CTRL FSM}
 add wave -noupdate -format Logic -radix hexadecimal /sim/uut/list_ctrl_inst/clk
 add wave -noupdate -format Logic -radix hexadecimal /sim/uut/listcrtl_req
@@ -216,7 +224,7 @@ add wave -noupdate -format Literal -radix hexadecimal /sim/curr_key
 add wave -noupdate -format Logic /sim/first_list
 add wave -noupdate -divider <NULL>
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {322995 ns} 0} {{Cursor 2} {111781 ns} 0}
+WaveRestoreCursors {{Cursor 1} {322995 ns} 0} {{Cursor 2} {111285 ns} 0}
 configure wave -namecolwidth 160
 configure wave -valuecolwidth 77
 configure wave -justifyvalue left
@@ -230,4 +238,4 @@ configure wave -gridperiod 1
 configure wave -griddelta 40
 configure wave -timeline 0
 update
-WaveRestoreZoom {109808 ns} {113318 ns}
+WaveRestoreZoom {109308 ns} {111864 ns}

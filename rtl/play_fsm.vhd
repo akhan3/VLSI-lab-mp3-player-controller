@@ -45,6 +45,7 @@ entity play_fsm is
     fio_busiv       : out std_logic;
     fio_ctrl        : out std_logic;
 
+    decrst_onseek   : in  std_logic;
     file_finished   : in  std_logic;
     music_finished  : in  std_logic;
     fetch_en        : out std_logic
@@ -141,6 +142,8 @@ begin
         dec_rst <= '1';
       elsif (state = STOP_ST) then
         dec_rst <= '1';
+      elsif (decrst_onseek = '1') then  -- recent edit
+        dec_rst <= '1';
       else
         dec_rst <= '0';
       end if;
@@ -159,9 +162,15 @@ begin
       elsif (state = STOP_ST) then
         dbuf_rst <= '1';
         sbuf_rst <= '1';
-      else
-        dbuf_rst <= dec_status_fall;
-        sbuf_rst <= dec_status_fall;
+      elsif (decrst_onseek = '1') then                          -- recent edit
+        dbuf_rst <= decrst_onseek;
+        sbuf_rst <= decrst_onseek;
+      elsif (state = DEC_RESET and dec_status_fall = '1') then  -- recent edit
+        dbuf_rst <= '1';
+        sbuf_rst <= '1';
+      else                                                      -- recent edit
+        dbuf_rst <= '0';
+        sbuf_rst <= '0';
       end if;
     end if;
   end process;
@@ -284,7 +293,7 @@ begin
     end if;
   end process;
 
-  next_state_comb_logic: process (state, play, pause, stop, open_done, dec_rst_done, file_finished)
+  next_state_comb_logic: process (state, play, pause, stop, open_done, dec_rst_done, file_finished, stopping)
   begin
     case state is
       when IDLE =>

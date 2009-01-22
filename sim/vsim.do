@@ -1,8 +1,23 @@
 source proc_force.do
 do wave.do
-run -all
+#run -all
 
-#run 110us
+run 110us
+
+# SEEKFWD key
+send_key "74"
+# SEEKBKW key
+#send_key "6B"
+
+run 100us
+
+
+
+
+
+
+
+
 
 # STOP key
 #send_key 14

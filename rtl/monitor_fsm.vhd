@@ -28,6 +28,7 @@ entity monitor_fsm is
     file_size_byte  : in  std_logic_vector(31 downto 0);
     file_finished   : out std_logic;
     music_finished  : out std_logic;
+    decrst_onseek   : out std_logic;
 
     dbuf_afull      : in  std_logic;
     sbuf_full       : in  std_logic;
@@ -57,13 +58,13 @@ architecture arch of monitor_fsm is
   signal  music_finished_s  : std_logic;
   signal  file_size_dword   : std_logic_vector(31 downto 0);
   signal  total_dword_cnt   : std_logic_vector(31 downto 0);
+  signal  remain_num_dword  : std_logic_vector(31 downto 0);
   signal  fetch_num_dword   : std_logic_vector(31 downto 0);
   signal  this_dword_cnt    : std_logic_vector(8 downto 0);
   signal  fetch_param_dword : std_logic_vector(8 downto 0);
-  constant FETCH_DWORD_MAX  : std_logic_vector(31 downto 0) := x"000000C8"; -- 256 in decimal
-  constant SEEK_KDWORD_MAX  : std_logic_vector(7 downto 0) := x"40";        -- 40k dwords
-  signal  seek_num_kdword   : std_logic_vector(31 downto 0);
-  signal  seek_param_kdword : std_logic_vector(7 downto 0);
+  constant FETCH_DWORD_MAX  : std_logic_vector(31 downto 0) := x"00000100";   -- 256 words (0x100)
+  constant SEEK_KDWORD_MAX  : std_logic_vector(7 downto 0)  := x"40";         -- 64 kilo-dwords (0x40)
+  constant SEEK_DWORD_MAX   : std_logic_vector(31 downto 0) := "00"&x"000" & SEEK_KDWORD_MAX & "00"&x"00";
   signal  seek_cmd_val      : std_logic_vector(7 downto 0);
   signal  seek_param_done   : std_logic;
   signal  seek_cmd_done     : std_logic;
@@ -104,7 +105,9 @@ begin
       if (state = READ_PARAM) then
         fio_busi <= fetch_param_dword(7 downto 0);
       elsif (state = SEEK_PARAM) then
-        fio_busi <= seek_param_kdword(7 downto 0);
+        fio_busi <= SEEK_KDWORD_MAX - 1;
+      elsif (state = SEEK_CMD) then
+        fio_busi <= seek_cmd_val;
       else
         fio_busi <= FIO_READ;
       end if;
@@ -209,7 +212,7 @@ begin
     if (reset = reset_state) then
       file_finished_s <= '0';
     elsif (clk'event and clk = clk_polarity) then
-      if (state = READ_CMD and (total_dword_cnt+this_dword_cnt) = file_size_dword and fio_req_s = '0' and fio_gnt = '0' and fio_busy = '0') then
+      if (state = READ_CMD and (total_dword_cnt+this_dword_cnt) >= file_size_dword and fio_req_s = '0' and fio_gnt = '0' and fio_busy = '0') then
         file_finished_s <= '1';
       else
         file_finished_s <= '0';
@@ -222,8 +225,9 @@ begin
 -- File DWords counters
 -------------------------------------------------------------------------------
   file_size_dword <= "00" & file_size_byte(31 downto 2);
-  fetch_num_dword <= file_size_dword - total_dword_cnt when ((file_size_dword - total_dword_cnt) < FETCH_DWORD_MAX) else FETCH_DWORD_MAX;
-  fetch_param_dword <= fetch_num_dword(8 downto 0) - 1;
+  remain_num_dword <= (file_size_dword - total_dword_cnt) when (file_size_dword > total_dword_cnt) else x"00000000"; -- saturation subtractor
+  fetch_num_dword <= remain_num_dword when (remain_num_dword < FETCH_DWORD_MAX) else FETCH_DWORD_MAX;
+  fetch_param_dword <= fetch_num_dword(8 downto 0) - 1 when (fetch_num_dword(8 downto 0) /= ('0'&x"00")) else ('0'&x"00");
 
   process (clk, reset)
   begin
@@ -247,8 +251,12 @@ begin
     elsif (clk'event and clk = clk_polarity) then
       if (fetch_en = '0') then -- if stop command
         total_dword_cnt <= x"00000000";
-      elsif (STATE = READ_CMD and file_finished_s = '1') then
+      elsif (state = READ_CMD and file_finished_s = '1') then
         total_dword_cnt <= x"00000000";
+      elsif (state = SEEK_CMD  and seek_cmd_val = FIO_FFSEEK and seek_cmd_done = '1') then  -- if seekfwd operation was performed
+        total_dword_cnt <= total_dword_cnt + SEEK_DWORD_MAX;                                  -- add the seek amount
+      elsif (state = SEEK_CMD  and seek_cmd_val = FIO_BFSEEK and seek_cmd_done = '1') then  -- if seekbkw operation was performed
+        total_dword_cnt <= total_dword_cnt - SEEK_DWORD_MAX;                                  -- subtract the seek amount
       elsif (state = READ_CMD and read_done = '1') then
         total_dword_cnt <= total_dword_cnt + fetch_num_dword;
       end if;
@@ -259,28 +267,48 @@ begin
 -------------------------------------------------------------------------------
 -- Seek implementation
 -------------------------------------------------------------------------------
-  seek_param_kdword <= SEEK_KDWORD_MAX - 1;  --seek_num_kdword(8 downto 0) - 1;
-
 -- seek_req generation and latched seek command
   process (clk, reset)
   begin
     if (reset = reset_state) then
       seek_req <= '0';
-      seek_cmd_val <= FIO_FFSEEK;
     elsif (clk'event and clk = clk_polarity) then
-      if (seekfwd = '1') then
-        seek_req <= '1';
-        seek_cmd_val <= FIO_FFSEEK;
-      elsif (seekbkw = '1') then
-        seek_req <= '1';
-        seek_cmd_val <= FIO_BFSEEK;
-      elsif (STATE = READ_PARAM) then
+      if (fetch_en = '0') then
         seek_req <= '0';
-        seek_cmd_val <= FIO_FFSEEK;
+      elsif (seekfwd = '1' or seekbkw = '1') then
+        seek_req <= '1';
+      elsif ( (state = SEEK_CHECK and next_state = READ_PARAM) or
+              (state = SEEK_CMD and next_state = READ_PARAM)  ) then
+        seek_req <= '0';
       end if;
     end if;
   end process;
 
+  process (clk, reset)
+  begin
+    if (reset = reset_state) then
+      seek_cmd_val <= FIO_FFSEEK;
+    elsif (clk'event and clk = clk_polarity) then
+      if (seekfwd = '1') then
+        seek_cmd_val <= FIO_FFSEEK;
+      elsif (seekbkw = '1') then
+        seek_cmd_val <= FIO_BFSEEK;
+      end if;
+    end if;
+  end process;
+
+  process (clk, reset)
+  begin
+    if (reset = reset_state) then
+      decrst_onseek <= '0';
+    elsif (clk'event and clk = clk_polarity) then
+      if (state = SEEK_CMD and seek_cmd_done = '1') then
+        decrst_onseek <= '1';
+      else
+        decrst_onseek <= '0';
+      end if;
+    end if;
+  end process;
 
 -------------------------------------------------------------------------------
 -- FSM
@@ -294,8 +322,9 @@ begin
     end if;
   end process;
 
-
-  next_state_comb_logic: process (state, dbuf_rd_en, fetch_en, read_param_done, read_done, file_finished_s)
+  next_state_comb_logic: process (state, dbuf_rd_en, fetch_en, read_param_done, read_done,
+                                  file_finished_s, remain_num_dword, total_dword_cnt,
+                                  seek_req, seek_param_done, seek_cmd_done, seek_cmd_val)
   begin
     case state is
       when IDLE =>
@@ -307,7 +336,9 @@ begin
           next_state <= IDLE;
         end if;
       when SEEK_CHECK =>
-        if (seek_req = '1') then
+        if (  seek_req = '1' and
+              ( (seek_cmd_val = FIO_FFSEEK and remain_num_dword > SEEK_DWORD_MAX) or        -- if enough leg room to seek-fwd
+                (seek_cmd_val = FIO_BFSEEK and total_dword_cnt > SEEK_DWORD_MAX)  ) ) then  -- if enough head room to seek-bkw
           next_state <= SEEK_PARAM;
         else
           next_state <= READ_PARAM;
@@ -342,7 +373,7 @@ begin
         if (seek_cmd_done = '1') then
           next_state <= READ_PARAM;
         else
-          next_state <= READ_CMD;
+          next_state <= SEEK_CMD;
         end if;
       when others =>
           next_state <= IDLE;

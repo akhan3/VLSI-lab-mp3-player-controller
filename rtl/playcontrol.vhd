@@ -120,6 +120,7 @@ architecture playcontrol_arch of playcontrol is
       hw_wr         : out std_logic;
       hw_din        : out std_logic_vector(31 downto 0);
       dec_status  : in  std_logic;
+      decrst_onseek   : in  std_logic;
       file_finished   : in  std_logic;
       music_finished  : in  std_logic;
       fio_busy    : in  std_logic;
@@ -157,7 +158,8 @@ architecture playcontrol_arch of playcontrol is
       fio_ctrl        : out std_logic;
       file_size_byte        : in  std_logic_vector(31 downto 0);
       file_finished   : out  std_logic;
-      music_finished  : out  std_logic
+      music_finished  : out  std_logic;
+      decrst_onseek   : out std_logic
     );
   end component;
 
@@ -212,6 +214,7 @@ architecture playcontrol_arch of playcontrol is
   signal fetch_en      : std_logic;
   signal file_finished  : std_logic;
   signal music_finished  : std_logic;
+  signal decrst_onseek   : std_logic;
   signal file_info_ready     : std_logic;
   signal file_info_start     : std_logic;
   signal arbiter_fio_req: std_logic_vector(2 downto 0);
@@ -296,6 +299,7 @@ begin
       fio_busy      =>  busy,
       file_finished   =>  file_finished,
       music_finished  =>  music_finished,
+      decrst_onseek   =>  decrst_onseek,
       fio_gnt           =>  playfsm_gnt,
       fio_req           =>  playfsm_req,
       fio_busi      =>  playfsm_busi,
@@ -329,7 +333,8 @@ begin
       fio_ctrl        =>  monfsm_ctrl         ,
       file_size_byte        =>  file_size_byte     ,
       file_finished   =>  file_finished,
-      music_finished  =>  music_finished
+      music_finished  =>  music_finished,
+      decrst_onseek   =>  decrst_onseek
     );
 
   file_info_processor_inst: file_info_processor
