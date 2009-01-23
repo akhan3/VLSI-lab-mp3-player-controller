@@ -6,15 +6,16 @@
 --
 -- Author                     : AAK
 -- Created on                 : 12 Jan, 2009
--- Last revision on           : 18 Jan, 2009
--- Last revision description  : Improved handling of PAUSE and STOP
---                              Changes in few signal names also.
+-- Last revision on           : 22 Jan, 2009
+-- Last revision description  : Chipsope cores reside here.
+--                              Seek implemented and tested in hw.
 -------------------------------------------------------------------------------
 
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
 use work.system_constants_pkg.all;
+use work.test_modules_component_pkg.all;  -- contains chipsope core declarations
 
 entity monitor_fsm is
   port(
@@ -43,17 +44,22 @@ entity monitor_fsm is
     fio_req         : out std_logic;
     fio_busi        : out std_logic_vector(7 downto 0);
     fio_busiv       : out std_logic;
-    fio_ctrl        : out std_logic
+    fio_ctrl        : out std_logic;
+    to_chipscope    : in  std_logic_vector(255 downto 0)
   );
 end entity;
 
 architecture arch of monitor_fsm is
   type    state_type is (IDLE, READ_PARAM, READ_CMD, SEEK_CHECK, SEEK_PARAM, SEEK_CMD);
   signal  state, next_state : state_type;
+  signal  dbuf_wdata_s      : std_logic_vector(31 downto 0);
+  signal  dbuf_wr_s         : std_logic;
   signal  dbuf_rd_en        : std_logic;
   signal  read_param_done   : std_logic;
   signal  read_done         : std_logic;
   signal  fio_req_s         : std_logic;
+  signal  fetch_en_r        : std_logic;
+  signal  file_start_os     : std_logic;
   signal  file_finished_s   : std_logic;
   signal  music_finished_s  : std_logic;
   signal  file_size_dword   : std_logic_vector(31 downto 0);
@@ -69,14 +75,24 @@ architecture arch of monitor_fsm is
   signal  seek_param_done   : std_logic;
   signal  seek_cmd_done     : std_logic;
   signal  seek_req          : std_logic;
+  signal  decrst_onseek_s   : std_logic;
+  signal  fio_busiv_s       : std_logic;
+  signal  fio_busi_s        : std_logic_vector(7 downto 0);
+  signal  fio_ctrl_s        : std_logic;
+
+-- Chipscope signals
+  signal  trig0             : std_logic_vector(255 downto 0);
+  signal  control0          : std_logic_vector(35 downto 0);
 
 begin
 
 -------------------------------------------------------------------------------
 -- Writing fetched MP3 data to DBUF
 -------------------------------------------------------------------------------
-  dbuf_wdata <= fio_buso;
-  dbuf_wr <= fio_busov when (state = READ_CMD) else '0';
+  dbuf_wdata_s <= fio_buso;
+  dbuf_wdata <= dbuf_wdata_s;
+  dbuf_wr_s <= fio_busov when (state = READ_CMD) else '0';
+  dbuf_wr <= dbuf_wr_s;
 
 
 -------------------------------------------------------------------------------
@@ -134,10 +150,11 @@ begin
     if (reset = reset_state) then
       fio_req_s <= '0';
     elsif (clk'event and clk = clk_polarity) then
-      if (  (state = SEEK_CHECK) or
-            (state = SEEK_PARAM and seek_param_done = '1') or
-            (state = SEEK_CMD and seek_cmd_done = '1') or
-            (state = READ_PARAM and read_param_done = '1')  ) then
+      if (  (state = SEEK_CHECK and next_state = READ_PARAM) or
+            (state = SEEK_CHECK and next_state = SEEK_PARAM) or
+            (state = SEEK_PARAM and next_state = SEEK_CMD) or
+            (state = SEEK_CMD and next_state = READ_PARAM) or
+            (state = READ_PARAM and next_state = READ_CMD)  ) then
         fio_req_s <= '1';
       elsif ( (state = READ_PARAM or state = READ_CMD or state = SEEK_PARAM or state = SEEK_CMD) and
               (fio_gnt = '1' and fio_busy = '0')  ) then
@@ -224,11 +241,35 @@ begin
 -------------------------------------------------------------------------------
 -- File DWords counters
 -------------------------------------------------------------------------------
-  file_size_dword <= "00" & file_size_byte(31 downto 2);
   remain_num_dword <= (file_size_dword - total_dword_cnt) when (file_size_dword > total_dword_cnt) else x"00000000"; -- saturation subtractor
   fetch_num_dword <= remain_num_dword when (remain_num_dword < FETCH_DWORD_MAX) else FETCH_DWORD_MAX;
   fetch_param_dword <= fetch_num_dword(8 downto 0) - 1 when (fetch_num_dword(8 downto 0) /= ('0'&x"00")) else ('0'&x"00");
 
+-- Rising edge detector for fetch_en to latch current file size
+  process (clk, reset)
+  begin
+    if (reset = reset_state) then
+      fetch_en_r <= '0';
+      file_start_os <= '0';
+    elsif (clk'event and clk = clk_polarity) then
+      fetch_en_r <= fetch_en;
+      file_start_os <= fetch_en and not fetch_en_r;
+    end if;
+  end process;
+
+-- Latching current file size
+  process (clk, reset)
+  begin
+    if (reset = reset_state) then
+      file_size_dword <= x"00000000";
+    elsif (clk'event and clk = clk_polarity) then
+      if (file_start_os = '1') then
+        file_size_dword <= "00" & file_size_byte(31 downto 2);
+      end if;
+    end if;
+  end process;
+
+-- Current fetch counter
   process (clk, reset)
   begin
     if (reset = reset_state) then
@@ -244,6 +285,7 @@ begin
     end if;
   end process;
 
+-- Total fetch counter
   process (clk, reset)
   begin
     if (reset = reset_state) then
@@ -297,18 +339,20 @@ begin
     end if;
   end process;
 
+  decrst_onseek <= decrst_onseek_s;
   process (clk, reset)
   begin
     if (reset = reset_state) then
-      decrst_onseek <= '0';
+      decrst_onseek_s <= '0';
     elsif (clk'event and clk = clk_polarity) then
       if (state = SEEK_CMD and seek_cmd_done = '1') then
-        decrst_onseek <= '1';
+        decrst_onseek_s <= '1';
       else
-        decrst_onseek <= '0';
+        decrst_onseek_s <= '0';
       end if;
     end if;
   end process;
+
 
 -------------------------------------------------------------------------------
 -- FSM
@@ -336,12 +380,16 @@ begin
           next_state <= IDLE;
         end if;
       when SEEK_CHECK =>
-        if (  seek_req = '1' and
+        if (fetch_en = '0') then   -- if stop command
+          next_state <= IDLE;
+        elsif (  seek_req = '1' and
               ( (seek_cmd_val = FIO_FFSEEK and remain_num_dword > SEEK_DWORD_MAX) or        -- if enough leg room to seek-fwd
                 (seek_cmd_val = FIO_BFSEEK and total_dword_cnt > SEEK_DWORD_MAX)  ) ) then  -- if enough head room to seek-bkw
           next_state <= SEEK_PARAM;
-        else
+        elsif (dbuf_rd_en = '1') then
           next_state <= READ_PARAM;
+        else
+          next_state <= SEEK_CHECK;
         end if;
       when READ_PARAM =>
         if (fetch_en = '0') then   -- If stop command
@@ -356,9 +404,7 @@ begin
           next_state <= IDLE;
         elsif (file_finished_s = '1') then
           next_state <= IDLE;
-        elsif (read_done = '1' and dbuf_rd_en = '0') then
-          next_state <= IDLE;
-        elsif (read_done = '1' and dbuf_rd_en = '1') then
+        elsif (read_done = '1') then
           next_state <= SEEK_CHECK;
         else
           next_state <= READ_CMD;
@@ -379,5 +425,33 @@ begin
           next_state <= IDLE;
     end case;
   end process;
+
+
+-------------------------------------------------------------------------------
+-- Chipscope cores
+-------------------------------------------------------------------------------
+  chipsope_cores: if USECHIPSCOPE generate
+    chipsope_icon: icon
+      port map(
+        control0 => control0
+      );
+
+    chipsope_ila: ila
+      port map(
+        control => control0,
+        clk     => clk,
+        trig0   => trig0
+      );
+  end generate;
+
+    trig0(219 downto 0)   <= to_chipscope(219 downto 0);
+    trig0(255 downto 252) <= seek_param_done & seek_cmd_done & dbuf_rd_en & file_start_os;
+    trig0(249 downto 248) <= read_param_done & read_done;
+
+--     trig0(151 downto 120) <= file_size_dword;
+--     trig0(183 downto 152) <= total_dword_cnt;
+--     trig0(236 downto 228) <= this_dword_cnt;
+--     trig0(247 downto 240) <= fetch_param_dword(7 downto 0);
+
 
 end architecture;

@@ -10,6 +10,8 @@ add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/decrst_onseek
 add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/seek_req
 add wave -noupdate -format Literal -radix hexadecimal /sim/uut/monitor_fsm_inst/seek_cmd_val
 add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/fetch_en
+add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/fetch_en_r
+add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/file_start_os
 add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/dbuf_afull
 add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/dbuf_rd_en
 add wave -noupdate -format Literal /sim/uut/monitor_fsm_inst/state
@@ -37,9 +39,12 @@ add wave -noupdate -format Literal -radix hexadecimal /sim/uut/monitor_fsm_inst/
 add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/dbuf_wr
 add wave -noupdate -format Literal /sim/uut/monitor_fsm_inst/next_state
 add wave -noupdate -format Literal -radix unsigned /sim/uut/monitor_fsm_inst/file_size_byte
+add wave -noupdate -format Literal -height 17 -radix hexadecimal /sim/uut/monitor_fsm_inst/trig0
+add wave -noupdate -format Literal -height 17 -radix hexadecimal /sim/uut/monitor_fsm_inst/control0
 add wave -noupdate -divider {playcontrol - DUT}
 add wave -noupdate -format Logic -radix hexadecimal /sim/uut/clk
 add wave -noupdate -format Logic -radix hexadecimal /sim/uut/reset
+add wave -noupdate -format Literal -height 17 -radix hexadecimal /sim/uut/to_chipscope
 add wave -noupdate -divider {PLAY FSM}
 add wave -noupdate -format Logic /sim/uut/play_fsm_inst/clk
 add wave -noupdate -format Logic /sim/uut/play_fsm_inst/play
@@ -224,7 +229,7 @@ add wave -noupdate -format Literal -radix hexadecimal /sim/curr_key
 add wave -noupdate -format Logic /sim/first_list
 add wave -noupdate -divider <NULL>
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {322995 ns} 0} {{Cursor 2} {111285 ns} 0}
+WaveRestoreCursors {{Cursor 1} {196785 ns} 0} {{Cursor 2} {37774 ns} 0}
 configure wave -namecolwidth 160
 configure wave -valuecolwidth 77
 configure wave -justifyvalue left
@@ -238,4 +243,4 @@ configure wave -gridperiod 1
 configure wave -griddelta 40
 configure wave -timeline 0
 update
-WaveRestoreZoom {109308 ns} {111864 ns}
+WaveRestoreZoom {0 ns} {594358 ns}

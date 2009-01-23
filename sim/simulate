@@ -30,14 +30,15 @@ then
   fi
 fi
 
-DESIGN_FILES="  ../rtl/system_constants_pkg.vhd   \
-                ../rtl/playcontrol.vhd            \
-                ../rtl/file_info_processor.vhd    \
-                ../rtl/arbiter_mux.vhd            \
-                ../rtl/list_ctrl.vhd              \
-                ../rtl/play_fsm.vhd               \
-                ../rtl/monitor_fsm.vhd            \
-                ../rtl/kbc_intf.vhd               \
+DESIGN_FILES="  ../rtl/system_constants_pkg.vhd       \
+                ../rtl/test_modules_component_pkg.vhd \
+                ../rtl/playcontrol.vhd                \
+                ../rtl/file_info_processor.vhd        \
+                ../rtl/arbiter_mux.vhd                \
+                ../rtl/list_ctrl.vhd                  \
+                ../rtl/play_fsm.vhd                   \
+                ../rtl/monitor_fsm.vhd                \
+                ../rtl/kbc_intf.vhd                   \
                 $SIMFILE"
 
 # Adding compilation library

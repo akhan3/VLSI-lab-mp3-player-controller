@@ -1,4 +1,5 @@
 vhdl work "../rtl/system_constants_pkg.vhd"
+vhdl work "../rtl/test_modules_component_pkg.vhd"
 vhdl work "../rtl/list_ctrl.vhd"
 vhdl work "../rtl/kbc_intf.vhd"
 vhdl work "../rtl/file_info_processor.vhd"
