@@ -146,6 +146,7 @@ architecture playcontrol_arch of playcontrol is
       dbuf_afull      : in  std_logic;
       sbuf_full       : in  std_logic;
       sbuf_empty      : in  std_logic;
+      dec_status      : in  std_logic;
       dbuf_wdata      : out std_logic_vector(31 downto 0);
       dbuf_wr         : out std_logic;
       fio_buso        : in  std_logic_vector(31 downto 0);
@@ -359,6 +360,7 @@ begin
       dbuf_afull      =>  dbuf_almost_full,
       sbuf_full       =>  sbuf_full    ,
       sbuf_empty      =>  sbuf_empty   ,
+      dec_status      =>  dec_status,
       dbuf_wr         =>  dbuf_wr_s      ,
       dbuf_wdata      =>  dbuf_din     ,
       fio_buso        =>  buso         ,

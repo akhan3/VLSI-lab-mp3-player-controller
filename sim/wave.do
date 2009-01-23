@@ -13,7 +13,7 @@ add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/fetch_en
 add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/fetch_en_r
 add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/file_start_os
 add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/dbuf_afull
-add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/dbuf_rd_en
+add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/dbuf_wr_en
 add wave -noupdate -format Literal /sim/uut/monitor_fsm_inst/state
 add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/fio_req
 add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/fio_gnt

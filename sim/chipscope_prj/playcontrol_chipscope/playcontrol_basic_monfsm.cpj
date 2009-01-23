@@ -1064,7 +1064,7 @@ unit.2.0.port.-1.s.252.color=java.awt.Color[r\=0,g\=0,b\=124]
 unit.2.0.port.-1.s.252.name=DataPort[252]
 unit.2.0.port.-1.s.252.orderindex=-1
 unit.2.0.port.-1.s.252.visible=1
-unit.2.0.port.-1.s.253.alias=dbuf_rd_en
+unit.2.0.port.-1.s.253.alias=dbuf_wr_en
 unit.2.0.port.-1.s.253.color=java.awt.Color[r\=0,g\=0,b\=124]
 unit.2.0.port.-1.s.253.name=DataPort[253]
 unit.2.0.port.-1.s.253.orderindex=-1
@@ -2359,7 +2359,7 @@ unit.2.0.port.0.s.252.color=java.awt.Color[r\=0,g\=0,b\=124]
 unit.2.0.port.0.s.252.name=TriggerPort0[252]
 unit.2.0.port.0.s.252.orderindex=-1
 unit.2.0.port.0.s.252.visible=1
-unit.2.0.port.0.s.253.alias=dbuf_rd_en
+unit.2.0.port.0.s.253.alias=dbuf_wr_en
 unit.2.0.port.0.s.253.color=java.awt.Color[r\=0,g\=0,b\=124]
 unit.2.0.port.0.s.253.name=TriggerPort0[253]
 unit.2.0.port.0.s.253.orderindex=-1
@@ -3407,7 +3407,7 @@ unit.2.0.waveform.posn.42.name=file_start_os
 unit.2.0.waveform.posn.42.radix=1
 unit.2.0.waveform.posn.42.type=signal
 unit.2.0.waveform.posn.43.channel=253
-unit.2.0.waveform.posn.43.name=dbuf_rd_en
+unit.2.0.waveform.posn.43.name=dbuf_wr_en
 unit.2.0.waveform.posn.43.type=signal
 unit.2.0.waveform.posn.44.channel=254
 unit.2.0.waveform.posn.44.name=seek_cmd_done

@@ -6,9 +6,9 @@
 --
 -- Author                     : AAK
 -- Created on                 : 12 Jan, 2009
--- Last revision on           : 22 Jan, 2009
--- Last revision description  : Chipsope cores reside here.
---                              Seek implemented and tested in hw.
+-- Last revision on           : 23 Jan, 2009
+-- Last revision description  : Added a new transition in FSM from SEEK_CMD
+--                              to SEEK_CHECK. Added new port dec_status
 -------------------------------------------------------------------------------
 
 library ieee;
@@ -34,6 +34,7 @@ entity monitor_fsm is
     dbuf_afull      : in  std_logic;
     sbuf_full       : in  std_logic;
     sbuf_empty      : in  std_logic;
+    dec_status      : in  std_logic;
     dbuf_wdata      : out std_logic_vector(31 downto 0);
     dbuf_wr         : out std_logic;
 
@@ -54,7 +55,7 @@ architecture arch of monitor_fsm is
   signal  state, next_state : state_type;
   signal  dbuf_wdata_s      : std_logic_vector(31 downto 0);
   signal  dbuf_wr_s         : std_logic;
-  signal  dbuf_rd_en        : std_logic;
+  signal  dbuf_wr_en        : std_logic;
   signal  read_param_done   : std_logic;
   signal  read_done         : std_logic;
   signal  fio_req_s         : std_logic;
@@ -151,10 +152,10 @@ begin
       fio_req_s <= '0';
     elsif (clk'event and clk = clk_polarity) then
       if (  (state = SEEK_CHECK and next_state = READ_PARAM) or
+            (state = READ_PARAM and next_state = READ_CMD) or
             (state = SEEK_CHECK and next_state = SEEK_PARAM) or
             (state = SEEK_PARAM and next_state = SEEK_CMD) or
-            (state = SEEK_CMD and next_state = READ_PARAM) or
-            (state = READ_PARAM and next_state = READ_CMD)  ) then
+            (state = SEEK_CMD and next_state = READ_PARAM)  ) then
         fio_req_s <= '1';
       elsif ( (state = READ_PARAM or state = READ_CMD or state = SEEK_PARAM or state = SEEK_CMD) and
               (fio_gnt = '1' and fio_busy = '0')  ) then
@@ -167,7 +168,8 @@ begin
 -------------------------------------------------------------------------------
 -- State machine transition signals
 -------------------------------------------------------------------------------
-  dbuf_rd_en <= '1' when (fetch_en = '1' and dbuf_afull = '0') else '0';
+--   dbuf_wr_en <= '1' when (fetch_en = '1' and dbuf_afull = '0' and dec_status = '0') else '0';
+  dbuf_wr_en <= '1' when (fetch_en = '1' and dbuf_afull = '0') else '0';
   music_finished_s <= sbuf_empty;
   music_finished <= music_finished_s;
   file_finished <= file_finished_s;
@@ -315,7 +317,7 @@ begin
     if (reset = reset_state) then
       seek_req <= '0';
     elsif (clk'event and clk = clk_polarity) then
-      if (fetch_en = '0') then
+      if (fetch_en = '0') then  -- if stop command
         seek_req <= '0';
       elsif (seekfwd = '1' or seekbkw = '1') then
         seek_req <= '1';
@@ -366,7 +368,7 @@ begin
     end if;
   end process;
 
-  next_state_comb_logic: process (state, dbuf_rd_en, fetch_en, read_param_done, read_done,
+  next_state_comb_logic: process (state, dbuf_wr_en, fetch_en, read_param_done, read_done,
                                   file_finished_s, remain_num_dword, total_dword_cnt,
                                   seek_req, seek_param_done, seek_cmd_done, seek_cmd_val)
   begin
@@ -374,7 +376,7 @@ begin
       when IDLE =>
         if (file_finished_s = '1') then
           next_state <= IDLE;
-        elsif (dbuf_rd_en = '1') then
+        elsif (dbuf_wr_en = '1') then
           next_state <= SEEK_CHECK;
         else
           next_state <= IDLE;
@@ -382,17 +384,17 @@ begin
       when SEEK_CHECK =>
         if (fetch_en = '0') then   -- if stop command
           next_state <= IDLE;
-        elsif (  seek_req = '1' and
-              ( (seek_cmd_val = FIO_FFSEEK and remain_num_dword > SEEK_DWORD_MAX) or        -- if enough leg room to seek-fwd
-                (seek_cmd_val = FIO_BFSEEK and total_dword_cnt > SEEK_DWORD_MAX)  ) ) then  -- if enough head room to seek-bkw
+        elsif ( seek_req = '1' and
+                ( (seek_cmd_val = FIO_FFSEEK and remain_num_dword > SEEK_DWORD_MAX) or        -- if enough leg room to seek-fwd
+                  (seek_cmd_val = FIO_BFSEEK and total_dword_cnt > SEEK_DWORD_MAX)  ) ) then  -- if enough head room to seek-bkw
           next_state <= SEEK_PARAM;
-        elsif (dbuf_rd_en = '1') then
+        elsif (dbuf_wr_en = '1') then
           next_state <= READ_PARAM;
         else
           next_state <= SEEK_CHECK;
         end if;
       when READ_PARAM =>
-        if (fetch_en = '0') then   -- If stop command
+        if (fetch_en = '0') then   -- if stop command
           next_state <= IDLE;
         elsif (read_param_done = '1') then
           next_state <= READ_CMD;
@@ -400,7 +402,7 @@ begin
           next_state <= READ_PARAM;
         end if;
       when READ_CMD =>
-        if (fetch_en = '0') then   -- If stop command
+        if (fetch_en = '0') then   -- if stop command
           next_state <= IDLE;
         elsif (file_finished_s = '1') then
           next_state <= IDLE;
@@ -416,8 +418,10 @@ begin
           next_state <= SEEK_PARAM;
         end if;
       when SEEK_CMD =>
-        if (seek_cmd_done = '1') then
+        if (seek_cmd_done = '1' and dbuf_wr_en = '1') then
           next_state <= READ_PARAM;
+        elsif (seek_cmd_done = '1' and dbuf_wr_en = '0') then
+          next_state <= SEEK_CHECK;
         else
           next_state <= SEEK_CMD;
         end if;
@@ -445,7 +449,7 @@ begin
   end generate;
 
     trig0(219 downto 0)   <= to_chipscope(219 downto 0);
-    trig0(255 downto 252) <= seek_param_done & seek_cmd_done & dbuf_rd_en & file_start_os;
+    trig0(255 downto 252) <= seek_param_done & seek_cmd_done & dbuf_wr_en & file_start_os;
     trig0(249 downto 248) <= read_param_done & read_done;
 
 --     trig0(151 downto 120) <= file_size_dword;
