@@ -14,9 +14,10 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
 use ieee.std_logic_textio.all;
+use work.test_util.all;
 use work.system_constants_pkg.all;
 
-entity lcdc_mdl is
+entity lcdc is
   generic(
     tclock : time -- clock frequency in this simulation
   );
@@ -33,43 +34,41 @@ entity lcdc_mdl is
     ccrm_addr           : in  std_logic_vector(4 downto 0);
 
     lcdc_cmd            : in  std_logic_vector(1 downto 0);
-    lcdc_busy           : out std_logic
+    lcdc_busy           : out std_logic := '0'
   );
 end entity;
 
-architecture behav of lcdc_mdl is
+architecture behav of lcdc is
+  constant LCD_LENGTH   : positive := 32;
+  subtype lcd_char_type   is std_logic_vector(7 downto 0);
+  type    lcd_str_array   is array(1 to LCD_LENGTH) of lcd_char_type;
   type    char_mem_array  is array(0 to 255)  of std_logic_vector(7 downto 0);
   type    cc_mem_array    is array(0 to 31)   of std_logic_vector(35 downto 0);
-  signal  char_mem      : char_mem_array;
-  signal  cc_mem        : cc_mem_array;
 
-  signal  char_mem_addr : std_logic_vector(7 downto 0);
-  signal  cc_mem_addr   : std_logic_vector(4 downto 0);
-
-  signal  test_char     : std_logic_vector(7 downto 0);
+  signal  char_mem      : char_mem_array; -- Character RAM
+  signal  cc_mem        : cc_mem_array;   -- Character Command RAM
 
 begin
-
-  lcdc_busy <= '1' when (lcdc_cmd = "01" or lcdc_cmd = "10") and clk'event and clk = clk_polarity else
-               '0' after 500*tclock + 3 ns;
 
 -------------------------------------------------------------------------------
 -- Write into the character memory
 -------------------------------------------------------------------------------
-
   process (clk, reset)
   begin
     if (reset = reset_state) then
       for i in 0 to 255 loop
-        char_mem(i) <= x"20"; -- fill with spaces
+        char_mem(i) <= x"20"; -- fill with spaces on reset
       end loop;
     elsif (clk'event and clk = clk_polarity) then
-      if (chrm_wr = '1') then
+      if (lcdc_cmd = LCD_CLEAR) then
+        for i in 0 to 255 loop
+          char_mem(i) <= x"20"; -- fill with spaces on LCD_CLEAR command
+        end loop;
+      elsif (chrm_wr = '1') then
         char_mem(conv_integer(chrm_addr)) <= chrm_wdata;
       end if;
     end if;
   end process;
-
 
 -------------------------------------------------------------------------------
 -- Write into the character-command memory
@@ -88,14 +87,80 @@ begin
     end if;
   end process;
 
+-------------------------------------------------------------------------------
+-- busy status of the LCD
+-------------------------------------------------------------------------------
+  lcdc_busy <= '1' when ( clk'event and clk = clk_polarity and
+                          (lcdc_cmd = LCD_REFRESH or lcdc_cmd = LCD_CLEAR)  ) else
+               '0' after 500*tclock + 3 ns;
 
-
-
-
-
-
-
-
+-------------------------------------------------------------------------------
+-- LCD display process
+-------------------------------------------------------------------------------
+  lcd_display_algo: process
+    variable cc_word  : std_logic_vector(35 downto 0);
+    variable v        : bit;
+    variable ctr      : bit;
+    variable cpos     : natural;
+    variable clth     : natural;
+    variable cbad     : natural;
+    variable csad     : natural;
+    variable wlth     : natural;
+    variable addr     : natural;
+    variable lcdpos   : natural;
+    --   signal  lcd_string    : string(1 to LCD_LENGTH);
+    variable lcd_char      : lcd_char_type;
+    variable lcd_string    : lcd_str_array;
+  begin
+    if (reset = reset_state) then
+      for i in 1 to LCD_LENGTH loop
+        wait until (clk'event and clk = clk_polarity);
+        lcd_string(i) := x"3F";   --'?'
+      end loop;
+    else
+      wait until (clk'event and clk = clk_polarity and lcdc_cmd = LCD_REFRESH);
+      -- refresh algo starts here
+      for i in 0 to (LCD_LENGTH - 1) loop
+        wait until (clk'event and clk = clk_polarity);
+        cc_word := cc_mem(i);
+        v := to_bit(cc_word(35));
+        if (v = '1') then
+          ctr := to_bit(cc_word(31));
+          cpos := conv_integer(cc_word(30 downto 26));
+          clth := conv_integer(cc_word(25 downto 21));
+          cbad := conv_integer(cc_word(20 downto 13));
+          csad := conv_integer(cc_word(12 downto 5));
+          wlth := conv_integer(cc_word(4 downto 0));
+          addr := csad;
+          lcdpos := cpos;
+          for j in 0 to clth loop
+            wait until (clk'event and clk = clk_polarity);
+            lcd_string(lcdpos) := char_mem(addr);
+            display_msg(hstr(char_mem(addr)));
+            if (ctr = '0') then
+              if (lcdpos = 0) then
+                lcdpos := 31;
+              else
+                lcdpos := lcdpos - 1;
+              end if;
+            else
+              if (lcdpos = 31) then
+                lcdpos := 0;
+              else
+                lcdpos := lcdpos + 1;
+              end if;
+            end if; -- ctr
+            if (addr = csad + wlth) then
+              addr := cbad;
+            else
+              addr := addr + 1;
+            end if; -- addr
+          end loop; -- j
+        end if; -- v
+      end loop; -- i
+      -- refresh algo finished
+    end if;
+  end process;
 
 
 end architecture;

@@ -40,6 +40,7 @@ DESIGN_FILES="  ../rtl/system_constants_pkg.vhd       \
                 ../rtl/play_fsm.vhd                   \
                 ../rtl/monitor_fsm.vhd                \
                 ../rtl/kbc_intf.vhd                   \
+                ../sim/test_util.vhd                  \
                 ../sim/lcdc.mdl                       \
                 $SIMFILE"
 

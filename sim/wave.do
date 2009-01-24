@@ -1,51 +1,30 @@
 onerror {resume}
 quietly WaveActivateNextPane {} 0
 add wave -noupdate -divider {LCDC MDL}
-add wave -noupdate -format Logic -height 17 /sim/lcdc_mdl_inst/clk
-add wave -noupdate -format Logic -height 17 /sim/lcdc_mdl_inst/reset
-add wave -noupdate -format Logic -height 17 /sim/lcdc_mdl_inst/chrm_wr
-add wave -noupdate -format Literal -height 17 -radix ascii /sim/lcdc_mdl_inst/chrm_wdata
-add wave -noupdate -format Literal -height 17 -radix unsigned /sim/lcdc_mdl_inst/chrm_addr
-add wave -noupdate -format Logic -height 17 /sim/lcdc_mdl_inst/ccrm_wr
-add wave -noupdate -format Literal -height 17 -radix hexadecimal /sim/lcdc_mdl_inst/ccrm_wdata
-add wave -noupdate -format Literal -height 17 -radix unsigned /sim/lcdc_mdl_inst/ccrm_addr
-add wave -noupdate -format Literal -height 17 /sim/lcdc_mdl_inst/lcdc_cmd
-add wave -noupdate -format Logic -height 17 /sim/lcdc_mdl_inst/lcdc_busy
-add wave -noupdate -format Literal -height 17 -radix ascii /sim/lcdc_mdl_inst/char_mem
-add wave -noupdate -format Literal -height 17 -radix hexadecimal /sim/lcdc_mdl_inst/cc_mem
-add wave -noupdate -format Literal -height 17 -radix unsigned /sim/lcdc_mdl_inst/char_mem_addr
-add wave -noupdate -format Literal -height 17 -radix unsigned /sim/lcdc_mdl_inst/cc_mem_addr
+add wave -noupdate -format Logic /sim/lcdc_mdl_inst/clk
+add wave -noupdate -format Logic /sim/lcdc_mdl_inst/reset
+add wave -noupdate -format Logic /sim/lcdc_mdl_inst/chrm_wr
+add wave -noupdate -format Literal -radix ascii /sim/lcdc_mdl_inst/chrm_wdata
+add wave -noupdate -format Literal -radix unsigned /sim/lcdc_mdl_inst/chrm_addr
+add wave -noupdate -format Logic /sim/lcdc_mdl_inst/ccrm_wr
+add wave -noupdate -format Literal -radix hexadecimal /sim/lcdc_mdl_inst/ccrm_wdata
+add wave -noupdate -format Literal -radix unsigned /sim/lcdc_mdl_inst/ccrm_addr
+add wave -noupdate -format Literal /sim/lcdc_mdl_inst/lcdc_cmd
+add wave -noupdate -format Logic /sim/lcdc_mdl_inst/lcdc_busy
+add wave -noupdate -format Literal -radix ascii /sim/lcdc_mdl_inst/char_mem
+add wave -noupdate -format Literal -radix hexadecimal /sim/lcdc_mdl_inst/cc_mem
+add wave -noupdate -format Literal -radix ascii /sim/lcdc_mdl_inst/lcd_string
+add wave -noupdate -format Literal -radix hexadecimal /sim/lcdc_mdl_inst/lcd_display_algo/cc_word
+add wave -noupdate -format Logic /sim/lcdc_mdl_inst/lcd_display_algo/v
+add wave -noupdate -format Logic /sim/lcdc_mdl_inst/lcd_display_algo/ctr
+add wave -noupdate -format Literal /sim/lcdc_mdl_inst/lcd_display_algo/cpos
+add wave -noupdate -format Literal /sim/lcdc_mdl_inst/lcd_display_algo/clth
+add wave -noupdate -format Literal /sim/lcdc_mdl_inst/lcd_display_algo/cbad
+add wave -noupdate -format Literal /sim/lcdc_mdl_inst/lcd_display_algo/csad
+add wave -noupdate -format Literal /sim/lcdc_mdl_inst/lcd_display_algo/wlth
+add wave -noupdate -format Literal /sim/lcdc_mdl_inst/lcd_display_algo/addr
+add wave -noupdate -format Literal /sim/lcdc_mdl_inst/lcd_display_algo/lcdpos
 add wave -noupdate -divider {DISPLAY CTRL}
-add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/clk
-add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/reset
-add wave -noupdate -format Literal /sim/uut/display_ctrl_inst/lcd_playing_status
-add wave -noupdate -format Literal -radix unsigned /sim/uut/display_ctrl_inst/lcd_vol_status
-add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/lcd_mute_status
-add wave -noupdate -format Literal /sim/uut/display_ctrl_inst/lcd_seek_status
-add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/lcd_filename_valid
-add wave -noupdate -format Literal -radix ascii /sim/uut/display_ctrl_inst/lcd_filename
-add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/lcdc_busy
-add wave -noupdate -format Literal /sim/uut/display_ctrl_inst/lcdc_cmd
-add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/chrm_wr
-add wave -noupdate -format Literal -radix ascii /sim/uut/display_ctrl_inst/chrm_wdata
-add wave -noupdate -format Literal -radix unsigned /sim/uut/display_ctrl_inst/chrm_addr
-add wave -noupdate -format Literal -radix hexadecimal /sim/uut/display_ctrl_inst/ccrm_wdata
-add wave -noupdate -format Literal -radix unsigned /sim/uut/display_ctrl_inst/ccrm_addr
-add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/ccrm_wr
-add wave -noupdate -format Literal /sim/uut/display_ctrl_inst/lcd_playing_status_r
-add wave -noupdate -format Literal /sim/uut/display_ctrl_inst/lcd_vol_status_r
-add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/lcd_mute_status_r
-add wave -noupdate -format Literal /sim/uut/display_ctrl_inst/lcd_seek_status_r
-add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/lcd_filename_valid_r
-add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/lcd_playing_event
-add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/lcd_vol_event
-add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/lcd_mute_event
-add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/lcd_seek_event
-add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/lcd_filename_event
-add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/update_event
-add wave -noupdate -format Literal -radix unsigned /sim/uut/display_ctrl_inst/char_mem_addr
-add wave -noupdate -format Literal -radix unsigned /sim/uut/display_ctrl_inst/cc_mem_addr
-add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/startup_fill_char_ram
 add wave -noupdate -divider {FILE INFO PROCESSOR}
 add wave -noupdate -format Logic /sim/uut/file_info_processor_inst/clk
 add wave -noupdate -format Logic /sim/uut/file_info_processor_inst/lcd_filename_valid
@@ -267,7 +246,7 @@ add wave -noupdate -format Literal -radix hexadecimal /sim/curr_key
 add wave -noupdate -format Logic /sim/first_list
 add wave -noupdate -divider <NULL>
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {31523 ns} 0} {{Cursor 2} {33216 ns} 0}
+WaveRestoreCursors {{Cursor 1} {32287 ns} 0} {{Cursor 2} {88230 ns} 0}
 configure wave -namecolwidth 160
 configure wave -valuecolwidth 77
 configure wave -justifyvalue left
@@ -281,4 +260,4 @@ configure wave -gridperiod 1
 configure wave -griddelta 40
 configure wave -timeline 0
 update
-WaveRestoreZoom {31339 ns} {33502 ns}
+WaveRestoreZoom {30459 ns} {51124 ns}

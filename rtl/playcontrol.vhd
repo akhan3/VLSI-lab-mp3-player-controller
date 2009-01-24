@@ -354,25 +354,25 @@ begin
       file_info_start =>  file_info_start
     );
 
-  display_ctrl_inst: display_ctrl
-    port map(
-      clk                 =>  clk,
-      reset               =>  reset,
-      lcd_playing_status  =>  lcd_playing_status,
-      lcd_vol_status      =>  lcd_vol_status,
-      lcd_mute_status     =>  lcd_mute_status,
-      lcd_seek_status     =>  lcd_seek_status,
-      lcd_filename_valid  =>  lcd_filename_valid,
-      lcd_filename        =>  lcd_filename,
-      lcdc_busy           =>  lcdc_busy,
-      lcdc_cmd            =>  lcdc_cmd,
-      chrm_wr             =>  chrm_wr,
-      chrm_wdata          =>  chrm_wdata,
-      chrm_addr           =>  chrm_addr,
-      ccrm_wdata          =>  ccrm_wdata,
-      ccrm_addr           =>  ccrm_addr,
-      ccrm_wr             =>  ccrm_wr
-    );
+--   display_ctrl_inst: display_ctrl
+--     port map(
+--       clk                 =>  clk,
+--       reset               =>  reset,
+--       lcd_playing_status  =>  lcd_playing_status,
+--       lcd_vol_status      =>  lcd_vol_status,
+--       lcd_mute_status     =>  lcd_mute_status,
+--       lcd_seek_status     =>  lcd_seek_status,
+--       lcd_filename_valid  =>  lcd_filename_valid,
+--       lcd_filename        =>  lcd_filename,
+--       lcdc_busy           =>  lcdc_busy,
+--       lcdc_cmd            =>  lcdc_cmd,
+--       chrm_wr             =>  chrm_wr,
+--       chrm_wdata          =>  chrm_wdata,
+--       chrm_addr           =>  chrm_addr,
+--       ccrm_wdata          =>  ccrm_wdata,
+--       ccrm_addr           =>  ccrm_addr,
+--       ccrm_wr             =>  ccrm_wr
+--     );
 
   play_fsm_inst: play_fsm
     port map(
