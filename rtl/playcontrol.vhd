@@ -106,6 +106,27 @@ architecture playcontrol_arch of playcontrol is
     );
   end component;
 
+  component display_ctrl is
+    port(
+      clk                 : in  std_logic;
+      reset               : in  std_logic;
+      lcd_playing_status  : in  std_logic_vector(2 downto 0);
+      lcd_vol_status      : in  std_logic_vector(4 downto 0);
+      lcd_mute_status     : in  std_logic;
+      lcd_seek_status     : in  std_logic_vector(1 downto 0);
+      lcd_filename_valid  : in  std_logic;
+      lcd_filename        : in  std_logic_vector(8*12-1 downto 0);
+      lcdc_busy           : in  std_logic;
+      lcdc_cmd            : out std_logic_vector(1 downto 0);
+      chrm_wr             : out std_logic;
+      chrm_wdata          : out std_logic_vector(7 downto 0);
+      chrm_addr           : out std_logic_vector(7 downto 0);
+      ccrm_wdata          : out std_logic_vector(35 downto 0);
+      ccrm_addr           : out std_logic_vector(4 downto 0);
+      ccrm_wr             : out std_logic
+    );
+  end component;
+
   component play_fsm is
     port(
       clk             : in  std_logic;
@@ -132,7 +153,10 @@ architecture playcontrol_arch of playcontrol is
       fetch_en        : out std_logic;
       dec_rst         : out  std_logic;
       dbuf_rst        : out  std_logic;
-      sbuf_rst        : out  std_logic
+      sbuf_rst        : out  std_logic;
+      lcd_playing_status  : out std_logic_vector(2 downto 0);
+      lcd_vol_status      : out std_logic_vector(4 downto 0);
+      lcd_mute_status     : out std_logic
     );
   end component;
 
@@ -161,6 +185,7 @@ architecture playcontrol_arch of playcontrol is
       file_finished   : out std_logic;
       music_finished  : out std_logic;
       decrst_onseek   : out std_logic;
+      lcd_seek_status : out std_logic_vector(1 downto 0);
       to_chipscope    : in  std_logic_vector(255 downto 0)
     );
   end component;
@@ -178,7 +203,9 @@ architecture playcontrol_arch of playcontrol is
       lcdc_cmd          : out std_logic_vector(1 downto 0);
       lcdc_chrm_wdata   : out std_logic_vector(7 downto 0);
       lcdc_chrm_waddr   : out std_logic_vector(7 downto 0);
-      lcdc_chrm_wen     : out std_logic
+      lcdc_chrm_wen     : out std_logic;
+      lcd_filename_valid: out std_logic;
+      lcd_filename      : out std_logic_vector(8*12-1 downto 0)
     );
   end component;
 
@@ -219,6 +246,12 @@ architecture playcontrol_arch of playcontrol is
   signal arbiter_fio_bus_out  : std_logic_vector(9 downto 0);
   signal file_size_byte       : std_logic_vector(31 downto 0);
   signal to_chipscope         : std_logic_vector(255 downto 0);
+  signal lcd_playing_status   : std_logic_vector(2 downto 0);
+  signal lcd_vol_status       : std_logic_vector(4 downto 0);
+  signal lcd_mute_status      : std_logic;
+  signal lcd_seek_status      : std_logic_vector(1 downto 0);
+  signal lcd_filename_valid   : std_logic;
+  signal lcd_filename         : std_logic_vector(8*12-1 downto 0);
 
 -- output signals to be read
   signal ctrl_s       : std_logic;
@@ -321,6 +354,26 @@ begin
       file_info_start =>  file_info_start
     );
 
+  display_ctrl_inst: display_ctrl
+    port map(
+      clk                 =>  clk,
+      reset               =>  reset,
+      lcd_playing_status  =>  lcd_playing_status,
+      lcd_vol_status      =>  lcd_vol_status,
+      lcd_mute_status     =>  lcd_mute_status,
+      lcd_seek_status     =>  lcd_seek_status,
+      lcd_filename_valid  =>  lcd_filename_valid,
+      lcd_filename        =>  lcd_filename,
+      lcdc_busy           =>  lcdc_busy,
+      lcdc_cmd            =>  lcdc_cmd,
+      chrm_wr             =>  chrm_wr,
+      chrm_wdata          =>  chrm_wdata,
+      chrm_addr           =>  chrm_addr,
+      ccrm_wdata          =>  ccrm_wdata,
+      ccrm_addr           =>  ccrm_addr,
+      ccrm_wr             =>  ccrm_wr
+    );
+
   play_fsm_inst: play_fsm
     port map(
       clk             =>  clk,
@@ -347,7 +400,10 @@ begin
       fetch_en        =>  fetch_en,
       dec_rst         =>  dec_rst_s,
       dbuf_rst        =>  dbuf_rst_s,
-      sbuf_rst        =>  sbuf_rst_s
+      sbuf_rst        =>  sbuf_rst_s,
+      lcd_playing_status  =>  lcd_playing_status,
+      lcd_vol_status      =>  lcd_vol_status,
+      lcd_mute_status     =>  lcd_mute_status
     );
 
   monitor_fsm_inst: monitor_fsm
@@ -375,6 +431,7 @@ begin
       file_finished   =>  file_finished,
       music_finished  =>  music_finished,
       decrst_onseek   =>  decrst_onseek,
+      lcd_seek_status =>  lcd_seek_status,
       to_chipscope    =>  to_chipscope
     );
 
@@ -391,7 +448,9 @@ begin
       lcdc_cmd        =>  lcdc_cmd_s,
       lcdc_chrm_wdata =>  chrm_wdata_s,
       lcdc_chrm_waddr =>  chrm_addr_s,
-      lcdc_chrm_wen   =>  chrm_wr_s
+      lcdc_chrm_wen   =>  chrm_wr_s,
+      lcd_filename_valid  =>  lcd_filename_valid,
+      lcd_filename        =>  lcd_filename
     );
 
 

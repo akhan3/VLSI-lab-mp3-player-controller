@@ -1,0 +1,101 @@
+-------------------------------------------------------------------------------
+-- Project                    : MP3 Player Controller
+-- Entity                     : lcdc_mdl
+-- Entity description         : LCD controller simulation model.
+--                              Contains two RAMs
+--
+-- Author                     : AAK
+-- Created on                 : 24 Jan, 2009
+-- Last revision on           : 24 Jan, 2009
+-- Last revision description  :
+-------------------------------------------------------------------------------
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all;
+use ieee.std_logic_textio.all;
+use work.system_constants_pkg.all;
+
+entity lcdc_mdl is
+  generic(
+    tclock : time -- clock frequency in this simulation
+  );
+  port(
+    clk                 : in  std_logic;
+    reset               : in  std_logic;
+
+    chrm_wr             : in  std_logic;
+    chrm_wdata          : in  std_logic_vector(7 downto 0);
+    chrm_addr           : in  std_logic_vector(7 downto 0);
+
+    ccrm_wr             : in  std_logic;
+    ccrm_wdata          : in  std_logic_vector(35 downto 0);
+    ccrm_addr           : in  std_logic_vector(4 downto 0);
+
+    lcdc_cmd            : in  std_logic_vector(1 downto 0);
+    lcdc_busy           : out std_logic
+  );
+end entity;
+
+architecture behav of lcdc_mdl is
+  type    char_mem_array  is array(0 to 255)  of std_logic_vector(7 downto 0);
+  type    cc_mem_array    is array(0 to 31)   of std_logic_vector(35 downto 0);
+  signal  char_mem      : char_mem_array;
+  signal  cc_mem        : cc_mem_array;
+
+  signal  char_mem_addr : std_logic_vector(7 downto 0);
+  signal  cc_mem_addr   : std_logic_vector(4 downto 0);
+
+  signal  test_char     : std_logic_vector(7 downto 0);
+
+begin
+
+  lcdc_busy <= '1' when (lcdc_cmd = "01" or lcdc_cmd = "10") and clk'event and clk = clk_polarity else
+               '0' after 500*tclock + 3 ns;
+
+-------------------------------------------------------------------------------
+-- Write into the character memory
+-------------------------------------------------------------------------------
+
+  process (clk, reset)
+  begin
+    if (reset = reset_state) then
+      for i in 0 to 255 loop
+        char_mem(i) <= x"20"; -- fill with spaces
+      end loop;
+    elsif (clk'event and clk = clk_polarity) then
+      if (chrm_wr = '1') then
+        char_mem(conv_integer(chrm_addr)) <= chrm_wdata;
+      end if;
+    end if;
+  end process;
+
+
+-------------------------------------------------------------------------------
+-- Write into the character-command memory
+-------------------------------------------------------------------------------
+  process (clk, reset)
+  begin
+    if (reset = reset_state) then
+      cc_mem(0) <= x"883E0001F";
+      for i in 1 to 31 loop
+        cc_mem(i) <= x"000000000";
+      end loop;
+    elsif (clk'event and clk = clk_polarity) then
+      if (ccrm_wr = '1') then
+        cc_mem(conv_integer(ccrm_addr)) <= ccrm_wdata;
+      end if;
+    end if;
+  end process;
+
+
+
+
+
+
+
+
+
+
+
+end architecture;

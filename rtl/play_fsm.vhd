@@ -6,7 +6,7 @@
 --
 -- Author                     : AAK
 -- Created on                 : 12 Jan, 2009
--- Last revision on           : 18 Jan, 2009
+-- Last revision on           : 24 Jan, 2009
 -- Last revision description  : Play-Pause-Stop logic imporved and tested in
 --                              hardware. Better interaction with monitor_fsm.
 --                              Changes in few signal names also.
@@ -48,7 +48,11 @@ entity play_fsm is
     decrst_onseek   : in  std_logic;
     file_finished   : in  std_logic;
     music_finished  : in  std_logic;
-    fetch_en        : out std_logic
+    fetch_en        : out std_logic;
+
+    lcd_playing_status  : out std_logic_vector(2 downto 0);
+    lcd_vol_status      : out std_logic_vector(4 downto 0);
+    lcd_mute_status     : out std_logic
   );
 end entity;
 
@@ -69,10 +73,13 @@ architecture arch of play_fsm is
 
 begin
 
+-------------------------------------------------------------------------------
 -- FIO Bus signals
+-------------------------------------------------------------------------------
   fio_ctrl <= '1';
   fio_busi <= FIO_OPEN;
-  -- Bus valid signal
+
+-- Bus valid signal
   process (clk, reset)
   begin
     if (reset = reset_state) then
@@ -85,7 +92,8 @@ begin
       end if;
     end if;
   end process;
-  -- Bus request generation
+
+-- Bus request generation
   fio_req <= fio_req_s;
   process (clk, reset)
   begin
@@ -114,8 +122,10 @@ begin
     end if;
   end process;
 
--- Resetting logic for Decoder and Buffers
-  -- Falling edge detector for dec_status
+-------------------------------------------------------------------------------
+-- Reset logic for Decoder and Buffers
+-------------------------------------------------------------------------------
+-- Falling edge detector for dec_status
   process (clk, reset)
   begin
     if (reset = reset_state) then
@@ -132,7 +142,8 @@ begin
       dec_status_fall <= not dec_status and dec_status_r;
     end if;
   end process;
-  -- Resetting the decoder
+
+-- Resetting the decoder
   process (clk, reset)
   begin
     if (reset = reset_state) then
@@ -149,7 +160,8 @@ begin
       end if;
     end if;
   end process;
-  -- Resetting the buffers
+
+-- Resetting the buffers
   process (clk, reset)
   begin
     if (reset = reset_state) then
@@ -220,8 +232,18 @@ begin
     end if;
   end process;
 
+-------------------------------------------------------------------------------
 -- Play/Pause and Change Volume command to AC97
+-------------------------------------------------------------------------------
   hw_din(27 downto 0) <= x"000" & mute_state & "00" & vol_state & "000" & vol_state;
+
+  lcd_mute_status <= mute_state;
+  lcd_vol_status <= vol_state;
+  lcd_playing_status <= "001" when (state = PLAY_ST) else
+                        "010" when (state = PAUSE_ST) else
+                        "100" when (state = STOP_ST) else
+                        "000"; -- IDLE state
+
   process (clk, reset)
   begin
     if (reset = reset_state) then
@@ -283,7 +305,9 @@ begin
   end process;
 
 
+-------------------------------------------------------------------------------
 -- FSM
+-------------------------------------------------------------------------------
   state_register: process (clk, reset)
   begin
     if (reset = reset_state) then

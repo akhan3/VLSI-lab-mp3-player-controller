@@ -1,5 +1,73 @@
 onerror {resume}
 quietly WaveActivateNextPane {} 0
+add wave -noupdate -divider {LCDC MDL}
+add wave -noupdate -format Logic -height 17 /sim/lcdc_mdl_inst/clk
+add wave -noupdate -format Logic -height 17 /sim/lcdc_mdl_inst/reset
+add wave -noupdate -format Logic -height 17 /sim/lcdc_mdl_inst/chrm_wr
+add wave -noupdate -format Literal -height 17 -radix ascii /sim/lcdc_mdl_inst/chrm_wdata
+add wave -noupdate -format Literal -height 17 -radix unsigned /sim/lcdc_mdl_inst/chrm_addr
+add wave -noupdate -format Logic -height 17 /sim/lcdc_mdl_inst/ccrm_wr
+add wave -noupdate -format Literal -height 17 -radix hexadecimal /sim/lcdc_mdl_inst/ccrm_wdata
+add wave -noupdate -format Literal -height 17 -radix unsigned /sim/lcdc_mdl_inst/ccrm_addr
+add wave -noupdate -format Literal -height 17 /sim/lcdc_mdl_inst/lcdc_cmd
+add wave -noupdate -format Logic -height 17 /sim/lcdc_mdl_inst/lcdc_busy
+add wave -noupdate -format Literal -height 17 -radix ascii /sim/lcdc_mdl_inst/char_mem
+add wave -noupdate -format Literal -height 17 -radix hexadecimal /sim/lcdc_mdl_inst/cc_mem
+add wave -noupdate -format Literal -height 17 -radix unsigned /sim/lcdc_mdl_inst/char_mem_addr
+add wave -noupdate -format Literal -height 17 -radix unsigned /sim/lcdc_mdl_inst/cc_mem_addr
+add wave -noupdate -divider {DISPLAY CTRL}
+add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/clk
+add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/reset
+add wave -noupdate -format Literal /sim/uut/display_ctrl_inst/lcd_playing_status
+add wave -noupdate -format Literal -radix unsigned /sim/uut/display_ctrl_inst/lcd_vol_status
+add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/lcd_mute_status
+add wave -noupdate -format Literal /sim/uut/display_ctrl_inst/lcd_seek_status
+add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/lcd_filename_valid
+add wave -noupdate -format Literal -radix ascii /sim/uut/display_ctrl_inst/lcd_filename
+add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/lcdc_busy
+add wave -noupdate -format Literal /sim/uut/display_ctrl_inst/lcdc_cmd
+add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/chrm_wr
+add wave -noupdate -format Literal -radix ascii /sim/uut/display_ctrl_inst/chrm_wdata
+add wave -noupdate -format Literal -radix unsigned /sim/uut/display_ctrl_inst/chrm_addr
+add wave -noupdate -format Literal -radix hexadecimal /sim/uut/display_ctrl_inst/ccrm_wdata
+add wave -noupdate -format Literal -radix unsigned /sim/uut/display_ctrl_inst/ccrm_addr
+add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/ccrm_wr
+add wave -noupdate -format Literal /sim/uut/display_ctrl_inst/lcd_playing_status_r
+add wave -noupdate -format Literal /sim/uut/display_ctrl_inst/lcd_vol_status_r
+add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/lcd_mute_status_r
+add wave -noupdate -format Literal /sim/uut/display_ctrl_inst/lcd_seek_status_r
+add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/lcd_filename_valid_r
+add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/lcd_playing_event
+add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/lcd_vol_event
+add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/lcd_mute_event
+add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/lcd_seek_event
+add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/lcd_filename_event
+add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/update_event
+add wave -noupdate -format Literal -radix unsigned /sim/uut/display_ctrl_inst/char_mem_addr
+add wave -noupdate -format Literal -radix unsigned /sim/uut/display_ctrl_inst/cc_mem_addr
+add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/startup_fill_char_ram
+add wave -noupdate -divider {FILE INFO PROCESSOR}
+add wave -noupdate -format Logic /sim/uut/file_info_processor_inst/clk
+add wave -noupdate -format Logic /sim/uut/file_info_processor_inst/lcd_filename_valid
+add wave -noupdate -format Literal -radix ascii /sim/uut/file_info_processor_inst/lcd_filename
+add wave -noupdate -format Logic -radix hexadecimal /sim/uut/file_info_processor_inst/file_info_start
+add wave -noupdate -format Logic -radix hexadecimal /sim/uut/file_info_processor_inst/file_info_ready
+add wave -noupdate -format Literal -radix hexadecimal /sim/uut/file_info_processor_inst/fio_buso
+add wave -noupdate -format Logic -radix hexadecimal /sim/uut/file_info_processor_inst/fio_busov
+add wave -noupdate -format Literal -radix hexadecimal /sim/uut/file_info_processor_inst/file_size_byte
+add wave -noupdate -format Logic -radix hexadecimal /sim/uut/file_info_processor_inst/lcdc_busy
+add wave -noupdate -format Literal -radix hexadecimal /sim/uut/file_info_processor_inst/lcdc_cmd
+add wave -noupdate -format Literal -radix ascii /sim/uut/file_info_processor_inst/lcdc_chrm_wdata
+add wave -noupdate -format Literal -radix hexadecimal /sim/uut/file_info_processor_inst/lcdc_chrm_waddr
+add wave -noupdate -format Logic -radix hexadecimal /sim/uut/file_info_processor_inst/lcdc_chrm_wen
+add wave -noupdate -format Literal -radix ascii /sim/uut/file_info_processor_inst/fname
+add wave -noupdate -format Literal -radix hexadecimal /sim/uut/file_info_processor_inst/fname_lcd_counter
+add wave -noupdate -format Literal -radix hexadecimal /sim/uut/file_info_processor_inst/fname_lcd_counter_reg
+add wave -noupdate -format Literal -radix hexadecimal /sim/uut/file_info_processor_inst/fio_data_counter
+add wave -noupdate -format Logic -radix hexadecimal /sim/uut/file_info_processor_inst/fio_data_counter3_reg
+add wave -noupdate -format Logic -radix hexadecimal /sim/uut/file_info_processor_inst/info_ready_bit
+add wave -noupdate -format Literal -radix hexadecimal /sim/uut/file_info_processor_inst/lcdc_command
+add wave -noupdate -format Logic -radix hexadecimal /sim/uut/file_info_processor_inst/fname_wr_done
 add wave -noupdate -divider {MONITOR FSM}
 add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/clk
 add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/seekfwd
@@ -39,12 +107,12 @@ add wave -noupdate -format Literal -radix hexadecimal /sim/uut/monitor_fsm_inst/
 add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/dbuf_wr
 add wave -noupdate -format Literal /sim/uut/monitor_fsm_inst/next_state
 add wave -noupdate -format Literal -radix unsigned /sim/uut/monitor_fsm_inst/file_size_byte
-add wave -noupdate -format Literal -height 17 -radix hexadecimal /sim/uut/monitor_fsm_inst/trig0
-add wave -noupdate -format Literal -height 17 -radix hexadecimal /sim/uut/monitor_fsm_inst/control0
+add wave -noupdate -format Literal -radix hexadecimal /sim/uut/monitor_fsm_inst/trig0
+add wave -noupdate -format Literal -radix hexadecimal /sim/uut/monitor_fsm_inst/control0
 add wave -noupdate -divider {playcontrol - DUT}
 add wave -noupdate -format Logic -radix hexadecimal /sim/uut/clk
 add wave -noupdate -format Logic -radix hexadecimal /sim/uut/reset
-add wave -noupdate -format Literal -height 17 -radix hexadecimal /sim/uut/to_chipscope
+add wave -noupdate -format Literal -radix hexadecimal /sim/uut/to_chipscope
 add wave -noupdate -divider {PLAY FSM}
 add wave -noupdate -format Logic /sim/uut/play_fsm_inst/clk
 add wave -noupdate -format Logic /sim/uut/play_fsm_inst/play
@@ -126,36 +194,6 @@ add wave -noupdate -format Logic -radix hexadecimal /sim/uut/busiv
 add wave -noupdate -format Logic -radix hexadecimal /sim/uut/busy
 add wave -noupdate -format Logic -radix hexadecimal /sim/uut/busov
 add wave -noupdate -format Literal -radix hexadecimal /sim/uut/buso
-add wave -noupdate -divider {LCD CTRL}
-add wave -noupdate -format Logic -radix hexadecimal /sim/uut/file_info_processor_inst/clk
-add wave -noupdate -format Literal -radix ascii /sim/uut/chrm_wdata
-add wave -noupdate -format Logic -radix hexadecimal /sim/uut/chrm_wr
-add wave -noupdate -format Literal -radix unsigned /sim/uut/chrm_addr
-add wave -noupdate -format Literal -radix hexadecimal /sim/uut/lcdc_cmd
-add wave -noupdate -format Logic -radix hexadecimal /sim/uut/lcdc_busy
-add wave -noupdate -format Literal -radix hexadecimal /sim/uut/ccrm_wdata
-add wave -noupdate -format Literal -radix unsigned /sim/uut/ccrm_addr
-add wave -noupdate -format Logic -radix hexadecimal /sim/uut/ccrm_wr
-add wave -noupdate -divider {FILE INFO PROCESSOR}
-add wave -noupdate -format Logic -radix hexadecimal /sim/uut/file_info_processor_inst/clk
-add wave -noupdate -format Logic -radix hexadecimal /sim/uut/file_info_processor_inst/file_info_start
-add wave -noupdate -format Logic -radix hexadecimal /sim/uut/file_info_processor_inst/file_info_ready
-add wave -noupdate -format Literal -radix hexadecimal /sim/uut/file_info_processor_inst/fio_buso
-add wave -noupdate -format Logic -radix hexadecimal /sim/uut/file_info_processor_inst/fio_busov
-add wave -noupdate -format Literal -radix hexadecimal /sim/uut/file_info_processor_inst/file_size_byte
-add wave -noupdate -format Logic -radix hexadecimal /sim/uut/file_info_processor_inst/lcdc_busy
-add wave -noupdate -format Literal -radix hexadecimal /sim/uut/file_info_processor_inst/lcdc_cmd
-add wave -noupdate -format Literal -radix hexadecimal /sim/uut/file_info_processor_inst/lcdc_chrm_wdata
-add wave -noupdate -format Literal -radix hexadecimal /sim/uut/file_info_processor_inst/lcdc_chrm_waddr
-add wave -noupdate -format Logic -radix hexadecimal /sim/uut/file_info_processor_inst/lcdc_chrm_wen
-add wave -noupdate -format Literal -radix ascii /sim/uut/file_info_processor_inst/fname
-add wave -noupdate -format Literal -radix hexadecimal /sim/uut/file_info_processor_inst/fname_lcd_counter
-add wave -noupdate -format Literal -radix hexadecimal /sim/uut/file_info_processor_inst/fname_lcd_counter_reg
-add wave -noupdate -format Literal -radix hexadecimal /sim/uut/file_info_processor_inst/fio_data_counter
-add wave -noupdate -format Logic -radix hexadecimal /sim/uut/file_info_processor_inst/fio_data_counter3_reg
-add wave -noupdate -format Logic -radix hexadecimal /sim/uut/file_info_processor_inst/info_ready_bit
-add wave -noupdate -format Literal -radix hexadecimal /sim/uut/file_info_processor_inst/lcdc_command
-add wave -noupdate -format Logic -radix hexadecimal /sim/uut/file_info_processor_inst/fname_wr_done
 add wave -noupdate -divider CODEC
 add wave -noupdate -format Logic -radix hexadecimal /sim/uut/hw_full
 add wave -noupdate -format Logic -radix hexadecimal /sim/uut/hw_wr
@@ -229,7 +267,7 @@ add wave -noupdate -format Literal -radix hexadecimal /sim/curr_key
 add wave -noupdate -format Logic /sim/first_list
 add wave -noupdate -divider <NULL>
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {196785 ns} 0} {{Cursor 2} {37774 ns} 0}
+WaveRestoreCursors {{Cursor 1} {31523 ns} 0} {{Cursor 2} {33216 ns} 0}
 configure wave -namecolwidth 160
 configure wave -valuecolwidth 77
 configure wave -justifyvalue left
@@ -243,4 +281,4 @@ configure wave -gridperiod 1
 configure wave -griddelta 40
 configure wave -timeline 0
 update
-WaveRestoreZoom {0 ns} {594358 ns}
+WaveRestoreZoom {31339 ns} {33502 ns}

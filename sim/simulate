@@ -35,10 +35,12 @@ DESIGN_FILES="  ../rtl/system_constants_pkg.vhd       \
                 ../rtl/playcontrol.vhd                \
                 ../rtl/file_info_processor.vhd        \
                 ../rtl/arbiter_mux.vhd                \
+                ../rtl/display_ctrl.vhd               \
                 ../rtl/list_ctrl.vhd                  \
                 ../rtl/play_fsm.vhd                   \
                 ../rtl/monitor_fsm.vhd                \
                 ../rtl/kbc_intf.vhd                   \
+                ../sim/lcdc.mdl                       \
                 $SIMFILE"
 
 # Adding compilation library

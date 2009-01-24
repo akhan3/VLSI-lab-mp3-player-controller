@@ -6,9 +6,9 @@
 --
 -- Author                     : AAK
 -- Created on                 : 12 Jan, 2009
--- Last revision on           : 23 Jan, 2009
--- Last revision description  : Added a new transition in FSM from SEEK_CMD
---                              to SEEK_CHECK. Added new port dec_status
+-- Last revision on           : 24 Jan, 2009
+-- Last revision description  : Undid the last change in Monitor FSM design.
+--                              Seek is now back to normal operation.
 -------------------------------------------------------------------------------
 
 library ieee;
@@ -46,6 +46,9 @@ entity monitor_fsm is
     fio_busi        : out std_logic_vector(7 downto 0);
     fio_busiv       : out std_logic;
     fio_ctrl        : out std_logic;
+
+    lcd_seek_status : out std_logic_vector(1 downto 0);
+
     to_chipscope    : in  std_logic_vector(255 downto 0)
   );
 end entity;
@@ -168,7 +171,6 @@ begin
 -------------------------------------------------------------------------------
 -- State machine transition signals
 -------------------------------------------------------------------------------
---   dbuf_wr_en <= '1' when (fetch_en = '1' and dbuf_afull = '0' and dec_status = '0') else '0';
   dbuf_wr_en <= '1' when (fetch_en = '1' and dbuf_afull = '0') else '0';
   music_finished_s <= sbuf_empty;
   music_finished <= music_finished_s;
@@ -311,6 +313,10 @@ begin
 -------------------------------------------------------------------------------
 -- Seek implementation
 -------------------------------------------------------------------------------
+  lcd_seek_status <= "01" when (seek_req = '1' and (seek_cmd_val = FIO_FFSEEK and remain_num_dword > SEEK_DWORD_MAX) ) else   -- if enough leg room to seek-fwd
+                     "10" when (seek_req = '1' and (seek_cmd_val = FIO_BFSEEK and total_dword_cnt > SEEK_DWORD_MAX) ) else    -- if enough head room to seek-bkw
+                     "00"; -- IDLE state
+
 -- seek_req generation and latched seek command
   process (clk, reset)
   begin
@@ -418,10 +424,8 @@ begin
           next_state <= SEEK_PARAM;
         end if;
       when SEEK_CMD =>
-        if (seek_cmd_done = '1' and dbuf_wr_en = '1') then
+        if (seek_cmd_done = '1') then
           next_state <= READ_PARAM;
-        elsif (seek_cmd_done = '1' and dbuf_wr_en = '0') then
-          next_state <= SEEK_CHECK;
         else
           next_state <= SEEK_CMD;
         end if;

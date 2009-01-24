@@ -1,12 +1,12 @@
 -------------------------------------------------------------------------------
 -- Project                    : MP3 Player Controller
 -- Entity                     : file_info_processor
--- Entity description         : Writes the MP3 filename to the LCD and also
---                              extracts the file size information
+-- Entity description         : Extracts the file name and size information.
+--                              Also writes the filename to the LCD
 --
 -- Author                     : AAK
 -- Created on                 : 04 Jan, 2009
--- Last revision on           : 15 Jan, 2009
+-- Last revision on           : 23 Jan, 2009
 -- Last revision description  : Changes in ports and internal signals names
 -------------------------------------------------------------------------------
 
@@ -17,32 +17,31 @@ use work.system_constants_pkg.all;
 
 entity file_info_processor is
   port(
-    clk             : in  std_logic;
-    reset           : in  std_logic;
-    file_info_start      : in  std_logic;
-    file_info_ready      : out std_logic;
-    fio_buso        : in  std_logic_vector(31 downto 0);
-    fio_busov       : in  std_logic;
-    file_size_byte        : out std_logic_vector(31 downto 0);
+    clk               : in  std_logic;
+    reset             : in  std_logic;
 
-    lcdc_busy       : in  std_logic;
---     lcdc_gnt        : in  std_logic;
---     lcdc_req        : out std_logic;
-    lcdc_cmd        : out std_logic_vector(1 downto 0);
---     lcdc_ccrm_wdata : out std_logic_vector(35 downto 0);
---     lcdc_ccrm_waddr : out std_logic_vector(4 downto 0);
---     lcdc_ccrm_wen   : out std_logic;
-    lcdc_chrm_wdata : out std_logic_vector(7 downto 0);
-    lcdc_chrm_waddr : out std_logic_vector(7 downto 0);
-    lcdc_chrm_wen   : out std_logic
+    file_info_start   : in  std_logic;
+    file_info_ready   : out std_logic;
+    file_size_byte    : out std_logic_vector(31 downto 0);
+
+    lcd_filename_valid: out std_logic;
+    lcd_filename      : out std_logic_vector(8*12-1 downto 0);
+
+    fio_buso          : in  std_logic_vector(31 downto 0);
+    fio_busov         : in  std_logic;
+
+    lcdc_busy         : in  std_logic;
+    lcdc_cmd          : out std_logic_vector(1 downto 0);
+    lcdc_chrm_wdata   : out std_logic_vector(7 downto 0);
+    lcdc_chrm_waddr   : out std_logic_vector(7 downto 0);
+    lcdc_chrm_wen     : out std_logic
   );
 end entity;
 
 architecture arch of file_info_processor is
+  constant  DOT_CHAR              : std_logic_vector(7 downto 0) := x"2E";  -- character := '.';
   type      filename_regarray   is  array (0 to 11) of std_logic_vector(7 downto 0);
   signal    fname                 : filename_regarray;
---   constant  DOT_CHAR              : character := '.';
-  constant  DOT_CHAR              : std_logic_vector(7 downto 0) := x"2E";
   signal    fname_lcd_counter     : std_logic_vector(3 downto 0);
   signal    fname_lcd_counter_reg : std_logic_vector(3 downto 0);
   signal    fio_data_counter      : std_logic_vector(3 downto 0);
@@ -50,9 +49,14 @@ architecture arch of file_info_processor is
   signal    info_ready_bit        : std_logic;
   signal    lcdc_command          : std_logic_vector(1 downto 0);
   signal    fname_wr_done         : std_logic;
+
 begin
 
-  filename_register: process (clk, reset)
+  lcd_filename_valid <= info_ready_bit;
+  lcd_filename <= fname(11) & fname(10) & fname(9) & fname(8) & fname(7) & fname(6) &
+                  fname(5) & fname(4) & fname(3) & fname(2) & fname(1) & fname(0);
+
+  process (clk, reset)
   begin
     if (reset = reset_state) then
       for i in 0 to 11 loop
@@ -80,7 +84,7 @@ begin
     end if;
   end process;
 
-  filesize_register: process (clk, reset)
+  process (clk, reset)
   begin
     if (reset = reset_state) then
         file_size_byte <= x"0000_0000";
@@ -91,7 +95,7 @@ begin
     end if;
   end process;
 
-  fio_counter: process (clk, reset)
+  process (clk, reset)
   begin
     if (reset = reset_state) then
       fio_data_counter <= x"8";
@@ -106,7 +110,7 @@ begin
     end if;
   end process;
 
-  filename_lcd_counter: process (clk, reset)
+  process (clk, reset)
   begin
     if (reset = reset_state) then
       fname_lcd_counter <= x"C";
@@ -154,9 +158,9 @@ begin
 
 -- 0 to 1 detector for counter[3] bit
 -- detects the transition from 7 to 8
---                          _____________
--- counter[3]    __________/  ___________
--- counter3_reg  ____________/__
+--                               _____________
+-- counter[3]         __________/  ___________
+-- counter3_reg       ____________/__
 -- file_info_ready    ____________/  \________
   file_info_ready <= info_ready_bit;
   process (clk, reset)
@@ -172,7 +176,7 @@ begin
     end if;
   end process;
 
-  filename_write_done: process (clk, reset) -- My thinking
+  process (clk, reset)
   begin
     if (reset = reset_state) then
       fname_wr_done <= '0';
@@ -184,21 +188,9 @@ begin
       end if;
     end if;
   end process;
---   filename_write_done: process (clk, reset) -- Given in manual
---   begin
---     if (reset = reset_state) then
---       fname_wr_done <= '0';
---     elsif (clk'event and clk = clk_polarity) then
---       if (lcdc_command = LCD_REFRESH) then
---         fname_wr_done <= '0';
---       elsif(fname_lcd_counter = (x"C"-x"1")) then
---         fname_wr_done <= '1';
---       end if;
---     end if;
---   end process;
 
   lcdc_cmd <= lcdc_command;
-  filename_lcd_refresh: process (clk, reset)  -- My thinking
+  filename_lcd_refresh: process (clk, reset)
   begin
     if (reset = reset_state) then
       lcdc_command <= LCD_NOP;
@@ -210,17 +202,5 @@ begin
       end if;
     end if;
   end process;
---   filename_lcd_refresh: process (clk, reset) -- Given in manual
---   begin
---     if (reset = reset_state) then
---       lcdc_command <= LCD_NOP;
---     elsif (clk'event and clk = clk_polarity) then
---       if (lcdc_command = LCD_REFRESH;) then
---         lcdc_command <= LCD_NOP;
---       elsif (fname_wr_done = '1' and lcdc_busy = '0') then
---         lcdc_command <= LCD_REFRESH;
---       end if;
---     end if;
---   end process;
 
 end architecture;
