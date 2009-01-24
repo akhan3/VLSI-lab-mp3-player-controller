@@ -24,7 +24,7 @@ end sim;
 architecture behavior of sim is
 
 -- LCD model declaration
-  component lcdc_mdl is
+  component lcdc is
     generic(
       tclock : time
     );
@@ -199,7 +199,7 @@ architecture behavior of sim is
 begin
 
 -- instantiate LCD model
-  lcdc_mdl_inst: lcdc_mdl
+  lcdc_inst: lcdc
     generic map(
       tclock      => tclock
     )

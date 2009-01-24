@@ -99,6 +99,7 @@ package system_constants_pkg is
   constant KEY_BKSP       : std_logic_vector(7 downto 0) := x"66";
   constant KEY_PLUS       : std_logic_vector(7 downto 0) := x"79";
   constant KEY_MINUS      : std_logic_vector(7 downto 0) := x"7B";
+  constant KEY_NUMLOCK    : std_logic_vector(7 downto 0) := x"77";
 -- File System Commands
   constant FIO_FILENEXT   : std_logic_vector(7 downto 0) := x"00";
   constant FIO_FILEPREV   : std_logic_vector(7 downto 0) := x"01";

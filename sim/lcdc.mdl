@@ -13,7 +13,8 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
-use ieee.std_logic_textio.all;
+-- use ieee.numeric_std.all;
+-- use std.textio.all;
 use work.test_util.all;
 use work.system_constants_pkg.all;
 
@@ -39,14 +40,13 @@ entity lcdc is
 end entity;
 
 architecture behav of lcdc is
-  constant LCD_LENGTH   : positive := 32;
-  subtype lcd_char_type   is std_logic_vector(7 downto 0);
+  constant LCD_LENGTH     : positive := 32;
+  subtype lcd_char_type   is character;
   type    lcd_str_array   is array(1 to LCD_LENGTH) of lcd_char_type;
   type    char_mem_array  is array(0 to 255)  of std_logic_vector(7 downto 0);
   type    cc_mem_array    is array(0 to 31)   of std_logic_vector(35 downto 0);
-
-  signal  char_mem      : char_mem_array; -- Character RAM
-  signal  cc_mem        : cc_mem_array;   -- Character Command RAM
+  signal  char_mem        : char_mem_array; -- Character RAM 256x8
+  signal  cc_mem          : cc_mem_array;   -- Character Command RAM 32x36
 
 begin
 
@@ -98,30 +98,28 @@ begin
 -- LCD display process
 -------------------------------------------------------------------------------
   lcd_display_algo: process
-    variable cc_word  : std_logic_vector(35 downto 0);
-    variable v        : bit;
-    variable ctr      : bit;
-    variable cpos     : natural;
-    variable clth     : natural;
-    variable cbad     : natural;
-    variable csad     : natural;
-    variable wlth     : natural;
-    variable addr     : natural;
-    variable lcdpos   : natural;
-    --   signal  lcd_string    : string(1 to LCD_LENGTH);
-    variable lcd_char      : lcd_char_type;
-    variable lcd_string    : lcd_str_array;
+    variable  cc_word     : std_logic_vector(35 downto 0);
+    variable  v           : bit;
+    variable  ctr         : bit;
+    variable  cpos        : natural;
+    variable  clth        : natural;
+    variable  cbad        : natural;
+    variable  csad        : natural;
+    variable  wlth        : natural;
+    variable  addr        : natural;
+    variable  lcdpos      : natural;
+    variable  lcd_char    : lcd_char_type;
+    variable  lcd_string  : lcd_str_array;
   begin
+    wait until (  (reset = reset_state) or
+                  (clk'event and clk = clk_polarity and lcdc_cmd = LCD_REFRESH) );
     if (reset = reset_state) then
       for i in 1 to LCD_LENGTH loop
-        wait until (clk'event and clk = clk_polarity);
-        lcd_string(i) := x"3F";   --'?'
+        lcd_string(i) := '?';
       end loop;
-    else
-      wait until (clk'event and clk = clk_polarity and lcdc_cmd = LCD_REFRESH);
+    elsif (clk'event and clk = clk_polarity and lcdc_cmd = LCD_REFRESH) then
       -- refresh algo starts here
       for i in 0 to (LCD_LENGTH - 1) loop
-        wait until (clk'event and clk = clk_polarity);
         cc_word := cc_mem(i);
         v := to_bit(cc_word(35));
         if (v = '1') then
@@ -134,9 +132,8 @@ begin
           addr := csad;
           lcdpos := cpos;
           for j in 0 to clth loop
-            wait until (clk'event and clk = clk_polarity);
-            lcd_string(lcdpos) := char_mem(addr);
-            display_msg(hstr(char_mem(addr)));
+            lcd_char := character'val(conv_integer(char_mem(addr)));
+            lcd_string(lcdpos + 1) := lcd_char;
             if (ctr = '0') then
               if (lcdpos = 0) then
                 lcdpos := 31;
@@ -155,10 +152,15 @@ begin
             else
               addr := addr + 1;
             end if; -- addr
+            wait until (clk'event and clk = clk_polarity);
           end loop; -- j
         end if; -- v
+        wait until (clk'event and clk = clk_polarity);
       end loop; -- i
       -- refresh algo finished
+      display_msg(string'("Line 1 [") & string(lcd_string(1 to 16)) & string'("]"));
+      display_msg(string'("Line 2 [") & string(lcd_string(17 to 32)) & string'("]"));
+      display_msg(string'(""));
     end if;
   end process;
 

@@ -19,6 +19,7 @@ entity kbc_intf is
     key_rd_ack: in  std_logic;
     key_data  : in  std_logic_vector(7 downto 0);
     key_rd    : out std_logic;
+    startup   : out std_logic;
     listprev  : out std_logic;
     listnext  : out std_logic;
     play      : out std_logic;
@@ -45,5 +46,6 @@ begin
   voldec    <= key_rd_ack when (key_data = KEY_MINUS) else '0';
   seekfwd   <= key_rd_ack when (key_data = KEY_6) else '0';
   seekbkw   <= key_rd_ack when (key_data = KEY_4) else '0';
+  startup   <= key_rd_ack when (key_data = KEY_NUMLOCK) else '0';
 
 end architecture;

@@ -65,6 +65,7 @@ architecture playcontrol_arch of playcontrol is
       key_rd_ack  : in  std_logic;
       key_data    : in  std_logic_vector(7 downto 0);
       key_rd      : out std_logic;
+      startup     : out std_logic;
       listprev    : out std_logic;
       listnext    : out std_logic;
       play        : out std_logic;
@@ -116,6 +117,7 @@ architecture playcontrol_arch of playcontrol is
       lcd_seek_status     : in  std_logic_vector(1 downto 0);
       lcd_filename_valid  : in  std_logic;
       lcd_filename        : in  std_logic_vector(8*12-1 downto 0);
+      startup             : in  std_logic;
       lcdc_busy           : in  std_logic;
       lcdc_cmd            : out std_logic_vector(1 downto 0);
       chrm_wr             : out std_logic;
@@ -196,19 +198,15 @@ architecture playcontrol_arch of playcontrol is
       reset             : in  std_logic;
       file_info_start   : in  std_logic;
       file_info_ready   : out std_logic;
+      file_size_byte    : out std_logic_vector(31 downto 0);
       fio_buso          : in  std_logic_vector(31 downto 0);
       fio_busov         : in  std_logic;
-      file_size_byte    : out std_logic_vector(31 downto 0);
-      lcdc_busy         : in  std_logic;
-      lcdc_cmd          : out std_logic_vector(1 downto 0);
-      lcdc_chrm_wdata   : out std_logic_vector(7 downto 0);
-      lcdc_chrm_waddr   : out std_logic_vector(7 downto 0);
-      lcdc_chrm_wen     : out std_logic;
       lcd_filename_valid: out std_logic;
       lcd_filename      : out std_logic_vector(8*12-1 downto 0)
     );
   end component;
 
+  signal startup              : std_logic;
   signal listnext             : std_logic;
   signal listprev             : std_logic;
   signal play                 : std_logic;
@@ -312,6 +310,7 @@ begin
 -- Module instantiations
   kbc_intf_inst: kbc_intf
     port map(
+      startup     =>  startup,
       key_empty   =>  key_empty,
       key_rd_ack  =>  key_rd_ack,
       key_data    =>  key_data,
@@ -354,25 +353,31 @@ begin
       file_info_start =>  file_info_start
     );
 
---   display_ctrl_inst: display_ctrl
---     port map(
---       clk                 =>  clk,
---       reset               =>  reset,
---       lcd_playing_status  =>  lcd_playing_status,
---       lcd_vol_status      =>  lcd_vol_status,
---       lcd_mute_status     =>  lcd_mute_status,
---       lcd_seek_status     =>  lcd_seek_status,
---       lcd_filename_valid  =>  lcd_filename_valid,
---       lcd_filename        =>  lcd_filename,
---       lcdc_busy           =>  lcdc_busy,
---       lcdc_cmd            =>  lcdc_cmd,
---       chrm_wr             =>  chrm_wr,
---       chrm_wdata          =>  chrm_wdata,
---       chrm_addr           =>  chrm_addr,
---       ccrm_wdata          =>  ccrm_wdata,
---       ccrm_addr           =>  ccrm_addr,
---       ccrm_wr             =>  ccrm_wr
---     );
+  display_ctrl_inst: display_ctrl
+    port map(
+      clk                 =>  clk,
+      reset               =>  reset,
+
+      lcd_playing_status  =>  lcd_playing_status,
+      lcd_vol_status      =>  lcd_vol_status,
+      lcd_mute_status     =>  lcd_mute_status,
+
+      lcd_seek_status     =>  lcd_seek_status,
+
+      lcd_filename_valid  =>  lcd_filename_valid,
+      lcd_filename        =>  lcd_filename,
+
+      startup             =>  startup,
+
+      lcdc_busy           =>  lcdc_busy,
+      lcdc_cmd            =>  lcdc_cmd_s,
+      chrm_wr             =>  chrm_wr_s,
+      chrm_wdata          =>  chrm_wdata_s,
+      chrm_addr           =>  chrm_addr_s,
+      ccrm_wdata          =>  ccrm_wdata_s,
+      ccrm_addr           =>  ccrm_addr_s,
+      ccrm_wr             =>  ccrm_wr_s
+    );
 
   play_fsm_inst: play_fsm
     port map(
@@ -444,11 +449,6 @@ begin
       fio_buso        =>  buso,
       fio_busov       =>  busov,
       file_size_byte  =>  file_size_byte,
-      lcdc_busy       =>  lcdc_busy,
-      lcdc_cmd        =>  lcdc_cmd_s,
-      lcdc_chrm_wdata =>  chrm_wdata_s,
-      lcdc_chrm_waddr =>  chrm_addr_s,
-      lcdc_chrm_wen   =>  chrm_wr_s,
       lcd_filename_valid  =>  lcd_filename_valid,
       lcd_filename        =>  lcd_filename
     );
