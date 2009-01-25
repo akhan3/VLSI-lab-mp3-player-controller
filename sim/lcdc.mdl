@@ -90,9 +90,9 @@ begin
 -------------------------------------------------------------------------------
 -- busy status of the LCD
 -------------------------------------------------------------------------------
-  lcdc_busy <= '1' when ( clk'event and clk = clk_polarity and
-                          (lcdc_cmd = LCD_REFRESH or lcdc_cmd = LCD_CLEAR)  ) else
-               '0' after 500*tclock + 3 ns;
+--   lcdc_busy <= '1' when ( clk'event and clk = clk_polarity and
+--                           (lcdc_cmd = LCD_REFRESH or lcdc_cmd = LCD_CLEAR)  ) else
+--                500*tclock + 3 ns;
 
 -------------------------------------------------------------------------------
 -- LCD display process
@@ -114,10 +114,12 @@ begin
     wait until (  (reset = reset_state) or
                   (clk'event and clk = clk_polarity and lcdc_cmd = LCD_REFRESH) );
     if (reset = reset_state) then
+      lcdc_busy <= '0';
       for i in 1 to LCD_LENGTH loop
-        lcd_string(i) := '?';
+        lcd_string(i) := ' ';
       end loop;
     elsif (clk'event and clk = clk_polarity and lcdc_cmd = LCD_REFRESH) then
+      lcdc_busy <= '1';
       -- refresh algo starts here
       for i in 0 to (LCD_LENGTH - 1) loop
         cc_word := cc_mem(i);
@@ -161,6 +163,7 @@ begin
       display_msg(string'("Line 1 [") & string(lcd_string(1 to 16)) & string'("]"));
       display_msg(string'("Line 2 [") & string(lcd_string(17 to 32)) & string'("]"));
       display_msg(string'(""));
+      lcdc_busy <= '0' after 10*tclock + 3 ns;
     end if;
   end process;
 

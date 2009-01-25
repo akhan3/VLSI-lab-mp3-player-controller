@@ -453,8 +453,9 @@ begin
   end generate;
 
     trig0(219 downto 0)   <= to_chipscope(219 downto 0);
-    trig0(255 downto 252) <= seek_param_done & seek_cmd_done & dbuf_wr_en & file_start_os;
+
     trig0(249 downto 248) <= read_param_done & read_done;
+    trig0(255 downto 252) <= seek_param_done & seek_cmd_done & dbuf_wr_en & file_start_os;
 
 --     trig0(151 downto 120) <= file_size_dword;
 --     trig0(183 downto 152) <= total_dword_cnt;

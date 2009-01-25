@@ -65,7 +65,7 @@ architecture playcontrol_arch of playcontrol is
       key_rd_ack  : in  std_logic;
       key_data    : in  std_logic_vector(7 downto 0);
       key_rd      : out std_logic;
-      startup     : out std_logic;
+      startup_key : out std_logic;
       listprev    : out std_logic;
       listnext    : out std_logic;
       play        : out std_logic;
@@ -117,7 +117,7 @@ architecture playcontrol_arch of playcontrol is
       lcd_seek_status     : in  std_logic_vector(1 downto 0);
       lcd_filename_valid  : in  std_logic;
       lcd_filename        : in  std_logic_vector(8*12-1 downto 0);
-      startup             : in  std_logic;
+      startup_key         : in  std_logic;
       lcdc_busy           : in  std_logic;
       lcdc_cmd            : out std_logic_vector(1 downto 0);
       chrm_wr             : out std_logic;
@@ -206,7 +206,7 @@ architecture playcontrol_arch of playcontrol is
     );
   end component;
 
-  signal startup              : std_logic;
+  signal startup_key          : std_logic;
   signal listnext             : std_logic;
   signal listprev             : std_logic;
   signal play                 : std_logic;
@@ -270,10 +270,6 @@ architecture playcontrol_arch of playcontrol is
   signal ccrm_wdata_s : std_logic_vector(35 downto 0);
 
 begin
--- Unassigned outputs are tied to zero
-  ccrm_wdata_s  <= x"000000000";
-  ccrm_addr_s   <= "00000";
-  ccrm_wr_s     <= '0';
 
 -- Output signals
   ctrl        <= ctrl_s      ;
@@ -310,7 +306,7 @@ begin
 -- Module instantiations
   kbc_intf_inst: kbc_intf
     port map(
-      startup     =>  startup,
+      startup_key =>  startup_key,
       key_empty   =>  key_empty,
       key_rd_ack  =>  key_rd_ack,
       key_data    =>  key_data,
@@ -367,7 +363,7 @@ begin
       lcd_filename_valid  =>  lcd_filename_valid,
       lcd_filename        =>  lcd_filename,
 
-      startup             =>  startup,
+      startup_key         =>  startup_key,
 
       lcdc_busy           =>  lcdc_busy,
       lcdc_cmd            =>  lcdc_cmd_s,
