@@ -5,8 +5,8 @@
 --
 -- Author                     : AAK
 -- Created on                 : 04 Jan, 2009
--- Last revision on           : 22 Jan, 2009
--- Last revision description  : Added chipscope
+-- Last revision on           : 26 Jan, 2009
+-- Last revision description  : Added fio_buy signal to chipscope
 -------------------------------------------------------------------------------
 
 library ieee;
@@ -465,6 +465,7 @@ begin
   to_chipscope(29 downto 20)    <= ctrl_s & busiv_s & busi_s;
   to_chipscope(31 downto 30)    <= clk & reset;
   to_chipscope(64 downto 32)    <= busov & buso;
+  to_chipscope(68)              <= busy;
   to_chipscope(73 downto 72)    <= file_info_start & file_info_ready;
   to_chipscope(109 downto 76)   <= hw_full & hw_wr_s & hw_din_s;
   to_chipscope(114 downto 112)  <= file_finished & music_finished & fetch_en;

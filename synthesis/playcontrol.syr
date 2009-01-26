@@ -2,11 +2,11 @@ Release 9.1.03i - xst J.33
 Copyright (c) 1995-2007 Xilinx, Inc.  All rights reserved.
 --> 
 Parameter TMPDIR set to ./xst/projnav.tmp
-CPU : 0.00 / 0.11 s | Elapsed : 0.00 / 1.00 s
+CPU : 0.00 / 0.09 s | Elapsed : 0.00 / 0.00 s
  
 --> 
 Parameter xsthdpdir set to ./xst
-CPU : 0.00 / 0.11 s | Elapsed : 0.00 / 1.00 s
+CPU : 0.00 / 0.09 s | Elapsed : 0.00 / 0.00 s
  
 --> 
 Reading design: playcontrol.prj
@@ -113,52 +113,52 @@ Entity <list_ctrl> compiled.
 Entity <list_ctrl> (Architecture <arch>) compiled.
 Compiling vhdl file "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" in Library work.
 Entity <display_ctrl> compiled.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 402. Choice VOLUME_LEVEL_ADDR is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 405. Choice + is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 463. Choice PROGRESS_ADDR is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 466. Choice + is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 469. Choice + is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 790. Choice FNAME_LCDPOS is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 793. Choice VOLUME_LCDPOS is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 796. Choice PLAYING_LCDPOS is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 799. Choice FSEEK_LCDPOS is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 802. Choice PROGRESS_LCDPOS is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 805. Choice MUTEMARK_LCDPOS is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 808. Choice VOLUME_LEVEL_LCDPOS is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 835. Choice VOLUME_ADDR is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 837. Choice + is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 839. Choice + is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 848. Choice PLAYING_ADDR is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 850. Choice + is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 852. Choice + is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 854. Choice + is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 856. Choice + is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 858. Choice + is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 860. Choice + is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 863. Choice PAUSED_ADDR is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 865. Choice + is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 867. Choice + is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 869. Choice + is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 871. Choice + is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 873. Choice + is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 876. Choice STOPPED_ADDR is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 878. Choice + is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 880. Choice + is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 882. Choice + is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 884. Choice + is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 886. Choice + is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 888. Choice + is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 891. Choice FSEEK_ADDR is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 893. Choice + is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 896. Choice BSEEK_ADDR is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 898. Choice + is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 901. Choice MUTEMARK_ADDR is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 904. Choice SPACE_ADDR is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 907. Choice VOLUME_LEVEL_ADDR is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 909. Choice + is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 912. Choice PROGRESS_ADDR is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 914. Choice + is not a locally static expression.
-WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 916. Choice + is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 401. Choice VOLUME_LEVEL_ADDR is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 404. Choice + is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 462. Choice PROGRESS_ADDR is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 465. Choice + is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 468. Choice + is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 789. Choice FNAME_LCDPOS is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 792. Choice VOLUME_LCDPOS is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 795. Choice PLAYING_LCDPOS is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 798. Choice FSEEK_LCDPOS is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 801. Choice PROGRESS_LCDPOS is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 804. Choice MUTEMARK_LCDPOS is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 807. Choice VOLUME_LEVEL_LCDPOS is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 834. Choice VOLUME_ADDR is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 836. Choice + is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 838. Choice + is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 847. Choice PLAYING_ADDR is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 849. Choice + is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 851. Choice + is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 853. Choice + is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 855. Choice + is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 857. Choice + is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 859. Choice + is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 862. Choice PAUSED_ADDR is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 864. Choice + is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 866. Choice + is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 868. Choice + is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 870. Choice + is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 872. Choice + is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 875. Choice STOPPED_ADDR is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 877. Choice + is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 879. Choice + is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 881. Choice + is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 883. Choice + is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 885. Choice + is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 887. Choice + is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 890. Choice FSEEK_ADDR is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 892. Choice + is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 895. Choice BSEEK_ADDR is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 897. Choice + is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 900. Choice MUTEMARK_ADDR is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 903. Choice SPACE_ADDR is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 906. Choice VOLUME_LEVEL_ADDR is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 908. Choice + is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 911. Choice PROGRESS_ADDR is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 913. Choice + is not a locally static expression.
+WARNING:HDLParsers:817 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" Line 915. Choice + is not a locally static expression.
 Entity <display_ctrl> (Architecture <arch>) compiled.
 Compiling vhdl file "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/play_fsm.vhd" in Library work.
 Entity <play_fsm> compiled.
@@ -209,16 +209,16 @@ Analyzing Entity <list_ctrl> in library <work> (Architecture <arch>).
 Entity <list_ctrl> analyzed. Unit <list_ctrl> generated.
 
 Analyzing Entity <display_ctrl> in library <work> (Architecture <arch>).
-WARNING:Xst:819 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" line 460: The following signals are missing in the process sensitivity list:
+WARNING:Xst:819 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" line 459: The following signals are missing in the process sensitivity list:
    lcd_prog_value.
-WARNING:Xst:1610 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" line 535: Width mismatch. <playing_ccram_data> has a width of 36 bits but assigned expression is 37-bit wide.
-WARNING:Xst:1610 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" line 559: Width mismatch. <seek_ccram_data> has a width of 36 bits but assigned expression is 37-bit wide.
-WARNING:Xst:1610 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" line 791: Width mismatch. <st_ccram_data> has a width of 36 bits but assigned expression is 37-bit wide.
-WARNING:Xst:1610 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" line 794: Width mismatch. <st_ccram_data> has a width of 36 bits but assigned expression is 37-bit wide.
-WARNING:Xst:1610 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" line 800: Width mismatch. <st_ccram_data> has a width of 36 bits but assigned expression is 37-bit wide.
-WARNING:Xst:1610 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" line 803: Width mismatch. <st_ccram_data> has a width of 36 bits but assigned expression is 37-bit wide.
-WARNING:Xst:1610 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" line 806: Width mismatch. <st_ccram_data> has a width of 36 bits but assigned expression is 37-bit wide.
-WARNING:Xst:1610 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" line 809: Width mismatch. <st_ccram_data> has a width of 36 bits but assigned expression is 37-bit wide.
+WARNING:Xst:1610 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" line 534: Width mismatch. <playing_ccram_data> has a width of 36 bits but assigned expression is 37-bit wide.
+WARNING:Xst:1610 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" line 558: Width mismatch. <seek_ccram_data> has a width of 36 bits but assigned expression is 37-bit wide.
+WARNING:Xst:1610 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" line 790: Width mismatch. <st_ccram_data> has a width of 36 bits but assigned expression is 37-bit wide.
+WARNING:Xst:1610 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" line 793: Width mismatch. <st_ccram_data> has a width of 36 bits but assigned expression is 37-bit wide.
+WARNING:Xst:1610 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" line 799: Width mismatch. <st_ccram_data> has a width of 36 bits but assigned expression is 37-bit wide.
+WARNING:Xst:1610 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" line 802: Width mismatch. <st_ccram_data> has a width of 36 bits but assigned expression is 37-bit wide.
+WARNING:Xst:1610 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" line 805: Width mismatch. <st_ccram_data> has a width of 36 bits but assigned expression is 37-bit wide.
+WARNING:Xst:1610 - "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd" line 808: Width mismatch. <st_ccram_data> has a width of 36 bits but assigned expression is 37-bit wide.
 Entity <display_ctrl> analyzed. Unit <display_ctrl> generated.
 
 Analyzing Entity <play_fsm> in library <work> (Architecture <arch>).
@@ -280,7 +280,6 @@ Unit <list_ctrl> synthesized.
 
 Synthesizing Unit <display_ctrl>.
     Related source file is "/afs/regent.e-technik.tu-muenchen.de/home/rse31/rse31/prj/playcontrol/rtl/display_ctrl.vhd".
-WARNING:Xst:646 - Signal <startup_key_r> is assigned but never used.
 WARNING:Xst:646 - Signal <lcd_filename_valid_r> is assigned but never used.
 WARNING:Xst:646 - Signal <any_event> is assigned but never used.
 WARNING:Xst - Property "use_dsp48" is not applicable for this technology.
@@ -295,7 +294,7 @@ WARNING:Xst - Property "use_dsp48" is not applicable for this technology.
     Found 5-bit register for signal <ccrm_addr>.
     Found 8-bit register for signal <chrm_wdata>.
     Found 8-bit 16-to-1 multiplexer for signal <fn_chram_data>.
-    Found 4-bit comparator less for signal <fn_chram_wr$cmp_lt0000> created at line 603.
+    Found 4-bit comparator less for signal <fn_chram_wr$cmp_lt0000> created at line 602.
     Found 4-bit up counter for signal <fn_lcd_counter>.
     Found 4-bit register for signal <fn_lcd_counter_reg>.
     Found 1-bit register for signal <fn_update_lcd>.
@@ -312,19 +311,19 @@ WARNING:Xst - Property "use_dsp48" is not applicable for this technology.
     Found 2-bit register for signal <lcd_seek_status_r>.
     Found 5-bit register for signal <lcd_vol_status_r>.
     Found 1-bit register for signal <mute_event>.
-    Found 1-bit xor2 for signal <mute_event$xor0000> created at line 285.
+    Found 1-bit xor2 for signal <mute_event$xor0000> created at line 284.
     Found 1-bit register for signal <mute_update_lcd>.
     Found 1-bit register for signal <playing_event>.
-    Found 3-bit comparator not equal for signal <playing_event$cmp_ne0000> created at line 246.
+    Found 3-bit comparator not equal for signal <playing_event$cmp_ne0000> created at line 245.
     Found 1-bit register for signal <playing_update_lcd>.
     Found 8-bit register for signal <prog_chram_addr>.
-    Found 8-bit adder for signal <prog_chram_addr$addsub0000> created at line 454.
+    Found 8-bit adder for signal <prog_chram_addr$addsub0000> created at line 453.
     Found 1-bit register for signal <prog_event>.
-    Found 7-bit comparator not equal for signal <prog_event$cmp_ne0000> created at line 272.
+    Found 7-bit comparator not equal for signal <prog_event$cmp_ne0000> created at line 271.
     Found 1-bit register for signal <prog_update_lcd>.
     Found 1-bit register for signal <prog_writing>.
     Found 1-bit register for signal <seek_event>.
-    Found 2-bit comparator not equal for signal <seek_event$cmp_ne0000> created at line 298.
+    Found 2-bit comparator not equal for signal <seek_event$cmp_ne0000> created at line 297.
     Found 1-bit register for signal <seek_update_lcd>.
     Found 5-bit up counter for signal <st_ccram_addr>.
     Found 5-bit register for signal <st_ccram_addr_r>.
@@ -334,17 +333,18 @@ WARNING:Xst - Property "use_dsp48" is not applicable for this technology.
     Found 8-bit register for signal <st_chram_addr_r>.
     Found 8-bit register for signal <st_chram_data>.
     Found 1-bit register for signal <st_chram_wr>.
+    Found 1-bit register for signal <startup_key_r>.
     Found 1-bit register for signal <trigger_init_seq>.
     Found 8-bit register for signal <vol_chram_addr>.
-    Found 8-bit adder for signal <vol_chram_addr$addsub0000> created at line 393.
+    Found 8-bit adder for signal <vol_chram_addr$addsub0000> created at line 392.
     Found 1-bit register for signal <vol_event>.
-    Found 5-bit comparator not equal for signal <vol_event$cmp_ne0000> created at line 259.
+    Found 5-bit comparator not equal for signal <vol_event$cmp_ne0000> created at line 258.
     Found 1-bit register for signal <vol_update_lcd>.
     Found 1-bit register for signal <vol_writing>.
     Summary:
 	inferred   3 ROM(s).
 	inferred   4 Counter(s).
-	inferred 166 D-type flip-flop(s).
+	inferred 167 D-type flip-flop(s).
 	inferred   2 Adder/Subtractor(s).
 	inferred   5 Comparator(s).
 	inferred   8 Multiplexer(s).
@@ -486,7 +486,7 @@ WARNING:Xst:653 - Signal <to_chipscope<167:165>> is used but never assigned. Tie
 WARNING:Xst:653 - Signal <to_chipscope<127:125>> is used but never assigned. Tied to value 000.
 WARNING:Xst:653 - Signal <to_chipscope<115>> is used but never assigned. Tied to value 0.
 WARNING:Xst:653 - Signal <to_chipscope<111:110>> is used but never assigned. Tied to value 00.
-WARNING:Xst:653 - Signal <to_chipscope<71:68>> is used but never assigned. Tied to value 0000.
+WARNING:Xst:653 - Signal <to_chipscope<71:69>> is used but never assigned. Tied to value 000.
 WARNING:Xst:653 - Signal <to_chipscope<19>> is used but never assigned. Tied to value 0.
 Unit <playcontrol> synthesized.
 
@@ -515,8 +515,8 @@ Macro Statistics
  5-bit up counter                                      : 1
  5-bit updown counter                                  : 1
  8-bit up counter                                      : 1
-# Registers                                            : 92
- 1-bit register                                        : 55
+# Registers                                            : 93
+ 1-bit register                                        : 56
  2-bit register                                        : 2
  3-bit register                                        : 2
  32-bit register                                       : 3
@@ -600,16 +600,16 @@ WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <st_ccram_data_33> 
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <st_ccram_data_34> (without init value) has a constant value of 0 in block <display_ctrl>.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <lcdc_cmd_0> (without init value) has a constant value of 0 in block <display_ctrl>.
 INFO:Xst:2261 - The FF/Latch <st_ccram_data_3> in Unit <display_ctrl> is equivalent to the following FF/Latch, which will be removed : <st_ccram_data_24> 
-INFO:Xst:2261 - The FF/Latch <st_ccram_data_7> in Unit <display_ctrl> is equivalent to the following FF/Latch, which will be removed : <st_ccram_data_15> 
-INFO:Xst:2261 - The FF/Latch <st_ccram_data_1> in Unit <display_ctrl> is equivalent to the following FF/Latch, which will be removed : <st_ccram_data_22> 
-INFO:Xst:2261 - The FF/Latch <st_ccram_data_6> in Unit <display_ctrl> is equivalent to the following FF/Latch, which will be removed : <st_ccram_data_14> 
-INFO:Xst:2261 - The FF/Latch <st_ccram_data_5> in Unit <display_ctrl> is equivalent to the following FF/Latch, which will be removed : <st_ccram_data_13> 
-INFO:Xst:2261 - The FF/Latch <st_ccram_data_0> in Unit <display_ctrl> is equivalent to the following FF/Latch, which will be removed : <st_ccram_data_21> 
-INFO:Xst:2261 - The FF/Latch <st_ccram_data_2> in Unit <display_ctrl> is equivalent to the following FF/Latch, which will be removed : <st_ccram_data_23> 
-INFO:Xst:2261 - The FF/Latch <st_ccram_data_9> in Unit <display_ctrl> is equivalent to the following FF/Latch, which will be removed : <st_ccram_data_17> 
 INFO:Xst:2261 - The FF/Latch <st_ccram_data_31> in Unit <display_ctrl> is equivalent to the following FF/Latch, which will be removed : <st_ccram_data_35> 
-INFO:Xst:2261 - The FF/Latch <st_ccram_data_8> in Unit <display_ctrl> is equivalent to the following FF/Latch, which will be removed : <st_ccram_data_16> 
+INFO:Xst:2261 - The FF/Latch <st_ccram_data_0> in Unit <display_ctrl> is equivalent to the following FF/Latch, which will be removed : <st_ccram_data_21> 
+INFO:Xst:2261 - The FF/Latch <st_ccram_data_9> in Unit <display_ctrl> is equivalent to the following FF/Latch, which will be removed : <st_ccram_data_17> 
+INFO:Xst:2261 - The FF/Latch <st_ccram_data_6> in Unit <display_ctrl> is equivalent to the following FF/Latch, which will be removed : <st_ccram_data_14> 
+INFO:Xst:2261 - The FF/Latch <st_ccram_data_2> in Unit <display_ctrl> is equivalent to the following FF/Latch, which will be removed : <st_ccram_data_23> 
+INFO:Xst:2261 - The FF/Latch <st_ccram_data_1> in Unit <display_ctrl> is equivalent to the following FF/Latch, which will be removed : <st_ccram_data_22> 
+INFO:Xst:2261 - The FF/Latch <st_ccram_data_7> in Unit <display_ctrl> is equivalent to the following FF/Latch, which will be removed : <st_ccram_data_15> 
+INFO:Xst:2261 - The FF/Latch <st_ccram_data_5> in Unit <display_ctrl> is equivalent to the following FF/Latch, which will be removed : <st_ccram_data_13> 
 INFO:Xst:2261 - The FF/Latch <st_ccram_data_10> in Unit <display_ctrl> is equivalent to the following FF/Latch, which will be removed : <st_ccram_data_18> 
+INFO:Xst:2261 - The FF/Latch <st_ccram_data_8> in Unit <display_ctrl> is equivalent to the following FF/Latch, which will be removed : <st_ccram_data_16> 
 WARNING:Xst:1710 - FF/Latch  <1> (without init value) has a constant value of 0 in block <seek_cmd_val>.
 WARNING:Xst:1710 - FF/Latch  <3> (without init value) has a constant value of 0 in block <seek_cmd_val>.
 WARNING:Xst:1710 - FF/Latch  <4> (without init value) has a constant value of 0 in block <seek_cmd_val>.
@@ -641,8 +641,8 @@ Macro Statistics
  5-bit up counter                                      : 1
  5-bit updown counter                                  : 1
  8-bit up counter                                      : 1
-# Registers                                            : 417
- Flip-Flops                                            : 417
+# Registers                                            : 418
+ Flip-Flops                                            : 418
 # Comparators                                          : 11
  2-bit comparator not equal                            : 1
  3-bit comparator not equal                            : 1
@@ -673,10 +673,10 @@ WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <ccrm_wdata_32> (wi
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <ccrm_wdata_33> (without init value) has a constant value of 0 in block <display_ctrl>.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch  <ccrm_wdata_34> (without init value) has a constant value of 0 in block <display_ctrl>.
 WARNING:Xst:1710 - FF/Latch  <st_chram_data_7> (without init value) has a constant value of 0 in block <display_ctrl>.
-INFO:Xst:2261 - The FF/Latch <ccrm_wdata_2> in Unit <display_ctrl> is equivalent to the following FF/Latch, which will be removed : <ccrm_wdata_23> 
 INFO:Xst:2261 - The FF/Latch <ccrm_wdata_31> in Unit <display_ctrl> is equivalent to the following FF/Latch, which will be removed : <ccrm_wdata_35> 
-INFO:Xst:2261 - The FF/Latch <ccrm_wdata_1> in Unit <display_ctrl> is equivalent to the following FF/Latch, which will be removed : <ccrm_wdata_22> 
 INFO:Xst:2261 - The FF/Latch <ccrm_wdata_3> in Unit <display_ctrl> is equivalent to the following FF/Latch, which will be removed : <ccrm_wdata_24> 
+INFO:Xst:2261 - The FF/Latch <ccrm_wdata_1> in Unit <display_ctrl> is equivalent to the following FF/Latch, which will be removed : <ccrm_wdata_22> 
+INFO:Xst:2261 - The FF/Latch <ccrm_wdata_2> in Unit <display_ctrl> is equivalent to the following FF/Latch, which will be removed : <ccrm_wdata_23> 
 INFO:Xst:2261 - The FF/Latch <ccrm_wdata_0> in Unit <display_ctrl> is equivalent to the following FF/Latch, which will be removed : <ccrm_wdata_21> 
 
 Optimizing unit <playcontrol> ...
@@ -688,13 +688,13 @@ Optimizing unit <play_fsm> ...
 Optimizing unit <file_info_processor> ...
 
 Optimizing unit <display_ctrl> ...
-INFO:Xst:2261 - The FF/Latch <ccrm_wdata_6> in Unit <display_ctrl> is equivalent to the following FF/Latch, which will be removed : <ccrm_wdata_14> 
-INFO:Xst:2261 - The FF/Latch <ccrm_wdata_5> in Unit <display_ctrl> is equivalent to the following FF/Latch, which will be removed : <ccrm_wdata_13> 
-INFO:Xst:2261 - The FF/Latch <ccrm_wdata_7> in Unit <display_ctrl> is equivalent to the following FF/Latch, which will be removed : <ccrm_wdata_15> 
 INFO:Xst:2261 - The FF/Latch <ccrm_wdata_9> in Unit <display_ctrl> is equivalent to the following FF/Latch, which will be removed : <ccrm_wdata_17> 
 INFO:Xst:2261 - The FF/Latch <ccrm_wdata_10> in Unit <display_ctrl> is equivalent to the following FF/Latch, which will be removed : <ccrm_wdata_18> 
-INFO:Xst:2261 - The FF/Latch <ccrm_wdata_8> in Unit <display_ctrl> is equivalent to the following FF/Latch, which will be removed : <ccrm_wdata_16> 
+INFO:Xst:2261 - The FF/Latch <ccrm_wdata_6> in Unit <display_ctrl> is equivalent to the following FF/Latch, which will be removed : <ccrm_wdata_14> 
+INFO:Xst:2261 - The FF/Latch <ccrm_wdata_5> in Unit <display_ctrl> is equivalent to the following FF/Latch, which will be removed : <ccrm_wdata_13> 
 INFO:Xst:2261 - The FF/Latch <ccrm_wdata_11> in Unit <display_ctrl> is equivalent to the following FF/Latch, which will be removed : <ccrm_wdata_19> 
+INFO:Xst:2261 - The FF/Latch <ccrm_wdata_8> in Unit <display_ctrl> is equivalent to the following FF/Latch, which will be removed : <ccrm_wdata_16> 
+INFO:Xst:2261 - The FF/Latch <ccrm_wdata_7> in Unit <display_ctrl> is equivalent to the following FF/Latch, which will be removed : <ccrm_wdata_15> 
 
 Optimizing unit <monitor_fsm> ...
 WARNING:Xst:1710 - FF/Latch  <seek_cmd_val_2> (without init value) has a constant value of 1 in block <monitor_fsm>.
@@ -703,23 +703,23 @@ Mapping all equations...
 Building and optimizing final netlist ...
 Found area constraint ratio of 100 (+ 5) on block playcontrol, actual ratio is 26.
 INFO:Xst:2260 - The FF/Latch <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[0].stage_zero.control_gen.ce_create[1].del_ce/bb_reg/fd/output_1> in Unit <BU2> is equivalent to the following FF/Latch : <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[0].stage_zero.control_gen.ce_create[1].del_ce/bb_reg/fd/output_1_1> 
-INFO:Xst:2260 - The FF/Latch <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[32].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1> in Unit <BU2> is equivalent to the following 2 FFs/Latches : <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[32].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_1> <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[32].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_2> 
+INFO:Xst:2260 - The FF/Latch <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[24].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1> in Unit <BU2> is equivalent to the following 2 FFs/Latches : <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[24].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_1> <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[24].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_2> 
 INFO:Xst:2260 - The FF/Latch <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[40].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1> in Unit <BU2> is equivalent to the following 2 FFs/Latches : <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[40].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_1> <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[40].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_2> 
 INFO:Xst:2260 - The FF/Latch <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[8].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1> in Unit <BU2> is equivalent to the following 2 FFs/Latches : <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[8].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_1> <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[8].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_2> 
+INFO:Xst:2260 - The FF/Latch <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[48].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1> in Unit <BU2> is equivalent to the following 2 FFs/Latches : <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[48].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_1> <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[48].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_2> 
+INFO:Xst:2260 - The FF/Latch <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[56].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1> in Unit <BU2> is equivalent to the following 2 FFs/Latches : <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[56].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_1> <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[56].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_2> 
 INFO:Xst:2260 - The FF/Latch <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[0].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1> in Unit <BU2> is equivalent to the following 2 FFs/Latches : <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[0].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_1> <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[0].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_2> 
 INFO:Xst:2260 - The FF/Latch <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[16].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1> in Unit <BU2> is equivalent to the following 2 FFs/Latches : <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[16].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_1> <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[16].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_2> 
-INFO:Xst:2260 - The FF/Latch <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[24].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1> in Unit <BU2> is equivalent to the following 2 FFs/Latches : <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[24].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_1> <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[24].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_2> 
-INFO:Xst:2260 - The FF/Latch <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[56].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1> in Unit <BU2> is equivalent to the following 2 FFs/Latches : <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[56].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_1> <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[56].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_2> 
-INFO:Xst:2260 - The FF/Latch <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[48].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1> in Unit <BU2> is equivalent to the following 2 FFs/Latches : <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[48].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_1> <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[48].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_2> 
+INFO:Xst:2260 - The FF/Latch <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[32].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1> in Unit <BU2> is equivalent to the following 2 FFs/Latches : <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[32].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_1> <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[32].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_2> 
 INFO:Xst:2260 - The FF/Latch <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[0].stage_zero.control_gen.ce_create[1].del_ce/bb_reg/fd/output_1> in Unit <BU2> is equivalent to the following FF/Latch : <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[0].stage_zero.control_gen.ce_create[1].del_ce/bb_reg/fd/output_1_1> 
-INFO:Xst:2260 - The FF/Latch <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[32].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1> in Unit <BU2> is equivalent to the following 2 FFs/Latches : <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[32].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_1> <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[32].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_2> 
+INFO:Xst:2260 - The FF/Latch <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[24].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1> in Unit <BU2> is equivalent to the following 2 FFs/Latches : <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[24].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_1> <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[24].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_2> 
 INFO:Xst:2260 - The FF/Latch <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[40].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1> in Unit <BU2> is equivalent to the following 2 FFs/Latches : <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[40].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_1> <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[40].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_2> 
 INFO:Xst:2260 - The FF/Latch <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[8].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1> in Unit <BU2> is equivalent to the following 2 FFs/Latches : <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[8].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_1> <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[8].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_2> 
+INFO:Xst:2260 - The FF/Latch <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[48].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1> in Unit <BU2> is equivalent to the following 2 FFs/Latches : <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[48].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_1> <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[48].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_2> 
+INFO:Xst:2260 - The FF/Latch <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[56].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1> in Unit <BU2> is equivalent to the following 2 FFs/Latches : <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[56].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_1> <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[56].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_2> 
 INFO:Xst:2260 - The FF/Latch <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[0].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1> in Unit <BU2> is equivalent to the following 2 FFs/Latches : <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[0].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_1> <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[0].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_2> 
 INFO:Xst:2260 - The FF/Latch <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[16].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1> in Unit <BU2> is equivalent to the following 2 FFs/Latches : <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[16].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_1> <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[16].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_2> 
-INFO:Xst:2260 - The FF/Latch <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[24].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1> in Unit <BU2> is equivalent to the following 2 FFs/Latches : <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[24].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_1> <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[24].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_2> 
-INFO:Xst:2260 - The FF/Latch <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[56].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1> in Unit <BU2> is equivalent to the following 2 FFs/Latches : <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[56].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_1> <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[56].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_2> 
-INFO:Xst:2260 - The FF/Latch <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[48].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1> in Unit <BU2> is equivalent to the following 2 FFs/Latches : <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[48].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_1> <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[48].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_2> 
+INFO:Xst:2260 - The FF/Latch <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[32].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1> in Unit <BU2> is equivalent to the following 2 FFs/Latches : <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[32].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_1> <U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[32].mux_div_clk.mux_sig.mux_adsu/mux/gen_lut_mux.i_lat_1_or_2.i_ainit_only.gen_bit_muxes[1].i_ainit_1.bit_mux/gen_output_reg.pipe1/gen_output_reg.gen_use_reg_sync_ctrls.output_reg/fd/output_1_2> 
 
 Final Macro Processing ...
 
@@ -727,8 +727,8 @@ Final Macro Processing ...
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 448
- Flip-Flops                                            : 448
+# Registers                                            : 449
+ Flip-Flops                                            : 449
 
 =========================================================================
 
@@ -757,29 +757,29 @@ Design Statistics
 # IOs                              : 193
 
 Cell Usage :
-# BELS                             : 2682
+# BELS                             : 2662
 #      GND                         : 2
 #      INV                         : 41
 #      LUT1                        : 48
-#      LUT2                        : 231
+#      LUT2                        : 230
 #      LUT2_D                      : 2
-#      LUT3                        : 678
+#      LUT3                        : 680
 #      LUT3_D                      : 4
 #      LUT3_L                      : 1
-#      LUT4                        : 633
+#      LUT4                        : 614
 #      LUT4_D                      : 4
 #      LUT4_L                      : 3
 #      MUXCY                       : 534
-#      MUXF5                       : 79
+#      MUXF5                       : 77
 #      MUXF6                       : 12
 #      VCC                         : 2
 #      XORCY                       : 408
-# FlipFlops/Latches                : 1529
-#      FDC                         : 219
-#      FDCE                        : 605
+# FlipFlops/Latches                : 1530
+#      FDC                         : 225
+#      FDCE                        : 611
 #      FDE                         : 2
-#      FDP                         : 354
-#      FDPE                        : 349
+#      FDP                         : 349
+#      FDPE                        : 343
 # MULTs                            : 2
 #      MULT18X18                   : 2
 # Others                           : 2
@@ -792,9 +792,9 @@ Device utilization summary:
 
 Selected Device : 2vp7ff896-7 
 
- Number of Slices:                    1247  out of   4928    25%  
- Number of Slice Flip Flops:          1529  out of   9856    15%  
- Number of 4 input LUTs:              1645  out of   9856    16%  
+ Number of Slices:                    1242  out of   4928    25%  
+ Number of Slice Flip Flops:          1530  out of   9856    15%  
+ Number of 4 input LUTs:              1627  out of   9856    16%  
  Number of IOs:                        193
  Number of bonded IOBs:                  0  out of    396     0%  
  Number of MULT18X18s:                   2  out of     44     4%  
@@ -817,11 +817,11 @@ NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
 
 Clock Information:
 ------------------
------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------+-------+
-Clock Signal                       | Clock buffer(FF name)                                                                                                                | Load  |
------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------+-------+
-clk                                | NONE(monitor_fsm_inst/progress_divider/BU2/U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/final_sel.quot_sel/bb_reg/fd/output_21)| 1529  |
------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------+-------+
+-----------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)                                                                                                                                                  | Load  |
+-----------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------+
+clk                                | NONE(monitor_fsm_inst/progress_divider/BU2/U0/i_algo_r2_nr.i_sdivider/a1/adivider/divider_blk/div_loop[32].divisor_gen.divisor_dcother.del_divisor/bb_reg/fd/output_23)| 1530  |
+-----------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------+
 INFO:Xst:2169 - HDL ADVISOR - Some clock signals were not automatically buffered by XST with BUFG/BUFR resources. Please use the buffer_type constraint in order to insert these buffers to the clock signals to help prevent skew problems.
 
 Asynchronous Control Signals Information:
@@ -829,7 +829,7 @@ Asynchronous Control Signals Information:
 -----------------------------------+------------------------+-------+
 Control Signal                     | Buffer(FF name)        | Load  |
 -----------------------------------+------------------------+-------+
-reset                              | NONE                   | 1527  |
+reset                              | NONE                   | 1528  |
 -----------------------------------+------------------------+-------+
 
 Timing Summary:
@@ -848,7 +848,7 @@ All values displayed in nanoseconds (ns)
 =========================================================================
 Timing constraint: Default period analysis for Clock 'clk'
   Clock period: 10.379ns (frequency: 96.351MHz)
-  Total number of paths / destination ports: 1529697 / 2348
+  Total number of paths / destination ports: 1529655 / 2349
 -------------------------------------------------------------------------
 Delay:               10.379ns (Levels of Logic = 47)
   Source:            monitor_fsm_inst/total_dword_cnt_0 (FF)
@@ -915,7 +915,7 @@ Delay:               10.379ns (Levels of Logic = 47)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'clk'
-  Total number of paths / destination ports: 816 / 315
+  Total number of paths / destination ports: 843 / 318
 -------------------------------------------------------------------------
 Offset:              5.476ns (Levels of Logic = 7)
   Source:            key_data<7> (PAD)
@@ -929,9 +929,9 @@ Offset:              5.476ns (Levels of Logic = 7)
      LUT4:I0->O            3   0.275   0.533  kbc_intf_inst/listnext11 (N1)
      LUT4:I0->O            3   0.275   0.533  kbc_intf_inst/listnext21 (N6)
      LUT3:I0->O            2   0.275   0.514  kbc_intf_inst/listnext3 (listnext)
-     LUT4:I0->O            1   0.275   0.349  list_ctrl_inst/fio_req_SW0 (N553)
+     LUT4:I0->O            1   0.275   0.349  list_ctrl_inst/fio_req_SW0 (N555)
      LUT4:I2->O            2   0.275   0.396  list_ctrl_inst/fio_req (listcrtl_req)
-     LUT4:I2->O            1   0.275   0.429  arbiter_mux_inst/gnt_le_SW0 (N555)
+     LUT4:I2->O            1   0.275   0.429  arbiter_mux_inst/gnt_le_SW0 (N557)
      LUT3:I1->O            3   0.275   0.397  arbiter_mux_inst/gnt_le (arbiter_mux_inst/gnt_le)
      FDCE:CE                   0.263          arbiter_mux_inst/gnt_reg_0
     ----------------------------------------
@@ -953,7 +953,7 @@ Offset:              2.454ns (Levels of Logic = 3)
     ----------------------------------------  ------------
      FDCE:C->Q            16   0.370   0.766  arbiter_mux_inst/gnt_reg_2 (arbiter_mux_inst/gnt_reg_2)
      LUT3:I0->O            5   0.275   0.466  list_ctrl_inst/state_FFd1-In11 (file_info_start)
-     LUT4:I3->O            1   0.275   0.000  arbiter_mux_inst/bus_out<8>1 (N50)
+     LUT4:I3->O            1   0.275   0.000  arbiter_mux_inst/bus_out<8>1 (N51)
      MUXF5:I1->O           0   0.303   0.000  arbiter_mux_inst/bus_out<8>_f5 (busiv)
     ----------------------------------------
     Total                      2.454ns (1.223ns logic, 1.231ns route)
@@ -961,7 +961,7 @@ Offset:              2.454ns (Levels of Logic = 3)
 
 =========================================================================
 Timing constraint: Default path analysis
-  Total number of paths / destination ports: 219 / 139
+  Total number of paths / destination ports: 220 / 140
 -------------------------------------------------------------------------
 Delay:               2.405ns (Levels of Logic = 3)
   Source:            key_data<7> (PAD)
@@ -980,14 +980,14 @@ Delay:               2.405ns (Levels of Logic = 3)
                                        (40.0% logic, 60.0% route)
 
 =========================================================================
-CPU : 57.30 / 57.43 s | Elapsed : 66.00 / 67.00 s
+CPU : 57.84 / 57.95 s | Elapsed : 62.00 / 62.00 s
  
 --> 
 
 
-Total memory usage is 197944 kilobytes
+Total memory usage is 197720 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :  118 (   0 filtered)
+Number of warnings :  117 (   0 filtered)
 Number of infos    :   47 (   0 filtered)
 

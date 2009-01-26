@@ -6,8 +6,8 @@
 --
 -- Author                     : AAK
 -- Created on                 : 12 Jan, 2009
--- Last revision on           : 24 Jan, 2009
--- Last revision description  : Only buffers but not decoder is resetted on SEEK
+-- Last revision on           : 26 Jan, 2009
+-- Last revision description  : Both buffers and decoder are resetted on SEEK
 -------------------------------------------------------------------------------
 
 library ieee;
@@ -151,8 +151,8 @@ begin
         dec_rst <= '1';
       elsif (state = STOP_ST) then
         dec_rst <= '1';
---       elsif (decrst_onseek = '1') then  -- recent edit
---         dec_rst <= '1';
+      elsif (decrst_onseek = '1') then  -- recent edit
+        dec_rst <= '1';
       else
         dec_rst <= '0';
       end if;

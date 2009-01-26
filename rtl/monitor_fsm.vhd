@@ -6,9 +6,8 @@
 --
 -- Author                     : AAK
 -- Created on                 : 12 Jan, 2009
--- Last revision on           : 24 Jan, 2009
--- Last revision description  : Undid the last change in Monitor FSM design.
---                              Seek is now back to normal operation.
+-- Last revision on           : 26 Jan, 2009
+-- Last revision description  : Added Xilinx divider core for progress bar.
 -------------------------------------------------------------------------------
 
 library ieee;

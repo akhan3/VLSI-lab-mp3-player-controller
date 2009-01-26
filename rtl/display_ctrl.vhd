@@ -6,8 +6,10 @@
 --
 -- Author                     : AAK
 -- Created on                 : 23 Jan, 2009
--- Last revision on           : 23 Jan, 2009
--- Last revision description  :
+-- Last revision on           : 26 Jan, 2009
+-- Last revision description  : Slight issue with contant strings in CHRAM
+-- To do                      : Scoll implementation.
+--                            : Decouple CHRAM and CCRAM updates.
 -------------------------------------------------------------------------------
 
 library ieee;
@@ -15,7 +17,6 @@ use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
 use ieee.numeric_std.all;
 use std.textio.all;
--- use work.test_util.all;
 use work.system_constants_pkg.all;
 
 entity display_ctrl is
@@ -90,7 +91,7 @@ architecture arch of display_ctrl is
     return (v1(0) & "000" & '1' & cpos & clth-1 & csad & csad & clth-1);
   end function;
 
-  constant SPACE_CHAR           : std_logic_vector(7 downto 0) := char2slv('_');
+  constant SPACE_CHAR           : std_logic_vector(7 downto 0) := char2slv(' ');
   constant PERCENT_CHAR         : std_logic_vector(7 downto 0) := char2slv('%');
   constant DOT_CHAR             : std_logic_vector(7 downto 0) := char2slv('.');
   constant MUTEMARK_CHAR        : std_logic_vector(7 downto 0) := char2slv('x');
@@ -137,9 +138,9 @@ architecture arch of display_ctrl is
   signal  init_seq_done         : std_logic;
   signal  startup_key_r         : std_logic;
   signal  init_counter          : std_logic_vector(31 downto 0);
-  constant INIT_WAIT_SECONDS    : natural := 2;
---   constant INIT_CNT_PEAK        : std_logic_vector(31 downto 0) := int2slv(CLK_PERIOD * INIT_WAIT_SECONDS - 1, 32);
-  constant INIT_CNT_PEAK        : std_logic_vector(31 downto 0) := int2slv(625-1, 32); -- 20us for simulation
+  constant INIT_WAIT_SECONDS    : natural := 5;
+  constant INIT_CNT_PEAK        : std_logic_vector(31 downto 0) := int2slv(CLK_PERIOD * INIT_WAIT_SECONDS, 32);
+--   constant INIT_CNT_PEAK        : std_logic_vector(31 downto 0) := int2slv(625-1, 32); -- 20us for simulation only
 
   signal  lcd_playing_status_r  : std_logic_vector(2 downto 0);
   signal  lcd_prog_value_r      : std_logic_vector(6 downto 0);
@@ -838,12 +839,6 @@ begin
             st_chram_data <= char2slv('O');   st_chram_wr <= '1';
           when VOLUME_ADDR + 2 =>
             st_chram_data <= char2slv('L');   st_chram_wr <= '1';
---           when VOLUME_ADDR + 3 =>
---             st_chram_data <= char2slv('U');   st_chram_wr <= '1';
---           when VOLUME_ADDR + 4 =>
---             st_chram_data <= char2slv('M');   st_chram_wr <= '1';
---           when VOLUME_ADDR + 5 =>
---             st_chram_data <= char2slv('E');   st_chram_wr <= '1';
 
           when PLAYING_ADDR =>
             st_chram_data <= char2slv('P');   st_chram_wr <= '1';
