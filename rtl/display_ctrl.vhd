@@ -20,6 +20,9 @@ use std.textio.all;
 use work.system_constants_pkg.all;
 
 entity display_ctrl is
+  generic (
+    SIMULATION  : boolean := false
+  );
   port(
     clk                 : in  std_logic;
     reset               : in  std_logic;
@@ -91,7 +94,7 @@ architecture arch of display_ctrl is
     return (v1(0) & "000" & '1' & cpos & clth-1 & csad & csad & clth-1);
   end function;
 
-  constant SPACE_CHAR           : std_logic_vector(7 downto 0) := char2slv(' ');
+  constant SPACE_CHAR           : std_logic_vector(7 downto 0) := char2slv('_');
   constant PERCENT_CHAR         : std_logic_vector(7 downto 0) := char2slv('%');
   constant DOT_CHAR             : std_logic_vector(7 downto 0) := char2slv('.');
   constant MUTEMARK_CHAR        : std_logic_vector(7 downto 0) := char2slv('x');
@@ -138,9 +141,9 @@ architecture arch of display_ctrl is
   signal  init_seq_done         : std_logic;
   signal  startup_key_r         : std_logic;
   signal  init_counter          : std_logic_vector(31 downto 0);
+  signal  INIT_CNT_PEAK         : std_logic_vector(31 downto 0);
   constant INIT_WAIT_SECONDS    : natural := 5;
-  constant INIT_CNT_PEAK        : std_logic_vector(31 downto 0) := int2slv(CLK_PERIOD * INIT_WAIT_SECONDS, 32);
---   constant INIT_CNT_PEAK        : std_logic_vector(31 downto 0) := int2slv(625-1, 32); -- 20us for simulation only
+
 
   signal  lcd_playing_status_r  : std_logic_vector(2 downto 0);
   signal  lcd_prog_value_r      : std_logic_vector(6 downto 0);
@@ -658,6 +661,13 @@ begin
     end if;
   end process;
 
+  for_sim: if SIMULATION generate
+    INIT_CNT_PEAK        <= int2slv(625-1, 32); -- 20us for simulation only
+  end generate;
+  for_syn: if not SIMULATION generate
+    INIT_CNT_PEAK        <= int2slv(CLK_PERIOD * INIT_WAIT_SECONDS, 32);
+  end generate;
+
   process (clk, reset)
   begin
     if (reset = reset_state) then
@@ -948,29 +958,29 @@ begin
               char2slv('1') & char2slv('2') when lcd_vol_status = 19 else
               char2slv('1') & char2slv('1') when lcd_vol_status = 20 else
               char2slv('1') & char2slv('0') when lcd_vol_status = 21 else
-              char2slv(' ') & char2slv('9') when lcd_vol_status = 22 else
-              char2slv(' ') & char2slv('8') when lcd_vol_status = 23 else
-              char2slv(' ') & char2slv('7') when lcd_vol_status = 24 else
-              char2slv(' ') & char2slv('6') when lcd_vol_status = 25 else
-              char2slv(' ') & char2slv('5') when lcd_vol_status = 26 else
-              char2slv(' ') & char2slv('4') when lcd_vol_status = 27 else
-              char2slv(' ') & char2slv('3') when lcd_vol_status = 28 else
-              char2slv(' ') & char2slv('2') when lcd_vol_status = 29 else
-              char2slv(' ') & char2slv('1') when lcd_vol_status = 30 else
-              char2slv(' ') & char2slv('0') when lcd_vol_status = 31 else
+              SPACE_CHAR    & char2slv('9') when lcd_vol_status = 22 else
+              SPACE_CHAR    & char2slv('8') when lcd_vol_status = 23 else
+              SPACE_CHAR    & char2slv('7') when lcd_vol_status = 24 else
+              SPACE_CHAR    & char2slv('6') when lcd_vol_status = 25 else
+              SPACE_CHAR    & char2slv('5') when lcd_vol_status = 26 else
+              SPACE_CHAR    & char2slv('4') when lcd_vol_status = 27 else
+              SPACE_CHAR    & char2slv('3') when lcd_vol_status = 28 else
+              SPACE_CHAR    & char2slv('2') when lcd_vol_status = 29 else
+              SPACE_CHAR    & char2slv('1') when lcd_vol_status = 30 else
+              SPACE_CHAR    & char2slv('0') when lcd_vol_status = 31 else
               char2slv('3') & char2slv('1');
 
 
-  prog_acd <= char2slv(' ') & char2slv('0') when lcd_prog_value = 0 else
-              char2slv(' ') & char2slv('1') when lcd_prog_value = 1 else
-              char2slv(' ') & char2slv('2') when lcd_prog_value = 2 else
-              char2slv(' ') & char2slv('3') when lcd_prog_value = 3 else
-              char2slv(' ') & char2slv('4') when lcd_prog_value = 4 else
-              char2slv(' ') & char2slv('5') when lcd_prog_value = 5 else
-              char2slv(' ') & char2slv('6') when lcd_prog_value = 6 else
-              char2slv(' ') & char2slv('7') when lcd_prog_value = 7 else
-              char2slv(' ') & char2slv('8') when lcd_prog_value = 8 else
-              char2slv(' ') & char2slv('9') when lcd_prog_value = 9 else
+  prog_acd <= SPACE_CHAR    & char2slv('0') when lcd_prog_value = 0 else
+              SPACE_CHAR    & char2slv('1') when lcd_prog_value = 1 else
+              SPACE_CHAR    & char2slv('2') when lcd_prog_value = 2 else
+              SPACE_CHAR    & char2slv('3') when lcd_prog_value = 3 else
+              SPACE_CHAR    & char2slv('4') when lcd_prog_value = 4 else
+              SPACE_CHAR    & char2slv('5') when lcd_prog_value = 5 else
+              SPACE_CHAR    & char2slv('6') when lcd_prog_value = 6 else
+              SPACE_CHAR    & char2slv('7') when lcd_prog_value = 7 else
+              SPACE_CHAR    & char2slv('8') when lcd_prog_value = 8 else
+              SPACE_CHAR    & char2slv('9') when lcd_prog_value = 9 else
               char2slv('1') & char2slv('0') when lcd_prog_value = 10 else
               char2slv('1') & char2slv('1') when lcd_prog_value = 11 else
               char2slv('1') & char2slv('2') when lcd_prog_value = 12 else
@@ -1062,7 +1072,7 @@ begin
               char2slv('9') & char2slv('8') when lcd_prog_value = 98 else
               char2slv('9') & char2slv('9') when lcd_prog_value = 99 else
               char2slv('0') & char2slv('0') when lcd_prog_value = 100 else
-              char2slv(' ') & char2slv(' ');
+              SPACE_CHAR    & SPACE_CHAR   ;
 
 
 end architecture;

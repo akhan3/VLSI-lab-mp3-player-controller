@@ -19,6 +19,9 @@ use work.system_constants_pkg.all;
 use work.test_modules_component_pkg.all;  -- contains chipsope core declarations
 
 entity monitor_fsm is
+  generic (
+    SIMULATION  : boolean := false
+  );
   port(
     clk             : in  std_logic;
     reset           : in  std_logic;
@@ -68,6 +71,10 @@ architecture arch of monitor_fsm is
     rfd: OUT std_logic);
   end component;
 
+  signal  FETCH_DWORD_MAX   : std_logic_vector(31 downto 0);
+  signal  SEEK_KDWORD_MAX   : std_logic_vector(7 downto 0);
+  signal  SEEK_DWORD_MAX    : std_logic_vector(31 downto 0);
+
   type    state_type is (IDLE, READ_PARAM, READ_CMD, SEEK_CHECK, SEEK_PARAM, SEEK_CMD);
   signal  state, next_state : state_type;
   signal  dbuf_wdata_s      : std_logic_vector(31 downto 0);
@@ -87,9 +94,6 @@ architecture arch of monitor_fsm is
   signal  fetch_num_dword   : std_logic_vector(31 downto 0);
   signal  this_dword_cnt    : std_logic_vector(8 downto 0);
   signal  fetch_param_dword : std_logic_vector(8 downto 0);
-  constant FETCH_DWORD_MAX  : std_logic_vector(31 downto 0) := x"00000100";   -- 256 words (0x100)
-  constant SEEK_KDWORD_MAX  : std_logic_vector(7 downto 0)  := x"40";         -- 64 kilo-dwords (0x40)
-  constant SEEK_DWORD_MAX   : std_logic_vector(31 downto 0) := "00"&x"000" & SEEK_KDWORD_MAX & "00"&x"00";
   signal  seek_cmd_val      : std_logic_vector(7 downto 0);
   signal  seek_param_done   : std_logic;
   signal  seek_cmd_done     : std_logic;
@@ -110,6 +114,16 @@ architecture arch of monitor_fsm is
   signal  control0          : std_logic_vector(35 downto 0);
 
 begin
+
+  for_sim: if SIMULATION generate
+    SEEK_KDWORD_MAX  <= x"40";         -- 64 kilo-dwords (0x40)
+  end generate;
+  for_syn: if not SIMULATION generate
+    SEEK_KDWORD_MAX  <= x"01";         -- 1 kilo-dwords (0x01)
+  end generate;
+
+  FETCH_DWORD_MAX  <= x"00000100";   -- 256 words (0x100)
+  SEEK_DWORD_MAX   <= "00"&x"000" & SEEK_KDWORD_MAX & "00"&x"00";
 
 -------------------------------------------------------------------------------
 -- Writing fetched MP3 data to DBUF
