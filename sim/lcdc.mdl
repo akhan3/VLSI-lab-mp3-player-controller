@@ -108,6 +108,7 @@ begin
     variable  wlth        : natural;
     variable  addr        : natural;
     variable  lcdpos      : natural;
+    variable  lcd_char_hex: std_logic_vector(7 downto 0);
     variable  lcd_char    : lcd_char_type;
     variable  lcd_string  : lcd_str_array;
   begin
@@ -121,7 +122,7 @@ begin
     elsif (clk'event and clk = clk_polarity and lcdc_cmd = LCD_REFRESH) then
       lcdc_busy <= '1';
       -- refresh algo starts here
-      for i in 0 to (LCD_LENGTH - 1) loop
+      lcd_index: for i in 0 to (LCD_LENGTH - 1) loop
         cc_word := cc_mem(i);
         v := to_bit(cc_word(35));
         if (v = '1') then
@@ -133,8 +134,9 @@ begin
           wlth := conv_integer(cc_word(4 downto 0));
           addr := csad;
           lcdpos := cpos;
-          for j in 0 to clth loop
-            lcd_char := character'val(conv_integer(char_mem(addr)));
+          char_index: for j in 0 to clth loop
+            lcd_char_hex := char_mem(addr);
+            lcd_char := character'val(conv_integer(lcd_char_hex));
             lcd_string(lcdpos + 1) := lcd_char;
             if (ctr = '0') then
               if (lcdpos = 0) then

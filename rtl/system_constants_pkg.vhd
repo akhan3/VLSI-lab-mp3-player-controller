@@ -78,10 +78,13 @@ package system_constants_pkg is
 ----------------------------------------------------------------------------------
 -- My constants
 ----------------------------------------------------------------------------------
+  constant  CLK_PERIOD    : natural := 31250000;
+
 -- LCD Commands
   constant  LCD_NOP       : std_logic_vector(1 downto 0) := "00";
   constant  LCD_CLEAR     : std_logic_vector(1 downto 0) := "01";
   constant  LCD_REFRESH   : std_logic_vector(1 downto 0) := "10";
+
 -- Keyboard Scan Codes
   constant KEY_0          : std_logic_vector(7 downto 0) := x"70";
   constant KEY_1          : std_logic_vector(7 downto 0) := x"69";
@@ -100,6 +103,7 @@ package system_constants_pkg is
   constant KEY_PLUS       : std_logic_vector(7 downto 0) := x"79";
   constant KEY_MINUS      : std_logic_vector(7 downto 0) := x"7B";
   constant KEY_NUMLOCK    : std_logic_vector(7 downto 0) := x"77";
+
 -- File System Commands
   constant FIO_FILENEXT   : std_logic_vector(7 downto 0) := x"00";
   constant FIO_FILEPREV   : std_logic_vector(7 downto 0) := x"01";

@@ -115,6 +115,7 @@ architecture playcontrol_arch of playcontrol is
       lcd_vol_status      : in  std_logic_vector(4 downto 0);
       lcd_mute_status     : in  std_logic;
       lcd_seek_status     : in  std_logic_vector(1 downto 0);
+      lcd_prog_value      : in  std_logic_vector(6 downto 0);
       lcd_filename_valid  : in  std_logic;
       lcd_filename        : in  std_logic_vector(8*12-1 downto 0);
       startup_key         : in  std_logic;
@@ -188,6 +189,7 @@ architecture playcontrol_arch of playcontrol is
       music_finished  : out std_logic;
       decrst_onseek   : out std_logic;
       lcd_seek_status : out std_logic_vector(1 downto 0);
+      lcd_prog_value  : out std_logic_vector(6 downto 0);
       to_chipscope    : in  std_logic_vector(255 downto 0)
     );
   end component;
@@ -248,6 +250,8 @@ architecture playcontrol_arch of playcontrol is
   signal lcd_vol_status       : std_logic_vector(4 downto 0);
   signal lcd_mute_status      : std_logic;
   signal lcd_seek_status      : std_logic_vector(1 downto 0);
+  signal lcd_prog_value       : std_logic_vector(6 downto 0);
+
   signal lcd_filename_valid   : std_logic;
   signal lcd_filename         : std_logic_vector(8*12-1 downto 0);
 
@@ -360,6 +364,8 @@ begin
 
       lcd_seek_status     =>  lcd_seek_status,
 
+      lcd_prog_value      =>  lcd_prog_value,
+
       lcd_filename_valid  =>  lcd_filename_valid,
       lcd_filename        =>  lcd_filename,
 
@@ -433,6 +439,7 @@ begin
       music_finished  =>  music_finished,
       decrst_onseek   =>  decrst_onseek,
       lcd_seek_status =>  lcd_seek_status,
+      lcd_prog_value  =>  lcd_prog_value,
       to_chipscope    =>  to_chipscope
     );
 

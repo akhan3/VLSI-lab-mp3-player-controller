@@ -51,7 +51,6 @@ entity monitor_fsm is
 
     lcd_seek_status : out std_logic_vector(1 downto 0);
     lcd_prog_value  : out std_logic_vector(6 downto 0);
-    lcd_prog_valid  : out std_logic;
 
     to_chipscope    : in  std_logic_vector(255 downto 0)
   );
@@ -350,8 +349,19 @@ begin
     );
 
   div_fraction_x100 <= div_fraction * std_logic_vector(to_unsigned(100, 7));
-  lcd_prog_value <= div_fraction_x100(38 downto 32);
-  lcd_prog_valid <= '1' when (div_quotient = 0) else '0';
+
+  process (clk, reset)
+  begin
+    if (reset = reset_state) then
+      lcd_prog_value <= "1111111";
+    elsif (clk'event and clk = clk_polarity) then
+      if (fetch_en = '1' and div_quotient = 0) then  -- if playing or paused
+        lcd_prog_value <= div_fraction_x100(38 downto 32);
+      else
+        lcd_prog_value <= "1111111";  -- to indicate invalid progress
+      end if;
+    end if;
+  end process;
 
 -- For simulation only
 -- synopsys translate_off

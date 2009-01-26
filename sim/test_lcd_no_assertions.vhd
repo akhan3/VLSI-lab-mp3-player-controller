@@ -91,8 +91,8 @@ architecture behavior of sim is
   end component;
 
   signal clk   : std_logic := '0';
-  signal reset : std_logic := '1';  -- POR
---   signal reset : std_logic := '0'; -- POR
+--   signal reset : std_logic := '1';  -- POR
+  signal reset : std_logic := '0'; -- POR
 
   signal key_empty  : std_logic                    := '1';
   signal key_rd     : std_logic;
@@ -152,8 +152,8 @@ architecture behavior of sim is
   type     vector_array32 is array (natural range <>) of std_logic_vector(31 downto 0);
   type     vector_array32xn is array (natural range <>) of vector_array32(7 downto 0);
 --   constant current_file_size       : std_logic_vector(31 downto 0) := x"00002000";   -- file size given in original TB
-  constant current_file_size       : std_logic_vector(31 downto 0) := x"00005545";   -- file size slightly increased
---   constant current_file_size       : std_logic_vector(31 downto 0) := x"0019E0CF";   -- file size equal to TEST2.MP3
+--   constant current_file_size       : std_logic_vector(31 downto 0) := x"00005545";   -- file size slightly increased
+  constant current_file_size       : std_logic_vector(31 downto 0) := x"0019E0CF";   -- file size equal to TEST2.MP3
 
   constant current_file_size_dword : std_logic_vector(31 downto 0) := "00"&current_file_size(31 downto 2);
   constant file_info : vector_array32xn(2 downto 0) :=
@@ -268,8 +268,8 @@ begin
       );
 
   clk   <= not clk after pw;
-  reset <= '0' after 50*pw; -- POR
---   reset <= '1' after 20*pw, '0' after 50*pw; -- POR
+--   reset <= '0' after 50*pw; -- POR
+  reset <= '1' after 20*pw, '0' after 50*pw; -- POR
 
 -- main simulation activity
   state_gen : process
