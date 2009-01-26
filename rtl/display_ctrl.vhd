@@ -10,6 +10,7 @@
 -- Last revision description  : Slight issue with contant strings in CHRAM
 -- To do                      : Scoll implementation.
 --                            : Decouple CHRAM and CCRAM updates.
+--                            : Logic for low priority updates not be missed.
 -------------------------------------------------------------------------------
 
 library ieee;
@@ -94,30 +95,34 @@ architecture arch of display_ctrl is
     return (v1(0) & "000" & '1' & cpos & clth-1 & csad & csad & clth-1);
   end function;
 
-  constant SPACE_CHAR           : std_logic_vector(7 downto 0) := char2slv('_');
+
+  constant INIT_WAIT_SECONDS    : natural := 5;
+  constant FORCE_STARTUP_ENABLE : boolean := false;
+
+  constant SPACE_CHAR           : std_logic_vector(7 downto 0) := char2slv('#');
   constant PERCENT_CHAR         : std_logic_vector(7 downto 0) := char2slv('%');
   constant DOT_CHAR             : std_logic_vector(7 downto 0) := char2slv('.');
   constant MUTEMARK_CHAR        : std_logic_vector(7 downto 0) := char2slv('x');
 
   constant FNAME_ADDR           : std_logic_vector(7 downto 0) := int2slv8(0);
   constant VOLUME_ADDR          : std_logic_vector(7 downto 0) := int2slv8(16);
-  constant VOLUME_LEVEL_ADDR    : std_logic_vector(7 downto 0) := int2slv8(22);
-  constant PLAYING_ADDR         : std_logic_vector(7 downto 0) := int2slv8(56);
-  constant PAUSED_ADDR          : std_logic_vector(7 downto 0) := int2slv8(32);
-  constant STOPPED_ADDR         : std_logic_vector(7 downto 0) := int2slv8(40);
-  constant SPACE_ADDR           : std_logic_vector(7 downto 0) := int2slv8(47); -- previously was 112 where I don't write
-  constant FSEEK_ADDR           : std_logic_vector(7 downto 0) := int2slv8(72);
-  constant BSEEK_ADDR           : std_logic_vector(7 downto 0) := int2slv8(50);
-  constant PROGRESS_ADDR        : std_logic_vector(7 downto 0) := int2slv8(52);
-  constant MUTEMARK_ADDR        : std_logic_vector(7 downto 0) := int2slv8(55);
+  constant VOLUME_LEVEL_ADDR    : std_logic_vector(7 downto 0) := int2slv8(24);
+  constant PLAYING_ADDR         : std_logic_vector(7 downto 0) := int2slv8(32);
+  constant PAUSED_ADDR          : std_logic_vector(7 downto 0) := int2slv8(40);
+  constant STOPPED_ADDR         : std_logic_vector(7 downto 0) := int2slv8(48);
+  constant FSEEK_ADDR           : std_logic_vector(7 downto 0) := int2slv8(56);
+  constant BSEEK_ADDR           : std_logic_vector(7 downto 0) := int2slv8(64);
+  constant PROGRESS_ADDR        : std_logic_vector(7 downto 0) := int2slv8(72);
+  constant MUTEMARK_ADDR        : std_logic_vector(7 downto 0) := int2slv8(80);
+  constant SPACE_ADDR           : std_logic_vector(7 downto 0) := int2slv8(88);
 
   constant FNAME_LEN            : std_logic_vector(4 downto 0) := int2slv5(12);
   constant VOLUME_LEN           : std_logic_vector(4 downto 0) := int2slv5(3);  -- may be increased to 6
   constant PLAYING_LEN          : std_logic_vector(4 downto 0) := int2slv5(7);
-  constant PAUSED_LEN           : std_logic_vector(4 downto 0) := int2slv5(6);
+  constant PAUSED_LEN           : std_logic_vector(4 downto 0) := int2slv5(7);
   constant STOPPED_LEN          : std_logic_vector(4 downto 0) := int2slv5(7);
-  constant FSEEK_LEN            : std_logic_vector(4 downto 0) := int2slv5(2);  -- may be increased to 2
-  constant BSEEK_LEN            : std_logic_vector(4 downto 0) := int2slv5(2);  -- may be increased to 2
+  constant FSEEK_LEN            : std_logic_vector(4 downto 0) := int2slv5(2);
+  constant BSEEK_LEN            : std_logic_vector(4 downto 0) := int2slv5(2);
   constant PROGRESS_LEN         : std_logic_vector(4 downto 0) := int2slv5(3); -- (2+1) including the % mark ("99%")
   constant MUTEMARK_LEN         : std_logic_vector(4 downto 0) := int2slv5(1);
   constant VOLUME_LEVEL_LEN     : std_logic_vector(4 downto 0) := int2slv5(2);
@@ -133,6 +138,17 @@ architecture arch of display_ctrl is
   constant MUTEMARK_LCDPOS      : std_logic_vector(4 downto 0) := int2slv5(29);
   constant VOLUME_LEVEL_LCDPOS  : std_logic_vector(4 downto 0) := int2slv5(30);
 
+  signal  ccrm_busy             : std_logic;
+  signal  chrm_busy             : std_logic;
+
+  signal  lcd_playing_status_r  : std_logic_vector(2 downto 0);
+  signal  lcd_prog_value_r      : std_logic_vector(6 downto 0);
+  signal  lcd_vol_status_r      : std_logic_vector(4 downto 0);
+  signal  lcd_mute_status_r     : std_logic;
+  signal  lcd_seek_status_r     : std_logic_vector(1 downto 0);
+  signal  any_event             : std_logic;
+
+-- signals for startup writing
   signal  init_flag             : std_logic;
   signal  init_flag_r           : std_logic;
   signal  trigger_init_seq      : std_logic;
@@ -142,20 +158,6 @@ architecture arch of display_ctrl is
   signal  startup_key_r         : std_logic;
   signal  init_counter          : std_logic_vector(31 downto 0);
   signal  INIT_CNT_PEAK         : std_logic_vector(31 downto 0);
-  constant INIT_WAIT_SECONDS    : natural := 5;
-
-
-  signal  lcd_playing_status_r  : std_logic_vector(2 downto 0);
-  signal  lcd_prog_value_r      : std_logic_vector(6 downto 0);
-  signal  lcd_vol_status_r      : std_logic_vector(4 downto 0);
-  signal  lcd_mute_status_r     : std_logic;
-  signal  lcd_seek_status_r     : std_logic_vector(1 downto 0);
-  signal  lcd_filename_valid_r  : std_logic;
-  signal  any_event          : std_logic;
-
--- signals for startup writing
---   signal  startup_fill          : std_logic;
---   signal  startup_fill_r        : std_logic;
   signal  st_ccram_addr       : std_logic_vector(4 downto 0);
   signal  st_ccram_addr_r     : std_logic_vector(4 downto 0);
   signal  st_ccram_data       : std_logic_vector(35 downto 0);
@@ -191,20 +193,29 @@ architecture arch of display_ctrl is
   signal  mute_chram_wr        : std_logic;
 
 -- signals for playing update
-  signal  playing_event           : std_logic;
-  signal  playing_update_lcd      : std_logic;
-  signal  playing_ccram_addr      : std_logic_vector(4 downto 0);
-  signal  playing_ccram_data      : std_logic_vector(35 downto 0);
-  signal  playing_ccram_wr        : std_logic;
+  signal  playing_event         : std_logic;
+  signal  playing_writing       : std_logic;
+  signal  playing_update_lcd    : std_logic;
+--   signal  playing_ccram_addr    : std_logic_vector(4 downto 0);
+--   signal  playing_ccram_data    : std_logic_vector(35 downto 0);
+--   signal  playing_ccram_wr      : std_logic;
+  signal  playing_chram_addr    : std_logic_vector(7 downto 0);
+  signal  playing_chram_data    : std_logic_vector(7 downto 0);
+  signal  playing_chram_wr      : std_logic;
+  signal  play_status_rom       : std_logic_vector(8*3-1 downto 0);
+  signal  play_status_text      : std_logic_vector(7 downto 0);
+
 
 -- signals for seek update
-  signal  seek_event           : std_logic;
-  signal  seek_update_lcd      : std_logic;
-  signal  seek_ccram_addr      : std_logic_vector(4 downto 0);
-  signal  seek_ccram_data      : std_logic_vector(35 downto 0);
-  signal  seek_ccram_wr        : std_logic;
+  signal  seek_event            : std_logic;
+  signal  seek_writing          : std_logic;
+  signal  seek_update_lcd       : std_logic;
+  signal  seek_ccram_addr       : std_logic_vector(4 downto 0);
+  signal  seek_ccram_data       : std_logic_vector(35 downto 0);
+  signal  seek_ccram_wr         : std_logic;
 
 -- signals for file name display
+  signal  fn_event            : std_logic;
   signal  fn_writing          : std_logic;
   signal  fn_update_lcd       : std_logic;
   signal  fn_chram_addr       : std_logic_vector(7 downto 0);
@@ -230,14 +241,12 @@ begin
       lcd_prog_value_r      <= "0000000";
       lcd_mute_status_r     <= '0';
       lcd_seek_status_r     <= "00";
-      lcd_filename_valid_r  <= '0';
     elsif (clk'event and clk = clk_polarity) then
       lcd_playing_status_r  <= lcd_playing_status;
       lcd_vol_status_r      <= lcd_vol_status;
       lcd_prog_value_r      <= lcd_prog_value;
       lcd_mute_status_r     <= lcd_mute_status;
       lcd_seek_status_r     <= lcd_seek_status;
-      lcd_filename_valid_r  <= lcd_filename_valid;
     end if;
   end process;
 
@@ -249,7 +258,7 @@ begin
     elsif (clk'event and clk = clk_polarity) then
       if (lcd_playing_status /= lcd_playing_status_r) then
         playing_event <= '1';
-      else
+      elsif (chrm_busy = '0') then
         playing_event <= '0';
       end if;
     end if;
@@ -262,7 +271,7 @@ begin
     elsif (clk'event and clk = clk_polarity) then
       if (lcd_vol_status /= lcd_vol_status_r) then
         vol_event <= '1';
-      else
+      elsif (chrm_busy = '0') then
         vol_event <= '0';
       end if;
     end if;
@@ -275,7 +284,7 @@ begin
     elsif (clk'event and clk = clk_polarity) then
       if (lcd_prog_value /= lcd_prog_value_r) then
         prog_event <= '1';
-      else
+      elsif (chrm_busy = '0') then
         prog_event <= '0';
       end if;
     end if;
@@ -288,7 +297,7 @@ begin
     elsif (clk'event and clk = clk_polarity) then
       if (lcd_mute_status /= lcd_mute_status_r) then
         mute_event <= '1';
-      else
+      elsif (chrm_busy = '0') then
         mute_event <= '0';
       end if;
     end if;
@@ -301,8 +310,21 @@ begin
     elsif (clk'event and clk = clk_polarity) then
       if (lcd_seek_status /= lcd_seek_status_r) then
         seek_event <= '1';
-      else
+      elsif (chrm_busy = '0') then
         seek_event <= '0';
+      end if;
+    end if;
+  end process;
+
+  process (clk, reset)
+  begin
+    if (reset = reset_state) then
+      fn_event      <= '0';
+    elsif (clk'event and clk = clk_polarity) then
+      if (lcd_filename_valid = '1') then
+        fn_event <= '1';
+      elsif (chrm_busy = '0') then
+        fn_event <= '0';
       end if;
     end if;
   end process;
@@ -337,38 +359,58 @@ begin
       ccrm_addr   <= "00000";
       ccrm_wdata  <= x"000000000";
       ccrm_wr     <= '0';
+      ccrm_busy     <= '0';
+      chrm_busy     <= '0';
     elsif (clk'event and clk = clk_polarity) then
-      if (fn_writing = '1') then            -- highest priority
-        chrm_addr   <=  fn_chram_addr;
-        chrm_wdata  <=  fn_chram_data;
-        chrm_wr     <=  fn_chram_wr;
-      elsif (vol_writing = '1') then
-        chrm_addr   <=  vol_chram_addr;
-        chrm_wdata  <=  vol_chram_data;
-        chrm_wr     <=  vol_chram_wr;
-      elsif (init_seq_flag_r = '1') then
+      if (init_seq_flag_r = '1') then         -- highest priority
         chrm_addr   <=  st_chram_addr_r;
         chrm_wdata  <=  st_chram_data;
         chrm_wr     <=  st_chram_wr;
         ccrm_addr   <=  st_ccram_addr_r;
         ccrm_wdata  <=  st_ccram_data;
         ccrm_wr     <=  st_ccram_wr;
+        ccrm_busy   <= '1';
+        chrm_busy   <= '1';
+      elsif (fn_writing = '1') then
+        chrm_addr   <=  fn_chram_addr;
+        chrm_wdata  <=  fn_chram_data;
+        chrm_wr     <=  fn_chram_wr;
+        ccrm_busy   <= '0';
+        chrm_busy   <= '1';
+      elsif (playing_writing = '1') then
+--       elsif (playing_event = '1') then
+--         ccrm_addr   <=  playing_ccram_addr;
+--         ccrm_wdata  <=  playing_ccram_data;
+--         ccrm_wr     <=  playing_ccram_wr;
+        chrm_addr   <=  playing_chram_addr;
+        chrm_wdata  <=  playing_chram_data;
+        chrm_wr     <=  playing_chram_wr;
+        ccrm_busy   <= '0';
+        chrm_busy   <= '1';
       elsif (mute_event = '1') then
         chrm_addr   <=  mute_chram_addr;
         chrm_wdata  <=  mute_chram_data;
         chrm_wr     <=  mute_chram_wr;
-      elsif (playing_event = '1') then
-        ccrm_addr   <=  playing_ccram_addr;
-        ccrm_wdata  <=  playing_ccram_data;
-        ccrm_wr     <=  playing_ccram_wr;
+        ccrm_busy   <= '0';
+        chrm_busy   <= '1';
+      elsif (vol_writing = '1') then
+        chrm_addr   <=  vol_chram_addr;
+        chrm_wdata  <=  vol_chram_data;
+        chrm_wr     <=  vol_chram_wr;
+        ccrm_busy   <= '0';
+        chrm_busy   <= '1';
       elsif (seek_event = '1') then
         ccrm_addr   <=  seek_ccram_addr;
         ccrm_wdata  <=  seek_ccram_data;
         ccrm_wr     <=  seek_ccram_wr;
+        ccrm_busy   <= '1';
+        chrm_busy   <= '0';
       elsif (prog_writing = '1') then         -- least priority
         chrm_addr   <=  prog_chram_addr;
         chrm_wdata  <=  prog_chram_data;
         chrm_wr     <=  prog_chram_wr;
+        ccrm_busy   <= '0';
+        chrm_busy   <= '1';
       else
         chrm_addr   <= x"00";
         chrm_wdata  <= x"00";
@@ -376,6 +418,8 @@ begin
         ccrm_addr   <= "00000";
         ccrm_wdata  <= x"000000000";
         ccrm_wr     <= '0';
+        ccrm_busy   <= '0';
+        chrm_busy   <= '0';
       end if;
     end if;
   end process;
@@ -383,13 +427,39 @@ begin
 -------------------------------------------------------------------------------
 -- Filling character memory with volume level
 -------------------------------------------------------------------------------
+  process (clk, reset)
+  begin
+    if (reset = reset_state) then
+      vol_writing <= '0';
+    elsif (clk'event and clk = clk_polarity) then
+      if (vol_event = '1' and chrm_busy = '0') then  -- start only when free
+        vol_writing <= '1';
+      elsif(vol_update_lcd = '1') then
+        vol_writing <= '0';
+      end if;
+    end if;
+  end process;
+
+  process (clk, reset)
+  begin
+    if (reset = reset_state) then
+      vol_update_lcd <= '0';
+    elsif (clk'event and clk = clk_polarity) then
+      if (vol_chram_addr = VOLUME_LEVEL_ADDR + VOLUME_LEVEL_LEN - 1) then
+        vol_update_lcd <= '1';
+      elsif(lcdc_busy = '0') then
+        vol_update_lcd <= '0';
+      end if;
+    end if;
+  end process;
+
 -- address counter
   process (clk, reset)
   begin
     if (reset = reset_state) then
       vol_chram_addr <= x"00";
     elsif (clk'event and clk = clk_polarity) then
-      if (vol_event = '1') then
+      if (vol_event = '1' and chrm_busy = '0') then -- start only when free
         vol_chram_addr <= VOLUME_LEVEL_ADDR;
       elsif (vol_chram_addr = VOLUME_LEVEL_ADDR + VOLUME_LEVEL_LEN - 1) then
         vol_chram_addr <= x"00";
@@ -415,42 +485,42 @@ begin
     end case;
   end process;
 
-  process (clk, reset)
-  begin
-    if (reset = reset_state) then
-      vol_writing <= '0';
-    elsif (clk'event and clk = clk_polarity) then
-      if (vol_event = '1') then
-        vol_writing <= '1';
-      elsif(vol_update_lcd = '1') then
-        vol_writing <= '0';
-      end if;
-    end if;
-  end process;
-
-  process (clk, reset)
-  begin
-    if (reset = reset_state) then
-      vol_update_lcd <= '0';
-    elsif (clk'event and clk = clk_polarity) then
-      if (vol_chram_addr = VOLUME_LEVEL_ADDR + VOLUME_LEVEL_LEN - 1) then
-        vol_update_lcd <= '1';
-      elsif(lcdc_busy = '0') then
-        vol_update_lcd <= '0';
-      end if;
-    end if;
-  end process;
-
 -------------------------------------------------------------------------------
 -- Filling character memory with Progress bar level
 -------------------------------------------------------------------------------
+  process (clk, reset)
+  begin
+    if (reset = reset_state) then
+      prog_writing <= '0';
+    elsif (clk'event and clk = clk_polarity) then
+      if (prog_event = '1' and chrm_busy = '0') then  -- start only when free
+        prog_writing <= '1';
+      elsif(prog_update_lcd = '1') then
+        prog_writing <= '0';
+      end if;
+    end if;
+  end process;
+
+  process (clk, reset)
+  begin
+    if (reset = reset_state) then
+      prog_update_lcd <= '0';
+    elsif (clk'event and clk = clk_polarity) then
+      if (prog_chram_addr = PROGRESS_ADDR + PROGRESS_LEN - 1) then -- (2+1) including the % mark ("99%")
+        prog_update_lcd <= '1';
+      elsif(lcdc_busy = '0') then
+        prog_update_lcd <= '0';
+      end if;
+    end if;
+  end process;
+
 -- address counter
   process (clk, reset)
   begin
     if (reset = reset_state) then
       prog_chram_addr <= x"00";
     elsif (clk'event and clk = clk_polarity) then
-      if (prog_event = '1') then
+      if (prog_event = '1' and chrm_busy = '0') then -- start only when free
         prog_chram_addr <= PROGRESS_ADDR;
       elsif (prog_chram_addr = PROGRESS_ADDR + PROGRESS_LEN - 1) then -- (2+1) including the % mark ("99%")
         prog_chram_addr <= x"00";
@@ -484,32 +554,6 @@ begin
     end case;
   end process;
 
-  process (clk, reset)
-  begin
-    if (reset = reset_state) then
-      prog_writing <= '0';
-    elsif (clk'event and clk = clk_polarity) then
-      if (prog_event = '1') then
-        prog_writing <= '1';
-      elsif(prog_update_lcd = '1') then
-        prog_writing <= '0';
-      end if;
-    end if;
-  end process;
-
-  process (clk, reset)
-  begin
-    if (reset = reset_state) then
-      prog_update_lcd <= '0';
-    elsif (clk'event and clk = clk_polarity) then
-      if (prog_chram_addr = PROGRESS_ADDR + PROGRESS_LEN - 1) then -- (2+1) including the % mark ("99%")
-        prog_update_lcd <= '1';
-      elsif(lcdc_busy = '0') then
-        prog_update_lcd <= '0';
-      end if;
-    end if;
-  end process;
-
 -------------------------------------------------------------------------------
 -- Updating the mute status
 -------------------------------------------------------------------------------
@@ -535,25 +579,61 @@ begin
 -------------------------------------------------------------------------------
 -- Updating the playing status
 -------------------------------------------------------------------------------
-  playing_ccram_addr <= PLAYING_LCDPOS;
-  playing_ccram_data <= lcd_charcmd(1, PLAYING_LCDPOS, PLAYING_LEN, PLAYING_ADDR) when lcd_playing_status = "001" else
-                        lcd_charcmd(1, PLAYING_LCDPOS, PLAYING_LEN, PAUSED_ADDR) when lcd_playing_status = "010" else
-                        lcd_charcmd(1, PLAYING_LCDPOS, PLAYING_LEN, STOPPED_ADDR) when lcd_playing_status = "100" else
-                        lcd_charcmd(1, PLAYING_LCDPOS, PLAYING_LEN, STOPPED_ADDR);
-  playing_ccram_wr <= playing_event;
+  process (clk, reset)
+  begin
+    if (reset = reset_state) then
+      playing_writing <= '0';
+    elsif (clk'event and clk = clk_polarity) then
+      if (playing_event = '1' and chrm_busy = '0') then  -- start only when free
+        playing_writing <= '1';
+      elsif(playing_update_lcd = '1') then
+        playing_writing <= '0';
+      end if;
+    end if;
+  end process;
 
   process (clk, reset)
   begin
     if (reset = reset_state) then
       playing_update_lcd <= '0';
     elsif (clk'event and clk = clk_polarity) then
-      if (playing_event = '1') then
+      if (playing_chram_addr = PLAYING_ADDR + PLAYING_LEN - 1) then
         playing_update_lcd <= '1';
       elsif(lcdc_busy = '0') then
         playing_update_lcd <= '0';
       end if;
     end if;
   end process;
+
+-- address counter
+  process (clk, reset)
+  begin
+    if (reset = reset_state) then
+      playing_chram_addr <= x"00";
+    elsif (clk'event and clk = clk_polarity) then
+      if (playing_event = '1' and chrm_busy = '0') then  -- start only when free
+        playing_chram_addr <= PLAYING_ADDR;
+      elsif (playing_chram_addr = PLAYING_ADDR + PLAYING_LEN - 1) then
+        playing_chram_addr <= x"00";
+      elsif (playing_chram_addr /= x"00") then
+        playing_chram_addr <= playing_chram_addr + 1;
+      end if;
+    end if;
+  end process;
+
+-- data MUX
+  playing_chram_data <= play_status_text;
+  playing_chram_wr <= '1' when (  playing_chram_addr >= PLAYING_ADDR and
+                                  playing_chram_addr <= PLAYING_ADDR + PLAYING_LEN - 1  ) else
+                      '0';
+
+--   playing_ccram_addr <= PLAYING_LCDPOS;
+--   playing_ccram_data <= lcd_charcmd(1, PLAYING_LCDPOS, PLAYING_LEN, PLAYING_ADDR) when lcd_playing_status = "001" else
+--                         lcd_charcmd(1, PLAYING_LCDPOS, PLAYING_LEN, PAUSED_ADDR) when lcd_playing_status = "010" else
+--                         lcd_charcmd(1, PLAYING_LCDPOS, PLAYING_LEN, STOPPED_ADDR) when lcd_playing_status = "100" else
+--                         lcd_charcmd(1, PLAYING_LCDPOS, PLAYING_LEN, STOPPED_ADDR);
+--   playing_ccram_wr <= playing_event;
+
 
 
 -------------------------------------------------------------------------------
@@ -585,49 +665,9 @@ begin
   process (clk, reset)
   begin
     if (reset = reset_state) then
-      fn_lcd_counter <= x"C";
-    elsif (clk'event and clk = clk_polarity) then
-      if (lcd_filename_valid = '1') then
-        fn_lcd_counter <= x"0";
-      elsif (fn_lcd_counter /= x"C") then
-        fn_lcd_counter <= fn_lcd_counter + x"1";
-      end if;
-    end if;
-  end process;
-
-  process (clk, reset)
-  begin
-    if (reset = reset_state) then
-      fn_lcd_counter_reg <= x"C";
-    elsif (clk'event and clk = clk_polarity) then
-      fn_lcd_counter_reg <= fn_lcd_counter;
-    end if;
-  end process;
-
-  fn_chram_wr <= '1' when (fn_lcd_counter < x"C") else '0';
-  fn_chram_addr <= x"0" & fn_lcd_counter;
-
-  with fn_lcd_counter select
-    fn_chram_data <= lcd_filename(0*8+7 downto 0*8) when x"0",
-                     lcd_filename(1*8+7 downto 1*8) when x"1",
-                     lcd_filename(2*8+7 downto 2*8) when x"2",
-                     lcd_filename(3*8+7 downto 3*8) when x"3",
-                     lcd_filename(4*8+7 downto 4*8) when x"4",
-                     lcd_filename(5*8+7 downto 5*8) when x"5",
-                     lcd_filename(6*8+7 downto 6*8) when x"6",
-                     lcd_filename(7*8+7 downto 7*8) when x"7",
-                     lcd_filename(8*8+7 downto 8*8) when x"8",
-                     lcd_filename(9*8+7 downto 9*8) when x"9",
-                     lcd_filename(10*8+7 downto 10*8) when x"A",
-                     lcd_filename(11*8+7 downto 11*8) when x"B",
-                     x"00" when others;
-
-  process (clk, reset)
-  begin
-    if (reset = reset_state) then
       fn_writing <= '0';
     elsif (clk'event and clk = clk_polarity) then
-      if (lcd_filename_valid = '1') then
+      if (fn_event = '1' and chrm_busy = '0') then  -- start only when free
         fn_writing <= '1';
       elsif(fn_update_lcd = '1') then
         fn_writing <= '0';
@@ -648,19 +688,50 @@ begin
     end if;
   end process;
 
+-- address counter
+  fn_chram_addr <= x"0" & fn_lcd_counter;
+  process (clk, reset)
+  begin
+    if (reset = reset_state) then
+      fn_lcd_counter <= x"C";
+    elsif (clk'event and clk = clk_polarity) then
+      if (fn_event = '1' and chrm_busy = '0') then  -- start only when free
+        fn_lcd_counter <= x"0";
+      elsif (fn_lcd_counter /= x"C") then
+        fn_lcd_counter <= fn_lcd_counter + x"1";
+      end if;
+    end if;
+  end process;
+  process (clk, reset)
+  begin
+    if (reset = reset_state) then
+      fn_lcd_counter_reg <= x"C";
+    elsif (clk'event and clk = clk_polarity) then
+      fn_lcd_counter_reg <= fn_lcd_counter;
+    end if;
+  end process;
+
+-- data MUX
+  fn_chram_wr <= '1' when (fn_lcd_counter < x"C") else '0';
+  with fn_lcd_counter select
+    fn_chram_data <= lcd_filename(0*8+7 downto 0*8) when x"0",
+                     lcd_filename(1*8+7 downto 1*8) when x"1",
+                     lcd_filename(2*8+7 downto 2*8) when x"2",
+                     lcd_filename(3*8+7 downto 3*8) when x"3",
+                     lcd_filename(4*8+7 downto 4*8) when x"4",
+                     lcd_filename(5*8+7 downto 5*8) when x"5",
+                     lcd_filename(6*8+7 downto 6*8) when x"6",
+                     lcd_filename(7*8+7 downto 7*8) when x"7",
+                     lcd_filename(8*8+7 downto 8*8) when x"8",
+                     lcd_filename(9*8+7 downto 9*8) when x"9",
+                     lcd_filename(10*8+7 downto 10*8) when x"A",
+                     lcd_filename(11*8+7 downto 11*8) when x"B",
+                     x"00" when others;
+
 
 -------------------------------------------------------------------------------
 -- init flag and trigger to fill the LCD memories with constant strings
 -------------------------------------------------------------------------------
-  process (clk, reset)
-  begin
-    if (reset = reset_state) then
-      startup_key_r <= '0';
-    elsif (clk'event and clk = clk_polarity) then
-      startup_key_r <= startup_key;
-    end if;
-  end process;
-
   for_sim: if SIMULATION generate
     INIT_CNT_PEAK        <= int2slv(625-1, 32); -- 20us for simulation only
   end generate;
@@ -686,10 +757,12 @@ begin
     elsif (clk'event and clk = clk_polarity) then
       if (init_flag = '1' and init_counter = 0) then    -- if init counter expires
         init_flag <= '0';                                 -- go down and never rise again
-      elsif (startup_key = '1') then    -- if forced to initialize again
-        init_flag <= '1';
-      elsif (startup_key = '0' and startup_key_r = '1') then  -- go down again in the next cycle
-        init_flag <= '0';                                     -- and never rise again
+      elsif FORCE_STARTUP_ENABLE then
+        if (startup_key = '1') then    -- if forced to initialize again
+          init_flag <= '1';
+        elsif (startup_key = '0' and startup_key_r = '1') then  -- go down again in the next cycle
+          init_flag <= '0';                                     -- and never rise again
+        end if;
       end if;
     end if;
   end process;
@@ -706,10 +779,19 @@ begin
   process (clk, reset)
   begin
     if (reset = reset_state) then
+      startup_key_r <= '0';
+    elsif (clk'event and clk = clk_polarity) then
+      startup_key_r <= startup_key;
+    end if;
+  end process;
+
+  process (clk, reset)
+  begin
+    if (reset = reset_state) then
       trigger_init_seq <= '0';
     elsif (clk'event and clk = clk_polarity) then
       if (init_flag = '0' and init_flag_r = '1') then  -- at the falling edge
-        trigger_init_seq <= '1';
+         trigger_init_seq <= '1';
       else
         trigger_init_seq <= '0';
       end if;
@@ -805,7 +887,7 @@ begin
             st_ccram_data <= lcd_charcmd(1, VOLUME_LCDPOS, VOLUME_LEN, VOLUME_ADDR);
             st_ccram_wr <= '1';
           when PLAYING_LCDPOS =>
-            st_ccram_data <= playing_ccram_data;
+            st_ccram_data <= lcd_charcmd(1, PLAYING_LCDPOS, PLAYING_LEN, PLAYING_ADDR);
             st_ccram_wr <= '1';
           when FSEEK_LCDPOS =>
             st_ccram_data <= lcd_charcmd(1, FSEEK_LCDPOS, FSEEK_LEN, SPACE_ADDR);
@@ -851,46 +933,18 @@ begin
             st_chram_data <= char2slv('L');   st_chram_wr <= '1';
 
           when PLAYING_ADDR =>
-            st_chram_data <= char2slv('P');   st_chram_wr <= '1';
+            st_chram_data <= char2slv('S');   st_chram_wr <= '1';
           when PLAYING_ADDR + 1 =>
-            st_chram_data <= char2slv('L');   st_chram_wr <= '1';
-          when PLAYING_ADDR + 2 =>
-            st_chram_data <= char2slv('A');   st_chram_wr <= '1';
-          when PLAYING_ADDR + 3 =>
-            st_chram_data <= char2slv('Y');   st_chram_wr <= '1';
-          when PLAYING_ADDR + 4 =>
-            st_chram_data <= char2slv('I');   st_chram_wr <= '1';
-          when PLAYING_ADDR + 5 =>
-            st_chram_data <= char2slv('N');   st_chram_wr <= '1';
-          when PLAYING_ADDR + 6 =>
-            st_chram_data <= char2slv('G');   st_chram_wr <= '1';
-
-          when PAUSED_ADDR =>
-            st_chram_data <= char2slv('P');   st_chram_wr <= '1';
-          when PAUSED_ADDR + 1 =>
-            st_chram_data <= char2slv('A');   st_chram_wr <= '1';
-          when PAUSED_ADDR + 2 =>
-            st_chram_data <= char2slv('U');   st_chram_wr <= '1';
-          when PAUSED_ADDR + 3 =>
-            st_chram_data <= char2slv('S');   st_chram_wr <= '1';
-          when PAUSED_ADDR + 4 =>
-            st_chram_data <= char2slv('E');   st_chram_wr <= '1';
-          when PAUSED_ADDR + 5 =>
-            st_chram_data <= char2slv('D');   st_chram_wr <= '1';
-
-          when STOPPED_ADDR =>
-            st_chram_data <= char2slv('S');   st_chram_wr <= '1';
-          when STOPPED_ADDR + 1 =>
             st_chram_data <= char2slv('T');   st_chram_wr <= '1';
-          when STOPPED_ADDR + 2 =>
+          when PLAYING_ADDR + 2 =>
             st_chram_data <= char2slv('O');   st_chram_wr <= '1';
-          when STOPPED_ADDR + 3 =>
+          when PLAYING_ADDR + 3 =>
             st_chram_data <= char2slv('P');   st_chram_wr <= '1';
-          when STOPPED_ADDR + 4 =>
+          when PLAYING_ADDR + 4 =>
             st_chram_data <= char2slv('P');   st_chram_wr <= '1';
-          when STOPPED_ADDR + 5 =>
+          when PLAYING_ADDR + 5 =>
             st_chram_data <= char2slv('E');   st_chram_wr <= '1';
-          when STOPPED_ADDR + 6 =>
+          when PLAYING_ADDR + 6 =>
             st_chram_data <= char2slv('D');   st_chram_wr <= '1';
 
           when FSEEK_ADDR =>
@@ -906,7 +960,7 @@ begin
           when MUTEMARK_ADDR =>
             st_chram_data <= mute_chram_data; st_chram_wr <= '1';
 
-          when SPACE_ADDR =>
+          when SPACE_ADDR | SPACE_ADDR+1 | SPACE_ADDR+2 | SPACE_ADDR+3 =>
             st_chram_data <= SPACE_CHAR;      st_chram_wr <= '1';
 
           when VOLUME_LEVEL_ADDR =>
@@ -1072,7 +1126,20 @@ begin
               char2slv('9') & char2slv('8') when lcd_prog_value = 98 else
               char2slv('9') & char2slv('9') when lcd_prog_value = 99 else
               char2slv('0') & char2slv('0') when lcd_prog_value = 100 else
-              SPACE_CHAR    & SPACE_CHAR   ;
+              SPACE_CHAR    & SPACE_CHAR;
 
+  play_status_rom <=  char2slv('S') & char2slv('P') & char2slv('P') when playing_chram_addr = PLAYING_ADDR else
+                      char2slv('T') & char2slv('A') & char2slv('L') when playing_chram_addr = PLAYING_ADDR + 1 else
+                      char2slv('O') & char2slv('U') & char2slv('A') when playing_chram_addr = PLAYING_ADDR + 2 else
+                      char2slv('P') & char2slv('S') & char2slv('Y') when playing_chram_addr = PLAYING_ADDR + 3 else
+                      char2slv('P') & char2slv('E') & char2slv('I') when playing_chram_addr = PLAYING_ADDR + 4 else
+                      char2slv('E') & char2slv('D') & char2slv('N') when playing_chram_addr = PLAYING_ADDR + 5 else
+                      char2slv('D') & SPACE_CHAR    & char2slv('G') when playing_chram_addr = PLAYING_ADDR + 6 else
+                      SPACE_CHAR    & SPACE_CHAR    & SPACE_CHAR;
+
+  play_status_text <= play_status_rom(7 downto 0)   when lcd_playing_status = "001" else  -- PLAYING
+                      play_status_rom(15 downto 8)  when lcd_playing_status = "010" else  -- PAUSED
+                      play_status_rom(23 downto 16) when lcd_playing_status = "100" else  -- STOPPED
+                      play_status_rom(23 downto 16);
 
 end architecture;

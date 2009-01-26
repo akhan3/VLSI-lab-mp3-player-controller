@@ -116,10 +116,10 @@ architecture arch of monitor_fsm is
 begin
 
   for_sim: if SIMULATION generate
-    SEEK_KDWORD_MAX  <= x"40";         -- 64 kilo-dwords (0x40)
+    SEEK_KDWORD_MAX  <= x"01";         -- 1 kilo-dwords (0x01)
   end generate;
   for_syn: if not SIMULATION generate
-    SEEK_KDWORD_MAX  <= x"01";         -- 1 kilo-dwords (0x01)
+    SEEK_KDWORD_MAX  <= x"40";         -- 64 kilo-dwords (0x40)
   end generate;
 
   FETCH_DWORD_MAX  <= x"00000100";   -- 256 words (0x100)
