@@ -14,6 +14,8 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
+use ieee.numeric_std.all;
+use ieee.math_real.all;
 use work.system_constants_pkg.all;
 use work.test_modules_component_pkg.all;  -- contains chipsope core declarations
 
@@ -48,12 +50,26 @@ entity monitor_fsm is
     fio_ctrl        : out std_logic;
 
     lcd_seek_status : out std_logic_vector(1 downto 0);
+    lcd_prog_value  : out std_logic_vector(6 downto 0);
+    lcd_prog_valid  : out std_logic;
 
     to_chipscope    : in  std_logic_vector(255 downto 0)
   );
 end entity;
 
 architecture arch of monitor_fsm is
+
+  component divider_core
+    port (
+    clk: IN std_logic;
+    aclr: IN std_logic;
+    dividend: IN std_logic_VECTOR(31 downto 0);
+    divisor: IN std_logic_VECTOR(31 downto 0);
+    quotient: OUT std_logic_VECTOR(31 downto 0);
+    remainder: OUT std_logic_VECTOR(31 downto 0);
+    rfd: OUT std_logic);
+  end component;
+
   type    state_type is (IDLE, READ_PARAM, READ_CMD, SEEK_CHECK, SEEK_PARAM, SEEK_CMD);
   signal  state, next_state : state_type;
   signal  dbuf_wdata_s      : std_logic_vector(31 downto 0);
@@ -68,6 +84,7 @@ architecture arch of monitor_fsm is
   signal  music_finished_s  : std_logic;
   signal  file_size_dword   : std_logic_vector(31 downto 0);
   signal  total_dword_cnt   : std_logic_vector(31 downto 0);
+  signal  curr_total_dword  : std_logic_vector(31 downto 0);
   signal  remain_num_dword  : std_logic_vector(31 downto 0);
   signal  fetch_num_dword   : std_logic_vector(31 downto 0);
   signal  this_dword_cnt    : std_logic_vector(8 downto 0);
@@ -83,6 +100,12 @@ architecture arch of monitor_fsm is
   signal  fio_busiv_s       : std_logic;
   signal  fio_busi_s        : std_logic_vector(7 downto 0);
   signal  fio_ctrl_s        : std_logic;
+  signal  div_rfd           : std_logic;
+  signal  div_quotient      : std_logic_vector(31 downto 0);
+  signal  div_fraction      : std_logic_vector(31 downto 0);
+  signal  div_fraction_x100 : std_logic_vector(38 downto 0);
+--   signal  progress_percent  : std_logic_vector(6 downto 0);
+
 
 -- Chipscope signals
   signal  trig0             : std_logic_vector(255 downto 0);
@@ -245,6 +268,7 @@ begin
 -------------------------------------------------------------------------------
 -- File DWords counters
 -------------------------------------------------------------------------------
+  curr_total_dword <= total_dword_cnt + this_dword_cnt;
   remain_num_dword <= (file_size_dword - total_dword_cnt) when (file_size_dword > total_dword_cnt) else x"00000000"; -- saturation subtractor
   fetch_num_dword <= remain_num_dword when (remain_num_dword < FETCH_DWORD_MAX) else FETCH_DWORD_MAX;
   fetch_param_dword <= fetch_num_dword(8 downto 0) - 1 when (fetch_num_dword(8 downto 0) /= ('0'&x"00")) else ('0'&x"00");
@@ -308,6 +332,52 @@ begin
       end if;
     end if;
   end process;
+
+
+-------------------------------------------------------------------------------
+-- File progress bar logic
+-------------------------------------------------------------------------------
+-- instantiating the divider for progress bar
+  progress_divider : divider_core
+    port map (
+      clk       => clk,
+      aclr      => reset,
+      dividend  => curr_total_dword,
+      divisor   => file_size_dword,
+      quotient  => div_quotient,
+      remainder => div_fraction,
+      rfd       => div_rfd
+    );
+
+  div_fraction_x100 <= div_fraction * std_logic_vector(to_unsigned(100, 7));
+  lcd_prog_value <= div_fraction_x100(38 downto 32);
+  lcd_prog_valid <= '1' when (div_quotient = 0) else '0';
+
+-- For simulation only
+-- synopsys translate_off
+  divider_logic: process (this_dword_cnt, file_size_dword, state)
+    variable play_flag            : boolean;
+    variable ratio_real           : real;
+    variable ratio_integer        : integer;
+    variable percent_real         : real;
+    variable percent_integer      : integer;
+    variable ratio_unsigned       : unsigned(31 downto 0);
+    variable rec_ratio_unsigned   : unsigned(31 downto 0);
+  begin
+    if (state = READ_CMD) then
+      play_flag := true;
+    end if;
+    if (play_flag and file_size_dword /= 0 and curr_total_dword /= 0) then
+      ratio_unsigned := to_unsigned(conv_integer(curr_total_dword), 32) / to_unsigned(conv_integer(file_size_dword), 32);
+      rec_ratio_unsigned := to_unsigned(conv_integer(file_size_dword), 32) / to_unsigned(conv_integer(curr_total_dword), 32);
+      ratio_integer := conv_integer(curr_total_dword) / conv_integer(file_size_dword);
+      ratio_real := real(conv_integer(curr_total_dword)) / real(conv_integer(file_size_dword));
+
+      percent_real := ratio_real * 100.0;
+      percent_integer := integer(round(percent_real));
+    end if;
+  end process;
+-- synopsys translate_on
 
 
 -------------------------------------------------------------------------------

@@ -1,6 +1,7 @@
 source proc_force.do
 do wave.do
-run 50 us
+# run -all
+run 100 us
 
 
 #run 20 us

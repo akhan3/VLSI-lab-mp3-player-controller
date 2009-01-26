@@ -42,6 +42,7 @@ DESIGN_FILES="  ../rtl/system_constants_pkg.vhd       \
                 ../rtl/kbc_intf.vhd                   \
                 ../sim/test_util.vhd                  \
                 ../sim/lcdc.mdl                       \
+                ../sim/divider_core.vhd               \
                 $SIMFILE"
 
 # Adding compilation library
