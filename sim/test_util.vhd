@@ -7,6 +7,7 @@ package test_util is
     function hstr(slv: std_logic_vector) return string;
     function hstr(sl: std_logic) return character;
     procedure display_msg(str : string);
+    procedure display_msg_notime(str : string);
 
 end package test_util;
 
@@ -75,6 +76,13 @@ package body test_util is
     begin
         write(my_line, now);
         write(my_line, string'(": ") & str);
+        writeline(output, my_line);
+    end procedure;
+
+    procedure display_msg_notime(str : string) is
+        variable my_line : line;
+    begin
+        write(my_line, str);
         writeline(output, my_line);
     end procedure;
 

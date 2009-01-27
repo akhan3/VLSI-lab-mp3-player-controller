@@ -10,56 +10,67 @@ proc send_key { scan_code } {
 
 proc play {} {
   send_key 76
-  run 2600 ns
+  run 5 us
 }
 
 proc pause {} {
   send_key 11
-  run 2600 ns
+  run 5 us
 }
 
 proc stop {} {
   send_key 14
-  run 2600 ns
+  run 5 us
 }
 
 proc mute {} {
   send_key 66
-  run 2600 ns
+  run 5 us
 }
 
 proc volinc {} {
   send_key 79
-  run 2600 ns
+  run 5 us
 }
 
 proc voldec {} {
   send_key 7B
-  run 2600 ns
+  run 5 us
 }
 
 proc listnext {} {
   send_key 72
-  run 2600 ns
+  run 5 us
 }
 
 proc listprev {} {
   send_key 75
-  run 2600 ns
+  run 5 us
 }
 
 proc startup {} {
   send_key 77
-  run 2600 ns
+  run 5 us
 }
 
 proc fseek {} {
   send_key 74
-  run 2600 ns
+  run 5 us
 }
 
 proc bseek {} {
   send_key 6B
-  run 2600 ns
+  run 5 us
 }
 
+proc voldown {delta} {
+  for {set i 1} {$i <= $delta} {incr i} {
+    voldec
+  }
+}
+
+proc volup {delta} {
+  for {set i 1} {$i <= $delta} {incr i} {
+    volinc
+  }
+}

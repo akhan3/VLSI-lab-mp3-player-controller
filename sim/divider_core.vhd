@@ -67,7 +67,7 @@ end component;
 -- Configuration specification
 	for all : wrapped_divider_core use entity XilinxCoreLib.div_gen_v1_0(behavioral)
 		generic map(
-			divclk_sel => 1,
+			divclk_sel => 8,
 			exponent_width => 8,
 			bias => 0,
 			c_has_sclr => 0,
