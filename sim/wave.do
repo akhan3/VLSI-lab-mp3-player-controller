@@ -1,5 +1,12 @@
 onerror {resume}
 quietly WaveActivateNextPane {} 0
+quietly virtual signal -install /sim/uut/display_ctrl_inst {/sim/uut/display_ctrl_inst/scroll_ccram_data(35)  } v
+quietly virtual signal -install /sim/uut/display_ctrl_inst {/sim/uut/display_ctrl_inst/scroll_ccram_data(31)  } ctr
+quietly virtual signal -install /sim/uut/display_ctrl_inst { /sim/uut/display_ctrl_inst/scroll_ccram_data(30 downto 26)} cpos
+quietly virtual signal -install /sim/uut/display_ctrl_inst { /sim/uut/display_ctrl_inst/scroll_ccram_data(25 downto 21)} clth
+quietly virtual signal -install /sim/uut/display_ctrl_inst { /sim/uut/display_ctrl_inst/scroll_ccram_data(20 downto 13)} cbad
+quietly virtual signal -install /sim/uut/display_ctrl_inst { /sim/uut/display_ctrl_inst/scroll_ccram_data(12 downto 5)} csad
+quietly virtual signal -install /sim/uut/display_ctrl_inst { /sim/uut/display_ctrl_inst/scroll_ccram_data(4 downto 0)} wlth
 add wave -noupdate -divider STATES
 add wave -noupdate -format Literal /sim/uut/play_fsm_inst/state
 add wave -noupdate -format Literal /sim/uut/monitor_fsm_inst/state
@@ -16,6 +23,14 @@ add wave -noupdate -format Literal -radix ascii /sim/uut/display_ctrl_inst/lcd_f
 add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/startup_key
 add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/lcdc_busy
 add wave -noupdate -format Literal /sim/uut/display_ctrl_inst/lcdc_cmd
+add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/any_update
+add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/init_update_lcd
+add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/vol_update_lcd
+add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/prog_update_lcd
+add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/mute_update_lcd
+add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/seek_update_lcd
+add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/fn_update_lcd
+add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/scroll_update_lcd
 add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/chrm_wr
 add wave -noupdate -format Literal -radix ascii /sim/uut/display_ctrl_inst/chrm_wdata
 add wave -noupdate -format Literal -radix unsigned /sim/uut/display_ctrl_inst/chrm_addr
@@ -80,14 +95,23 @@ add wave -noupdate -format Literal -radix unsigned /sim/uut/display_ctrl_inst/fn
 add wave -noupdate -format Literal /sim/uut/display_ctrl_inst/fn_lcd_counter_reg
 add wave -noupdate -divider {SCROLL LOGIC}
 add wave -noupdate -format Literal -radix unsigned /sim/uut/display_ctrl_inst/scroll_timeout_cnt
-add wave -noupdate -format Literal /sim/uut/display_ctrl_inst/scroll_event
-add wave -noupdate -format Literal /sim/uut/display_ctrl_inst/scroll_event_r
-add wave -noupdate -format Literal /sim/uut/display_ctrl_inst/scroll_writing
-add wave -noupdate -format Literal /sim/uut/display_ctrl_inst/scroll_update_lcd
+add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/scroll_event
+add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/scroll_event_r
+add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/scroll_writing
+add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/scroll_update_lcd
+add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/scroll_ccram_wr
 add wave -noupdate -format Literal -radix unsigned /sim/uut/display_ctrl_inst/scroll_ccram_addr
-add wave -noupdate -format Literal -radix hexadecimal /sim/uut/display_ctrl_inst/scroll_ccram_data
-add wave -noupdate -format Literal /sim/uut/display_ctrl_inst/scroll_ccram_wr
 add wave -noupdate -format Literal -radix unsigned /sim/uut/display_ctrl_inst/scroll_index
+add wave -noupdate -format Literal -radix hexadecimal /sim/uut/display_ctrl_inst/scroll_ccram_data
+add wave -noupdate -divider {command format}
+add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/v
+add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/ctr
+add wave -noupdate -format Literal -radix unsigned /sim/uut/display_ctrl_inst/cpos
+add wave -noupdate -format Literal -radix unsigned /sim/uut/display_ctrl_inst/clth
+add wave -noupdate -format Literal -radix unsigned /sim/uut/display_ctrl_inst/cbad
+add wave -noupdate -format Literal -radix unsigned /sim/uut/display_ctrl_inst/csad
+add wave -noupdate -format Literal -radix unsigned /sim/uut/display_ctrl_inst/wlth
+add wave -noupdate -divider {command format}
 add wave -noupdate -divider {LCDC MDL}
 add wave -noupdate -format Logic /sim/lcdc_inst/clk
 add wave -noupdate -format Logic /sim/lcdc_inst/reset
@@ -671,29 +695,19 @@ add wave -noupdate -format Logic /sim/dec_status
 add wave -noupdate -format Literal /sim/test_state
 add wave -noupdate -format Literal /sim/file_cnt
 add wave -noupdate -format Literal -radix hexadecimal /sim/file_data_cnt
-add wave -noupdate -format Literal -radix hexadecimal /sim/dbuf_all_data_cnt
-add wave -noupdate -format Literal -radix hexadecimal /sim/dbuf_curr_data_cnt
-add wave -noupdate -format Literal -radix hexadecimal /sim/req_data_size
-add wave -noupdate -format Logic /sim/dbuf_reset_status
-add wave -noupdate -format Logic /sim/sbuf_reset_status
-add wave -noupdate -format Logic /sim/dec_reset_status
-add wave -noupdate -format Literal -radix hexadecimal /sim/curr_key
-add wave -noupdate -format Logic /sim/first_list
-add wave -noupdate -divider <NULL>
-add wave -noupdate -divider <NULL>
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {1461011 ns} 0} {{Cursor 2} {100035 ns} 0}
-configure wave -namecolwidth 171
-configure wave -valuecolwidth 77
+WaveRestoreCursors {{Cursor 1} {0 ns} 0}
+configure wave -namecolwidth 150
+configure wave -valuecolwidth 100
 configure wave -justifyvalue left
 configure wave -signalnamewidth 1
 configure wave -snapdistance 10
 configure wave -datasetprefix 0
-configure wave -rowmargin 6
+configure wave -rowmargin 4
 configure wave -childrowmargin 2
 configure wave -gridoffset 0
 configure wave -gridperiod 1
 configure wave -griddelta 40
 configure wave -timeline 0
 update
-WaveRestoreZoom {0 ns} {152313 ns}
+WaveRestoreZoom {0 ns} {19880 ns}
