@@ -37,7 +37,6 @@ add wave -noupdate -format Literal /sim/uut/display_ctrl_inst/lcd_prog_value_r
 add wave -noupdate -format Literal -radix unsigned /sim/uut/display_ctrl_inst/lcd_vol_status_r
 add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/lcd_mute_status_r
 add wave -noupdate -format Literal /sim/uut/display_ctrl_inst/lcd_seek_status_r
-add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/lcd_filename_valid_r
 add wave -noupdate -format Literal -radix unsigned /sim/uut/display_ctrl_inst/st_ccram_addr
 add wave -noupdate -format Literal -radix unsigned /sim/uut/display_ctrl_inst/st_ccram_addr_r
 add wave -noupdate -format Literal -radix hexadecimal /sim/uut/display_ctrl_inst/st_ccram_data
@@ -61,6 +60,7 @@ add wave -noupdate -format Literal -radix ascii /sim/uut/display_ctrl_inst/prog_
 add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/prog_chram_wr
 add wave -noupdate -format Literal -radix ascii /sim/uut/display_ctrl_inst/prog_acd
 add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/mute_event
+add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/mute_writing
 add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/mute_update_lcd
 add wave -noupdate -format Literal /sim/uut/display_ctrl_inst/mute_chram_addr
 add wave -noupdate -format Literal /sim/uut/display_ctrl_inst/mute_chram_data
@@ -68,9 +68,6 @@ add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/mute_chram_wr
 add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/playing_event
 add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/playing_writing
 add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/playing_update_lcd
-add wave -noupdate -format Literal -radix unsigned /sim/uut/display_ctrl_inst/playing_ccram_addr
-add wave -noupdate -format Literal -radix hexadecimal /sim/uut/display_ctrl_inst/playing_ccram_data
-add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/playing_ccram_wr
 add wave -noupdate -format Literal -radix unsigned /sim/uut/display_ctrl_inst/playing_chram_addr
 add wave -noupdate -format Literal -radix ascii /sim/uut/display_ctrl_inst/playing_chram_data
 add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/playing_chram_wr
@@ -79,9 +76,10 @@ add wave -noupdate -format Literal -radix ascii /sim/uut/display_ctrl_inst/play_
 add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/seek_event
 add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/seek_writing
 add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/seek_update_lcd
-add wave -noupdate -format Literal -radix unsigned /sim/uut/display_ctrl_inst/seek_ccram_addr
-add wave -noupdate -format Literal -radix hexadecimal /sim/uut/display_ctrl_inst/seek_ccram_data
-add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/seek_ccram_wr
+add wave -noupdate -format Literal -radix unsigned /sim/uut/display_ctrl_inst/seek_chram_addr
+add wave -noupdate -format Literal -radix ascii /sim/uut/display_ctrl_inst/seek_chram_data
+add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/seek_chram_wr
+add wave -noupdate -format Literal -radix ascii /sim/uut/display_ctrl_inst/seek_status_text
 add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/fn_writing
 add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/fn_update_lcd
 add wave -noupdate -format Literal -radix unsigned /sim/uut/display_ctrl_inst/fn_chram_addr
@@ -386,7 +384,6 @@ add wave -noupdate -format Literal /sim/uut/display_ctrl_inst/lcd_prog_value_r
 add wave -noupdate -format Literal -radix unsigned /sim/uut/display_ctrl_inst/lcd_vol_status_r
 add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/lcd_mute_status_r
 add wave -noupdate -format Literal /sim/uut/display_ctrl_inst/lcd_seek_status_r
-add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/lcd_filename_valid_r
 add wave -noupdate -format Literal -radix unsigned /sim/uut/display_ctrl_inst/st_ccram_addr
 add wave -noupdate -format Literal -radix unsigned /sim/uut/display_ctrl_inst/st_ccram_addr_r
 add wave -noupdate -format Literal -radix hexadecimal /sim/uut/display_ctrl_inst/st_ccram_data
@@ -413,14 +410,8 @@ add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/mute_event
 add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/mute_update_lcd
 add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/playing_event
 add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/playing_update_lcd
-add wave -noupdate -format Literal /sim/uut/display_ctrl_inst/playing_ccram_addr
-add wave -noupdate -format Literal -radix hexadecimal /sim/uut/display_ctrl_inst/playing_ccram_data
-add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/playing_ccram_wr
 add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/seek_event
 add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/seek_update_lcd
-add wave -noupdate -format Literal -radix unsigned /sim/uut/display_ctrl_inst/seek_ccram_addr
-add wave -noupdate -format Literal -radix hexadecimal /sim/uut/display_ctrl_inst/seek_ccram_data
-add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/seek_ccram_wr
 add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/fn_writing
 add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/fn_update_lcd
 add wave -noupdate -format Literal -radix unsigned /sim/uut/display_ctrl_inst/fn_chram_addr
@@ -691,7 +682,7 @@ add wave -noupdate -format Logic /sim/first_list
 add wave -noupdate -divider <NULL>
 add wave -noupdate -divider <NULL>
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {1461011 ns} 0} {{Cursor 2} {52515 ns} 0}
+WaveRestoreCursors {{Cursor 1} {1461011 ns} 0} {{Cursor 2} {110074 ns} 0}
 configure wave -namecolwidth 171
 configure wave -valuecolwidth 77
 configure wave -justifyvalue left
@@ -705,4 +696,4 @@ configure wave -gridperiod 1
 configure wave -griddelta 40
 configure wave -timeline 0
 update
-WaveRestoreZoom {51543 ns} {53151 ns}
+WaveRestoreZoom {109950 ns} {112955 ns}
