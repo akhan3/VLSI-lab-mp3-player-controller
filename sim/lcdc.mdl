@@ -13,7 +13,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
--- use ieee.numeric_std.all;
+use ieee.numeric_std.all;
 -- use std.textio.all;
 use work.test_util.all;
 use work.system_constants_pkg.all;
@@ -41,6 +41,7 @@ end entity;
 
 architecture behav of lcdc is
   constant LCD_LENGTH     : positive := 32;
+  constant BLANK_CHAR     : std_logic_vector(7 downto 0) := std_logic_vector(to_unsigned(character'pos('*'), 8));
   subtype lcd_char_type   is character;
   type    lcd_str_array   is array(1 to LCD_LENGTH) of lcd_char_type;
   type    char_mem_array  is array(0 to 255)  of std_logic_vector(7 downto 0);
@@ -57,12 +58,12 @@ begin
   begin
     if (reset = reset_state) then
       for i in 0 to 255 loop
-        char_mem(i) <= x"20"; -- fill with spaces on reset
+        char_mem(i) <= BLANK_CHAR; -- fill with spaces on reset
       end loop;
     elsif (clk'event and clk = clk_polarity) then
       if (lcdc_cmd = LCD_CLEAR) then
         for i in 0 to 255 loop
-          char_mem(i) <= x"20"; -- fill with spaces on LCD_CLEAR command
+          char_mem(i) <= BLANK_CHAR; -- fill with spaces on LCD_CLEAR command
         end loop;
       elsif (chrm_wr = '1') then
         char_mem(conv_integer(chrm_addr)) <= chrm_wdata;
