@@ -40,6 +40,9 @@ entity display_ctrl is
     lcd_filename        : in  std_logic_vector(8*12-1 downto 0);
 
     startup_key         : in  std_logic;
+    scroll_sw           : in  std_logic;
+    scroll_fast         : in  std_logic;
+    scroll_slow         : in  std_logic;
 
     lcdc_busy           : in  std_logic;
     lcdc_cmd            : out std_logic_vector(1 downto 0);
@@ -107,13 +110,7 @@ architecture arch of display_ctrl is
     return (int2slv(v, 1) & "000" & int2slv(ctr, 1) & cpos & clth-1 & cbad & csad & wlth-1);
   end function;
 
-
-  constant INIT_WAIT_MILLISEC       : natural := 1000;
-  constant SCROLL_TIMEOUT_SEC       : natural := 5;
-  constant FORCE_STARTUP_ENABLE     : boolean := true;  -- should be false in final release
-
   constant CHRAM_MAX_ADDRESS    : std_logic_vector(7 downto 0) := int2slv8(63);
-
   constant LINE1_LCDPOS         : std_logic_vector(4 downto 0) := int2slv5(0);
   constant LINE2_LCDPOS         : std_logic_vector(4 downto 0) := int2slv5(16);
   constant LINE1_ADDR           : std_logic_vector(7 downto 0) := int2slv8(0);
@@ -171,9 +168,9 @@ architecture arch of display_ctrl is
   signal  init_seq_flag_r     : std_logic;
   signal  init_update_lcd     : std_logic;
   signal  init_seq_done       : std_logic;
-  signal  init_counter        : std_logic_vector(24 downto 0);
+  signal  init_counter        : std_logic_vector(31 downto 0);
+  signal  INIT_CNT_PEAK       : std_logic_vector(31 downto 0);
   signal  startup_key_r       : std_logic;
-  signal  INIT_CNT_PEAK       : std_logic_vector(24 downto 0);
   signal  st_ccram_addr       : std_logic_vector(4 downto 0);
   signal  st_ccram_addr_r     : std_logic_vector(4 downto 0);
   signal  st_ccram_data       : std_logic_vector(35 downto 0);
@@ -240,16 +237,21 @@ architecture arch of display_ctrl is
   signal  fn_lcd_counter_reg  : std_logic_vector(3 downto 0);
 
 -- signals for file scrolling display
-  signal  SCROLL_TIMEOUT_CNT_PEAK : std_logic_vector(24 downto 0);
-  signal  scroll_timeout_cnt      : std_logic_vector(24 downto 0);
+  signal  SCROLL_TIMEOUT_CNT_PEAK   : std_logic_vector(31 downto 0);
+  signal  SCROLL_TIMEOUT_CNT_PEAK_0 : std_logic_vector(31 downto 0);
+  signal  SCROLL_TIMEOUT_CNT_PEAK_1 : std_logic_vector(31 downto 0);
+  signal  SCROLL_TIMEOUT_CNT_PEAK_2 : std_logic_vector(31 downto 0);
+  signal  SCROLL_TIMEOUT_CNT_PEAK_3 : std_logic_vector(31 downto 0);
+  signal  scroll_timeout_cnt      : std_logic_vector(31 downto 0);
   signal  scroll_event            : std_logic;
-  signal  scroll_event_r          : std_logic;
   signal  scroll_writing          : std_logic;
   signal  scroll_update_lcd       : std_logic;
   signal  scroll_ccram_addr       : std_logic_vector(4 downto 0);
   signal  scroll_ccram_data       : std_logic_vector(35 downto 0);
   signal  scroll_ccram_wr         : std_logic;
   signal  scroll_index            : std_logic_vector(4 downto 0);
+  signal  scroll_delay            : std_logic_vector(1 downto 0);
+  signal  scroll_en               : std_logic;
 
 begin
 
@@ -265,7 +267,7 @@ begin
     if (reset = reset_state) then
       lcd_playing_status_r  <= "000";
       lcd_vol_status_r      <= "00000";
-      lcd_prog_value_r      <= "0000000";
+      lcd_prog_value_r      <= "1111111";
       lcd_mute_status_r     <= '0';
       lcd_seek_status_r     <= "00";
     elsif (clk'event and clk = clk_polarity) then
@@ -370,7 +372,7 @@ begin
     if (reset = reset_state) then
       lcdc_cmd <= LCD_NOP;
     elsif (clk'event and clk = clk_polarity) then
-      if (lcdc_busy = '0' and any_update = '1') then
+      if (any_update = '1' and lcdc_busy = '0' and init_seq_done = '1') then
         lcdc_cmd <= LCD_REFRESH;
       else
         lcdc_cmd <= LCD_NOP;
@@ -469,7 +471,8 @@ begin
     elsif (clk'event and clk = clk_polarity) then
       if (vol_event = '1' and chrm_busy = '0') then  -- start only when free
         vol_writing <= '1';
-      elsif(vol_update_lcd = '1') then
+--       elsif(vol_update_lcd = '1') then
+      elsif (vol_chram_addr = VOLUMELEVEL_ADDR + VOLUMELEVEL_LEN - 1) then
         vol_writing <= '0';
       end if;
     end if;
@@ -530,7 +533,7 @@ begin
     elsif (clk'event and clk = clk_polarity) then
       if (prog_event = '1' and chrm_busy = '0') then  -- start only when free
         prog_writing <= '1';
-      elsif(prog_update_lcd = '1') then
+      elsif (prog_chram_addr = PROGRESS_ADDR + PROGRESS_LEN - 1) then -- (2+1) including the % mark ("99%")
         prog_writing <= '0';
       end if;
     end if;
@@ -599,7 +602,8 @@ begin
     elsif (clk'event and clk = clk_polarity) then
       if (mute_event = '1' and chrm_busy = '0') then  -- start only when free
         mute_writing <= '1';
-      elsif(mute_update_lcd = '1') then
+--       elsif(mute_update_lcd = '1') then
+      elsif (mute_chram_addr = MUTEMARK_ADDR + MUTEMARK_LEN - 1) then
         mute_writing <= '0';
       end if;
     end if;
@@ -649,7 +653,8 @@ begin
     elsif (clk'event and clk = clk_polarity) then
       if (playing_event = '1' and chrm_busy = '0') then  -- start only when free
         playing_writing <= '1';
-      elsif(playing_update_lcd = '1') then
+--       elsif(playing_update_lcd = '1') then
+      elsif (playing_chram_addr = PLAYING_ADDR + PLAYING_LEN - 1) then
         playing_writing <= '0';
       end if;
     end if;
@@ -701,7 +706,8 @@ begin
     elsif (clk'event and clk = clk_polarity) then
       if (seek_event = '1' and chrm_busy = '0') then  -- start only when free
         seek_writing <= '1';
-      elsif(seek_update_lcd = '1') then
+--       elsif(seek_update_lcd = '1') then
+      elsif (seek_chram_addr = SEEK_ADDR + SEEK_LEN- 1) then
         seek_writing <= '0';
       end if;
     end if;
@@ -763,7 +769,8 @@ begin
     elsif (clk'event and clk = clk_polarity) then
       if (fn_event = '1' and chrm_busy = '0') then  -- start only when free
         fn_writing <= '1';
-      elsif(fn_update_lcd = '1') then
+--       elsif(fn_update_lcd = '1') then
+      elsif (fn_lcd_counter_reg = x"B" and fn_lcd_counter = x"C") then
         fn_writing <= '0';
       end if;
     end if;
@@ -827,10 +834,10 @@ begin
 -- init flag and trigger to fill the LCD memories with constant strings
 -------------------------------------------------------------------------------
   init_for_sim: if SIMULATION generate
-    INIT_CNT_PEAK <= int2slv(625-1, 25); -- 20us for simulation only
+    INIT_CNT_PEAK <= int2slv(625, 32); -- 20us for simulation only
   end generate;
   init_for_syn: if not SIMULATION generate
-    INIT_CNT_PEAK <= int2slv((INIT_WAIT_MILLISEC/1000) * CLK_PERIOD, 25);
+    INIT_CNT_PEAK <= int2slv(INIT_WAIT_MILLISEC * (CLK_PERIOD/1000) - 1, 32);
   end generate;
 
   process (clk, reset)
@@ -841,6 +848,15 @@ begin
       if (init_counter /= 0) then
         init_counter <= init_counter - 1;
       end if;
+    end if;
+  end process;
+
+  process (clk, reset)
+  begin
+    if (reset = reset_state) then
+      startup_key_r <= '0';
+    elsif (clk'event and clk = clk_polarity) then
+      startup_key_r <= startup_key;
     end if;
   end process;
 
@@ -867,15 +883,6 @@ begin
       init_flag_r <= '1';
     elsif (clk'event and clk = clk_polarity) then
       init_flag_r <= init_flag;
-    end if;
-  end process;
-
-  process (clk, reset)
-  begin
-    if (reset = reset_state) then
-      startup_key_r <= '0';
-    elsif (clk'event and clk = clk_polarity) then
-      startup_key_r <= startup_key;
     end if;
   end process;
 
@@ -935,8 +942,8 @@ begin
       if (init_seq_flag = '0' and init_seq_flag_r = '1') then   -- at the falling edge of init_seq_flag
         init_seq_done <= '1';                                     -- go high and never fall again
       elsif FORCE_STARTUP_ENABLE then
-        if (startup_key = '1') then    -- if forced to initialize again
-          init_seq_done <= '0';
+        if (startup_key = '1') then     -- if forced to initialize again
+          init_seq_done <= '0';           -- go down and wait for falling edge of init_seq_flag
         end if;
       end if;
     end if;
@@ -1053,27 +1060,12 @@ begin
     elsif (clk'event and clk = clk_polarity) then
       if (init_seq_flag = '1') then
         case st_ccram_addr(4 downto 0) is
---           when FNAME_LCDPOS =>
---             st_ccram_data <= lcd_charcmd(1, FNAME_LCDPOS, FNAME_LEN, FNAME_ADDR);
---             st_ccram_wr <= '1';
---           when VOLUME_LCDPOS =>
---             st_ccram_data <= lcd_charcmd(1, VOLUME_LCDPOS, VOLUME_LEN, VOLUME_ADDR);
---             st_ccram_wr <= '1';
---           when PLAYING_LCDPOS =>
---             st_ccram_data <= lcd_charcmd(1, PLAYING_LCDPOS, PLAYING_LEN, PLAYING_ADDR);
---             st_ccram_wr <= '1';
---           when SEEK_LCDPOS =>
---             st_ccram_data <= lcd_charcmd(1, SEEK_LCDPOS, SEEK_LEN, SEEK_ADDR);
---             st_ccram_wr <= '1';
---           when PROGRESS_LCDPOS =>
---             st_ccram_data <= lcd_charcmd(1, PROGRESS_LCDPOS, PROGRESS_LEN, PROGRESS_ADDR);
---             st_ccram_wr <= '1';
---           when MUTEMARK_LCDPOS =>
---             st_ccram_data <= lcd_charcmd(1, MUTEMARK_LCDPOS, MUTEMARK_LEN, MUTEMARK_ADDR);
---             st_ccram_wr <= '1';
---           when VOLUMELEVEL_LCDPOS =>
---             st_ccram_data <= lcd_charcmd(1, VOLUMELEVEL_LCDPOS, VOLUMELEVEL_LEN, VOLUMELEVEL_ADDR);
---             st_ccram_wr <= '1';
+          when LINE1_LCDPOS =>
+            st_ccram_data <= lcd_charcmd(1, LINE1_LCDPOS, LINE1_LEN, LINE1_ADDR);
+            st_ccram_wr <= '1';
+          when LINE2_LCDPOS =>
+            st_ccram_data <= lcd_charcmd(1, LINE2_LCDPOS, LINE2_LEN, LINE2_ADDR);
+            st_ccram_wr <= '1';
           when others =>
             st_ccram_data <= x"000000000";
             st_ccram_wr <= '0';
@@ -1090,11 +1082,47 @@ begin
 -- Scrolling display logic
 -------------------------------------------------------------------------------
   scroll_for_sim: if SIMULATION generate
-    SCROLL_TIMEOUT_CNT_PEAK <= int2slv(250, 25); -- 8us for simulation only
+    SCROLL_TIMEOUT_CNT_PEAK_0 <= int2slv(100 - 1, 32);    --  few usec for simulation only
+    SCROLL_TIMEOUT_CNT_PEAK_1 <= int2slv(200 - 1, 32);
+    SCROLL_TIMEOUT_CNT_PEAK_2 <= int2slv(300 - 1, 32);
+    SCROLL_TIMEOUT_CNT_PEAK_3 <= int2slv(400 - 1, 32);
   end generate;
   scroll_for_syn: if not SIMULATION generate
-    SCROLL_TIMEOUT_CNT_PEAK <= int2slv(SCROLL_TIMEOUT_SEC * CLK_PERIOD, 25);
+    SCROLL_TIMEOUT_CNT_PEAK_0 <= int2slv(SCROLL_TIMEOUT_MILLISEC_0 * (CLK_PERIOD/1000) - 1, 32);
+    SCROLL_TIMEOUT_CNT_PEAK_1 <= int2slv(SCROLL_TIMEOUT_MILLISEC_1 * (CLK_PERIOD/1000) - 1, 32);
+    SCROLL_TIMEOUT_CNT_PEAK_2 <= int2slv(SCROLL_TIMEOUT_MILLISEC_2 * (CLK_PERIOD/1000) - 1, 32);
+    SCROLL_TIMEOUT_CNT_PEAK_3 <= int2slv(SCROLL_TIMEOUT_MILLISEC_3 * (CLK_PERIOD/1000) - 1, 32);
   end generate;
+
+  process (clk, reset)
+  begin
+    if (reset = reset_state) then
+      scroll_delay <= "01";
+    elsif (clk'event and clk = clk_polarity) then
+      if (scroll_fast = '1' and scroll_delay /= 0) then
+        scroll_delay <= scroll_delay - 1;
+      elsif (scroll_slow = '1' and scroll_delay /= 3) then
+        scroll_delay <= scroll_delay + 1;
+      end if;
+    end if;
+  end process;
+
+  SCROLL_TIMEOUT_CNT_PEAK <=  SCROLL_TIMEOUT_CNT_PEAK_0 when (scroll_delay = 0) else
+                              SCROLL_TIMEOUT_CNT_PEAK_1 when (scroll_delay = 1) else
+                              SCROLL_TIMEOUT_CNT_PEAK_2 when (scroll_delay = 2) else
+                              SCROLL_TIMEOUT_CNT_PEAK_3 when (scroll_delay = 3) else
+                              SCROLL_TIMEOUT_CNT_PEAK_0;
+
+  process (clk, reset)
+  begin
+    if (reset = reset_state) then
+      scroll_en <= '1';
+    elsif (clk'event and clk = clk_polarity) then
+      if (scroll_sw = '1') then
+        scroll_en <= not scroll_en;
+      end if;
+    end if;
+  end process;
 
   process (clk, reset)
   begin
@@ -1114,20 +1142,11 @@ begin
   process (clk, reset)
   begin
     if (reset = reset_state) then
-      scroll_event_r <= '0';
-    elsif (clk'event and clk = clk_polarity) then
-      scroll_event_r <= scroll_event;
-    end if;
-  end process;
-
-  process (clk, reset)
-  begin
-    if (reset = reset_state) then
       scroll_writing <= '0';
     elsif (clk'event and clk = clk_polarity) then
       if (scroll_event = '1' and ccrm_busy = '0') then  -- start only when free
         scroll_writing <= '1';
-      elsif(scroll_update_lcd = '1') then
+      elsif (scroll_ccram_addr = LINE2_LCDPOS) then -- only 2 commands (0 and 16)to be written to CCRAM
         scroll_writing <= '0';
       end if;
     end if;
@@ -1146,17 +1165,39 @@ begin
     end if;
   end process;
 
--- scroll_index counters
+-- -- scroll_index counter
+--   process (clk, reset)
+--   begin
+--     if (reset = reset_state) then
+--       scroll_index <= (others => '0');
+--     elsif (clk'event and clk = clk_polarity) then
+--       if (init_flag = '1') then
+--         scroll_index <= (others => '0');
+--       elsif (scroll_en = '0') then
+--         scroll_index <= (others => '0');
+--       elsif (scroll_event = '1' and scroll_index = LINE1_SCROLL_LEN - 1) then
+--         scroll_index <= (others => '0');
+--       elsif (scroll_event = '1') then
+--         scroll_index <= scroll_index + 1;
+--       end if;
+--     end if;
+--   end process;
+--
+-- scroll_index counter
   process (clk, reset)
   begin
     if (reset = reset_state) then
       scroll_index <= (others => '0');
     elsif (clk'event and clk = clk_polarity) then
       if (init_flag = '1') then
-        scroll_index <= (others => '1');
-      elsif (scroll_event = '1' and scroll_index = LINE1_SCROLL_LEN - 1) then
         scroll_index <= (others => '0');
-      elsif (scroll_event = '1') then
+      elsif (scroll_en = '0' and scroll_event = '1' and scroll_index = LINE1_SCROLL_LEN - 1) then -- stop scroll
+        scroll_index <= (others => '0');
+      elsif (scroll_en = '0' and scroll_event = '1' and scroll_index = LINE1_LCDPOS) then   -- stop scroll
+        scroll_index <= (others => '0');
+      elsif (scroll_event = '1' and scroll_index = LINE1_SCROLL_LEN - 1) then   -- wrap around
+        scroll_index <= (others => '0');
+      elsif (scroll_event = '1') then   -- increment scroll_index
         scroll_index <= scroll_index + 1;
       end if;
     end if;

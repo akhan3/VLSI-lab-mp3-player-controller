@@ -66,6 +66,9 @@ architecture playcontrol_arch of playcontrol is
       key_data    : in  std_logic_vector(7 downto 0);
       key_rd      : out std_logic;
       startup_key : out std_logic;
+      scroll_sw   : out std_logic;
+      scroll_fast : out std_logic;
+      scroll_slow : out std_logic;
       listprev    : out std_logic;
       listnext    : out std_logic;
       play        : out std_logic;
@@ -119,6 +122,9 @@ architecture playcontrol_arch of playcontrol is
       lcd_filename_valid  : in  std_logic;
       lcd_filename        : in  std_logic_vector(8*12-1 downto 0);
       startup_key         : in  std_logic;
+      scroll_sw           : in  std_logic;
+      scroll_fast         : in  std_logic;
+      scroll_slow         : in  std_logic;
       lcdc_busy           : in  std_logic;
       lcdc_cmd            : out std_logic_vector(1 downto 0);
       chrm_wr             : out std_logic;
@@ -209,6 +215,9 @@ architecture playcontrol_arch of playcontrol is
   end component;
 
   signal startup_key          : std_logic;
+  signal scroll_sw            : std_logic;
+  signal scroll_fast          : std_logic;
+  signal scroll_slow          : std_logic;
   signal listnext             : std_logic;
   signal listprev             : std_logic;
   signal play                 : std_logic;
@@ -311,6 +320,9 @@ begin
   kbc_intf_inst: kbc_intf
     port map(
       startup_key =>  startup_key,
+      scroll_sw   =>  scroll_sw,
+      scroll_fast =>  scroll_fast,
+      scroll_slow =>  scroll_slow,
       key_empty   =>  key_empty,
       key_rd_ack  =>  key_rd_ack,
       key_data    =>  key_data,
@@ -370,6 +382,9 @@ begin
       lcd_filename        =>  lcd_filename,
 
       startup_key         =>  startup_key,
+      scroll_sw           =>  scroll_sw,
+      scroll_fast         =>  scroll_fast,
+      scroll_slow         =>  scroll_slow,
 
       lcdc_busy           =>  lcdc_busy,
       lcdc_cmd            =>  lcdc_cmd_s,

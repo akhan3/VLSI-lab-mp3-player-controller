@@ -15,21 +15,24 @@ use work.system_constants_pkg.all;
 
 entity kbc_intf is
   port(
-    key_empty : in  std_logic;
-    key_rd_ack: in  std_logic;
-    key_data  : in  std_logic_vector(7 downto 0);
-    key_rd    : out std_logic;
-    startup_key: out std_logic;
-    listprev  : out std_logic;
-    listnext  : out std_logic;
-    play      : out std_logic;
-    stop      : out std_logic;
-    pause     : out std_logic;
-    mute      : out std_logic;
-    volinc    : out std_logic;
-    voldec    : out std_logic;
-    seekfwd   : out std_logic;
-    seekbkw   : out std_logic
+      key_empty   : in  std_logic;
+      key_rd_ack  : in  std_logic;
+      key_data    : in  std_logic_vector(7 downto 0);
+      key_rd      : out std_logic;
+      startup_key : out std_logic;
+      scroll_sw   : out std_logic;
+      scroll_fast : out std_logic;
+      scroll_slow : out std_logic;
+      listprev    : out std_logic;
+      listnext    : out std_logic;
+      play        : out std_logic;
+      stop        : out std_logic;
+      pause       : out std_logic;
+      mute        : out std_logic;
+      volinc      : out std_logic;
+      voldec      : out std_logic;
+      seekfwd     : out std_logic;
+      seekbkw     : out std_logic
   );
 end entity;
 
@@ -46,6 +49,9 @@ begin
   voldec    <= key_rd_ack when (key_data = KEY_MINUS) else '0';
   seekfwd   <= key_rd_ack when (key_data = KEY_6) else '0';
   seekbkw   <= key_rd_ack when (key_data = KEY_4) else '0';
-  startup_key   <= key_rd_ack when (key_data = KEY_NUMLOCK) else '0';
+  scroll_sw <= key_rd_ack when (key_data = KEY_NUMLOCK) else '0';
+  scroll_fast <= key_rd_ack when (key_data = KEY_1) else '0';
+  scroll_slow <= key_rd_ack when (key_data = KEY_7) else '0';
+  startup_key   <= key_rd_ack when (key_data = KEY_ENTER) else '0';
 
 end architecture;

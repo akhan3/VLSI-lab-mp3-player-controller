@@ -49,7 +49,22 @@ proc listprev {} {
 }
 
 proc startup {} {
+  send_key 5A
+  run 5 us
+}
+
+proc scrollsw {} {
   send_key 77
+  run 5 us
+}
+
+proc scrollfast {} {
+  send_key 69
+  run 5 us
+}
+
+proc scrollslow {} {
+  send_key 6C
   run 5 us
 }
 

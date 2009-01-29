@@ -76,8 +76,9 @@ then
   else
     VSIM_SWITCH_LIST=" -novopt -quiet -do vsim.do"
   fi
-  echo "%%" vsim work.sim $VSIM_SWITCH_LIST -l $TESTNAME.log -wlf $TESTNAME.wlf
-  vsim work.sim $VSIM_SWITCH_LIST -l $TESTNAME.log -wlf $TESTNAME.wlf -GSIMULATION=true
+  GENERICS=" -GSIMULATION=true"
+  echo "%%" vsim work.sim $GENERICS $VSIM_SWITCH_LIST -l $TESTNAME.log -wlf $TESTNAME.wlf
+  vsim work.sim $GENERICS $VSIM_SWITCH_LIST -l $TESTNAME.log -wlf $TESTNAME.wlf
 
   # Checking for errors in simulation report
   SIM_ERR=`grep -i error $TESTNAME.log | wc -l`

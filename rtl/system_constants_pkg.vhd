@@ -78,7 +78,17 @@ package system_constants_pkg is
 ----------------------------------------------------------------------------------
 -- My constants
 ----------------------------------------------------------------------------------
-  constant  CLK_PERIOD    : natural := 31250000;
+  constant  CLK_PERIOD                : natural := 31250000;
+
+-- Hard configuration constants
+  constant  FORCE_STARTUP_ENABLE      : boolean := false;   -- should be false in final release
+  constant  INIT_WAIT_MILLISEC        : natural := 6000;
+
+-- Scrolling configuration constants
+  constant  SCROLL_TIMEOUT_MILLISEC_0 : natural := 200;     -- fastest ~ minium scroll delay
+  constant  SCROLL_TIMEOUT_MILLISEC_1 : natural := 400;
+  constant  SCROLL_TIMEOUT_MILLISEC_2 : natural := 600;
+  constant  SCROLL_TIMEOUT_MILLISEC_3 : natural := 800;     -- slowest ~ maximum scroll delay
 
 -- LCD Commands
   constant  LCD_NOP       : std_logic_vector(1 downto 0) := "00";
@@ -103,6 +113,7 @@ package system_constants_pkg is
   constant KEY_PLUS       : std_logic_vector(7 downto 0) := x"79";
   constant KEY_MINUS      : std_logic_vector(7 downto 0) := x"7B";
   constant KEY_NUMLOCK    : std_logic_vector(7 downto 0) := x"77";
+  constant KEY_ENTER      : std_logic_vector(7 downto 0) := x"5A";
 
 -- File System Commands
   constant FIO_FILENEXT   : std_logic_vector(7 downto 0) := x"00";
