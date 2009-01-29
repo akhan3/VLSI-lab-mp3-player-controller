@@ -23,6 +23,7 @@ add wave -noupdate -format Literal -radix ascii /sim/uut/display_ctrl_inst/lcd_f
 add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/startup_key
 add wave -noupdate -format Literal /sim/uut/display_ctrl_inst/lcdc_cmd
 add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/lcdc_busy
+add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/any_event
 add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/any_update
 add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/init_seq_done
 add wave -noupdate -format Logic /sim/uut/display_ctrl_inst/init_update_lcd
@@ -169,16 +170,17 @@ add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/read_param_done
 add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/read_done
 add wave -noupdate -format Literal -radix unsigned /sim/uut/monitor_fsm_inst/fetch_param_dword
 add wave -noupdate -format Literal -radix unsigned /sim/uut/monitor_fsm_inst/fetch_num_dword
-add wave -noupdate -format Analog-Step -radix unsigned -scale 0.0030000000000000001 /sim/uut/monitor_fsm_inst/curr_total_dword
-add wave -noupdate -format Analog-Step -radix unsigned -scale 0.0030000000000000001 /sim/uut/monitor_fsm_inst/remain_num_dword
-add wave -noupdate -format Analog-Step -radix unsigned -scale 0.050000000000000003 /sim/uut/monitor_fsm_inst/this_dword_cnt
-add wave -noupdate -format Analog-Step -radix unsigned -scale 0.0030000000000000001 /sim/uut/monitor_fsm_inst/total_dword_cnt
+add wave -noupdate -format Literal -radix unsigned -scale 0.0030000000000000001 /sim/uut/monitor_fsm_inst/curr_total_dword
+add wave -noupdate -format Literal -radix unsigned -scale 0.0030000000000000001 /sim/uut/monitor_fsm_inst/remain_num_dword
+add wave -noupdate -format Literal -radix unsigned -scale 0.050000000000000003 /sim/uut/monitor_fsm_inst/this_dword_cnt
+add wave -noupdate -format Literal -radix unsigned -scale 0.0030000000000000001 /sim/uut/monitor_fsm_inst/total_dword_cnt
 add wave -noupdate -format Literal -radix unsigned /sim/uut/monitor_fsm_inst/file_size_dword
 add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/file_finished
 add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/music_finished
+add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/music_finished_s
 add wave -noupdate -divider <NULL>
-add wave -noupdate -format Literal /sim/uut/monitor_fsm_inst/lcd_seek_status
-add wave -noupdate -format Analog-Step -radix unsigned -scale 0.165354 /sim/uut/monitor_fsm_inst/lcd_prog_value
+add wave -noupdate -format Literal -radix unsigned /sim/uut/monitor_fsm_inst/lcd_seek_status
+add wave -noupdate -format Literal -radix unsigned -scale 0.165354 /sim/uut/monitor_fsm_inst/lcd_prog_value
 add wave -noupdate -format Literal -radix unsigned /sim/uut/monitor_fsm_inst/lcd_prog_value
 add wave -noupdate -format Literal -radix hexadecimal /sim/uut/monitor_fsm_inst/div_fraction_x100
 add wave -noupdate -divider divider_CORE
@@ -206,8 +208,6 @@ add wave -noupdate -format Literal -radix hexadecimal /sim/uut/monitor_fsm_inst/
 add wave -noupdate -format Logic /sim/uut/monitor_fsm_inst/dbuf_wr
 add wave -noupdate -format Literal /sim/uut/monitor_fsm_inst/next_state
 add wave -noupdate -format Literal -radix unsigned /sim/uut/monitor_fsm_inst/file_size_byte
-add wave -noupdate -format Literal -radix hexadecimal /sim/uut/monitor_fsm_inst/trig0
-add wave -noupdate -format Literal -radix hexadecimal /sim/uut/monitor_fsm_inst/control0
 add wave -noupdate -divider {FILE INFO PROCESSOR}
 add wave -noupdate -format Logic /sim/uut/file_info_processor_inst/clk
 add wave -noupdate -format Logic -radix hexadecimal /sim/uut/file_info_processor_inst/file_info_start
@@ -378,7 +378,7 @@ add wave -noupdate -format Literal -radix hexadecimal /sim/curr_key
 add wave -noupdate -format Logic /sim/first_list
 add wave -noupdate -divider <NULL>
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {573 ns} 0}
+WaveRestoreCursors {{Cursor 1} {728475 ns} 0}
 configure wave -namecolwidth 150
 configure wave -valuecolwidth 100
 configure wave -justifyvalue left
@@ -392,4 +392,4 @@ configure wave -gridperiod 1
 configure wave -griddelta 40
 configure wave -timeline 0
 update
-WaveRestoreZoom {0 ns} {2090 ns}
+WaveRestoreZoom {726747 ns} {729707 ns}

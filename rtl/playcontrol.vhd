@@ -132,7 +132,9 @@ architecture playcontrol_arch of playcontrol is
       chrm_addr           : out std_logic_vector(7 downto 0);
       ccrm_wdata          : out std_logic_vector(35 downto 0);
       ccrm_addr           : out std_logic_vector(4 downto 0);
-      ccrm_wr             : out std_logic
+      ccrm_wr             : out std_logic;
+
+      to_chipscope        : in  std_logic_vector(255 downto 0)
     );
   end component;
 
@@ -195,8 +197,7 @@ architecture playcontrol_arch of playcontrol is
       music_finished  : out std_logic;
       decrst_onseek   : out std_logic;
       lcd_seek_status : out std_logic_vector(1 downto 0);
-      lcd_prog_value  : out std_logic_vector(6 downto 0);
-      to_chipscope    : in  std_logic_vector(255 downto 0)
+      lcd_prog_value  : out std_logic_vector(6 downto 0)
     );
   end component;
 
@@ -393,7 +394,9 @@ begin
       chrm_addr           =>  chrm_addr_s,
       ccrm_wdata          =>  ccrm_wdata_s,
       ccrm_addr           =>  ccrm_addr_s,
-      ccrm_wr             =>  ccrm_wr_s
+      ccrm_wr             =>  ccrm_wr_s,
+
+      to_chipscope    =>  to_chipscope
     );
 
   play_fsm_inst: play_fsm
@@ -454,8 +457,7 @@ begin
       music_finished  =>  music_finished,
       decrst_onseek   =>  decrst_onseek,
       lcd_seek_status =>  lcd_seek_status,
-      lcd_prog_value  =>  lcd_prog_value,
-      to_chipscope    =>  to_chipscope
+      lcd_prog_value  =>  lcd_prog_value
     );
 
   file_info_processor_inst: file_info_processor

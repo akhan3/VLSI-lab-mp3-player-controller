@@ -52,9 +52,7 @@ entity monitor_fsm is
     fio_ctrl        : out std_logic;
 
     lcd_seek_status : out std_logic_vector(1 downto 0);
-    lcd_prog_value  : out std_logic_vector(6 downto 0);
-
-    to_chipscope    : in  std_logic_vector(255 downto 0)
+    lcd_prog_value  : out std_logic_vector(6 downto 0)
   );
 end entity;
 
@@ -106,12 +104,6 @@ architecture arch of monitor_fsm is
   signal  div_quotient      : std_logic_vector(31 downto 0);
   signal  div_fraction      : std_logic_vector(31 downto 0);
   signal  div_fraction_x100 : std_logic_vector(38 downto 0);
---   signal  progress_percent  : std_logic_vector(6 downto 0);
-
-
--- Chipscope signals
-  signal  trig0             : std_logic_vector(255 downto 0);
-  signal  control0          : std_logic_vector(35 downto 0);
 
 begin
 
@@ -370,6 +362,8 @@ begin
     elsif (clk'event and clk = clk_polarity) then
       if (fetch_en = '1' and div_quotient = 0) then  -- if playing or paused
         lcd_prog_value <= div_fraction_x100(38 downto 32);
+--       elsif (fetch_en = '0' and music_finished_s = '0') then  -- in the end of file when no DBUF activity
+--         lcd_prog_value <= std_logic_vector(to_unsigned(99, 7)); -- show 99% instead of invalid
       else
         lcd_prog_value <= "1111111";  -- to indicate invalid progress
       end if;
@@ -526,34 +520,6 @@ begin
           next_state <= IDLE;
     end case;
   end process;
-
-
--------------------------------------------------------------------------------
--- Chipscope cores
--------------------------------------------------------------------------------
-  chipsope_cores: if USECHIPSCOPE generate
-    chipsope_icon: icon
-      port map(
-        control0 => control0
-      );
-
-    chipsope_ila: ila
-      port map(
-        control => control0,
-        clk     => clk,
-        trig0   => trig0
-      );
-  end generate;
-
-    trig0(219 downto 0)   <= to_chipscope(219 downto 0);
-
-    trig0(249 downto 248) <= read_param_done & read_done;
-    trig0(255 downto 252) <= seek_param_done & seek_cmd_done & dbuf_wr_en & file_start_os;
-
---     trig0(151 downto 120) <= file_size_dword;
---     trig0(183 downto 152) <= total_dword_cnt;
---     trig0(236 downto 228) <= this_dword_cnt;
---     trig0(247 downto 240) <= fetch_param_dword(7 downto 0);
 
 
 end architecture;

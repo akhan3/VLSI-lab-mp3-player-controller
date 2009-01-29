@@ -238,6 +238,7 @@ begin
   lcd_mute_status <= mute_state;
   lcd_vol_status <= vol_state;
   lcd_playing_status <= "001" when (state = PLAY_ST) else
+                        "001" when (state = IDLE and music_finished = '0') else   -- playing status at the end of file
                         "010" when (state = PAUSE_ST) else
                         "100" when (state = STOP_ST) else
                         "000"; -- IDLE state
@@ -248,10 +249,12 @@ begin
       hw_din(31 downto 28) <= x"0";
       hw_wr <= '0';
     elsif (clk'event and clk = clk_polarity) then
-      if (  ( (state = PLAY_ST and pause = '1') or
-              (state = PAUSE_ST and play = '1') or
-              (state = PAUSE_ST and stop = '1')   ) and hw_full = '0' ) then  -- play/pause toggle
-        hw_din(31 downto 28) <= AC97_PAUSE;
+      if (  hw_full = '0' and
+            ( (state = PLAY_ST and pause = '1') or  -- normal pause
+              (state = PAUSE_ST and play = '1') or  -- normal play
+              (state = PAUSE_ST and stop = '1') )   -- release pause if stopped
+         ) then
+        hw_din(31 downto 28) <= AC97_PAUSE;     -- play/pause toggle
         hw_wr <= '1';
       elsif ((volinc_r = '1' or voldec_r = '1' or mute_r = '1') and hw_full = '0') then   -- Volume change command
         hw_din(31 downto 28) <= AC97_CHANGE_VOL;
@@ -315,11 +318,13 @@ begin
     end if;
   end process;
 
-  next_state_comb_logic: process (state, play, pause, stop, open_done, dec_rst_done, file_finished, stopping)
+  next_state_comb_logic: process (state, play, pause, stop, open_done, dec_rst_done,
+                                  file_finished, music_finished, stopping)
   begin
     case state is
       when IDLE =>
-        if (play = '1') then
+--         if (play = '1') then
+        if (play = '1' and music_finished = '1') then   -- ensure previous file is still not playing
           next_state <= OPEN_ST;
         else
           next_state <= IDLE;

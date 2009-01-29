@@ -19,6 +19,7 @@ use ieee.std_logic_unsigned.all;
 use ieee.numeric_std.all;
 use std.textio.all;
 use work.system_constants_pkg.all;
+use work.test_modules_component_pkg.all;  -- contains chipsope core declarations
 
 entity display_ctrl is
   generic (
@@ -51,7 +52,9 @@ entity display_ctrl is
     chrm_addr           : out std_logic_vector(7 downto 0);
     ccrm_wdata          : out std_logic_vector(35 downto 0);
     ccrm_addr           : out std_logic_vector(4 downto 0);
-    ccrm_wr             : out std_logic
+    ccrm_wr             : out std_logic;
+
+    to_chipscope        : in  std_logic_vector(255 downto 0)
   );
 end entity;
 
@@ -151,14 +154,14 @@ architecture arch of display_ctrl is
 
   signal  ccrm_busy             : std_logic;
   signal  chrm_busy             : std_logic;
+  signal  any_event             : std_logic;
+  signal  any_update            : std_logic;
 
   signal  lcd_playing_status_r  : std_logic_vector(2 downto 0);
   signal  lcd_prog_value_r      : std_logic_vector(6 downto 0);
   signal  lcd_vol_status_r      : std_logic_vector(4 downto 0);
   signal  lcd_mute_status_r     : std_logic;
   signal  lcd_seek_status_r     : std_logic_vector(1 downto 0);
-  signal  any_event             : std_logic;
-  signal  any_update            : std_logic;
 
 -- signals for startup writing
   signal  init_flag           : std_logic;
@@ -216,7 +219,6 @@ architecture arch of display_ctrl is
   signal  play_status_rom       : std_logic_vector(8*3-1 downto 0);
   signal  play_status_text      : std_logic_vector(7 downto 0);
 
-
 -- signals for seek update
   signal  seek_event            : std_logic;
   signal  seek_writing          : std_logic;
@@ -252,6 +254,10 @@ architecture arch of display_ctrl is
   signal  scroll_index            : std_logic_vector(4 downto 0);
   signal  scroll_delay            : std_logic_vector(1 downto 0);
   signal  scroll_en               : std_logic;
+
+-- Chipscope signals
+  signal  trig0             : std_logic_vector(255 downto 0);
+  signal  control0          : std_logic_vector(35 downto 0);
 
 begin
 
@@ -769,7 +775,6 @@ begin
     elsif (clk'event and clk = clk_polarity) then
       if (fn_event = '1' and chrm_busy = '0') then  -- start only when free
         fn_writing <= '1';
---       elsif(fn_update_lcd = '1') then
       elsif (fn_lcd_counter_reg = x"B" and fn_lcd_counter = x"C") then
         fn_writing <= '0';
       end if;
@@ -865,10 +870,10 @@ begin
     if (reset = reset_state) then
       init_flag <= '1';
     elsif (clk'event and clk = clk_polarity) then
-      if (init_flag = '1' and init_counter = 0) then    -- if init counter expires
-        init_flag <= '0';                                 -- go down and never rise again
+      if (init_flag = '1' and fn_update_lcd = '1') then   -- if first filename event tries to update display
+        init_flag <= '0';                                   -- go down and never rise again
       elsif FORCE_STARTUP_ENABLE then
-        if (startup_key = '1') then    -- if forced to initialize again
+        if (startup_key = '1') then                       -- if forced to initialize again
           init_flag <= '1';
         elsif (startup_key = '0' and startup_key_r = '1') then  -- go down again in the next cycle
           init_flag <= '0';                                     -- and never rise again
@@ -876,6 +881,24 @@ begin
       end if;
     end if;
   end process;
+
+--   process (clk, reset)
+--   begin
+--     if (reset = reset_state) then
+--       init_flag <= '1';
+--     elsif (clk'event and clk = clk_polarity) then
+-- --       if (init_flag = '1' and init_counter = 0) then    -- if  init counter expires
+--       if (init_flag = '1' and any_update = '1') then    -- if first event tries to update display
+--         init_flag <= '0';                                 -- go down and never rise again
+--       elsif FORCE_STARTUP_ENABLE then
+--         if (startup_key = '1') then    -- if forced to initialize again
+--           init_flag <= '1';
+--         elsif (startup_key = '0' and startup_key_r = '1') then  -- go down again in the next cycle
+--           init_flag <= '0';                                     -- and never rise again
+--         end if;
+--       end if;
+--     end if;
+--   end process;
 
   process (clk, reset)
   begin
@@ -1094,6 +1117,12 @@ begin
     SCROLL_TIMEOUT_CNT_PEAK_3 <= int2slv(SCROLL_TIMEOUT_MILLISEC_3 * (CLK_PERIOD/1000) - 1, 32);
   end generate;
 
+  SCROLL_TIMEOUT_CNT_PEAK <=  SCROLL_TIMEOUT_CNT_PEAK_0 when (scroll_delay = 0) else
+                              SCROLL_TIMEOUT_CNT_PEAK_1 when (scroll_delay = 1) else
+                              SCROLL_TIMEOUT_CNT_PEAK_2 when (scroll_delay = 2) else
+                              SCROLL_TIMEOUT_CNT_PEAK_3 when (scroll_delay = 3) else
+                              SCROLL_TIMEOUT_CNT_PEAK_0;
+
   process (clk, reset)
   begin
     if (reset = reset_state) then
@@ -1107,16 +1136,10 @@ begin
     end if;
   end process;
 
-  SCROLL_TIMEOUT_CNT_PEAK <=  SCROLL_TIMEOUT_CNT_PEAK_0 when (scroll_delay = 0) else
-                              SCROLL_TIMEOUT_CNT_PEAK_1 when (scroll_delay = 1) else
-                              SCROLL_TIMEOUT_CNT_PEAK_2 when (scroll_delay = 2) else
-                              SCROLL_TIMEOUT_CNT_PEAK_3 when (scroll_delay = 3) else
-                              SCROLL_TIMEOUT_CNT_PEAK_0;
-
   process (clk, reset)
   begin
     if (reset = reset_state) then
-      scroll_en <= '1';
+      scroll_en <= '0';   -- initially scroll is off
     elsif (clk'event and clk = clk_polarity) then
       if (scroll_sw = '1') then
         scroll_en <= not scroll_en;
@@ -1165,24 +1188,6 @@ begin
     end if;
   end process;
 
--- -- scroll_index counter
---   process (clk, reset)
---   begin
---     if (reset = reset_state) then
---       scroll_index <= (others => '0');
---     elsif (clk'event and clk = clk_polarity) then
---       if (init_flag = '1') then
---         scroll_index <= (others => '0');
---       elsif (scroll_en = '0') then
---         scroll_index <= (others => '0');
---       elsif (scroll_event = '1' and scroll_index = LINE1_SCROLL_LEN - 1) then
---         scroll_index <= (others => '0');
---       elsif (scroll_event = '1') then
---         scroll_index <= scroll_index + 1;
---       end if;
---     end if;
---   end process;
---
 -- scroll_index counter
   process (clk, reset)
   begin
@@ -1193,7 +1198,7 @@ begin
         scroll_index <= (others => '0');
       elsif (scroll_en = '0' and scroll_event = '1' and scroll_index = LINE1_SCROLL_LEN - 1) then -- stop scroll
         scroll_index <= (others => '0');
-      elsif (scroll_en = '0' and scroll_event = '1' and scroll_index = LINE1_LCDPOS) then   -- stop scroll
+      elsif (scroll_en = '0' and scroll_event = '1' and scroll_index = LINE1_LCDPOS) then   -- stick at zero index
         scroll_index <= (others => '0');
       elsif (scroll_event = '1' and scroll_index = LINE1_SCROLL_LEN - 1) then   -- wrap around
         scroll_index <= (others => '0');
@@ -1242,6 +1247,50 @@ begin
         scroll_ccram_wr <= '0';
     end case;
   end process;
+
+
+-------------------------------------------------------------------------------
+-- Chipscope cores
+-------------------------------------------------------------------------------
+  chipsope_cores: if USECHIPSCOPE generate
+    chipsope_icon: icon
+      port map(
+        control0 => control0
+      );
+
+    chipsope_ila: ila
+      port map(
+        control => control0,
+        clk     => clk,
+        trig0   => trig0
+      );
+  end generate;
+
+    trig0(219 downto 0)   <= to_chipscope(219 downto 0);
+    trig0(220) <= any_event;
+    trig0(221) <= any_update;
+    trig0(222) <= vol_update_lcd;
+    trig0(223) <= init_flag;
+    trig0(224) <= init_seq_trigger;
+    trig0(225) <= init_seq_flag;
+    trig0(226) <= init_update_lcd;
+    trig0(227) <= init_seq_done;
+    trig0(228) <= ccrm_busy;
+    trig0(229) <= chrm_busy;
+    trig0(230) <= st_ccram_wr;
+    trig0(231) <= st_chram_wr;
+    trig0(232) <= vol_chram_wr;
+    trig0(233) <= vol_event;
+    trig0(234) <= startup_key;
+    trig0(235) <= fn_event;
+    trig0(236) <= fn_update_lcd;
+    trig0(237) <= scroll_event;
+    trig0(238) <= scroll_update_lcd;
+    trig0(239) <= scroll_ccram_wr;
+    trig0(240) <= scroll_en;
+    trig0(245 downto 241) <= scroll_index;
+    trig0(250 downto 246) <= scroll_ccram_addr;
+    trig0(255 downto 251) <= scroll_timeout_cnt(4 downto 0);
 
 
 -------------------------------------------------------------------------------
