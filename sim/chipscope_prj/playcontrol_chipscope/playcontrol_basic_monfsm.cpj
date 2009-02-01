@@ -1,5 +1,5 @@
 #ChipScope Pro Analyzer Project File, Version 3.0
-#Thu Jan 29 23:23:04 CET 2009
+#Fri Jan 30 01:00:55 CET 2009
 deviceChain.deviceName0=XCF32P
 deviceChain.deviceName1=System_ACE_CF
 deviceChain.deviceName2=XC2VP30
@@ -98,7 +98,7 @@ unit.2.0.port.-1.b.10.channellist=241 242 243 244 245
 unit.2.0.port.-1.b.10.color=java.awt.Color[r\=0,g\=0,b\=124]
 unit.2.0.port.-1.b.10.name=DataPort
 unit.2.0.port.-1.b.10.orderindex=-1
-unit.2.0.port.-1.b.10.radix=Hex
+unit.2.0.port.-1.b.10.radix=Unsigned
 unit.2.0.port.-1.b.10.signedOffset=0.0
 unit.2.0.port.-1.b.10.signedPrecision=0
 unit.2.0.port.-1.b.10.signedScaleFactor=1.0
@@ -112,7 +112,7 @@ unit.2.0.port.-1.b.11.channellist=246 247 248 249 250
 unit.2.0.port.-1.b.11.color=java.awt.Color[r\=0,g\=0,b\=124]
 unit.2.0.port.-1.b.11.name=TriggerPort0_1
 unit.2.0.port.-1.b.11.orderindex=-1
-unit.2.0.port.-1.b.11.radix=Hex
+unit.2.0.port.-1.b.11.radix=Unsigned
 unit.2.0.port.-1.b.11.signedOffset=0.0
 unit.2.0.port.-1.b.11.signedPrecision=0
 unit.2.0.port.-1.b.11.signedScaleFactor=1.0
@@ -126,7 +126,7 @@ unit.2.0.port.-1.b.12.channellist=251 252 253 254 255
 unit.2.0.port.-1.b.12.color=java.awt.Color[r\=0,g\=0,b\=124]
 unit.2.0.port.-1.b.12.name=nc_1
 unit.2.0.port.-1.b.12.orderindex=-1
-unit.2.0.port.-1.b.12.radix=Hex
+unit.2.0.port.-1.b.12.radix=Unsigned
 unit.2.0.port.-1.b.12.signedOffset=0.0
 unit.2.0.port.-1.b.12.signedPrecision=0
 unit.2.0.port.-1.b.12.signedScaleFactor=1.0
@@ -3290,7 +3290,7 @@ unit.2.0.waveform.posn.229.name=seek_param_done
 unit.2.0.waveform.posn.229.type=signal
 unit.2.0.waveform.posn.23.channel=2147483646
 unit.2.0.waveform.posn.23.name=LCD_scroll_index
-unit.2.0.waveform.posn.23.radix=1
+unit.2.0.waveform.posn.23.radix=4
 unit.2.0.waveform.posn.23.type=bus
 unit.2.0.waveform.posn.230.channel=255
 unit.2.0.waveform.posn.230.name=seek_param_done
@@ -3324,7 +3324,7 @@ unit.2.0.waveform.posn.239.name=seek_param_done
 unit.2.0.waveform.posn.239.type=signal
 unit.2.0.waveform.posn.24.channel=2147483646
 unit.2.0.waveform.posn.24.name=scroll_timeout_cnt[4\:0]
-unit.2.0.waveform.posn.24.radix=1
+unit.2.0.waveform.posn.24.radix=4
 unit.2.0.waveform.posn.24.type=bus
 unit.2.0.waveform.posn.240.channel=255
 unit.2.0.waveform.posn.240.name=seek_param_done
@@ -3358,7 +3358,7 @@ unit.2.0.waveform.posn.249.name=seek_param_done
 unit.2.0.waveform.posn.249.type=signal
 unit.2.0.waveform.posn.25.channel=2147483646
 unit.2.0.waveform.posn.25.name=scroll_ccram_addr
-unit.2.0.waveform.posn.25.radix=1
+unit.2.0.waveform.posn.25.radix=4
 unit.2.0.waveform.posn.25.type=bus
 unit.2.0.waveform.posn.250.channel=255
 unit.2.0.waveform.posn.250.name=seek_param_done
