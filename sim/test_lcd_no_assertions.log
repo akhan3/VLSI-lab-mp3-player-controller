@@ -1,0 +1,2179 @@
+# //  ModelSim SE 6.2k Dec 13 2007 Linux 2.6.27-9-generic
+# //
+# //  Copyright 1991-2007 Mentor Graphics Corporation
+# //              All Rights Reserved.
+# //
+# //  THIS WORK CONTAINS TRADE SECRET AND 
+# //  PROPRIETARY INFORMATION WHICH IS THE PROPERTY
+# //  OF MENTOR GRAPHICS CORPORATION OR ITS LICENSORS
+# //  AND IS SUBJECT TO LICENSE TERMS.
+# //
+# vsim -do vsim.do -l test_lcd_no_assertions.log -quiet -wlf test_lcd_no_assertions.wlf -novopt -GSIMULATION=true work.sim 
+# ** Warning: (vsim-3473) Component instance "chipsope_icon : icon" is not bound.
+#    Time: 0 ns  Iteration: 0  Region: /sim/uut/display_ctrl_inst/chipsope_cores  File: ../rtl/display_ctrl.vhd
+# ** Warning: (vsim-3473) Component instance "chipsope_ila : ila" is not bound.
+#    Time: 0 ns  Iteration: 0  Region: /sim/uut/display_ctrl_inst/chipsope_cores  File: ../rtl/display_ctrl.vhd
+# do vsim.do 
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/monitor_fsm_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/monitor_fsm_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/monitor_fsm_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/monitor_fsm_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/monitor_fsm_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/monitor_fsm_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/monitor_fsm_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/monitor_fsm_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/monitor_fsm_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/monitor_fsm_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 1  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 1  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 1  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 1  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/lcdc_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 0  Instance: /sim/lcdc_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 1  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 1  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 1  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 1  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 1  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 1  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 1  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 1  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 1  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 15 ns  Iteration: 1  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 45 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 45 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 45 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 45 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 45 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 45 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 45 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 45 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 45 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 45 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 45 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 45 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 45 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 45 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 45 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 45 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 45 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 45 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 45 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 45 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 45 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 45 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 45 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 45 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 45 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 45 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 45 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 45 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 45 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 45 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 45 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 45 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 45 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 45 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 45 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 45 ns  Iteration: 1  Instance: /sim/uut/monitor_fsm_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 75 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 75 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 75 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 75 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 75 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 75 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 75 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 75 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 75 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 75 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 75 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 75 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 75 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 75 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 75 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 75 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 75 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 75 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 75 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 75 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 75 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 75 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 75 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 75 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 75 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 75 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 75 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 105 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 105 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 105 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 105 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 105 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 105 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 105 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 105 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 105 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 105 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 105 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 105 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 105 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 105 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 105 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 105 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 105 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 105 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 105 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 105 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 105 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 105 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 105 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 105 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 105 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 105 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 135 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 135 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 135 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 135 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 135 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 135 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 135 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 135 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 135 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 135 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 135 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 135 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 135 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 135 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 135 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 135 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 135 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 135 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 135 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 135 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 135 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 135 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 135 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 135 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 135 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 135 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 165 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 165 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 165 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 165 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 165 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 165 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 165 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 165 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 165 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 165 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 165 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 165 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 165 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 165 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 165 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 165 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 165 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 165 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 165 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 165 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 165 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 165 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 165 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 165 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 165 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 165 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 195 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 195 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 195 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 195 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 195 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 195 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 195 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 195 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 195 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 195 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 195 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 195 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 195 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 195 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 195 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 195 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 195 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 195 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 195 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 195 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 195 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 195 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 195 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 195 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 195 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 195 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 225 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 225 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 225 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 225 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 225 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 225 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 225 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 225 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 225 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 225 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 225 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 225 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 225 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 225 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 225 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 225 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 225 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 225 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 225 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 225 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 225 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 225 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 225 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 225 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 225 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 225 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 255 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 255 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 255 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 255 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 255 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 255 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 255 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 255 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 255 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 255 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 255 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 255 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 255 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 255 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 255 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 255 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 255 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 255 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 255 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 255 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 255 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 255 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 255 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 255 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 255 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 255 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 285 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 285 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 285 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 285 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 285 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 285 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 285 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 285 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 285 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 285 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 285 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 285 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 285 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 285 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 285 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 285 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 285 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 285 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 285 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 285 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 285 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 285 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 285 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 285 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 285 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 285 ns  Iteration: 0  Instance: /sim/uut/display_ctrl_inst
+# 36945 ns: [TEST2   .MP3 VOL]
+# 36945 ns: [STOPPED       31]
+#  
+# 41625 ns: [TEST3   .MP3 VOL]
+# 41625 ns: [STOPPED       31]
+#  
+# 43905 ns: [TEST3   .MP3 VOL]
+# 43905 ns: [STOPPED       31]
+#  
+# 46305 ns: [TEST2   .MP3 VOL]
+# 46305 ns: [STOPPED       31]
+#  
+# 49005 ns: [TEST2   .MP3 VOL]
+# 49005 ns: [STOPPED       31]
+#  
+# 51285 ns: [TEST1   .MP3 VOL]
+# 51285 ns: [STOPPED       31]
+#  
+# 55005 ns: [TEST1   .MP3 VOL]
+# 55005 ns: [STOPPED       31]
+#  
+# 57285 ns: [TEST1   .MP3 VOL]
+# 57285 ns: [PLAYING       31]
+#  
+# 59565 ns: [TEST1   .MP3 VOL]
+# 59565 ns: [PLAYING   0%  31]
+#  
+# 61845 ns: [TEST1   .MP3 VOL]
+# 61845 ns: [PLAYING   1%  31]
+#  
+# 64125 ns: [TEST1   .MP3 VOL]
+# 64125 ns: [PLAYING   1%  31]
+#  
+# 66405 ns: [TEST1   .MP3 VOL]
+# 66405 ns: [PLAYING   2%  31]
+#  
+# 68685 ns: [TEST1   .MP3 VOL]
+# 68685 ns: [PLAYING   3%  31]
+#  
+# 70965 ns: [TEST1   .MP3 VOL]
+# 70965 ns: [PLAYING   3%  31]
+#  
+# 73245 ns: [TEST1   .MP3 VOL]
+# 73245 ns: [PLAYING   4%  31]
+#  
+# 76905 ns: [TEST1   .MP3 VOL]
+# 76905 ns: [PLAYING   5%  31]
+#  
+# 79185 ns: [TEST1   .MP3 VOL]
+# 79185 ns: [PLAYING   6%  31]
+#  
+# 81465 ns: [TEST1   .MP3 VOL]
+# 81465 ns: [PLAYING   6%  31]
+#  
+# 83745 ns: [TEST1   .MP3 VOL]
+# 83745 ns: [PLAYING   7%  31]
+#  
+# 86025 ns: [TEST1   .MP3 VOL]
+# 86025 ns: [PLAYING   8%  31]
+#  
+# 88305 ns: [TEST1   .MP3 VOL]
+# 88305 ns: [PLAYING   8%  31]
+#  
+# 90585 ns: [TEST1   .MP3 VOL]
+# 90585 ns: [PLAYING   9%  31]
+#  
+# 92865 ns: [TEST1   .MP3 VOL]
+# 92865 ns: [PLAYING   9%  31]
+#  
+# 97005 ns: [TEST1   .MP3 VOL]
+# 97005 ns: [PLAYING   9%  31]
+#  
+run -all
+# 103005 ns: [TEST1   .MP3 VOL]
+# 103005 ns: [PLAYING   9%  31]
+#  
+# 109005 ns: [TEST1   .MP3 VOL]
+# 109005 ns: [PLAYING   9%  31]
+#  
+# 115005 ns: [TEST1   .MP3 VOL]
+# 115005 ns: [PLAYING   9%  31]
+#  
+# 121005 ns: [TEST1   .MP3 VOL]
+# 121005 ns: [PLAYING   9%  31]
+#  
+# 127005 ns: [TEST1   .MP3 VOL]
+# 127005 ns: [PLAYING   9%  31]
+#  
+# 133005 ns: [TEST1   .MP3 VOL]
+# 133005 ns: [PLAYING   9%  31]
+#  
+# 139005 ns: [TEST1   .MP3 VOL]
+# 139005 ns: [PLAYING  10%  31]
+#  
+# 141285 ns: [TEST1   .MP3 VOL]
+# 141285 ns: [PLAYING  10%  31]
+#  
+# 143625 ns: [TEST1   .MP3 VOL]
+# 143625 ns: [PLAYING  11%  31]
+#  
+# 145905 ns: [TEST1   .MP3 VOL]
+# 145905 ns: [PLAYING  12%  31]
+#  
+# 148185 ns: [TEST1   .MP3 VOL]
+# 148185 ns: [PLAYING  12%  31]
+#  
+# 150465 ns: [TEST1   .MP3 VOL]
+# 150465 ns: [PLAYING  13%  31]
+#  
+# 152745 ns: [TEST1   .MP3 VOL]
+# 152745 ns: [PLAYING  14%  31]
+#  
+# 155025 ns: [TEST1   .MP3 VOL]
+# 155025 ns: [PLAYING  14%  31]
+#  
+# 157305 ns: [TEST1   .MP3 VOL]
+# 157305 ns: [PLAYING  15%  31]
+#  
+# 159585 ns: [TEST1   .MP3 VOL]
+# 159585 ns: [PLAYING  15%  31]
+#  
+# 161865 ns: [TEST1   .MP3 VOL]
+# 161865 ns: [PLAYING  16%  31]
+#  
+# 164145 ns: [TEST1   .MP3 VOL]
+# 164145 ns: [PLAYING  17%  31]
+#  
+# 166425 ns: [TEST1   .MP3 VOL]
+# 166425 ns: [PLAYING  18%  31]
+#  
+# 168705 ns: [TEST1   .MP3 VOL]
+# 168705 ns: [PLAYING  18%  31]
+#  
+# 170985 ns: [TEST1   .MP3 VOL]
+# 170985 ns: [PLAYING  19%  31]
+#  
+# 173265 ns: [TEST1   .MP3 VOL]
+# 173265 ns: [PLAYING  19%  31]
+#  
+# 175545 ns: [TEST1   .MP3 VOL]
+# 175545 ns: [PLAYING  20%  31]
+#  
+# 178185 ns: [TEST1   .MP3 VOL]
+# 178185 ns: [PLAYING  21%  31]
+#  
+# 181005 ns: [TEST1   .MP3 VOL]
+# 181005 ns: [PLAYING  22%  31]
+#  
+# 183285 ns: [TEST1   .MP3 VOL]
+# 183285 ns: [PLAYING  22%  31]
+#  
+# 185565 ns: [TEST1   .MP3 VOL]
+# 185565 ns: [PLAYING  23%  31]
+#  
+# 187845 ns: [TEST1   .MP3 VOL]
+# 187845 ns: [PLAYING  23%  31]
+#  
+# 193005 ns: [TEST1   .MP3 VOL]
+# 193005 ns: [PLAYING  23%  31]
+#  
+# 199005 ns: [TEST1   .MP3 VOL]
+# 199005 ns: [PLAYING  23%  31]
+#  
+# 205005 ns: [TEST1   .MP3 VOL]
+# 205005 ns: [PLAYING  23%  31]
+#  
+# 211005 ns: [TEST1   .MP3 VOL]
+# 211005 ns: [PLAYING  23%  31]
+#  
+# 217005 ns: [TEST1   .MP3 VOL]
+# 217005 ns: [PLAYING  23%  31]
+#  
+# 219945 ns: [TEST1   .MP3 VOL]
+# 219945 ns: [PLAYING  24%  31]
+#  
+# 223005 ns: [TEST1   .MP3 VOL]
+# 223005 ns: [PLAYING  25%  31]
+#  
+# 225285 ns: [TEST1   .MP3 VOL]
+# 225285 ns: [PLAYING  26%  31]
+#  
+# 227565 ns: [TEST1   .MP3 VOL]
+# 227565 ns: [PLAYING  26%  31]
+#  
+# 229845 ns: [TEST1   .MP3 VOL]
+# 229845 ns: [PLAYING  27%  31]
+#  
+# 232905 ns: [TEST1   .MP3 VOL]
+# 232905 ns: [PLAYING  28%  31]
+#  
+# 235185 ns: [TEST1   .MP3 VOL]
+# 235185 ns: [PLAYING  28%  31]
+#  
+# 237465 ns: [TEST1   .MP3 VOL]
+# 237465 ns: [PLAYING  29%  31]
+#  
+# 240345 ns: [TEST1   .MP3 VOL]
+# 240345 ns: [PLAYING  30%  31]
+#  
+# 242625 ns: [TEST1   .MP3 VOL]
+# 242625 ns: [PLAYING  31%  31]
+#  
+# 244905 ns: [TEST1   .MP3 VOL]
+# 244905 ns: [PLAYING  31%  31]
+#  
+# 247185 ns: [TEST1   .MP3 VOL]
+# 247185 ns: [PLAYING  32%  31]
+#  
+# 253005 ns: [TEST1   .MP3 VOL]
+# 253005 ns: [PLAYING  32%  31]
+#  
+# 259005 ns: [TEST1   .MP3 VOL]
+# 259005 ns: [PLAYING  32%  31]
+#  
+# 265005 ns: [TEST1   .MP3 VOL]
+# 265005 ns: [PLAYING  32%  31]
+#  
+# 271005 ns: [TEST1   .MP3 VOL]
+# 271005 ns: [PLAYING  32%  31]
+#  
+# 277005 ns: [TEST1   .MP3 VOL]
+# 277005 ns: [PLAYING  32%  31]
+#  
+# 282105 ns: [TEST1   .MP3 VOL]
+# 282105 ns: [PLAYING  33%  31]
+#  
+# 284385 ns: [TEST1   .MP3 VOL]
+# 284385 ns: [PLAYING  34%  31]
+#  
+# 286665 ns: [TEST1   .MP3 VOL]
+# 286665 ns: [PLAYING  34%  31]
+#  
+# 288945 ns: [TEST1   .MP3 VOL]
+# 288945 ns: [PLAYING  35%  31]
+#  
+# 291225 ns: [TEST1   .MP3 VOL]
+# 291225 ns: [PLAYING  36%  31]
+#  
+# 293505 ns: [TEST1   .MP3 VOL]
+# 293505 ns: [PLAYING  36%  31]
+#  
+# 295785 ns: [TEST1   .MP3 VOL]
+# 295785 ns: [PLAYING  37%  31]
+#  
+# 299385 ns: [TEST1   .MP3 VOL]
+# 299385 ns: [PLAYING  38%  31]
+#  
+# 301665 ns: [TEST1   .MP3 VOL]
+# 301665 ns: [PLAYING  39%  31]
+#  
+# 303945 ns: [TEST1   .MP3 VOL]
+# 303945 ns: [PLAYING  39%  31]
+#  
+# 306225 ns: [TEST1   .MP3 VOL]
+# 306225 ns: [PLAYING  40%  31]
+#  
+# 308505 ns: [TEST1   .MP3 VOL]
+# 308505 ns: [PLAYING  41%  31]
+#  
+# 310785 ns: [TEST1   .MP3 VOL]
+# 310785 ns: [PLAYING  41%  31]
+#  
+# 313065 ns: [TEST1   .MP3 VOL]
+# 313065 ns: [PLAYING  42%  31]
+#  
+# 319005 ns: [TEST1   .MP3 VOL]
+# 319005 ns: [PLAYING  42%  31]
+#  
+# 325005 ns: [TEST1   .MP3 VOL]
+# 325005 ns: [PLAYING  42%  31]
+#  
+# 331005 ns: [TEST1   .MP3 VOL]
+# 331005 ns: [PLAYING  42%  31]
+#  
+# 337005 ns: [TEST1   .MP3 VOL]
+# 337005 ns: [PLAYING  42%  31]
+#  
+# 343005 ns: [TEST1   .MP3 VOL]
+# 343005 ns: [PLAYING  42%  31]
+#  
+# 347625 ns: [TEST1   .MP3 VOL]
+# 347625 ns: [PLAYING  43%  31]
+#  
+# 349905 ns: [TEST1   .MP3 VOL]
+# 349905 ns: [PLAYING  44%  31]
+#  
+# 352185 ns: [TEST1   .MP3 VOL]
+# 352185 ns: [PLAYING  44%  31]
+#  
+# 354465 ns: [TEST1   .MP3 VOL]
+# 354465 ns: [PLAYING  45%  31]
+#  
+# 356745 ns: [TEST1   .MP3 VOL]
+# 356745 ns: [PLAYING  46%  31]
+#  
+# 359025 ns: [TEST1   .MP3 VOL]
+# 359025 ns: [PLAYING  46%  31]
+#  
+# 361305 ns: [TEST1   .MP3 VOL]
+# 361305 ns: [PLAYING  47%  31]
+#  
+# 363585 ns: [TEST1   .MP3 VOL]
+# 363585 ns: [PLAYING  47%  31]
+#  
+# 365865 ns: [TEST1   .MP3 VOL]
+# 365865 ns: [PLAYING  48%  31]
+#  
+# 368145 ns: [TEST1   .MP3 VOL]
+# 368145 ns: [PLAYING  49%  31]
+#  
+# 370425 ns: [TEST1   .MP3 VOL]
+# 370425 ns: [PLAYING  50%  31]
+#  
+# 372705 ns: [TEST1   .MP3 VOL]
+# 372705 ns: [PLAYING  50%  31]
+#  
+# 374985 ns: [TEST1   .MP3 VOL]
+# 374985 ns: [PLAYING  51%  31]
+#  
+# 379005 ns: [TEST1   .MP3 VOL]
+# 379005 ns: [PLAYING  51%  31]
+#  
+# 385005 ns: [TEST1   .MP3 VOL]
+# 385005 ns: [PLAYING  51%  31]
+#  
+# 391005 ns: [TEST1   .MP3 VOL]
+# 391005 ns: [PLAYING  51%  31]
+#  
+# 397005 ns: [TEST1   .MP3 VOL]
+# 397005 ns: [PLAYING  51%  31]
+#  
+# 403005 ns: [TEST1   .MP3 VOL]
+# 403005 ns: [PLAYING  51%  31]
+#  
+# 409005 ns: [TEST1   .MP3 VOL]
+# 409005 ns: [PLAYING  52%  31]
+#  
+# 411285 ns: [TEST1   .MP3 VOL]
+# 411285 ns: [PLAYING  52%  31]
+#  
+# 413565 ns: [TEST1   .MP3 VOL]
+# 413565 ns: [PLAYING  53%  31]
+#  
+# 415845 ns: [TEST1   .MP3 VOL]
+# 415845 ns: [PLAYING  54%  31]
+#  
+# 418125 ns: [TEST1   .MP3 VOL]
+# 418125 ns: [PLAYING  54%  31]
+#  
+# 420405 ns: [TEST1   .MP3 VOL]
+# 420405 ns: [PLAYING  55%  31]
+#  
+# 422685 ns: [TEST1   .MP3 VOL]
+# 422685 ns: [PLAYING  56%  31]
+#  
+# 424965 ns: [TEST1   .MP3 VOL]
+# 424965 ns: [PLAYING  56%  31]
+#  
+# 427245 ns: [TEST1   .MP3 VOL]
+# 427245 ns: [PLAYING  57%  31]
+#  
+# 429525 ns: [TEST1   .MP3 VOL]
+# 429525 ns: [PLAYING  58%  31]
+#  
+# 431805 ns: [TEST1   .MP3 VOL]
+# 431805 ns: [PLAYING  58%  31]
+#  
+# 434085 ns: [TEST1   .MP3 VOL]
+# 434085 ns: [PLAYING  59%  31]
+#  
+# 437145 ns: [TEST1   .MP3 VOL]
+# 437145 ns: [PLAYING  60%  31]
+#  
+# 439425 ns: [TEST1   .MP3 VOL]
+# 439425 ns: [PLAYING  60%  31]
+#  
+# 445005 ns: [TEST1   .MP3 VOL]
+# 445005 ns: [PLAYING  60%  31]
+#  
+# 451005 ns: [TEST1   .MP3 VOL]
+# 451005 ns: [PLAYING  60%  31]
+#  
+# 457005 ns: [TEST1   .MP3 VOL]
+# 457005 ns: [PLAYING  60%  31]
+#  
+# 463005 ns: [TEST1   .MP3 VOL]
+# 463005 ns: [PLAYING  60%  31]
+#  
+# 469005 ns: [TEST1   .MP3 VOL]
+# 469005 ns: [PLAYING  60%  31]
+#  
+# 472425 ns: [TEST1   .MP3 VOL]
+# 472425 ns: [PLAYING  61%  31]
+#  
+# 475005 ns: [TEST1   .MP3 VOL]
+# 475005 ns: [PLAYING  62%  31]
+#  
+# 477285 ns: [TEST1   .MP3 VOL]
+# 477285 ns: [PLAYING  62%  31]
+#  
+# 479565 ns: [TEST1   .MP3 VOL]
+# 479565 ns: [PLAYING  63%  31]
+#  
+# 481845 ns: [TEST1   .MP3 VOL]
+# 481845 ns: [PLAYING  64%  31]
+#  
+# 484125 ns: [TEST1   .MP3 VOL]
+# 484125 ns: [PLAYING  64%  31]
+#  
+# 486405 ns: [TEST1   .MP3 VOL]
+# 486405 ns: [PLAYING  65%  31]
+#  
+# 488685 ns: [TEST1   .MP3 VOL]
+# 488685 ns: [PLAYING  66%  31]
+#  
+# 490965 ns: [TEST1   .MP3 VOL]
+# 490965 ns: [PLAYING  66%  31]
+#  
+# 493245 ns: [TEST1   .MP3 VOL]
+# 493245 ns: [PLAYING  67%  31]
+#  
+# 496185 ns: [TEST1   .MP3 VOL]
+# 496185 ns: [PLAYING  68%  31]
+#  
+# 499005 ns: [TEST1   .MP3 VOL]
+# 499005 ns: [PLAYING  69%  31]
+#  
+# 501285 ns: [TEST1   .MP3 VOL]
+# 501285 ns: [PLAYING  69%  31]
+#  
+# 503565 ns: [TEST1   .MP3 VOL]
+# 503565 ns: [PLAYING  70%  31]
+#  
+# 505845 ns: [TEST1   .MP3 VOL]
+# 505845 ns: [PLAYING  70%  31]
+#  
+# 511005 ns: [TEST1   .MP3 VOL]
+# 511005 ns: [PLAYING  70%  31]
+#  
+# 517005 ns: [TEST1   .MP3 VOL]
+# 517005 ns: [PLAYING  70%  31]
+#  
+# 523005 ns: [TEST1   .MP3 VOL]
+# 523005 ns: [PLAYING  70%  31]
+#  
+# 529005 ns: [TEST1   .MP3 VOL]
+# 529005 ns: [PLAYING  70%  31]
+#  
+# 535005 ns: [TEST1   .MP3 VOL]
+# 535005 ns: [PLAYING  70%  31]
+#  
+# 538185 ns: [TEST1   .MP3 VOL]
+# 538185 ns: [PLAYING  71%  31]
+#  
+# 541005 ns: [TEST1   .MP3 VOL]
+# 541005 ns: [PLAYING  72%  31]
+#  
+# 543285 ns: [TEST1   .MP3 VOL]
+# 543285 ns: [PLAYING  72%  31]
+#  
+# 545565 ns: [TEST1   .MP3 VOL]
+# 545565 ns: [PLAYING  73%  31]
+#  
+# 547845 ns: [TEST1   .MP3 VOL]
+# 547845 ns: [PLAYING  74%  31]
+#  
+# 550125 ns: [TEST1   .MP3 VOL]
+# 550125 ns: [PLAYING  75%  31]
+#  
+# 552405 ns: [TEST1   .MP3 VOL]
+# 552405 ns: [PLAYING  75%  31]
+#  
+# 554685 ns: [TEST1   .MP3 VOL]
+# 554685 ns: [PLAYING  76%  31]
+#  
+# 556965 ns: [TEST1   .MP3 VOL]
+# 556965 ns: [PLAYING  76%  31]
+#  
+# 559245 ns: [TEST1   .MP3 VOL]
+# 559245 ns: [PLAYING  77%  31]
+#  
+# 561945 ns: [TEST1   .MP3 VOL]
+# 561945 ns: [PLAYING  78%  31]
+#  
+# 565005 ns: [TEST1   .MP3 VOL]
+# 565005 ns: [PLAYING  79%  31]
+#  
+# 567285 ns: [TEST1   .MP3 VOL]
+# 567285 ns: [PLAYING  79%  31]
+#  
+# 571005 ns: [TEST1   .MP3 VOL]
+# 571005 ns: [PLAYING  79%  31]
+#  
+# 577005 ns: [TEST1   .MP3 VOL]
+# 577005 ns: [PLAYING  79%  31]
+#  
+# 583005 ns: [TEST1   .MP3 VOL]
+# 583005 ns: [PLAYING  79%  31]
+#  
+# 589005 ns: [TEST1   .MP3 VOL]
+# 589005 ns: [PLAYING  79%  31]
+#  
+# 595005 ns: [TEST1   .MP3 VOL]
+# 595005 ns: [PLAYING  79%  31]
+#  
+# 600585 ns: [TEST1   .MP3 VOL]
+# 600585 ns: [PLAYING  80%  31]
+#  
+# 602865 ns: [TEST1   .MP3 VOL]
+# 602865 ns: [PLAYING  81%  31]
+#  
+# 605145 ns: [TEST1   .MP3 VOL]
+# 605145 ns: [PLAYING  81%  31]
+#  
+# 607425 ns: [TEST1   .MP3 VOL]
+# 607425 ns: [PLAYING  82%  31]
+#  
+# 610425 ns: [TEST1   .MP3 VOL]
+# 610425 ns: [PLAYING  83%  31]
+#  
+# 613005 ns: [TEST1   .MP3 VOL]
+# 613005 ns: [PLAYING  84%  31]
+#  
+# 615285 ns: [TEST1   .MP3 VOL]
+# 615285 ns: [PLAYING  84%  31]
+#  
+# 617865 ns: [TEST1   .MP3 VOL]
+# 617865 ns: [PLAYING  85%  31]
+#  
+# 620145 ns: [TEST1   .MP3 VOL]
+# 620145 ns: [PLAYING  86%  31]
+#  
+# 622425 ns: [TEST1   .MP3 VOL]
+# 622425 ns: [PLAYING  86%  31]
+#  
+# 624705 ns: [TEST1   .MP3 VOL]
+# 624705 ns: [PLAYING  87%  31]
+#  
+# 626985 ns: [TEST1   .MP3 VOL]
+# 626985 ns: [PLAYING  88%  31]
+#  
+# 629265 ns: [TEST1   .MP3 VOL]
+# 629265 ns: [PLAYING  88%  31]
+#  
+# 631545 ns: [TEST1   .MP3 VOL]
+# 631545 ns: [PLAYING  89%  31]
+#  
+# 637005 ns: [TEST1   .MP3 VOL]
+# 637005 ns: [PLAYING  89%  31]
+#  
+# 643005 ns: [TEST1   .MP3 VOL]
+# 643005 ns: [PLAYING  89%  31]
+#  
+# 649005 ns: [TEST1   .MP3 VOL]
+# 649005 ns: [PLAYING  89%  31]
+#  
+# 655005 ns: [TEST1   .MP3 VOL]
+# 655005 ns: [PLAYING  89%  31]
+#  
+# 661005 ns: [TEST1   .MP3 VOL]
+# 661005 ns: [PLAYING  89%  31]
+#  
+# 666585 ns: [TEST1   .MP3 VOL]
+# 666585 ns: [PLAYING  90%  31]
+#  
+# 668865 ns: [TEST1   .MP3 VOL]
+# 668865 ns: [PLAYING  91%  31]
+#  
+# 671145 ns: [TEST1   .MP3 VOL]
+# 671145 ns: [PLAYING  91%  31]
+#  
+# 673425 ns: [TEST1   .MP3 VOL]
+# 673425 ns: [PLAYING  92%  31]
+#  
+# 676425 ns: [TEST1   .MP3 VOL]
+# 676425 ns: [PLAYING  93%  31]
+#  
+# 679005 ns: [TEST1   .MP3 VOL]
+# 679005 ns: [PLAYING  93%  31]
+#  
+# 681285 ns: [TEST1   .MP3 VOL]
+# 681285 ns: [PLAYING  94%  31]
+#  
+# 683865 ns: [TEST1   .MP3 VOL]
+# 683865 ns: [PLAYING  95%  31]
+#  
+# 686145 ns: [TEST1   .MP3 VOL]
+# 686145 ns: [PLAYING  96%  31]
+#  
+# 688425 ns: [TEST1   .MP3 VOL]
+# 688425 ns: [PLAYING  96%  31]
+#  
+# 690705 ns: [TEST1   .MP3 VOL]
+# 690705 ns: [PLAYING  97%  31]
+#  
+# 692985 ns: [TEST1   .MP3 VOL]
+# 692985 ns: [PLAYING  98%  31]
+#  
+# 695265 ns: [TEST1   .MP3 VOL]
+# 695265 ns: [PLAYING  98%  31]
+#  
+# 697545 ns: [TEST1   .MP3 VOL]
+# 697545 ns: [PLAYING  98%  31]
+#  
+# 703005 ns: [TEST1   .MP3 VOL]
+# 703005 ns: [PLAYING  98%  31]
+#  
+# 709005 ns: [TEST1   .MP3 VOL]
+# 709005 ns: [PLAYING  98%  31]
+#  
+# 715005 ns: [TEST1   .MP3 VOL]
+# 715005 ns: [PLAYING  98%  31]
+#  
+# 721005 ns: [TEST1   .MP3 VOL]
+# 721005 ns: [PLAYING  98%  31]
+#  
+# 727005 ns: [TEST1   .MP3 VOL]
+# 727005 ns: [PLAYING  98%  31]
+#  
+# 729285 ns: [TEST1   .MP3 VOL]
+# 729285 ns: [PLAYING  99%  31]
+#  
+# 731565 ns: [TEST1   .MP3 VOL]
+# 731565 ns: [STOPPED       31]
+#  
+# 733845 ns: [TEST1   .MP3 VOL]
+# 733845 ns: [STOPPED       31]
+#  
+# 736125 ns: [TEST1   .MP3 VOL]
+# 736125 ns: [PLAYING   0%  31]
+#  
+# 739005 ns: [TEST1   .MP3 VOL]
+# 739005 ns: [PLAYING   0%  31]
+#  
+# 741705 ns: [TEST1   .MP3 VOL]
+# 741705 ns: [PLAYING   1%  31]
+#  
+# 745005 ns: [TEST1   .MP3 VOL]
+# 745005 ns: [PLAYING   2%  31]
+#  
+# 747285 ns: [TEST1   .MP3 VOL]
+# 747285 ns: [PLAYING   3%  31]
+#  
+# 749565 ns: [TEST1   .MP3 VOL]
+# 749565 ns: [PLAYING   3%  31]
+#  
+# 751845 ns: [TEST1   .MP3 VOL]
+# 751845 ns: [PLAYING   4%  31]
+#  
+# 755625 ns: [TEST1   .MP3 VOL]
+# 755625 ns: [PLAYING   5%  31]
+#  
+# 757905 ns: [TEST1   .MP3 VOL]
+# 757905 ns: [PLAYING   6%  31]
+#  
+# 760185 ns: [TEST1   .MP3 VOL]
+# 760185 ns: [PLAYING   6%  31]
+#  
+# 762465 ns: [TEST1   .MP3 VOL]
+# 762465 ns: [PLAYING   7%  31]
+#  
+# 764745 ns: [TEST1   .MP3 VOL]
+# 764745 ns: [PLAYING   8%  31]
+#  
+# 767025 ns: [TEST1   .MP3 VOL]
+# 767025 ns: [PLAYING   8%  31]
+#  
+# 769305 ns: [TEST1   .MP3 VOL]
+# 769305 ns: [PLAYING   9%  31]
+#  
+# 775005 ns: [TEST1   .MP3 VOL]
+# 775005 ns: [PLAYING   9%  31]
+#  
+# 781005 ns: [TEST1   .MP3 VOL]
+# 781005 ns: [PLAYING   9%  31]
+#  
+# 787005 ns: [TEST1   .MP3 VOL]
+# 787005 ns: [PLAYING   9%  31]
+#  
+# 793005 ns: [TEST1   .MP3 VOL]
+# 793005 ns: [PLAYING   9%  31]
+#  
+# 799005 ns: [TEST1   .MP3 VOL]
+# 799005 ns: [PLAYING   9%  31]
+#  
+# 805005 ns: [TEST1   .MP3 VOL]
+# 805005 ns: [PLAYING   9%  31]
+#  
+# 811005 ns: [TEST1   .MP3 VOL]
+# 811005 ns: [PLAYING   9%  31]
+#  
+# 817005 ns: [TEST1   .MP3 VOL]
+# 817005 ns: [PLAYING   9%  31]
+#  
+# 819285 ns: [TEST1   .MP3 VOL]
+# 819285 ns: [PLAYING  10%  31]
+#  
+# 822345 ns: [TEST1   .MP3 VOL]
+# 822345 ns: [PLAYING  11%  31]
+#  
+# 824625 ns: [TEST1   .MP3 VOL]
+# 824625 ns: [PLAYING  12%  31]
+#  
+# 826905 ns: [TEST1   .MP3 VOL]
+# 826905 ns: [PLAYING  12%  31]
+#  
+# 829185 ns: [TEST1   .MP3 VOL]
+# 829185 ns: [PLAYING  13%  31]
+#  
+# 832185 ns: [TEST1   .MP3 VOL]
+# 832185 ns: [PLAYING  14%  31]
+#  
+# 835005 ns: [TEST1   .MP3 VOL]
+# 835005 ns: [PLAYING  14%  31]
+#  
+# 837285 ns: [TEST1   .MP3 VOL]
+# 837285 ns: [PLAYING  15%  31]
+#  
+# 839865 ns: [TEST1   .MP3 VOL]
+# 839865 ns: [PLAYING  16%  31]
+#  
+# 842145 ns: [TEST1   .MP3 VOL]
+# 842145 ns: [PLAYING  17%  31]
+#  
+# 844425 ns: [TEST1   .MP3 VOL]
+# 844425 ns: [PLAYING  17%  31]
+#  
+# 846705 ns: [TEST1   .MP3 VOL]
+# 846705 ns: [PLAYING  18%  31]
+#  
+# 848985 ns: [TEST1   .MP3 VOL]
+# 848985 ns: [PLAYING  18%  31]
+#  
+# 851265 ns: [TEST1   .MP3 VOL]
+# 851265 ns: [PLAYING  19%  31]
+#  
+# 853545 ns: [TEST1   .MP3 VOL]
+# 853545 ns: [PLAYING  20%  31]
+#  
+# 855825 ns: [TEST1   .MP3 VOL]
+# 855825 ns: [PLAYING  21%  31]
+#  
+# 858105 ns: [TEST1   .MP3 VOL]
+# 858105 ns: [PLAYING  21%  31]
+#  
+# 860385 ns: [TEST1   .MP3 VOL]
+# 860385 ns: [PLAYING  22%  31]
+#  
+# 863625 ns: [TEST1   .MP3 VOL]
+# 863625 ns: [PLAYING  23%  31]
+#  
+# 865905 ns: [TEST1   .MP3 VOL]
+# 865905 ns: [PLAYING  23%  31]
+#  
+# 871005 ns: [TEST1   .MP3 VOL]
+# 871005 ns: [PLAYING  23%  31]
+#  
+# 877005 ns: [TEST1   .MP3 VOL]
+# 877005 ns: [PLAYING  23%  31]
+#  
+# 883005 ns: [TEST1   .MP3 VOL]
+# 883005 ns: [PLAYING  23%  31]
+#  
+# 889005 ns: [TEST1   .MP3 VOL]
+# 889005 ns: [PLAYING  23%  31]
+#  
+# 895005 ns: [TEST1   .MP3 VOL]
+# 895005 ns: [PLAYING  23%  31]
+#  
+# 898665 ns: [TEST1   .MP3 VOL]
+# 898665 ns: [PLAYING  24%  31]
+#  
+# 901005 ns: [TEST1   .MP3 VOL]
+# 901005 ns: [PLAYING  25%  31]
+#  
+# 903285 ns: [TEST1   .MP3 VOL]
+# 903285 ns: [PLAYING  25%  31]
+#  
+# 905565 ns: [TEST1   .MP3 VOL]
+# 905565 ns: [PLAYING  26%  31]
+#  
+# 907845 ns: [TEST1   .MP3 VOL]
+# 907845 ns: [PLAYING  27%  31]
+#  
+# 910125 ns: [TEST1   .MP3 VOL]
+# 910125 ns: [PLAYING  27%  31]
+#  
+# 912405 ns: [TEST1   .MP3 VOL]
+# 912405 ns: [PLAYING  28%  31]
+#  
+# 914685 ns: [TEST1   .MP3 VOL]
+# 914685 ns: [PLAYING  29%  31]
+#  
+# 916965 ns: [TEST1   .MP3 VOL]
+# 916965 ns: [PLAYING  29%  31]
+#  
+# 919245 ns: [TEST1   .MP3 VOL]
+# 919245 ns: [PLAYING  30%  31]
+#  
+# 921525 ns: [TEST1   .MP3 VOL]
+# 921525 ns: [PLAYING  31%  31]
+#  
+# 923805 ns: [TEST1   .MP3 VOL]
+# 923805 ns: [PLAYING  31%  31]
+#  
+# 926085 ns: [TEST1   .MP3 VOL]
+# 926085 ns: [PLAYING  32%  31]
+#  
+# 931005 ns: [TEST1   .MP3 VOL]
+# 931005 ns: [PLAYING  32%  31]
+#  
+# 937005 ns: [TEST1   .MP3 VOL]
+# 937005 ns: [PLAYING  32%  31]
+#  
+# 943005 ns: [TEST1   .MP3 VOL]
+# 943005 ns: [PLAYING  32%  31]
+#  
+# 949005 ns: [TEST1   .MP3 VOL]
+# 949005 ns: [PLAYING  32%  31]
+#  
+# 955005 ns: [TEST1   .MP3 VOL]
+# 955005 ns: [PLAYING  32%  31]
+#  
+# 960825 ns: [TEST1   .MP3 VOL]
+# 960825 ns: [PLAYING  33%  31]
+#  
+# 963105 ns: [TEST1   .MP3 VOL]
+# 963105 ns: [PLAYING  34%  31]
+#  
+# 965385 ns: [TEST1   .MP3 VOL]
+# 965385 ns: [PLAYING  34%  31]
+#  
+# 967665 ns: [TEST1   .MP3 VOL]
+# 967665 ns: [PLAYING  35%  31]
+#  
+# 970665 ns: [TEST1   .MP3 VOL]
+# 970665 ns: [PLAYING  36%  31]
+#  
+# 973005 ns: [TEST1   .MP3 VOL]
+# 973005 ns: [PLAYING  37%  31]
+#  
+# 975285 ns: [TEST1   .MP3 VOL]
+# 975285 ns: [PLAYING  37%  31]
+#  
+# 978105 ns: [TEST1   .MP3 VOL]
+# 978105 ns: [PLAYING  38%  31]
+#  
+# 980385 ns: [TEST1   .MP3 VOL]
+# 980385 ns: [PLAYING  39%  31]
+#  
+# 982665 ns: [TEST1   .MP3 VOL]
+# 982665 ns: [PLAYING  39%  31]
+#  
+# 984945 ns: [TEST1   .MP3 VOL]
+# 984945 ns: [PLAYING  40%  31]
+#  
+# 987225 ns: [TEST1   .MP3 VOL]
+# 987225 ns: [PLAYING  41%  31]
+#  
+# 989505 ns: [TEST1   .MP3 VOL]
+# 989505 ns: [PLAYING  41%  31]
+#  
+# 991785 ns: [TEST1   .MP3 VOL]
+# 991785 ns: [PLAYING  42%  31]
+#  
+# 997005 ns: [TEST1   .MP3 VOL]
+# 997005 ns: [PLAYING  42%  31]
+#  
+# 1003005 ns: [TEST1   .MP3 VOL]
+# 1003005 ns: [PLAYING  42%  31]
+#  
+# 1009005 ns: [TEST1   .MP3 VOL]
+# 1009005 ns: [PLAYING  42%  31]
+#  
+# 1015005 ns: [TEST1   .MP3 VOL]
+# 1015005 ns: [PLAYING  42%  31]
+#  
+# 1021005 ns: [TEST1   .MP3 VOL]
+# 1021005 ns: [PLAYING  42%  31]
+#  
+# 1026345 ns: [TEST1   .MP3 VOL]
+# 1026345 ns: [PLAYING  43%  31]
+#  
+# 1028625 ns: [TEST1   .MP3 VOL]
+# 1028625 ns: [PLAYING  44%  31]
+#  
+# 1030905 ns: [TEST1   .MP3 VOL]
+# 1030905 ns: [PLAYING  44%  31]
+#  
+# 1033185 ns: [TEST1   .MP3 VOL]
+# 1033185 ns: [PLAYING  45%  31]
+#  
+# 1036185 ns: [TEST1   .MP3 VOL]
+# 1036185 ns: [PLAYING  46%  31]
+#  
+# 1039005 ns: [TEST1   .MP3 VOL]
+# 1039005 ns: [PLAYING  46%  31]
+#  
+# 1041285 ns: [TEST1   .MP3 VOL]
+# 1041285 ns: [PLAYING  47%  31]
+#  
+# 1043625 ns: [TEST1   .MP3 VOL]
+# 1043625 ns: [PLAYING  48%  31]
+#  
+# 1045905 ns: [TEST1   .MP3 VOL]
+# 1045905 ns: [PLAYING  49%  31]
+#  
+# 1048185 ns: [TEST1   .MP3 VOL]
+# 1048185 ns: [PLAYING  49%  31]
+#  
+# 1050465 ns: [TEST1   .MP3 VOL]
+# 1050465 ns: [PLAYING  50%  31]
+#  
+# 1052745 ns: [TEST1   .MP3 VOL]
+# 1052745 ns: [PLAYING  51%  31]
+#  
+# 1055025 ns: [TEST1   .MP3 VOL]
+# 1055025 ns: [PLAYING  51%  31]
+#  
+# 1057305 ns: [TEST1   .MP3 VOL]
+# 1057305 ns: [PLAYING  51%  31]
+#  
+# 1063005 ns: [TEST1   .MP3 VOL]
+# 1063005 ns: [PLAYING  51%  31]
+#  
+# 1069005 ns: [TEST1   .MP3 VOL]
+# 1069005 ns: [PLAYING  51%  31]
+#  
+# 1075005 ns: [TEST1   .MP3 VOL]
+# 1075005 ns: [PLAYING  51%  31]
+#  
+# 1081005 ns: [TEST1   .MP3 VOL]
+# 1081005 ns: [PLAYING  51%  31]
+#  
+# 1087005 ns: [TEST1   .MP3 VOL]
+# 1087005 ns: [PLAYING  51%  31]
+#  
+# 1089285 ns: [TEST1   .MP3 VOL]
+# 1089285 ns: [PLAYING  52%  31]
+#  
+# 1092105 ns: [TEST1   .MP3 VOL]
+# 1092105 ns: [PLAYING  53%  31]
+#  
+# 1094385 ns: [TEST1   .MP3 VOL]
+# 1094385 ns: [PLAYING  54%  31]
+#  
+# 1096665 ns: [TEST1   .MP3 VOL]
+# 1096665 ns: [PLAYING  54%  31]
+#  
+# 1098945 ns: [TEST1   .MP3 VOL]
+# 1098945 ns: [PLAYING  55%  31]
+#  
+# 1101225 ns: [TEST1   .MP3 VOL]
+# 1101225 ns: [PLAYING  56%  31]
+#  
+# 1103505 ns: [TEST1   .MP3 VOL]
+# 1103505 ns: [PLAYING  56%  31]
+#  
+# 1105785 ns: [TEST1   .MP3 VOL]
+# 1105785 ns: [PLAYING  57%  31]
+#  
+# 1108065 ns: [TEST1   .MP3 VOL]
+# 1108065 ns: [PLAYING  57%  31]
+#  
+# 1110345 ns: [TEST1   .MP3 VOL]
+# 1110345 ns: [PLAYING  58%  31]
+#  
+# 1112625 ns: [TEST1   .MP3 VOL]
+# 1112625 ns: [PLAYING  59%  31]
+#  
+# 1115865 ns: [TEST1   .MP3 VOL]
+# 1115865 ns: [PLAYING  60%  31]
+#  
+# 1118145 ns: [TEST1   .MP3 VOL]
+# 1118145 ns: [PLAYING  60%  31]
+#  
+# 1123005 ns: [TEST1   .MP3 VOL]
+# 1123005 ns: [PLAYING  60%  31]
+#  
+# 1129005 ns: [TEST1   .MP3 VOL]
+# 1129005 ns: [PLAYING  60%  31]
+#  
+# 1135005 ns: [TEST1   .MP3 VOL]
+# 1135005 ns: [PLAYING  60%  31]
+#  
+# 1141005 ns: [TEST1   .MP3 VOL]
+# 1141005 ns: [PLAYING  60%  31]
+#  
+# 1147005 ns: [TEST1   .MP3 VOL]
+# 1147005 ns: [PLAYING  60%  31]
+#  
+# 1151145 ns: [TEST1   .MP3 VOL]
+# 1151145 ns: [PLAYING  61%  31]
+#  
+# 1153425 ns: [TEST1   .MP3 VOL]
+# 1153425 ns: [PLAYING  62%  31]
+#  
+# 1155705 ns: [TEST1   .MP3 VOL]
+# 1155705 ns: [PLAYING  62%  31]
+#  
+# 1157985 ns: [TEST1   .MP3 VOL]
+# 1157985 ns: [PLAYING  63%  31]
+#  
+# 1160265 ns: [TEST1   .MP3 VOL]
+# 1160265 ns: [PLAYING  64%  31]
+#  
+# 1162545 ns: [TEST1   .MP3 VOL]
+# 1162545 ns: [PLAYING  64%  31]
+#  
+# 1164825 ns: [TEST1   .MP3 VOL]
+# 1164825 ns: [PLAYING  65%  31]
+#  
+# 1167105 ns: [TEST1   .MP3 VOL]
+# 1167105 ns: [PLAYING  65%  31]
+#  
+# 1169385 ns: [TEST1   .MP3 VOL]
+# 1169385 ns: [PLAYING  66%  31]
+#  
+# 1171665 ns: [TEST1   .MP3 VOL]
+# 1171665 ns: [PLAYING  67%  31]
+#  
+# 1173945 ns: [TEST1   .MP3 VOL]
+# 1173945 ns: [PLAYING  68%  31]
+#  
+# 1176225 ns: [TEST1   .MP3 VOL]
+# 1176225 ns: [PLAYING  68%  31]
+#  
+# 1178505 ns: [TEST1   .MP3 VOL]
+# 1178505 ns: [PLAYING  69%  31]
+#  
+# 1181625 ns: [TEST1   .MP3 VOL]
+# 1181625 ns: [PLAYING  70%  31]
+#  
+# 1183905 ns: [TEST1   .MP3 VOL]
+# 1183905 ns: [PLAYING  70%  31]
+#  
+# 1189005 ns: [TEST1   .MP3 VOL]
+# 1189005 ns: [PLAYING  70%  31]
+#  
+# 1195005 ns: [TEST1   .MP3 VOL]
+# 1195005 ns: [PLAYING  70%  31]
+#  
+# 1201005 ns: [TEST1   .MP3 VOL]
+# 1201005 ns: [PLAYING  70%  31]
+#  
+# 1207005 ns: [TEST1   .MP3 VOL]
+# 1207005 ns: [PLAYING  70%  31]
+#  
+# 1213005 ns: [TEST1   .MP3 VOL]
+# 1213005 ns: [PLAYING  70%  31]
+#  
+# 1216905 ns: [TEST1   .MP3 VOL]
+# 1216905 ns: [PLAYING  71%  31]
+#  
+# 1219185 ns: [TEST1   .MP3 VOL]
+# 1219185 ns: [PLAYING  72%  31]
+#  
+# 1221465 ns: [TEST1   .MP3 VOL]
+# 1221465 ns: [PLAYING  72%  31]
+#  
+# 1223745 ns: [TEST1   .MP3 VOL]
+# 1223745 ns: [PLAYING  73%  31]
+#  
+# 1226025 ns: [TEST1   .MP3 VOL]
+# 1226025 ns: [PLAYING  74%  31]
+#  
+# 1228305 ns: [TEST1   .MP3 VOL]
+# 1228305 ns: [PLAYING  74%  31]
+#  
+# 1230585 ns: [TEST1   .MP3 VOL]
+# 1230585 ns: [PLAYING  75%  31]
+#  
+# 1232865 ns: [TEST1   .MP3 VOL]
+# 1232865 ns: [PLAYING  75%  31]
+#  
+# 1235145 ns: [TEST1   .MP3 VOL]
+# 1235145 ns: [PLAYING  76%  31]
+#  
+# 1237425 ns: [TEST1   .MP3 VOL]
+# 1237425 ns: [PLAYING  77%  31]
+#  
+# 1239705 ns: [TEST1   .MP3 VOL]
+# 1239705 ns: [PLAYING  78%  31]
+#  
+# 1241985 ns: [TEST1   .MP3 VOL]
+# 1241985 ns: [PLAYING  78%  31]
+#  
+# 1244265 ns: [TEST1   .MP3 VOL]
+# 1244265 ns: [PLAYING  79%  31]
+#  
+# 1249005 ns: [TEST1   .MP3 VOL]
+# 1249005 ns: [PLAYING  79%  31]
+#  
+# 1255005 ns: [TEST1   .MP3 VOL]
+# 1255005 ns: [PLAYING  79%  31]
+#  
+# 1261005 ns: [TEST1   .MP3 VOL]
+# 1261005 ns: [PLAYING  79%  31]
+#  
+# 1267005 ns: [TEST1   .MP3 VOL]
+# 1267005 ns: [PLAYING  79%  31]
+#  
+# 1273005 ns: [TEST1   .MP3 VOL]
+# 1273005 ns: [PLAYING  79%  31]
+#  
+# 1279005 ns: [TEST1   .MP3 VOL]
+# 1279005 ns: [PLAYING  80%  31]
+#  
+# 1281285 ns: [TEST1   .MP3 VOL]
+# 1281285 ns: [PLAYING  80%  31]
+#  
+# 1283565 ns: [TEST1   .MP3 VOL]
+# 1283565 ns: [PLAYING  81%  31]
+#  
+# 1285845 ns: [TEST1   .MP3 VOL]
+# 1285845 ns: [PLAYING  82%  31]
+#  
+# 1288125 ns: [TEST1   .MP3 VOL]
+# 1288125 ns: [PLAYING  83%  31]
+#  
+# 1290405 ns: [TEST1   .MP3 VOL]
+# 1290405 ns: [PLAYING  83%  31]
+#  
+# 1292685 ns: [TEST1   .MP3 VOL]
+# 1292685 ns: [PLAYING  84%  31]
+#  
+# 1296825 ns: [TEST1   .MP3 VOL]
+# 1296825 ns: [PLAYING  85%  31]
+#  
+# 1299105 ns: [TEST1   .MP3 VOL]
+# 1299105 ns: [PLAYING  86%  31]
+#  
+# 1301385 ns: [TEST1   .MP3 VOL]
+# 1301385 ns: [PLAYING  86%  31]
+#  
+# 1303665 ns: [TEST1   .MP3 VOL]
+# 1303665 ns: [PLAYING  87%  31]
+#  
+# 1306665 ns: [TEST1   .MP3 VOL]
+# 1306665 ns: [PLAYING  88%  31]
+#  
+# 1309005 ns: [TEST1   .MP3 VOL]
+# 1309005 ns: [PLAYING  89%  31]
+#  
+# 1311285 ns: [TEST1   .MP3 VOL]
+# 1311285 ns: [PLAYING  89%  31]
+#  
+# 1315005 ns: [TEST1   .MP3 VOL]
+# 1315005 ns: [PLAYING  89%  31]
+#  
+# 1321005 ns: [TEST1   .MP3 VOL]
+# 1321005 ns: [PLAYING  89%  31]
+#  
+# 1327005 ns: [TEST1   .MP3 VOL]
+# 1327005 ns: [PLAYING  89%  31]
+#  
+# 1333005 ns: [TEST1   .MP3 VOL]
+# 1333005 ns: [PLAYING  89%  31]
+#  
+# 1339005 ns: [TEST1   .MP3 VOL]
+# 1339005 ns: [PLAYING  89%  31]
+#  
+# 1345005 ns: [TEST1   .MP3 VOL]
+# 1345005 ns: [PLAYING  90%  31]
+#  
+# 1347285 ns: [TEST1   .MP3 VOL]
+# 1347285 ns: [PLAYING  90%  31]
+#  
+# 1349565 ns: [TEST1   .MP3 VOL]
+# 1349565 ns: [PLAYING  91%  31]
+#  
+# 1351845 ns: [TEST1   .MP3 VOL]
+# 1351845 ns: [PLAYING  92%  31]
+#  
+# 1355145 ns: [TEST1   .MP3 VOL]
+# 1355145 ns: [PLAYING  93%  31]
+#  
+# 1357425 ns: [TEST1   .MP3 VOL]
+# 1357425 ns: [PLAYING  93%  31]
+#  
+# 1359705 ns: [TEST1   .MP3 VOL]
+# 1359705 ns: [PLAYING  94%  31]
+#  
+# 1362585 ns: [TEST1   .MP3 VOL]
+# 1362585 ns: [PLAYING  95%  31]
+#  
+# 1364865 ns: [TEST1   .MP3 VOL]
+# 1364865 ns: [PLAYING  96%  31]
+#  
+# 1367145 ns: [TEST1   .MP3 VOL]
+# 1367145 ns: [PLAYING  96%  31]
+#  
+# 1369425 ns: [TEST1   .MP3 VOL]
+# 1369425 ns: [PLAYING  97%  31]
+#  
+# 1372425 ns: [TEST1   .MP3 VOL]
+# 1372425 ns: [PLAYING  98%  31]
+#  
+# 1375005 ns: [TEST1   .MP3 VOL]
+# 1375005 ns: [PLAYING  98%  31]
+#  
+# 1381005 ns: [TEST1   .MP3 VOL]
+# 1381005 ns: [PLAYING  98%  31]
+#  
+# 1387005 ns: [TEST1   .MP3 VOL]
+# 1387005 ns: [PLAYING  98%  31]
+#  
+# 1393005 ns: [TEST1   .MP3 VOL]
+# 1393005 ns: [PLAYING  98%  31]
+#  
+# 1399005 ns: [TEST1   .MP3 VOL]
+# 1399005 ns: [PLAYING  98%  31]
+#  
+# 1405005 ns: [TEST1   .MP3 VOL]
+# 1405005 ns: [PLAYING  98%  31]
+#  
+# ** Failure: The simulation is finished successfully. This is not a failure!!!
+#    Time: 1406925 ns  Iteration: 0  Process: /sim/state_gen File: test_lcd_no_assertions.vhd
+# Break in Process state_gen at test_lcd_no_assertions.vhd line 412
